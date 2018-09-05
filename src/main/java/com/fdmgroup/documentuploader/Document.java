@@ -1,16 +1,20 @@
 package com.fdmgroup.documentuploader;
 
 import java.nio.file.Path;
+import java.sql.Date;
 
 public class Document {
 	String name;
 	Path sourcePath;
 	Path repositoryPath;
-	public Document(String name, Path sourcePath, Path repositoryPath) {
+	Date date;
+	
+	public Document(String name, Path sourcePath, Path repositoryPath, Date date) {
 		super();
 		this.name = name;
 		this.sourcePath = sourcePath;
 		this.repositoryPath = repositoryPath;
+		this.date = date;
 	}
 	public Document() {
 		super();
@@ -32,6 +36,12 @@ public class Document {
 	}
 	public void setRepositoryPath(Path repositoryPath) {
 		this.repositoryPath = repositoryPath;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	
 
