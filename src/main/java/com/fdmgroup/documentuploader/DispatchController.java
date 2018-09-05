@@ -46,13 +46,13 @@ public class DispatchController {
 		return "UserHome/";//+userAccount.getUsername();
 	}
 	
-	@RequestMapping(value = "/Login", method = RequestMethod.GET)
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(Model model) {
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute(userAccount);
 		return "login";
 	}
-	@RequestMapping(value = "/Login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLoginSuccess(@ModelAttribute UserAccount userAccount) {
 		
 		return "UserHome/";//+userAccount.getUsername();
