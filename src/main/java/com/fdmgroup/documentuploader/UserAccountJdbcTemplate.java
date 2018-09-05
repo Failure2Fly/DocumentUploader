@@ -1,6 +1,8 @@
 package com.fdmgroup.documentuploader;
 
-import java.util.List;
+
+import java.util.Map.Entry;
+
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -12,59 +14,40 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
       this.dataSource = dataSource;
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
    }
-   public void create(String name, Integer age) {
-      String SQL = "insert into Student (name, age) values (?, ?)";
-      jdbcTemplateObject.update( SQL, name, age);
-      System.out.println("Created Record Name = " + name + " Age = " + age);
-      
-   }
+   
    @Override
    public void create(UserAccount item) {
-   	String SQL = "INSERT INTO USERACCOUNT () VALUES (?,?,?,?,?,null,null)";
-   	
+
+   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
+   	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
+   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
+   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
+   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress());
+    //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
+
+    //TODO more questions/answers
    }
+   
    @Override
    public void delete(UserAccount item) {
-   	//TODO sql query creation 
-   	
+   	//TODO sql query deletion all useraccount's stuff
+	   String SQL1 = "DELETE FROM USERACCOUNTTOSECURITYQUESTION WHERE USERACCOUNTSECURITYJOINID = ?";
+	   String SQL2 = "DELETE FROM USERACCOUNT WHERE username = ?";
+	   String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";  
    }
+   
    @Override
    public void update(UserAccount item) {
-   	//TODO sql query creation 
-   	String SQL = "";
-
-   	
+   	//TODO sql query update username
+   	String SQL = "UPDATE useraccount SET firstname=?,lastname=?,userpassword=?,useremail=? WHERE username=?";
+   	jdbcTemplateObject.update(SQL,item.getFirstName(),item.getLastName(),item.getPassword(),item.getEmailAddress(),item.getUsername());
    }
+   
    @Override
    public UserAccount read(String username) {
-   	//TODO sql query creation 
 	  String SQL = "SELECT use.username,use.userpassword,use.useremail,use.firstname,use.lastname,sec.question,uats.questionanswer FROM USERACCOUNT USE JOIN USERACCOUNTTOSECURITYQUESTION UATS ON UATS.USERACCOUNTSECURITYJOINID = USE.USERID JOIN SECURITYQUESTION SEC ON UATS.SECURITYQUESTIONJOINID = SEC.QUESTIONID WHERE USERNAME = ?";
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{username},new UserAccountMapper());
    	return user;
    }
-  /* public Student getStudent(Integer id) {
-      String SQL = "select * from Student where id = ?";
-      Student student = jdbcTemplateObject.queryForObject(SQL, 
-         new Object[]{id}, new StudentMapper());
-      
-      return student;
-   }
-   public List<Student> listStudents() {
-      String SQL = "select * from Student";
-      List <Student> students = jdbcTemplateObject.query(SQL, new StudentMapper());
-      return students;
-   }
-   public void delete(Integer id) {
-      String SQL = "delete from Student where id = ?";
-      jdbcTemplateObject.update(SQL, id);
-      System.out.println("Deleted Record with ID = " + id );
-      return;
-   }
-   public void update(Integer id, Integer age){
-      String SQL = "update Student set age = ? where id = ?";
-      jdbcTemplateObject.update(SQL, age, id);
-      System.out.println("Updated Record with ID = " + id );
-      return;
-   }*/
-
 }
