@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>THIS IS THE USER HOMEPAGE</h1>
+<h1>THIS IS THE USER HOMEPAGE OF ${userAccount.username}</h1>
 </body>
 </html>
