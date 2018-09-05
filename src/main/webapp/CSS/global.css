@@ -82,7 +82,7 @@ form {
 	float: right;
 }
 
-input#fields {
+input #fields {
     margin-left: 50px;
     margin-top: 5px;
     padding-right: 150px;
@@ -110,6 +110,14 @@ input[type=checkbox], input[type=radio] {
 
 /* This is the Start Login Page*/
 
+.login-form {
+    max-width: 300px;
+    margin: auto;
+    margin-top: 50px;
+}
+.login-form input#fields {
+    margin: 5px 50px 5px;
+}
 .form-group-login {
 	width: 100%;
 	margin: 20px 20px 0px 20px;
@@ -123,6 +131,11 @@ input[type=checkbox], input[type=radio] {
 .login-links {
 	color: #00aeef;
 	padding: 15px;
+}
+input#loginButton {
+    margin-left: 30px;
+    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 /* This is the End of Login Page */

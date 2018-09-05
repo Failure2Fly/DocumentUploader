@@ -11,7 +11,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestUserAccountDAO {
 
-	@Test
+/*	@Test
 	public void testRead() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");;
@@ -23,7 +23,7 @@ public class TestUserAccountDAO {
 		UserAccount actual =  userAccount.read(username);
 		
 		assertEquals(expected,actual);	
-	}
+	}*/
 	
 	@Test
 	public void testCreate(){

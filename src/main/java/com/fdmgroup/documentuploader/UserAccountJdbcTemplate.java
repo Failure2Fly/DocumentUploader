@@ -17,10 +17,17 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public void create(UserAccount item) {
-   	String SQL = "exec register_account(?,?,?,?,?,?,?)";
+
+   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
+   	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
    	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-    jdbcTemplateObject.update(SQL,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress(),entry.getKey().name(),entry.getValue());
-    
+
+   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
+   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress());
+    //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
+
+
     //TODO more questions/answers
    }
    
