@@ -29,7 +29,7 @@ public class DocumentDaoTest {
 		Path sourcePath = Paths.get("C:\\Users\\daniel.klingensmith\\javawindow.PNG");
 		Path repositoryPath = Paths.get("C:\\Users\\daniel.klingensmith\\read.PNG");
 		DocumentDao dao = new DocumentDao();
-		Document document = new Document("TestImage", sourcePath,repositoryPath);
+		Document document = new Document("TestImage", sourcePath,repositoryPath, null);
 		dao.create(document);
 		dao.delete(document);
 	}

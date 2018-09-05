@@ -1,10 +1,7 @@
 package com.fdmgroup.documentuploader;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 
 public class DocumentDao implements DAO<Document, Integer> {
 
@@ -17,7 +14,7 @@ public class DocumentDao implements DAO<Document, Integer> {
 			Files.write(document.getRepositoryPath(), data);
 			    
 		} catch (IOException x) {
-			System.err.println("Problem creating file");
+			System.err.println("Problem creating file - check document paths");
 		    System.err.println(x);
 		}
 		
@@ -29,7 +26,7 @@ public class DocumentDao implements DAO<Document, Integer> {
 		try {
 			Files.delete(document.getRepositoryPath());
 		} catch (IOException e) {
-			System.err.println("File to be deleted does not exist, probably");
+			System.err.println("File to be deleted does not exist or document does not have a repository path, probably");
 			e.printStackTrace();
 		}
 		
@@ -42,7 +39,7 @@ public class DocumentDao implements DAO<Document, Integer> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Error with updating a file- check document paths");
 			e.printStackTrace();
 		}
 		
