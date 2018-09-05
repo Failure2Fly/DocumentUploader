@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<h1>THIS IS THE USER REGISTRATION PAGE</h1>
 </body>
 </html>
