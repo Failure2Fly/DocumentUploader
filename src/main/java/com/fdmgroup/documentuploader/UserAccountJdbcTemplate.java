@@ -1,7 +1,6 @@
 package com.fdmgroup.documentuploader;
 
-import java.util.List;
-import java.util.Map;
+
 import java.util.Map.Entry;
 
 import javax.sql.DataSource;
@@ -15,42 +14,35 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
       this.dataSource = dataSource;
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
    }
+   
    @Override
    public void create(UserAccount item) {
    	String SQL = "exec register_account(?,?,?,?,?,?,?)";
    	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-    jdbcTemplateObject.update(SQL,item.getUsername(),item.getLastName(),item.getPassword(),item.getEmailAddress(),entry.getKey(),entry.getValue());
+    jdbcTemplateObject.update(SQL,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress(),entry.getKey(),entry.getValue());
     
     //TODO more questions/answers
    }
+   
    @Override
    public void delete(UserAccount item) {
-   	//TODO sql query creation 
+   	//TODO sql query deletion all useraccount's stuff
 	   String SQL1 = "DELETE FROM USERACCOUNTTOSECURITYQUESTION WHERE USERACCOUNTSECURITYJOINID = ?";
 	   String SQL2 = "DELETE FROM USERACCOUNT WHERE username = ?";
-	   String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";
-	   
-	   
+	   String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";  
    }
+   
    @Override
    public void update(UserAccount item) {
-   	//TODO sql query creation
+   	//TODO sql query update username
    	String SQL = "UPDATE useraccount SET firstname=?,lastname=?,userpassword=?,useremail=? WHERE username=?";
    	jdbcTemplateObject.update(SQL,item.getFirstName(),item.getLastName(),item.getPassword(),item.getEmailAddress(),item.getUsername());
    }
+   
    @Override
    public UserAccount read(String username) {
-   	//TODO sql query creation 
 	  String SQL = "SELECT use.username,use.userpassword,use.useremail,use.firstname,use.lastname,sec.question,uats.questionanswer FROM USERACCOUNT USE JOIN USERACCOUNTTOSECURITYQUESTION UATS ON UATS.USERACCOUNTSECURITYJOINID = USE.USERID JOIN SECURITYQUESTION SEC ON UATS.SECURITYQUESTIONJOINID = SEC.QUESTIONID WHERE USERNAME = ?";
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{username},new UserAccountMapper());
    	return user;
    }
- /*
-   public List<Student> listStudents() {
-      String SQL = "select * from Student";
-      List <Student> students = jdbcTemplateObject.query(SQL, new StudentMapper());
-      return students;
-   }
-*/
-
 }
