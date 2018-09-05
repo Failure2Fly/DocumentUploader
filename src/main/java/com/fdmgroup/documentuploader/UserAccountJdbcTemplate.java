@@ -19,7 +19,7 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    public void create(UserAccount item) {
    	String SQL = "exec register_account(?,?,?,?,?,?,?)";
    	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-    jdbcTemplateObject.update(SQL,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress(),entry.getKey(),entry.getValue());
+    jdbcTemplateObject.update(SQL,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress(),entry.getKey().name(),entry.getValue());
     
     //TODO more questions/answers
    }
