@@ -11,6 +11,10 @@ public class UserAccount {
 	Map<SecurityQuestion,String> mapQA;
 	
 
+	public UserAccount() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public UserAccount(String username, String lastName, String firstName, String password, String emailAddress,
 			Map<SecurityQuestion, String> mapQA) {
 		super();

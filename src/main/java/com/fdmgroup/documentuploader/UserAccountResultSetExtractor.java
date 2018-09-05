@@ -20,6 +20,10 @@ public class UserAccountResultSetExtractor implements ResultSetExtractor {
 	        user.setLastName(rs.getString(5));
 	        Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
 	        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6)),rs.getString(7));
+	        while(rs.next()){
+		        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6)),rs.getString(7));
+	        }
+	        user.setMapQA(rsQuestionMap);
 	        return user;
 	    }
 	    

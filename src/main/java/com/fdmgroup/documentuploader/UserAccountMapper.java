@@ -18,6 +18,9 @@ public class UserAccountMapper implements RowMapper<UserAccount> {
 		user.setLastName(rs.getString("lastname"));
 		Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
 	    rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question")),rs.getString("questionanswer"));
+	    while(rs.next()){
+	    	rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question")),rs.getString("questionanswer"));
+	    }
 		user.setMapQA(rsQuestionMap);
 
 		return user;
