@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
@@ -38,11 +38,10 @@
 				<br>
 				<sf:input path="username" type="text" class="fas" id="fields"
 					placeholder="Create a username" />
-				<br>	
+				<br>
 				<sf:input path="password" type="text" class="fas" id="fields"
 					placeholder="Create a password" />
-				<br> <br>
-				<select>
+				<br> <br> <select>
 					<option value="maiden">What is the maiden name of your
 						mother?</option>
 					<option value="pet">What is the name of your first pet?</option>
@@ -52,12 +51,9 @@
 						first car?</option>
 				</select> <br> <input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
-				<br> <input type="checkbox" name="agree" value="agree"
-					> I accept <span>UD's terms and
-					conditions</span> 
-				<br>
-				<input class="button" id="registerButton" type="submit"
-					value="Register">
+				<br> <input type="checkbox" name="agree" value="agree">
+				I accept <span>UD's terms and conditions</span> <br> <input
+					class="button" id="registerButton" type="submit" value="Register">
 
 
 			</fieldset>
