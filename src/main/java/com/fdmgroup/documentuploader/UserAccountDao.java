@@ -1,72 +1,40 @@
 package com.fdmgroup.documentuploader;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import javax.sql.DataSource;
 
 import oracle.jdbc.OracleDriver;
 
-public class UserAccountDao implements DAO<UserAccount, String> {
+public class UserAccountDao implements DAOExample<UserAccount,String> {
 
 	@Override
-	public void create(UserAccount user) {
-		try (Connection connection = createManager();) {
-		//Insert query after database is created
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void setDataSource(DataSource ds) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(UserAccount user) {
-		try (Connection connection = createManager();) {
-		//Insert query after database is created
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void create(UserAccount item) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void update(UserAccount user) {
-		try (Connection connection = createManager();) {
-		//Insert query after database is created
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void delete(UserAccount item) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public UserAccount read(String username) {
-		try (Connection connection = createManager();) {
-		//Insert query after database is created
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+	public void update(UserAccount item) {
+		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public UserAccount read(String item) {
+		// TODO Auto-generated method stub
 		return null;
 	}
-
-	
-	
-	public static Connection createManager() throws SQLException {
-		if (!DriverManager.getDrivers().hasMoreElements()) {
-			DriverManager.registerDriver(new OracleDriver());
-		}
-		return DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "trainee1", "!QAZSE4");
-	}
-
-
-
-
-
-
 
 }
