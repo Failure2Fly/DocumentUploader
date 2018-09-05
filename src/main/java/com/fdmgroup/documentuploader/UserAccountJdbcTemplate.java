@@ -12,16 +12,12 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
       this.dataSource = dataSource;
       this.jdbcTemplateObject = new JdbcTemplate(dataSource);
    }
-   public void create(String name, Integer age) {
-      String SQL = "insert into Student (name, age) values (?, ?)";
-      jdbcTemplateObject.update( SQL, name, age);
-      System.out.println("Created Record Name = " + name + " Age = " + age);
-      
-   }
    @Override
    public void create(UserAccount item) {
-   	String SQL = "INSERT INTO USERACCOUNT () VALUES (?,?,?,?,?,null,null)";
-   	
+   	String SQL = "exec register_account(?,?,?,?,?,?,?)";
+    jdbcTemplateObject.update( SQL,item.getUsername(),item.getLastName(),item.getPassword(),item.getEmailAddress(),);
+    
+    //TODO more questions/answers
    }
    @Override
    public void delete(UserAccount item) {
@@ -32,8 +28,6 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    public void update(UserAccount item) {
    	//TODO sql query creation 
    	String SQL = "";
-
-   	
    }
    @Override
    public UserAccount read(String username) {

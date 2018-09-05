@@ -22,8 +22,6 @@ public class TestUserAccountDAO {
 		UserAccount expected = new UserAccount(username,"Todd","Fred","FredsCool","Fred@gmail.com",QA);
 		UserAccount actual =  userAccount.read(username);
 		
-		assertEquals(expected,actual);
-		
+		assertEquals(expected,actual);	
 	}
-
 }
