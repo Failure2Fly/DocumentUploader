@@ -1,17 +1,112 @@
-DROP TABLE UserAccount;
+DROP TABLE UserAccount CASCADE CONSTRAINTS;
 CREATE TABLE UserAccount(
     UserID int,
     Username varchar(255),
     LastName varchar(255),
     FirstName varchar(255),
     UserPassword varchar(255),
-    UserEmail varchar(255) 
+    UserEmail varchar(255),
+    PRIMARY KEY(UserID)
 );
 
-INSERT INTO UserAccount
-VALUES(
-1, 'fredtodd', 'Todd','Fred','FredsCool','Fred@gmail.com');
-INSERT INTO UserAccount
-VALUES(
-2, 'thebananaeater', 'Monelli','Barbara','password1','barb@gmail.com');
+INSERT INTO UserAccount VALUES(1, 'fredtodd', 'Todd','Fred','FredsCool','Fred@gmail.com');
+INSERT INTO UserAccount VALUES(2, 'thebananaeater', 'Monelli','Barbara','password1','barb@gmail.com');
 
+DROP TABLE SecurityQuestion CASCADE CONSTRAINTS;
+CREATE TABLE SecurityQuestion(
+  QuestionID int,
+  Question VARCHAR(255),
+    PRIMARY KEY(QuestionID)
+  
+  );
+  
+INSERT INTO SecurityQuestion VALUES(1, 'What was the name of your first pet?');
+INSERT INTO SecurityQuestion VALUES(2, 'What was your mothers maiden name?');
+  
+DROP TABLE UserAccountToSecurityQuestion CASCADE CONSTRAINTS;
+CREATE TABLE UserAccountToSecurityQuestion(
+  UserAccountSecurityJoinID int,
+  SecurityQuestionJoinID int,
+  QuestionAnswer VARCHAR(255),
+  
+  CONSTRAINT FK_userId FOREIGN KEY (UserAccountSecurityJoinID)
+  REFERENCES UserAccount(UserID),
+  CONSTRAINT FK_questionId FOREIGN KEY (SecurityQuestionJoinID)
+  REFERENCES SecurityQuestion(QuestionID)
+  
+  );
+  
+INSERT INTO UserAccountToSecurityQuestion VALUES(1, 1, 'Bad dog');
+INSERT INTO UserAccountToSecurityQuestion VALUES(1, 2, 'Wagner');
+
+
+
+DROP TABLE BusinessAccount CASCADE CONSTRAINTS;
+CREATE TABLE BusinessAccount(
+  BusinessAccountID int,
+  UserAccountOwnerID int,
+  ServiceLevel int,
+  PRIMARY KEY(BusinessAccountID),
+  CONSTRAINT FK_ownerId FOREIGN KEY (UserAccountOwnerID)
+  REFERENCES UserAccount(UserID)
+  );
+
+INSERT INTO BusinessAccount VALUES(1, 1, 1);
+
+DROP TABLE BusinessAccountToUserAccount CASCADE CONSTRAINTS;
+CREATE TABLE BusinessAccountToUserAccount(
+  BusinessAccountUserJoinID int,
+  UserAccountBusinessJoinID int,
+  CONSTRAINT FK_businessAccountJoinId FOREIGN KEY (BusinessAccountUserJoinID)
+  REFERENCES BusinessAccount(BusinessAccountID),
+   CONSTRAINT FK_userAccountJoinId FOREIGN KEY (UserAccountBusinessJoinID)
+  REFERENCES UserAccount(UserID)
+  );
+  
+INSERT INTO BusinessAccountToUserAccount
+VALUES(
+1, 1);
+  
+  
+DROP TABLE ServiceLevels CASCADE CONSTRAINTS;
+CREATE TABLE ServiceLevels(
+  ServiceLevelID int,
+  ServiceLevel VARCHAR(255),
+  PRIMARY KEY(ServiceLevelID)
+  );
+  
+INSERT INTO ServiceLevels VALUES(1, 'Bronze'); 
+INSERT INTO ServiceLevels VALUES(2, 'Silver'); 
+INSERT INTO ServiceLevels VALUES(3, 'Gold'); 
+INSERT INTO ServiceLevels VALUES(4, 'Unlimited'); 
+INSERT INTO ServiceLevels VALUES(5, 'Enterprise'); 
+  
+DROP TABLE Files CASCADE CONSTRAINTS;
+CREATE TABLE Files(
+  FileId int,
+  FileName VARCHAR(255),
+  StoredFile BLOB,
+  StoreDate DATE,
+  PRIMARY KEY(FileId)
+  );
+  
+  --INSERT INTO Files VALUES(1, 'Text.txt',EMPTY_BLOB(),SYSDATE); 
+  
+  CREATE OR REPLACE DIRECTORY repository AS 'C:\Users\daniel.klingensmith';
+  DECLARE
+  src_lob  BFILE := BFILENAME('REPOSITORY', 'Text.txt');
+  dest_lob BLOB;
+BEGIN
+  INSERT INTO Files VALUES(2, 'Text.txt',EMPTY_BLOB(),SYSDATE)
+     RETURNING StoredFile INTO dest_lob;
+
+  DBMS_LOB.OPEN(src_lob, DBMS_LOB.LOB_READONLY);
+  DBMS_LOB.LoadFromFile( DEST_LOB => dest_lob,
+                         SRC_LOB  => src_lob,
+                         AMOUNT   => DBMS_LOB.GETLENGTH(src_lob) );
+  DBMS_LOB.CLOSE(src_lob);
+
+  COMMIT;
+END;
+/
+  
