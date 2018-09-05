@@ -58,21 +58,6 @@ public class DispatchController {
 	}
 
 
-	@RequestMapping(value = "/SuccessfulRegistration", method = RequestMethod.GET)
-	public String successfulRegistration(@ModelAttribute("userAccount") UserAccount userAccount) {
-		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
-		dao.create(userAccount);
-		return "login";
-	}
-
-	@RequestMapping(value = "/SuccessfulLogin", method = RequestMethod.POST)
-	public String successfulLogin() {
-		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
-		
-		UserAccount userAccount = new UserAccount();
-		
-		return "userHome";
-
-	}
+	
 
 }
