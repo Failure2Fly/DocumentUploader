@@ -1,0 +1,17 @@
+DROP TABLE UserAccount;
+CREATE TABLE UserAccount(
+    UserID int,
+    Username varchar(255),
+    LastName varchar(255),
+    FirstName varchar(255),
+    UserPassword varchar(255),
+    UserEmail varchar(255) 
+);
+
+INSERT INTO UserAccount
+VALUES(
+1, 'fredtodd', 'Todd','Fred','FredsCool','Fred@gmail.com');
+INSERT INTO UserAccount
+VALUES(
+2, 'thebananaeater', 'Monelli','Barbara','password1','barb@gmail.com');
+
