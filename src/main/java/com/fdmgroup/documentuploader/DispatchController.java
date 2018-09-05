@@ -16,5 +16,10 @@ public class DispatchController {
 	public String dynamicServletLogic(Model model){
 		return "UserHome";
 	}
+	
+	@RequestMapping(value="/register")
+	public String registerPage(Model model){
+		return "register";
+	}
 
 }
