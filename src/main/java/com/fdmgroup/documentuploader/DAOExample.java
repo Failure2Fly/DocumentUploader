@@ -2,8 +2,6 @@ package com.fdmgroup.documentuploader;
 
 import javax.sql.DataSource;
 
-import org.aspectj.apache.bcel.util.Repository;
-
 public interface DAOExample<T, U> {
 
 void setDataSource(DataSource ds);

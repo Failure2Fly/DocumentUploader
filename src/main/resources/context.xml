@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:util="http://www.springframework.org/schema/util"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -11,32 +10,20 @@
 	http://www.springframework.org/schema/util
 	http://www.springframework.org/schema/util/spring-util-3.1.xsd
 	">
-	<context:annotation-config/>
+	<context:annotation-config />
 
 	<bean id="dataSource"
-	class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-	<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver.class.getName()" />
-	<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
-	<property name="username" value="trainee1" />
-	<property name="password" value="!QAZSE4" />
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="username" value="trainee1" />
+		<property name="password" value="!QAZSE4" />
 	</bean>
-	
-	<bean name="user" class="com.fdmgroup.demos.spring.UserFactory"
-		factory-method="createUser" scope="prototype"/>
+	<bean id="UserAccountJdbcTemplate" class="com.fdmgroup.documentuploader.UserAccountJdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
 
-	<bean name="users" class="com.fdmgroup.demos.spring.UserStorage" init-method="init">
-		<property name="usersList">
-			<util:list list-class="java.util.ArrayList">
-				<ref bean="user" />
-				<ref bean="user" />
-				<ref bean="user" />
-				<ref bean="user" />
-				<ref bean="user" />
-			</util:list>
-		</property>
-	</bean>
-	<bean name="userFactory" class="com.fdmgroup.demos.spring.UserFactory" />
-	<bean name="userController" class="com.fdmgroup.demos.spring.UserController" init-method="init" />
 </beans>
 
 
