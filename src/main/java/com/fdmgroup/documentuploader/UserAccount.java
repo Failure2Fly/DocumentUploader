@@ -8,7 +8,7 @@ public class UserAccount {
 	private String firstName;
 	private String password;
 	private String emailAddress;
-	Map<SecurityQuestion,String> mapQA;
+	private Map<SecurityQuestion,String> mapQA;
 	
 
 	public UserAccount() {

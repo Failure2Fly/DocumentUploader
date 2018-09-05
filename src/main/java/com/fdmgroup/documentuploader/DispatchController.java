@@ -33,16 +33,16 @@ public class DispatchController {
 		return (UserAccount) request.getAttribute("loggedInUser");
 	}
 	
-	@RequestMapping(value = "/RegisterUser", method = RequestMethod.GET)
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute(userAccount);
 		return "register";
 	}
-	@RequestMapping(value = "/RegisterUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
 	
-		return "UserHome/"+userAccount.getUsername();
+		return "UserHome/";//+userAccount.getUsername();
 	}
 	
 	@RequestMapping(value = "/Login", method = RequestMethod.GET)
@@ -54,7 +54,7 @@ public class DispatchController {
 	@RequestMapping(value = "/Login", method = RequestMethod.POST)
 	public String userLoginSuccess(@ModelAttribute UserAccount userAccount) {
 		
-		return "UserHome/"+userAccount.getUsername();
+		return "UserHome/";//+userAccount.getUsername();
 	}
 
 
