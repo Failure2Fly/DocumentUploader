@@ -3,9 +3,6 @@ package com.fdmgroup.documentuploader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class DispatchController {
-	private String loggedInUsername= "";
+
 	@RequestMapping(value = "/")
 	public String landingPage(Model model) {
 		return "index";
@@ -27,17 +24,6 @@ public class DispatchController {
 		return "userHome";
 	}
 
-
-//	@ModelAttribute("userAccount")
-//	public UserAccount getUser(HttpServletRequest request) {
-//		return (UserAccount) request.getAttribute("userAccount");
-//	}
-//
-//	@ModelAttribute("loggedInUser")
-//	public UserAccount getLoggedInUser(HttpServletRequest request) {
-//		return (UserAccount) request.getAttribute("loggedInUser");
-//	}
-	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -48,6 +34,8 @@ public class DispatchController {
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
 		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
 		dao.create(userAccount);
+		
+		
 		File file = new File("H:\\Debug.txt");
 		try {
 			FileWriter writer= new FileWriter(file);

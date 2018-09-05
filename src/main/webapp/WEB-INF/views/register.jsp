@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 
 <head>
+
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -27,19 +28,19 @@
 		<sf:form commandName="userAccount" method="POST" action="register">
 			<fieldset class="register-form">
 				<sf:input path="firstName" type="text" class="fas" id="fields"
-					name="Firstname" placeholder="&#xf406; First name " value="" />
+					name="Firstname" placeholder="First name " value="" />
 				<br>
 				<sf:input path="lastName" type="text" class="fas" id="fields"
-					name="Lastname" placeholder="&#xf406; Last name" value="" />
-				<br>
-				<sf:input path="username" type="text" class="fas" id="fields"
-					placeholder="&#xf406; Create a username" />
+					name="Lastname" placeholder="Last name" value="" />
 				<br>
 				<sf:input path="emailAddress" type="text" class="fas" id="fields"
-					placeholder="&#xf0e0; Email" />
+					placeholder="Email" />
 				<br>
+				<sf:input path="username" type="text" class="fas" id="fields"
+					placeholder="Create a username" />
+				<br>	
 				<sf:input path="password" type="text" class="fas" id="fields"
-					placeholder="&#xf023; Create a password" />
+					placeholder="Create a password" />
 				<br> <br>
 				<select>
 					<option value="maiden">What is the maiden name of your
@@ -52,8 +53,10 @@
 				</select> <br> <input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
 				<br> <input type="checkbox" name="agree" value="agree"
-					class="form-check">I accept <span>UD's terms and
-					conditions</span> <input class="button" id="registerButton" type="submit"
+					> I accept <span>UD's terms and
+					conditions</span> 
+				<br>
+				<input class="button" id="registerButton" type="submit"
 					value="Register">
 
 
