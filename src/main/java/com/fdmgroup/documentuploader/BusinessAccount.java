@@ -5,14 +5,14 @@ import java.util.List;
 public class BusinessAccount {
 
 	private UserAccount admin;
-	private servicelevel;
-	private userAccounts;
-	private fileList;
+	//private servicelevel;
+	//private UserAccount userAccounts;
+	//private Files fileList;
 	private int businessAccountId;
 	
-	ServiceLevel servicelevel = new ServiceLevel();
-	List<UserAccount> userAccounts = new List<UserAccount>();
-	List<String> fileList = new List<String>();
+	ServiceLevel servicelevel;
+	List<UserAccount> userAccounts;
+	List<String> fileList;
 	
 	
 	public BusinessAccount() {

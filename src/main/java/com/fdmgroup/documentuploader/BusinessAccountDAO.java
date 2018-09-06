@@ -1,11 +1,13 @@
 package com.fdmgroup.documentuploader;
 
 
+import java.util.List;
+
 import javax.sql.DataSource;
 
 import oracle.jdbc.OracleDriver;
 
-public class BusinessAccountDAO implements DAOExample<BusinessAccount, int> {
+public class BusinessAccountDAO implements DAOExample<BusinessAccount, Integer> {
 
 	@Override
 	public void setDataSource(DataSource ds) {
@@ -30,15 +32,15 @@ public class BusinessAccountDAO implements DAOExample<BusinessAccount, int> {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
-	public BusinessAccount read(int item) {
+	
+/*	@Override
+	public BusinessAccount readAll(List<BusinessAccount> item) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-	
+	}*/
+
 	@Override
-	public BusinessAccount readAll(String item) {
+	public BusinessAccount read(Integer item) {
 		// TODO Auto-generated method stub
 		return null;
 	}
