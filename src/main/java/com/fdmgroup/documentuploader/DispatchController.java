@@ -32,10 +32,6 @@ public class DispatchController {
 	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
-		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
-		dao.create(userAccount);
-		
-		
 		File file = new File("H:\\Debug.txt");
 		try {
 			FileWriter writer= new FileWriter(file);
@@ -46,7 +42,12 @@ public class DispatchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
+		dao.create(userAccount);
 		return "userHome";
+		
+		
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)

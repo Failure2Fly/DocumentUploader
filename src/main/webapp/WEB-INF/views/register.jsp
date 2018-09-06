@@ -33,7 +33,7 @@
 				<sf:input path="lastName" type="text" class="fas" id="fields"
 					name="Lastname" placeholder="Last name" value="" />
 				<br>
-				<sf:input path="emailAddress" type="text" class="fas" id="fields"
+				<sf:input path="userEmail" type="text" class="fas" id="fields"
 					placeholder="Email" />
 				<br>
 				<sf:input path="username" type="text" class="fas" id="fields"

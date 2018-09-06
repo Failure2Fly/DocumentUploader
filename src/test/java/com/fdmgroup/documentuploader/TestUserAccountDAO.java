@@ -10,21 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TestUserAccountDAO {
-
-/*	@Test
-	public void testRead() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");;
-		Map<SecurityQuestion,String> QA = new HashMap<>();
-		QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "Bad dog");
-		QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Wagner");
-		String username = "fredtodd";
-		UserAccount expected = new UserAccount(username,"Todd","Fred","FredsCool","Fred@gmail.com",QA);
-		UserAccount actual =  userAccount.read(username);
-		
-		assertEquals(expected,actual);	
-	}*/
 	
+<<<<<<< HEAD
 //	@Test
 //	public void testCreate(){
 //		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
@@ -39,4 +26,23 @@ public class TestUserAccountDAO {
 //		
 //		assertEquals(expected,actual);
 //	}
+=======
+	@Test
+	public void testCreateThenReadThenDelete(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");;
+		//Map<SecurityQuestion,String> QA = new HashMap<>();
+		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
+		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
+		String username = "LukeWeatherstein";
+		
+		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
+		userAccount.delete(expected);
+		userAccount.create(expected);
+		UserAccount actual = userAccount.read(username);
+		
+		assertEquals(expected,actual);
+		userAccount.delete(expected);
+	}
+>>>>>>> a89871a862d4b3ab5a649ed09c69a507611a0452
 }
