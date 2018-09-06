@@ -4,11 +4,13 @@ package com.fdmgroup.documentuploader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map.Entry;
+//import java.util.Map.Entry;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    private DataSource dataSource;
    private JdbcTemplate jdbcTemplateObject;
