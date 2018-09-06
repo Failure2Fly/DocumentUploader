@@ -49,13 +49,7 @@
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
-<<<<<<< HEAD
-					<option value="car">Who is your favorite actor, musician, or artist?</option>
-				</select> <br> <input type="text" class="fas" id="fields"
-					name="SecurityQuestion" placeholder="Security Answer " value="" />
-				<br> <input type="checkbox" name="agree" value="agree">
-				I accept <span>UD's terms and conditions</span> <br> 
-=======
+
 				</select> 
 				<br> 
 				<input type="text" class="fas" id="fields"
@@ -64,7 +58,7 @@
 				<input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> 
 				<br> 
->>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
+
 				<input class="button" id="registerButton" type="submit" value="Register">
 
 

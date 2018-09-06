@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package com.fdmgroup.documentuploader;
 
 import static org.junit.Assert.*;
@@ -9,24 +9,25 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 public class TestUserAccountDAO {
 
-=======
-//package com.fdmgroup.documentuploader;
-//
-//import static org.junit.Assert.*;
-//
-//import java.util.HashMap;
-//import java.util.Map;
-//
-//import org.junit.Test;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.support.ClassPathXmlApplicationContext;
-//
-//public class TestUserAccountDAO {
-//	
->>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
+
+	@Test 
+	public void testReadNonexistentUser(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+		String username = "ImaginaryUser";
+//		
+		UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
+		try{
+		System.out.println("This is the result of a nonexistent read"+dao.read(username));
+		}catch(EmptyResultDataAccessException e){
+			
+		}
+		
+	}
 //	@Test
 //	public void testCreateThenReadThenDelete(){
 //		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
@@ -44,9 +45,7 @@ public class TestUserAccountDAO {
 //		assertEquals(expected,actual);
 //		userAccount.delete(expected);
 //	}
-<<<<<<< HEAD
+
 
 }
-=======
-//}
->>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
+
