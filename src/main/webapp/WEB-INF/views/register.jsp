@@ -39,16 +39,17 @@
 				<sf:input path="username" type="text" class="fas" id="fields"
 					placeholder="Create a username" />
 				<br>
-				<sf:input path="password" type="text" class="fas" id="fields"
+				<sf:input path="password" type="password" class="fas" id="fields"
 					placeholder="Create a password" />
 				<br> <br> <select>
+				<option value="pet">What is the name of your first pet?</option>
 					<option value="maiden">What is the maiden name of your
 						mother?</option>
-					<option value="pet">What is the name of your first pet?</option>
 					<option value="concert">What was the first concert you
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
+					<option value="car">Who is your favorite actor, musician, or artist?</option>
 				</select> <br> <input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
 				<br> <input type="checkbox" name="agree" value="agree">

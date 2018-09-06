@@ -63,6 +63,11 @@ public class DispatchController {
 		return "userHome";
 	}
 
+//	@RequestMapping(value = "/register", method = RequestMethod.POST)
+//	public String userRegisterSuccess(@ModelAttribute UserAccount userAccount) {
+//		
+//		return "login";
+//	}
 
 	
 
