@@ -28,19 +28,19 @@
 		<sf:form commandName="userAccount" method="POST" action="register">
 			<fieldset class="register-form">
 				<sf:input path="firstName" type="text" class="fas" id="fields"
-					name="firstname" placeholder="First name " value="" />
+					name="FirstName" placeholder="First name " value="" />
 				<br>
 				<sf:input path="lastName" type="text" class="fas" id="fields"
-					name="lastname" placeholder="Last name" value="" />
+					name="LastName" placeholder="Last name" value="" />
 				<br>
 				<sf:input path="userEmail" type="text" class="fas" id="fields"
-					 name="email" placeholder="Email" />
+					 name="Email" placeholder="Email" />
 				<br>
 				<sf:input path="username" type="text" class="fas" id="fields"
-					name="username" placeholder="Create a username" />
+					name="UserName" placeholder="Create a username" />
 				<br>
 				<sf:input path="password" type="password" class="fas" id="fields"
-					name="password" placeholder="Create a password" />
+					name="Password" placeholder="Create a password" />
 				<br> <br> <select>
 				<option value="pet">What is the name of your first pet?</option>
 					<option value="maiden">What is the maiden name of your
@@ -51,7 +51,7 @@
 						first car?</option>
 					<option value="car">Who is your favorite actor, musician, or artist?</option>
 				</select> <br> <input type="text" class="fas" id="fields"
-					name="securityQuestion" placeholder="Security Answer " value="" />
+					name="SecurityQuestion" placeholder="Security Answer " value="" />
 				<br> <input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> <br> 
 				<input class="button" id="registerButton" type="submit" value="Register">
