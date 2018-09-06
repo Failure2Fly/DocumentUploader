@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import oracle.jdbc.OracleDriver;
 
 @Repository
-public class BusinessAccountDAO implements DAOExample<BusinessAccount, Integer> {
+public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> {
 
 
    private DataSource dataSource;
