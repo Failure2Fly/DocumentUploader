@@ -3,6 +3,7 @@ package com.fdmgroup.documentuploader;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
 public class Validator {
 	
@@ -18,6 +19,8 @@ public class Validator {
 		}
 		}catch(EmptyResultDataAccessException e){
 			return false;
+		}catch(IncorrectResultSizeDataAccessException e){
+			return false;
 		}
 		
 		
@@ -25,7 +28,7 @@ public class Validator {
 	}
 
 	public boolean validateUserRegistration(UserAccount userAccount) {
-		
+		//TODO add real validation here
 		return true;
 	}
 

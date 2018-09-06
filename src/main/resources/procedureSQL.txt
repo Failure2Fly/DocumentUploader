@@ -24,7 +24,7 @@ END;
 /
 show errors PROCEDURE register_account;   
 
-
+DROP SEQUENCE useraccount_seq;
 CREATE SEQUENCE useraccount_seq
  START WITH     1
  INCREMENT BY   1

@@ -27,21 +27,21 @@ public class BusinessAccountDAO implements DAOExample<BusinessAccount, Integer> 
 	public void create(BusinessAccount item) {
 		//UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
 		//List<UserAccount> userAccounts, List<String> fileList
-		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, admin, servicelevel) VALUES(businessaccount_seq.nextval, ?, ?)";
-		jdbcTemplateObject.update(SQL1, item.getAdmin(),item.getServicelevel());
+		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, owner, servicelevel) VALUES(businessaccount_seq.nextval, ?, ?)";
+		jdbcTemplateObject.update(SQL1, item.getOwner(),item.getServicelevel());
 		
 	}
 
 	@Override
 	public void delete(BusinessAccount item) {
 		String SQL = "DELETE FROM BUSINESSACCOUNT WHERE businessaccountid = ?";
-		jdbcTemplateObject.update(SQL,item.getAdmin());
+		jdbcTemplateObject.update(SQL,item.getOwner());
 	}
 
 	@Override
 	public void update(BusinessAccount item) {
-		String SQL = "UPDATE BUSINESSACCOUNT SET admin=?, servicelevel=?";
-		jdbcTemplateObject.update(SQL, item.getAdmin(),item.getServicelevel());
+		String SQL = "UPDATE BUSINESSACCOUNT SET owner=?, servicelevel=?";
+		jdbcTemplateObject.update(SQL, item.getOwner(),item.getServicelevel());
 	}
 	
 /*	@Override
@@ -50,11 +50,19 @@ public class BusinessAccountDAO implements DAOExample<BusinessAccount, Integer> 
 		return null;
 	}*/
 
-	public BusinessAccount read(String admin) {
-		String SQL = "SELECT admin, servicelevel FROM BUSINESSACCOUNT WHERE admin=?";
-		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{admin}, new BusinessAccountMapper());
-		return admin;
+	public BusinessAccount read(String owner) {
+		String SQL = "SELECT owner, servicelevel FROM BUSINESSACCOUNT WHERE admin=?";
+		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{owner}, new BusinessAccountMapper());
+		return business;
 	}
+
+
+	@Override
+	public BusinessAccount read(Integer item) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 
 }
