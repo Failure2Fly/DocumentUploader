@@ -6,11 +6,10 @@ CREATE TABLE UserAccount(
     FirstName varchar(255),
     UserPassword varchar(255),
     UserEmail varchar(255),
-    PRIMARY KEY(UserID)
+    PRIMARY KEY(UserID),
+    UNIQUE(Username)
 );
 
-INSERT INTO UserAccount VALUES(1, 'fredtodd', 'Todd','Fred','FredsCool','Fred@gmail.com');
-INSERT INTO UserAccount VALUES(2, 'thebananaeater', 'Monelli','Barbara','password1','barb@gmail.com');
 
 DROP TABLE SecurityQuestion CASCADE CONSTRAINTS;
 CREATE TABLE SecurityQuestion(
@@ -38,9 +37,7 @@ CREATE TABLE UserAccountToSecurityQuestion(
   REFERENCES SecurityQuestion(QuestionID)
   
   );
-  
-INSERT INTO UserAccountToSecurityQuestion VALUES(1, 1, 'Bad dog');
-INSERT INTO UserAccountToSecurityQuestion VALUES(1, 2, 'Wagner');
+
 
 
 
@@ -54,7 +51,7 @@ CREATE TABLE BusinessAccount(
   REFERENCES UserAccount(UserID)
   );
 
-INSERT INTO BusinessAccount VALUES(1, 1, 1);
+
 
 DROP TABLE BusinessAccountToUserAccount CASCADE CONSTRAINTS;
 CREATE TABLE BusinessAccountToUserAccount(
@@ -66,9 +63,6 @@ CREATE TABLE BusinessAccountToUserAccount(
   REFERENCES UserAccount(UserID)
   );
   
-INSERT INTO BusinessAccountToUserAccount
-VALUES(
-1, 1);
   
   
 DROP TABLE ServiceLevels CASCADE CONSTRAINTS;
@@ -84,32 +78,17 @@ INSERT INTO ServiceLevels VALUES(3, 'Gold');
 INSERT INTO ServiceLevels VALUES(4, 'Unlimited'); 
 INSERT INTO ServiceLevels VALUES(5, 'Enterprise'); 
   
-DROP TABLE Files CASCADE CONSTRAINTS;
-CREATE TABLE Files(
+DROP TABLE Documents CASCADE CONSTRAINTS;
+CREATE TABLE Documents(
   FileId int,
   FileName VARCHAR(255),
-  StoredFile BLOB,
+  StoredFilePath VARCHAR(255),
   StoreDate DATE,
-  PRIMARY KEY(FileId)
+  AssociatedAccountId int,
+  PRIMARY KEY(FileId),
+  CONSTRAINT FK_businessAccountDocumentId FOREIGN KEY (AssociatedAccountId)
+  REFERENCES BusinessAccount(BusinessAccountID)
   );
   
-  --INSERT INTO Files VALUES(1, 'Text.txt',EMPTY_BLOB(),SYSDATE); 
-  
-  CREATE OR REPLACE DIRECTORY repository AS 'C:\Users\daniel.klingensmith';
-  DECLARE
-  src_lob  BFILE := BFILENAME('REPOSITORY', 'Text.txt');
-  dest_lob BLOB;
-BEGIN
-  INSERT INTO Files VALUES(2, 'Text.txt',EMPTY_BLOB(),SYSDATE)
-     RETURNING StoredFile INTO dest_lob;
 
-  DBMS_LOB.OPEN(src_lob, DBMS_LOB.LOB_READONLY);
-  DBMS_LOB.LoadFromFile( DEST_LOB => dest_lob,
-                         SRC_LOB  => src_lob,
-                         AMOUNT   => DBMS_LOB.GETLENGTH(src_lob) );
-  DBMS_LOB.CLOSE(src_lob);
-
-  COMMIT;
-END;
-/
   

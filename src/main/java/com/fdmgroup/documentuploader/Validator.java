@@ -5,7 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 public class Validator {
-
+	
 	public boolean validateUserLogin(String username, String password) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
@@ -22,6 +22,11 @@ public class Validator {
 		
 		
 		
+	}
+
+	public boolean validateUserRegistration(UserAccount userAccount) {
+		
+		return true;
 	}
 
 }
