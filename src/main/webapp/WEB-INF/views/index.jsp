@@ -35,11 +35,13 @@
     </div>
   </nav>
 	
-	<div  class="main-img" style="background-image: url(./webapp/imgs/main.jpg)">
-  </div>
+	<div>
+  		<h1>This is the home page</h1>
+  	</div>
+	<div  class="main-img" style="background-image: url(./imgs/main.jpg)">
+  	</div>
   
-  <div>
-  </div>
+
 	
 
   

@@ -49,11 +49,15 @@
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
-				</select> <br> <input type="text" class="fas" id="fields"
+				</select> 
+				<br> 
+				<input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
-				<br> <input type="checkbox" name="agree" value="agree">
-				I accept <span>UD's terms and conditions</span> <br> <input
-					class="button" id="registerButton" type="submit" value="Register">
+				<br> 
+				<input type="checkbox" name="agree" value="agree">
+				I accept <span>UD's terms and conditions</span> 
+				<br> 
+				<input class="button" id="registerButton" type="submit" value="Register">
 
 
 			</fieldset>
