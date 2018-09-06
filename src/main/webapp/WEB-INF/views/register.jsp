@@ -71,9 +71,9 @@
 <footer>
 	<div class="row">
 		<div class="col-4 social">
-			<i class="fab fa-facebook-f"></i> <i class="fab fa-twitter"></i> <i
-				class="fab fa-linkedin-in"></i> <i class="fab fa-google-plus-g"></i>
-			<i class="fab fa-youtube"></i>
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
 
 		</div>
 		<div class="col-8 copyright">

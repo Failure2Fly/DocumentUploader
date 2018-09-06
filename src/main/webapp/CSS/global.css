@@ -289,11 +289,14 @@ footer {
 	width: 100%;
 }
 
+footer a {
+	color: #666666;
+}
 .social {
 	padding-top: 20px;
 }
 
-.social i {
+.social a {
 	padding: 0px 15px 0px 15px;
 }
 
