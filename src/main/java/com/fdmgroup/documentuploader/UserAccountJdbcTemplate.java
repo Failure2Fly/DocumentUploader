@@ -42,22 +42,20 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 
     //TODO more questions/answers
    }
-   
    @Override
    public void delete(UserAccount item) {
    	//TODO sql query deletion all useraccount's stuff
-	   String SQL1 = "DELETE FROM USERACCOUNTTOSECURITYQUESTION WHERE USERACCOUNTSECURITYJOINID = ?";
-	   String SQL2 = "DELETE FROM USERACCOUNT WHERE username = ?";
-	   String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";  
+	   //String SQL1 = "DELETE FROM USERACCOUNTTOSECURITYQUESTION WHERE USERACCOUNTSECURITYJOINID = ?";
+	   String SQL = "DELETE FROM USERACCOUNT WHERE username = ?";
+	   //String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";
+	   jdbcTemplateObject.update(SQL,item.getUsername());
    }
-   
    @Override
    public void update(UserAccount item) {
    	//TODO sql query update username
    	String SQL = "UPDATE useraccount SET firstname=?,lastname=?,userpassword=?,useremail=? WHERE username=?";
    	jdbcTemplateObject.update(SQL,item.getFirstName(),item.getLastName(),item.getPassword(),item.getUserEmail(),item.getUsername());
    }
-   
    @Override
    public UserAccount read(String username) {
 	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE username = ?";
