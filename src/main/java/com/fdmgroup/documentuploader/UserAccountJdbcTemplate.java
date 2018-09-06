@@ -28,16 +28,8 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 
 //   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
 //   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
-   	File file = new File("H:\\DebugInCreate.txt");
-	try {
-		FileWriter writer= new FileWriter(file);
-		writer.write(item.toString()); 
-	      writer.flush();
-	      writer.close();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+   	
+	
     jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
 
