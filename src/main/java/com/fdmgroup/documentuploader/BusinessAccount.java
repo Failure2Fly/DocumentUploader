@@ -42,13 +42,12 @@ public class BusinessAccount {
 		this.businessAccountId = businessAccountId;
 	}
 	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel, List<UserAccount> userAccounts,
-			List<String> fileList, int businessAccountId) {
+			List<String> fileList) {
 		super();
 		this.owner = owner;
 		this.servicelevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
-		this.businessAccountId = businessAccountId;
 	}
 	public BusinessAccount() {
 		super();
@@ -57,6 +56,15 @@ public class BusinessAccount {
 	public String toString() {
 		return "BusinessAccount [owner=" + owner + ", servicelevel=" + servicelevel + ", userAccounts=" + userAccounts
 				+ ", fileList=" + fileList + ", businessAccountId=" + businessAccountId + "]";
+	}
+	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel, List<UserAccount> userAccounts,
+			List<String> fileList, int businessAccountId) {
+		super();
+		this.owner = owner;
+		this.servicelevel = servicelevel;
+		this.userAccounts = userAccounts;
+		this.fileList = fileList;
+		this.businessAccountId = businessAccountId;
 	}
 	
 

@@ -13,20 +13,20 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 public class TestUserAccountDAO {
 
-	@Test 
-	public void testReadNonexistentUser(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
-		String username = "ImaginaryUser";
+//	@Test 
+//	public void testReadNonexistentUser(){
+//		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+//		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+//		String username = "ImaginaryUser";
 //		
-		UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
-		try{
-		System.out.println("This is the result of a nonexistent read"+dao.read(username));
-		}catch(EmptyResultDataAccessException e){
-			
-		}
-		
-	}
+//		UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
+//		try{
+//		System.out.println("This is the result of a nonexistent read"+dao.read(username));
+//		}catch(EmptyResultDataAccessException e){
+//			
+//		}
+//		
+//	}
 //	@Test
 //	public void testCreateThenReadThenDelete(){
 //		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
