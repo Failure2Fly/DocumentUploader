@@ -5,18 +5,16 @@ import java.util.List;
 
 public class BusinessAccount {
 
-	private UserAccount owner;
+	private UserAccount admin;
 	private ServiceLevel servicelevel;
 	private List<UserAccount> userAccounts = new ArrayList<>();
 	private List<String> fileList = new ArrayList<>();
 	private int businessAccountId;
-	
-	
-	public UserAccount getOwner() {
-		return owner;
+	public UserAccount getAdmin() {
+		return admin;
 	}
-	public void setOwner(UserAccount owner) {
-		this.owner = owner;
+	public void setAdmin(UserAccount admin) {
+		this.admin = admin;
 	}
 	public ServiceLevel getServicelevel() {
 		return servicelevel;
@@ -42,10 +40,10 @@ public class BusinessAccount {
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
 	}
-	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel, List<UserAccount> userAccounts,
+	public BusinessAccount(UserAccount admin, ServiceLevel servicelevel, List<UserAccount> userAccounts,
 			List<String> fileList, int businessAccountId) {
 		super();
-		this.owner = owner;
+		this.admin = admin;
 		this.servicelevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
@@ -56,9 +54,10 @@ public class BusinessAccount {
 	}
 	@Override
 	public String toString() {
-		return "BusinessAccount [owner=" + owner + ", servicelevel=" + servicelevel + ", userAccounts=" + userAccounts
+		return "BusinessAccount [admin=" + admin + ", servicelevel=" + servicelevel + ", userAccounts=" + userAccounts
 				+ ", fileList=" + fileList + ", businessAccountId=" + businessAccountId + "]";
 	}
+	
 	
 	
 	
