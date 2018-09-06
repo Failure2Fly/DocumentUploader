@@ -1,6 +1,9 @@
 package com.fdmgroup.documentuploader;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Map.Entry;
 
 import javax.sql.DataSource;
@@ -19,11 +22,23 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    public void create(UserAccount item) {
    	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
    	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
-   	//Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-   	//String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
-   	//key = key.substring(0, 1).toUpperCase() + key.substring(1);
-    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress());
+//   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
+
+//   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
+//   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+   	File file = new File("H:\\DebugInCreate.txt");
+	try {
+		FileWriter writer= new FileWriter(file);
+		writer.write(item.toString()); 
+	      writer.flush();
+	      writer.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
+
 
     //TODO more questions/answers
    }
@@ -40,7 +55,7 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    public void update(UserAccount item) {
    	//TODO sql query update username
    	String SQL = "UPDATE useraccount SET firstname=?,lastname=?,userpassword=?,useremail=? WHERE username=?";
-   	jdbcTemplateObject.update(SQL,item.getFirstName(),item.getLastName(),item.getPassword(),item.getEmailAddress(),item.getUsername());
+   	jdbcTemplateObject.update(SQL,item.getFirstName(),item.getLastName(),item.getPassword(),item.getUserEmail(),item.getUsername());
    }
    
    @Override
