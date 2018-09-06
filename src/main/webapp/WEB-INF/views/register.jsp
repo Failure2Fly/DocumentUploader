@@ -28,19 +28,19 @@
 		<sf:form commandName="userAccount" method="POST" action="register">
 			<fieldset class="register-form">
 				<sf:input path="firstName" type="text" class="fas" id="fields"
-					name="Firstname" placeholder="First name " value="" />
+					name="firstname" placeholder="First name " value="" />
 				<br>
 				<sf:input path="lastName" type="text" class="fas" id="fields"
-					name="Lastname" placeholder="Last name" value="" />
+					name="lastname" placeholder="Last name" value="" />
 				<br>
 				<sf:input path="userEmail" type="text" class="fas" id="fields"
-					placeholder="Email" />
+					 name="email" placeholder="Email" />
 				<br>
 				<sf:input path="username" type="text" class="fas" id="fields"
-					placeholder="Create a username" />
+					name="username" placeholder="Create a username" />
 				<br>
 				<sf:input path="password" type="password" class="fas" id="fields"
-					placeholder="Create a password" />
+					name="password" placeholder="Create a password" />
 				<br> <br> <select>
 				<option value="pet">What is the name of your first pet?</option>
 					<option value="maiden">What is the maiden name of your
@@ -53,8 +53,8 @@
 				</select> <br> <input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
 				<br> <input type="checkbox" name="agree" value="agree">
-				I accept <span>UD's terms and conditions</span> <br> <input
-					class="button" id="registerButton" type="submit" value="Register">
+				I accept <span>UD's terms and conditions</span> <br> 
+				<input class="button" id="registerButton" type="submit" value="Register">
 
 
 			</fieldset>

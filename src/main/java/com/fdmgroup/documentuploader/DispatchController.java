@@ -30,6 +30,7 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "register";
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
 		File file = new File("H:\\Debug.txt");
@@ -64,11 +65,17 @@ public class DispatchController {
 		return "userHome";
 	}
 
-//	@RequestMapping(value = "/register", method = RequestMethod.POST)
-//	public String userRegisterSuccess(@ModelAttribute UserAccount userAccount) {
-//		
-//		return "login";
-//	}
+	@RequestMapping(value = "/register", method = RequestMethod.POST)
+	public String userRegisterSuccess(@ModelAttribute UserAccount userAccount) {
+		
+//		String user_name = request.getParam("UserName");
+//		String password = request.getParam("Password");
+//		String user_name = request.getParam("UserName");
+//		String password = request.getParam("Password");
+//		String user_name = request.getParameter("UserName");
+		
+		return "login";
+	}
 
 	
 
