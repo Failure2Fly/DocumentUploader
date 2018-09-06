@@ -22,10 +22,11 @@
 	<bean id="UserAccountJdbcTemplate" class="com.fdmgroup.documentuploader.UserAccountJdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	
-	
-	
 	<bean id="DocumentDao" class="com.fdmgroup.documentuploader.DocumentDao">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="BusinessAccountDAO" class="com.fdmgroup.documentuploader.BusinessAccountDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

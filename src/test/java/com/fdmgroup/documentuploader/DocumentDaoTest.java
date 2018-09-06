@@ -1,19 +1,8 @@
 package com.fdmgroup.documentuploader;
 
-import static org.junit.Assert.*;
-
-import static java.nio.file.StandardOpenOption.*;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -21,7 +10,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 public class DocumentDaoTest {
 
@@ -29,33 +17,33 @@ public class DocumentDaoTest {
 	public void setUp() throws Exception {
 	}
 
-	@Test
-	public void test() {
-		File file = new File("H:\\TestText.txt");
-		try {
-			FileWriter writer= new FileWriter(file);
-			writer.write("This is some test text!"); 
-		      writer.flush();
-		      writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		DocumentDao dao = (DocumentDao)context.getBean("DocumentDao");
-	
+//	@Test
+//	public void test() {
+//		File file = new File("H:\\TestText.txt");
+//		try {
+//			FileWriter writer= new FileWriter(file);
+//			writer.write("This is some test text!"); 
+//		      writer.flush();
+//		      writer.close();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 //		
-		
-		Path sourcePath = Paths.get(file.toString());
-		Path repositoryPath = Paths.get("H:\\RepositoryText.txt");
-	
-		Document document = new Document("TestText", sourcePath,repositoryPath, null);
-		dao.create(document);
-		Document documentRead = dao.read(repositoryPath.toString());
-		System.out.println(documentRead);
-		dao.delete(document);
-		
-	}
+//		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+//		DocumentDao dao = (DocumentDao)context.getBean("DocumentDao");
+//	
+////		
+//		
+//		Path sourcePath = Paths.get(file.toString());
+//		Path repositoryPath = Paths.get("H:\\RepositoryText.txt");
+//	
+//		Document document = new Document("TestText", sourcePath,repositoryPath, null);
+//		dao.create(document);
+//		Document documentRead = dao.read(repositoryPath.toString());
+//		System.out.println(documentRead);
+//		dao.delete(document);
+//		
+//	}
 
 }

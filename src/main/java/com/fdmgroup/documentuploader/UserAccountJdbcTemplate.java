@@ -55,4 +55,10 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{username},new UserAccountMapper());
    	return user;
    }
+   
+   public UserAccount read(Integer id) {
+	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE userid = ?";
+	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{id},new UserAccountMapper());
+   	return user;
+   }
 }
