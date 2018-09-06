@@ -29,7 +29,6 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 //   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
 //   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
    	
-	
     jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
 
