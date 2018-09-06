@@ -19,16 +19,17 @@
 <body>
 	<h1>THIS IS THE LOGIN PAGE</h1>
 	<div id="login-form" class="form login-form">
+	<legend>Login
 		<sf:form commandName="userAccount" method="POST" action="login">
 			<fieldset class="login-form">
-				<sf:input path="username" type="text" class="fas" id="fields"
+				Username:<sf:input path="username" type="text" class="fas" id="fields"
 					placeholder="Enter your username" />
 				<br>
-				<sf:input path="password" type="password" class="fas" id="fields"
+				Password:<sf:input path="password" type="password" class="fas" id="fields"
 					placeholder="Enter your password" />
 				<br> 
 				<input class="button" id="loginButton" type="submit" value="Login">
-
+	</legend>
 
 			</fieldset>
 		</sf:form>
