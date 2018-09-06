@@ -38,7 +38,7 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-    jdbcTemplateObject.update(SQL1,item.getFirstName(),item.getLastName(),item.getUserEmail(),item.getUsername(),item.getPassword());
+    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
 
 

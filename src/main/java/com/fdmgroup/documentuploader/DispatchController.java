@@ -20,7 +20,7 @@ public class DispatchController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/UserHome/*", method = RequestMethod.GET)
+	@RequestMapping(value = "/userHome/*", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(Model model) {
 
 		return "userHome";
