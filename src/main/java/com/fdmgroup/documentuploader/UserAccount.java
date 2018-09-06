@@ -119,7 +119,7 @@ public class UserAccount {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UserAccount [username=").append(username).append(", password=").append(password)
-				.append(", emailAddress=").append(userEmail).append(", firstName=").append(firstName)
+				.append(", useremail=").append(userEmail).append(", firstName=").append(firstName)
 				.append(", lastName=").append(lastName).append("]");
 		return builder.toString();
 	}
