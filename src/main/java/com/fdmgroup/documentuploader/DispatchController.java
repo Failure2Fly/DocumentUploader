@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -36,15 +38,16 @@ public class DispatchController {
 		try {
 			FileWriter writer= new FileWriter(file);
 			writer.write(userAccount.toString()); 
-		      writer.flush();
-		      writer.close();
+		    writer.flush();
+		    writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		UserAccountJdbcTemplate dao = new UserAccountJdbcTemplate();
-		dao.create(userAccount);
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+		jdbc.create(userAccount);
 		return "userHome";
 		
 		

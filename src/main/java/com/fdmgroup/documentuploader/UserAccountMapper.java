@@ -17,13 +17,11 @@ public class UserAccountMapper implements RowMapper<UserAccount> {
 		user.setFirstName(rs.getString("firstname"));
 		user.setLastName(rs.getString("lastname"));
 //		Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
-
 //	    rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));
 //	    while(rs.next()){
 //	    	rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));
 //	    }
 //		user.setMapQA(rsQuestionMap);
-
 		return user;
 	}
 }
