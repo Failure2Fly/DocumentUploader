@@ -269,6 +269,6 @@ public class BusinessAccount {
 		return "BusinessAccount [admin=" + admin + ", businessAccountId=" + businessAccountId + ", servicelevel="
 				+ servicelevel + ", userAccounts=" + userAccounts + ", fileList=" + fileList + "]";
 	}
-	
+
 
 }
