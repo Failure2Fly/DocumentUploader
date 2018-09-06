@@ -15,15 +15,14 @@ public class UserAccount {
 		super();
 		
 	}
-	public UserAccount(String username, String lastName, String firstName, String password, String emailAddress,
-			Map<SecurityQuestion, String> mapQA) {
+	public UserAccount(String username, String lastName, String firstName, String password, String emailAddress) {
 		super();
 		this.username = username;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
 		this.emailAddress = emailAddress;
-		this.mapQA = mapQA;
+		this.mapQA = null;
 	}
 	public String getUsername() {
 		return username;

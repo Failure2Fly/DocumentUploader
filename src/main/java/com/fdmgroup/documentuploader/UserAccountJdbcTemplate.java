@@ -17,12 +17,11 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public void create(UserAccount item) {
-
    	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
    	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
-   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
-   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+   	//Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
+   	//String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
+   	//key = key.substring(0, 1).toUpperCase() + key.substring(1);
     jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getEmailAddress());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
 
@@ -46,7 +45,7 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public UserAccount read(String username) {
-	  String SQL = "SELECT use.username,use.userpassword,use.useremail,use.firstname,use.lastname,sec.question,uats.questionanswer FROM USERACCOUNT USE JOIN USERACCOUNTTOSECURITYQUESTION UATS ON UATS.USERACCOUNTSECURITYJOINID = USE.USERID JOIN SECURITYQUESTION SEC ON UATS.SECURITYQUESTIONJOINID = SEC.QUESTIONID WHERE USERNAME = ?";
+	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE username = ?";
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{username},new UserAccountMapper());
    	return user;
    }

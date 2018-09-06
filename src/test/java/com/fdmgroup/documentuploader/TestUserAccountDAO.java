@@ -15,11 +15,11 @@ public class TestUserAccountDAO {
 	public void testRead() {
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");;
-		Map<SecurityQuestion,String> QA = new HashMap<>();
-		QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "Bad dog");
-		QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Wagner");
-		String username = "fredtodd";
-		UserAccount expected = new UserAccount(username,"Todd","Fred","FredsCool","Fred@gmail.com",QA);
+		//Map<SecurityQuestion,String> QA = new HashMap<>();
+		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "Bad dog");
+		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Wagner");
+		String username = "LukeWeatherstein";
+		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
 		UserAccount actual =  userAccount.read(username);
 		
 		assertEquals(expected,actual);	
@@ -33,9 +33,9 @@ public class TestUserAccountDAO {
 		QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
 		QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
 		String username = "LukeWeatherstein";
-		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com",QA);
+		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
 		userAccount.create(expected);
-		UserAccount actual =  userAccount.read(username);
+		UserAccount actual = userAccount.read(username);
 		
 		assertEquals(expected,actual);
 	}
