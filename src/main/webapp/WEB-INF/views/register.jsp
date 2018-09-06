@@ -39,7 +39,7 @@
 				<sf:input path="username" type="text" class="fas" id="fields"
 					placeholder="Create a username" />
 				<br>
-				<sf:input path="password" type="text" class="fas" id="fields"
+				<sf:input path="password" type="text password" class="fas" id="fields myInput"
 					placeholder="Create a password" />
 				<br> <br> <select>
 					<option value="maiden">What is the maiden name of your
