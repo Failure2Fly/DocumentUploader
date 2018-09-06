@@ -20,27 +20,32 @@
 </head>
 
 <body>
-	<h1>This is the Register Page</h1>
+	<div class="header"><div class = "registrationTitle"><h1>This is the Register Page</h1></div></div>
+	
 
 	<h2>Register</h2>
 
-	<div id="register-form" class="form register-form">
+	<div id="register-form" class="registration">
 		<sf:form commandName="userAccount" method="POST" action="register">
-			<fieldset class="register-form">
-				<sf:input path="firstName" type="text" class="fas" id="fields"
+			<fieldset >
+					<p>First Name:</p>
+				<sf:input path="firstName" class="inputField" type="text" 
 					name="FirstName" placeholder="First name " value="" />
 				<br>
-				<sf:input path="lastName" type="text" class="fas" id="fields"
+					<p>Last Name:</p> 
+				<sf:input path="lastName" class="inputField" type="text" 
 					name="LastName" placeholder="Last name" value="" />
 				<br>
-				<sf:input path="userEmail" type="text" class="fas" id="fields"
+					<p>Email:</p> 
+				<sf:input path="userEmail" class="inputField" type="text" 
 					 name="Email" placeholder="Email" />
 				<br>
-				<sf:input path="username" type="text" class="fas" id="fields"
+					<p>Username:</p> 
+				<sf:input path="username" class="inputField" type="text" 
 					name="UserName" placeholder="Create a username" />
 				<br>
-
-				<sf:input path="password" type="password" class="fas" id="fields"
+					<p>Password:</p> 
+				<sf:input path="password" class="inputField" type="password" 
 					name="Password" placeholder="Create a password" />
 				<br> <br> <select>
 				<option value="pet">What is the name of your first pet?</option>
@@ -53,7 +58,7 @@
 					<option value="artist">Who is your favorite actor, musician, or artist?</option>
 				</select> 
 				<br> 
-				<input type="text" class="fas" id="fields"
+				<input type="text" 
 					name="securityQuestion" placeholder="Security Answer " value="" />
 				<br> 
 				<input type="checkbox" name="agree" value="agree">
@@ -69,6 +74,7 @@
 </body>
 
 <footer>
+<div class="header">
 	<div class="row">
 		<div class="col-4 social">
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
@@ -79,6 +85,7 @@
 		<div class="col-8 copyright">
 			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
 		</div>
+	</div>
 	</div>
 </footer>
 </html>

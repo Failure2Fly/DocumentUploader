@@ -17,19 +17,22 @@
 </head>
 
 <body>
-	<h1>THIS IS THE LOGIN PAGE</h1>
-	<div id="login-form" class="form login-form">
-	<legend>Login
+<div class="header"><div class = "registrationTitle"><h1>THIS IS THE LOGIN PAGE</h1></div></div>
+	<h2>Register</h2>
+	<div id="login-form" class="registration">
+	
 		<sf:form commandName="userAccount" method="POST" action="login">
 			<fieldset class="login-form">
-				Username:<sf:input path="username" type="text" class="fas" id="fields"
+				<p>Username:</p>
+				<sf:input path="username" type="text" class="inputField" id="fields"
 					placeholder="Enter your username" />
 				<br>
-				Password:<sf:input path="password" type="password" class="fas" id="fields"
+				<p>Password:</p>
+				<sf:input path="password" type="password" class="inputField" id="fields"
 					placeholder="Enter your password" />
 				<br> 
 				<input class="button" id="loginButton" type="submit" value="Login">
-	</legend>
+	
 
 			</fieldset>
 		</sf:form>
@@ -37,6 +40,7 @@
 </body>
 
 <footer>
+<div class="header">
 	<div class="row">
 		<div class="col-4 social">
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
@@ -47,6 +51,7 @@
 		<div class="col-8 copyright">
 			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
 		</div>
+	</div>
 	</div>
 </footer>
 </html>
