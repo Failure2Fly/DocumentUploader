@@ -20,7 +20,6 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public void create(UserAccount item) {
-
    	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
    	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
 //   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
@@ -37,7 +36,6 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
     jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
     //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
 
@@ -62,7 +60,7 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public UserAccount read(String username) {
-	  String SQL = "SELECT userid,username,lastname,firstname,userpassword,useremail FROM UserAccount WHERE Username = ?";
+	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE username = ?";
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{username},new UserAccountMapper());
    	return user;
    }

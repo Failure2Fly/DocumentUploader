@@ -11,7 +11,6 @@ public class UserAccount {
 	private String userEmail;
 //	private Map<SecurityQuestion,String> mapQA;
 	
-
 	public String getUserEmail() {
 		return userEmail;
 	}
