@@ -14,7 +14,7 @@ public class TestUserAccountDAO {
 	@Test
 	public void testCreateThenReadThenDelete(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");;
+		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		//Map<SecurityQuestion,String> QA = new HashMap<>();
 		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
 		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
