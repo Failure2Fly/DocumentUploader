@@ -51,7 +51,6 @@
 					<option value="car">What was the make and model of your
 						first car?</option>
 					<option value="artist">Who is your favorite actor, musician, or artist?</option>
-
 				</select> 
 				<br> 
 				<input type="text" class="fas" id="fields"

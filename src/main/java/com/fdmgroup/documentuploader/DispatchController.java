@@ -41,16 +41,7 @@ public class DispatchController {
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
-		File file = new File("H:\\Debug.txt");
-		try {
-			FileWriter writer= new FileWriter(file);
-			writer.write(userAccount.toString()); 
-		    writer.flush();
-		    writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 		
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
@@ -63,27 +54,22 @@ public class DispatchController {
 	public String userLogin(Model model) {
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute(userAccount);
-		
-		
 		return "login";
 	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLoginSuccess(@ModelAttribute UserAccount userAccount) {
+		Validator validator = new Validator();
+		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
+		if(isValid){
+			return "userHome";
+		}else{
+			return "login";
+		}
 		
-		return "userHome";
 	}
 
-//	@RequestMapping(value = "/register", method = RequestMethod.POST)
-//	public String userRegisterSuccess(@ModelAttribute UserAccount userAccount) {
-//		
-//		String user_name = request.getParam("UserName");
-//		String password = request.getParam("Password");
-//		String user_name = request.getParam("UserName");
-//		String password = request.getParam("Password");
-//		String user_name = request.getParameter("UserName");
-//		
-//		return "login";
-//	}
+
 
 	
 
