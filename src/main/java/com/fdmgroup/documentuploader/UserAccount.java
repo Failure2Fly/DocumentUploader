@@ -56,6 +56,7 @@ public class UserAccount {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 //	public Map<SecurityQuestion, String> getMapQA() {
 //		return mapQA;
 //	}
@@ -123,7 +124,7 @@ public class UserAccount {
 				.append(", lastName=").append(lastName).append("]");
 		return builder.toString();
 	}
-	
+
 	
 	
 }

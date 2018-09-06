@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public class DocumentDao implements DAO<Document, String> {
-	
+	 
 	 	private DataSource dataSource;
 	   private JdbcTemplate jdbcTemplateObject;
 	   
