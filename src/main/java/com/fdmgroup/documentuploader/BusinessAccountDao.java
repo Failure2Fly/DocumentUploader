@@ -26,37 +26,38 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 
 
 	@Override
-	public void create(BusinessAccount item) {
+	public void create(BusinessAccount account) {
 		//UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
 		//List<UserAccount> userAccounts, List<String> fileList
 		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel) VALUES(businessaccount_seq.nextval, ?, ?)";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
-		String ownerUsername =item.getOwner().getUsername();
+		String ownerUsername =account.getOwner().getUsername();
 	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);		
-		jdbcTemplateObject.update(SQL1, ownerId,item.getServicelevel());
+		jdbcTemplateObject.update(SQL1, ownerId,account.getServicelevel());
 		
 	}
 
 	@Override
-	public void delete(BusinessAccount item) {
+	public void delete(BusinessAccount account) {
 		String SQL = "DELETE FROM BUSINESSACCOUNT WHERE businessaccountid = ?";
-		jdbcTemplateObject.update(SQL,item.getBusinessAccountId());
+		jdbcTemplateObject.update(SQL,account.getBusinessAccountId());
 	}
 
 	@Override
-	public void update(BusinessAccount item) {
+	public void update(BusinessAccount account) {
 		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
-		String ownerUsername =item.getOwner().getUsername();
+		String ownerUsername =account.getOwner().getUsername();
 	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);
-		jdbcTemplateObject.update(SQL, ownerId,item.getServicelevel());
+		jdbcTemplateObject.update(SQL, ownerId,account.getServicelevel());
 	}
 	
 
 	public BusinessAccount read(String username) {
-		String SQL = "SELECT businessaccountid, servicelevel FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
+		//TODO : will fail when user has multiple accounts
+		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { username }, Integer.class);
@@ -67,9 +68,14 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 
 
 	@Override
-	public BusinessAccount read(Integer item) {
-		// TODO Auto-generated method stub
-		return null;
+	public BusinessAccount read(Integer id) {
+		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel FROM BUSINESSACCOUNT WHERE businessaccountid=?";
+		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
+			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
+	    		sqlOwnerId, new Object[] { id }, Integer.class);
+		
+		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{ownerId}, new BusinessAccountMapper());
+		return business;
 	}
 
 
