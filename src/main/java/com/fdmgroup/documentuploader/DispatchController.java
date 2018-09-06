@@ -25,6 +25,12 @@ public class DispatchController {
 
 		return "userHome";
 	}
+	
+	@RequestMapping(value = "/serviceLevels")
+	public String ServiceLevels(Model model) {
+
+		return "serviceLevels";
+	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
@@ -32,6 +38,7 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "register";
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
 		File file = new File("H:\\Debug.txt");
@@ -48,8 +55,7 @@ public class DispatchController {
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		jdbc.create(userAccount);
-		return "userHome";
-		
+		return "login";
 		
 	}
 	
@@ -67,6 +73,17 @@ public class DispatchController {
 		return "userHome";
 	}
 
+//	@RequestMapping(value = "/register", method = RequestMethod.POST)
+//	public String userRegisterSuccess(@ModelAttribute UserAccount userAccount) {
+//		
+//		String user_name = request.getParam("UserName");
+//		String password = request.getParam("Password");
+//		String user_name = request.getParam("UserName");
+//		String password = request.getParam("Password");
+//		String user_name = request.getParameter("UserName");
+//		
+//		return "login";
+//	}
 
 	
 
