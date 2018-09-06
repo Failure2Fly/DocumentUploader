@@ -47,3 +47,4 @@ public class BusinessAccountDAO implements DAOExample<BusinessAccount, Integer> 
 
 
 }
+

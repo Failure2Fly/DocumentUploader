@@ -24,7 +24,7 @@
 				<sf:input path="username" type="text" class="fas" id="fields"
 					placeholder="Enter your username" />
 				<br>
-				<sf:input path="password" type="text" class="fas" id="fields"
+				<sf:input path="password" type="password" class="fas" id="fields"
 					placeholder="Enter your password" />
 				<br> 
 				<input class="button" id="loginButton" type="submit" value="Login">

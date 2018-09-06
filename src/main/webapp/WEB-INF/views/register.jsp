@@ -28,27 +28,34 @@
 		<sf:form commandName="userAccount" method="POST" action="register">
 			<fieldset class="register-form">
 				<sf:input path="firstName" type="text" class="fas" id="fields"
-					name="Firstname" placeholder="First name " value="" />
+					name="FirstName" placeholder="First name " value="" />
 				<br>
 				<sf:input path="lastName" type="text" class="fas" id="fields"
-					name="Lastname" placeholder="Last name" value="" />
+					name="LastName" placeholder="Last name" value="" />
 				<br>
 				<sf:input path="userEmail" type="text" class="fas" id="fields"
-					placeholder="Email" />
+					 name="Email" placeholder="Email" />
 				<br>
 				<sf:input path="username" type="text" class="fas" id="fields"
-					placeholder="Create a username" />
+					name="UserName" placeholder="Create a username" />
 				<br>
-				<sf:input path="password" type="text" class="fas" id="fields"
-					placeholder="Create a password" />
+				<sf:input path="password" type="password" class="fas" id="fields"
+					name="Password" placeholder="Create a password" />
 				<br> <br> <select>
+				<option value="pet">What is the name of your first pet?</option>
 					<option value="maiden">What is the maiden name of your
 						mother?</option>
-					<option value="pet">What is the name of your first pet?</option>
 					<option value="concert">What was the first concert you
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
+<<<<<<< HEAD
+					<option value="car">Who is your favorite actor, musician, or artist?</option>
+				</select> <br> <input type="text" class="fas" id="fields"
+					name="SecurityQuestion" placeholder="Security Answer " value="" />
+				<br> <input type="checkbox" name="agree" value="agree">
+				I accept <span>UD's terms and conditions</span> <br> 
+=======
 				</select> 
 				<br> 
 				<input type="text" class="fas" id="fields"
@@ -57,6 +64,7 @@
 				<input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> 
 				<br> 
+>>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
 				<input class="button" id="registerButton" type="submit" value="Register">
 
 

@@ -1,3 +1,18 @@
+<<<<<<< HEAD
+package com.fdmgroup.documentuploader;
+
+import static org.junit.Assert.*;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class TestUserAccountDAO {
+
+=======
 //package com.fdmgroup.documentuploader;
 //
 //import static org.junit.Assert.*;
@@ -11,6 +26,7 @@
 //
 //public class TestUserAccountDAO {
 //	
+>>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
 //	@Test
 //	public void testCreateThenReadThenDelete(){
 //		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
@@ -28,4 +44,9 @@
 //		assertEquals(expected,actual);
 //		userAccount.delete(expected);
 //	}
+<<<<<<< HEAD
+
+}
+=======
 //}
+>>>>>>> 3867879e2209361e226af5dae0db26e2c839129b
