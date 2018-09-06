@@ -21,8 +21,7 @@ public class UserAccount {
 		super();
 		
 	}
-	public UserAccount(String username, String lastName, String firstName, String password, String userEmail
-			) {
+	public UserAccount(String username, String lastName, String firstName, String password, String userEmail){
 		super();
 		this.username = username;
 		this.lastName = lastName;

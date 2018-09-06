@@ -44,13 +44,10 @@ public class DispatchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		jdbc.create(userAccount);
-		return "userHome";
-		
-		
+		return "userHome";	
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -63,7 +60,8 @@ public class DispatchController {
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String userLoginSuccess(@ModelAttribute UserAccount userAccount) {
-		
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		return "userHome";
 	}
 
