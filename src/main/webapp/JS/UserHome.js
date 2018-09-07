@@ -1,19 +1,15 @@
 
 function DisplayAccounts(){
-	
+	var ul = document.getElementById("dynamic-list");
+    var candidate = document.getElementById("candidate");
+    var li = document.createElement("li");
+    li.setAttribute('id',candidate.value);
+    li.appendChild(document.createTextNode(candidate.value));
+    ul.appendChild(li);
 	
 
 
-		var success = "Success, Welcome ";
-		success += username;
-		if(message == success){
-			window.alert(message);
-			return true;
-		}
-		else{
-			window.alert(message);
-			return false;
-		}
+		
 		
 }
 
