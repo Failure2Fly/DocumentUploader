@@ -21,7 +21,7 @@
 
 
 <body>
-<div class="header"><div class = "registrationTitle"><h1>Welcome to Document Loader, ${userAccount.username}</h1></div></div>
+<div class="header"><div class = "registrationTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div></div>
 </body>
 <footer>
 <div class="header">
