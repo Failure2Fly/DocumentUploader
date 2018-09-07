@@ -4,7 +4,9 @@ package com.fdmgroup.documentuploader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
@@ -13,12 +15,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import oracle.jdbc.OracleDriver;
-
 @Repository
 public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> {
 
-
+	ApplicationContext context;
+	
    private DataSource dataSource;
    private JdbcTemplate jdbcTemplateObject;
    
@@ -70,15 +71,29 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	}
 	
 
-	public BusinessAccount read(String username) {
-		//TODO : will fail when user has multiple accounts
+	public List<BusinessAccount> read(String username) {
+		
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { username }, Integer.class);
-		
-		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{ownerId}, new BusinessAccountMapper());
-		return business;
+		List<BusinessAccount> businessAccounts = new ArrayList<>();
+		List<Map<String, Object>> rows = new ArrayList<>();
+				rows = jdbcTemplateObject.queryForList(SQL, new Object[]{ownerId}, new BusinessAccountMapper());
+		for(Map map : rows){
+			BusinessAccount account = new BusinessAccount();
+			account.setAccountName((String)map.get("accountname"));
+			account.setBusinessAccountId((int)map.get("businessaccountid"));
+			
+			int ownerIdInt=((int)map.get("useraccountownerid"));
+			ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+			
+			customer.setName((String)row.get("NAME"));
+			customer.setAge((Integer)row.get("AGE"));
+			customers.add(customer);
+			businessAccounts.add(account);
+		}
+		return businessAccounts;
 	}
 
 
