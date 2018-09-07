@@ -110,7 +110,6 @@ public class DispatchController {
 			return "login";
 		}
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
@@ -134,5 +133,18 @@ public class DispatchController {
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
+	@RequestMapping(value = "/userControlPanel", method = RequestMethod.GET)
+	public String changeUserInfoGet(Model model, HttpSession session) {
+		model.addAttribute("userAccount", session.getAttribute("user"));
+		return "userControlPanel";
 
+	}
+	@RequestMapping(value = "/userControlPanel", method = RequestMethod.POST)
+	public String changeUserInfoPost(@ModelAttribute UserAccount userAccount,HttpSession session){
+		context = getContext();
+		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+		
+		return null;
+		
+	}
 }

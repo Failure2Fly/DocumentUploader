@@ -31,6 +31,9 @@
 			<a href="/DocumentUploader/login">
 				<button	class="btn btn-primary" type="submit">Logout</button>
 			</a>
+			<a href="/DocumentUploader/userControlPanel">
+				<button	class="btn btn-primary" type="submit">Change User Information</button>
+			</a>
 		</div>
 	</div>
 

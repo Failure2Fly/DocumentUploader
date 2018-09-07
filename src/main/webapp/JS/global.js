@@ -51,7 +51,13 @@ function RegisterValidate() {
     return true;
     }
 }
-
+function cancelDisplayProperty(){
+	if (info.style.removeProperty) {
+	    info.style.removeProperty('display');
+	} else {
+	    info.style.removeAttribute('display');
+	}
+}
 function loginValidate(){
     var user_name = document.querySelector(".user-name").value;
     var password = document.querySelector(".password").value;

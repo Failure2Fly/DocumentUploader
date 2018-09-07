@@ -100,7 +100,9 @@ input.inputField{
 	color: #00aeef !important;
 }
 
-
+.validate-form{
+	display:none;
+}
 
 
 
