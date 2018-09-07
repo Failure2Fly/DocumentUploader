@@ -19,9 +19,11 @@
 		<property name="username" value="trainee1" />
 		<property name="password" value="!QAZSE4" />
 	</bean>
+	
 	<bean id="UserAccountJdbcTemplate" class="com.fdmgroup.documentuploader.UserAccountJdbcTemplate">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
+	
 	<bean id="DocumentDao" class="com.fdmgroup.documentuploader.DocumentDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>

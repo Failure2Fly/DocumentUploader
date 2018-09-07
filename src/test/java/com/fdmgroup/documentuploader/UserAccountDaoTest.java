@@ -21,7 +21,7 @@ public class UserAccountDaoTest {
 		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "ImaginaryUser";
 		
-		UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
+	 	UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
 		try{
 		System.out.println("This is the result of a nonexistent read"+dao.read(username));
 		}catch(EmptyResultDataAccessException e){
@@ -83,6 +83,20 @@ public class UserAccountDaoTest {
 		System.out.println(testUser2.getFirstName());
 		userAccount.update(testUser2);
 		userAccount.delete(testUser2);
+	}
+	
+	@Test
+	public void test_readMethodReads_WhenPassedAnInteger(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+		String username = "fakeUser";
+		int id = 1000000;
+		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");
+	
+		UserAccount actual = userAccount.read(id);
+		
+		assertEquals(expected,actual);
+		
 	}
 
 
