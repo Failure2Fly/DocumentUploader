@@ -20,7 +20,7 @@
 </head>
 
 
-<body>
+<body onload="UserAccount()">
 <div class="header">
 	<div class="mainHeaderRight"></div>
 		<div class="mainTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div>
@@ -33,8 +33,12 @@
 			</a>
 		</div>
 	</div>
+	<div>
+		<p>${sessionScope.accountList}</p>
+	</div>
 
 
+	<script src="./JS/UserHome.js"></script>
 </body>
 
 

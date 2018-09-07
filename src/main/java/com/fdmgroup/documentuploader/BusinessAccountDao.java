@@ -1,86 +1,118 @@
 package com.fdmgroup.documentuploader;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import oracle.jdbc.OracleDriver;
 
 @Repository
 public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> {
 
+	private DataSource dataSource;
+	private JdbcTemplate jdbcTemplateObject;
 
-   private DataSource dataSource;
-   private JdbcTemplate jdbcTemplateObject;
-   
-   public void setDataSource(DataSource dataSource) {
-      this.dataSource = dataSource;
-      this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-   }
-
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
 
 	@Override
 	public void create(BusinessAccount account) {
-		//UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
-		//List<UserAccount> userAccounts, List<String> fileList
-		//TODO: write servicelevel
-		File file = new File("H:\\DebugInCreate.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-			writer.write(account.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			
-			e.printStackTrace();
-		}
-		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(businessaccount_seq.nextval, ?, null, ?)";
-		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
-		String ownerUsername =account.getOwner().getUsername();
-	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
-	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);	
-	    
-		jdbcTemplateObject.update(SQL1, ownerId, account.getAccountName());
+		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
+		// List<UserAccount> userAccounts, List<String> fileList
+		// TODO: write servicelevel
 		
+		String SQL1 = "INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(?, ?, null, ?)";
+		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
+		String ownerUsername = account.getOwner().getUsername();
+		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
+				Integer.class);
+		int businessId= getId();
+		jdbcTemplateObject.update(SQL1,businessId , ownerId, account.getAccountName());
+		
+		SQL1 = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
+		jdbcTemplateObject.update(SQL1, businessId, ownerId);
+
 	}
 
 	@Override
 	public void delete(BusinessAccount account) {
-		String SQL = "DELETE FROM BUSINESSACCOUNT WHERE businessaccountid = ?";
-		jdbcTemplateObject.update(SQL,account.getBusinessAccountId());
+		String SQL = "DELETE FROM BUSINESSACCOUNTTOUSERACCOUNT WHERE businessaccountuserjoinid = ?";
+		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
+		SQL = "DELETE FROM BUSINESSACCOUNT WHERE businessaccountid = ?";
+		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
 	}
 
 	@Override
 	public void update(BusinessAccount account) {
 		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?, accountname=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
-		String ownerUsername =account.getOwner().getUsername();
-	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
-	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);
-		jdbcTemplateObject.update(SQL, ownerId,account.getServicelevel(),account.getAccountName());
+		String ownerUsername = account.getOwner().getUsername();
+		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
+				Integer.class);
+		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel(), account.getAccountName());
 	}
-	
 
-	public BusinessAccount read(String username) {
-		//TODO : will fail when user has multiple accounts
+	public List<BusinessAccount> read(String username) {
+		
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
-			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
-	    		sqlOwnerId, new Object[] { username }, Integer.class);
-		
-		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{ownerId}, new BusinessAccountMapper());
-		return business;
+	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { username }, Integer.class);
+	   
+		List<BusinessAccount> businessAccounts = new ArrayList<>();
+		List<Map<String, Object>> rows = new ArrayList<>();
+		rows = jdbcTemplateObject.queryForList(SQL, ownerId);
+		for(Map<String, Object> map : rows){
+			BusinessAccount account = new BusinessAccount();
+			BigDecimal accountId =(BigDecimal) map.get("businessaccountid");
+			account.setAccountName((String)map.get("accountname"));
+			account.setBusinessAccountId(accountId.intValue());
+			
+			ApplicationContext context= DispatchController.getContext(); 
+			UserAccountJdbcTemplate userDao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+			UserAccount owner = userDao.read(ownerId);
+			account.setOwner(owner);
+			
+			List<UserAccount> associatedUsers = new ArrayList<>();
+			List<Map<String,Object>> innerRows = new ArrayList<>();
+			SQL="SELECT useraccountbusinessjoinid FROM BUSINESSACCOUNTTOUSERACCOUNT WHERE businessaccountuserjoinid = ?";
+			innerRows=jdbcTemplateObject.queryForList(SQL, accountId);
+			for(Map<String, Object> innerMap:innerRows){
+				UserAccount userAccount = new UserAccount();
+				userAccount.setFirstName((String)innerMap.get("firstname"));
+				userAccount.setLastName((String)innerMap.get("lastname"));
+				userAccount.setUsername((String)innerMap.get("username"));
+				userAccount.setPassword((String)innerMap.get("password"));
+				userAccount.setUserEmail((String)innerMap.get("useremail"));
+				List<Questions> listQA = null;
+				userAccount.setListQA(listQA);
+				associatedUsers.add(userAccount);
+			}
+			account.setUserAccounts(associatedUsers);
+			
+			List<String> fileList = new ArrayList<>();
+			innerRows = new ArrayList<>();
+			SQL="SELECT filename FROM documents WHERE associatedaccountid = ?";
+			innerRows=jdbcTemplateObject.queryForList(SQL, accountId);
+			for(Map<String, Object> innerMap : innerRows){
+				String file =(String)innerMap.get("filename");
+				fileList.add(file);
+			}
+			account.setFileList(fileList);
+			
+			businessAccounts.add(account);
+		}
+		return businessAccounts;
 	}
-
 
 	@Override
 	public BusinessAccount read(Integer id) {
@@ -90,10 +122,21 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	    		sqlOwnerId, new Object[] { id }, Integer.class);
 		
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{ownerId}, new BusinessAccountMapper());
+
 		return business;
 	}
 
+	public int getId() {
+		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
+		try {
+			
+			
+			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
 
+		} catch (NullPointerException e) {
+			return 1;
+		}
+
+	}
 
 }
-

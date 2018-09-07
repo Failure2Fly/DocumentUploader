@@ -20,9 +20,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
 public class DispatchController {
-	private ApplicationContext context;
+	private static ApplicationContext context;
 
-	private ApplicationContext getContext() {
+	public static ApplicationContext getContext() {
 		if (context != null) {
 			return context;
 		} else {
@@ -65,7 +65,7 @@ public class DispatchController {
 			try {
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
-				return "userHome";
+				return "login";
 			} catch (Exception e) {
 				File file = new File("H:\\Debug.txt");
 				try {
@@ -102,9 +102,12 @@ public class DispatchController {
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
 			context = getContext();
-			UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
-			userAccount = dao.read(userAccount.getUsername());
+			UserAccountJdbcTemplate userDao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+			userAccount = userDao.read(userAccount.getUsername());
 			session.setAttribute("user", userAccount);
+			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
+			
 			return "userHome";
 		} else {
 			return "login";

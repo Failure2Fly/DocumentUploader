@@ -30,9 +30,16 @@ public class BusinessAccountDaoTest {
 		String accountName="TestAccount";
 		
 		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
+		BusinessAccount account2 = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
-		account = businessDao.read(username);
-		businessDao.delete(account);
+		businessDao.create(account2);
+		
+		List<BusinessAccount>accounts = businessDao.read(username);
+		for(BusinessAccount acc:accounts){
+			account=acc;
+			businessDao.delete(account);
+		}
+		
 		userDao.delete(user);
 		try{
 
@@ -48,9 +55,10 @@ public class BusinessAccountDaoTest {
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
 		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
-		userAccount.create(user);
+		
 		List<UserAccount> users = new ArrayList<>();
 		users.add(user);
+		userAccount.create(user);
 		List<String> files= null;
 		ServiceLevel level = null;
 		String accountName="TestAccount";
@@ -59,13 +67,18 @@ public class BusinessAccountDaoTest {
 		System.out.println("Before update: " + account.getAccountName());
 		account.setAccountName("WhooAccount!");
 		businessDao.update(account);
+		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
+		for(BusinessAccount acc:accounts){
+			account=acc;
+		}
 		System.out.println("After update: " + account.getAccountName());
 		businessDao.delete(account);
 		System.out.println("account deleted");
-//		userAccount.delete(user);
-//		System.out.println("user deleted");
+		userAccount.delete(user);
+		System.out.println("user deleted");
 
 	}
+	
 
 	@Test
 	public void test_businessAccountReadMethodWorks_WhenPassedInAnInteger() {
