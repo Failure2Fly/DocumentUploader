@@ -24,8 +24,9 @@ public class BusinessAccountDaoTest {
 		users.add(user);
 		List<String> files= null;
 		ServiceLevel level = null;
+		String accountName="TestAccount";
 		
-		BusinessAccount account = new BusinessAccount(user,level,users,files);
+		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
 		account = businessDao.read(username);
 		//businessDao.delete(account);

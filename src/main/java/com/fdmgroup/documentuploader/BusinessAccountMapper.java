@@ -19,6 +19,7 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		UserAccount owner = dao.read(rs.getInt("useraccountownerid"));
 		business.setBusinessAccountId(rs.getInt("businessaccountid"));
 		business.setOwner(owner);
+		business.setAccountName(rs.getString("accountname"));
 		
 		//TODO: ServiceLevel DAO
 		business.setServicelevel(null);
