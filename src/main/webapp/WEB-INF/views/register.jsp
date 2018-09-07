@@ -20,56 +20,70 @@
 </head>
 
 <body>
-	<h1>This is the Register Page</h1>
+	<div class="header"><div class = "registrationTitle"><h1>This is the Register Page</h1></div></div>
+	
 
 	<h2>Register</h2>
 
-	<div id="register-form" class="form register-form">
+	<div id="register-form" class="registration">
 		<sf:form commandName="userAccount" method="POST" action="register">
-			<fieldset class="register-form">
-				<sf:input path="firstName" type="text" class="fas" id="fields"
-					name="Firstname" placeholder="First name " value="" />
+			<fieldset >
+					<p>First Name:</p>
+				<sf:input path="firstName" class="inputField" type="text" 
+					name="FirstName" placeholder="First name " value="" />
 				<br>
-				<sf:input path="lastName" type="text" class="fas" id="fields"
-					name="Lastname" placeholder="Last name" value="" />
+					<p>Last Name:</p> 
+				<sf:input path="lastName" class="inputField" type="text" 
+					name="LastName" placeholder="Last name" value="" />
 				<br>
-				<sf:input path="userEmail" type="text" class="fas" id="fields"
-					placeholder="Email" />
+					<p>Email:</p> 
+				<sf:input path="userEmail" class="inputField" type="text" 
+					 name="Email" placeholder="Email" />
 				<br>
-				<sf:input path="username" type="text" class="fas" id="fields"
-					placeholder="Create a username" />
+					<p>Username:</p> 
+				<sf:input path="username" class="inputField" type="text" 
+					name="UserName" placeholder="Create a username" />
 				<br>
-				<sf:input path="password" type="text" class="fas" id="fields"
-					placeholder="Create a password" />
-				<br> <br> <sf:select path="mapQA">
-					<!--<sf:options values="${listOfQuestion}"></sf:options>-->
+					<p>Password:</p> 
+				<sf:input path="password" class="inputField" type="password" 
+					name="Password" placeholder="Create a password" />
+				<br> <br> <select>
+				<option value="pet">What is the name of your first pet?</option>
 					<option value="maiden">What is the maiden name of your
 						mother?</option>
-					<option value="pet">What is the name of your first pet?
-					</option>
 					<option value="concert">What was the first concert you
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
-				</sf:select> <br> <input type="text" class="fas" id="fields"
+					<option value="artist">Who is your favorite actor, musician, or artist?</option>
+				</select> 
+				<br> 
+				<input type="text" 
 					name="securityQuestion" placeholder="Security Answer " value="" />
-				<br> <input type="checkbox" name="agree" value="agree">
-				I accept <span>UD's terms and conditions</span> <br> <input
-					class="button" id="registerButton" type="submit" value="Register">
+				<br> 
+				<input type="checkbox" name="agree" value="agree">
+				I accept <span>UD's terms and conditions</span> 
+				<br> 
+				<input class="button" id="registerButton" type="submit" value="Register">
+
+
 			</fieldset>
 		</sf:form>
 	</div>
 </body>
 <footer>
+<div class="header">
 	<div class="row">
 		<div class="col-4 social">
-			<i class="fab fa-facebook-f"></i> <i class="fab fa-twitter"></i> <i
-				class="fab fa-linkedin-in"></i> <i class="fab fa-google-plus-g"></i>
-			<i class="fab fa-youtube"></i>
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
 		</div>
 		<div class="col-8 copyright">
 			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
 		</div>
+	</div>
 	</div>
 </footer>
 </html>

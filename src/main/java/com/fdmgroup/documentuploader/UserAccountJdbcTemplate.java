@@ -22,23 +22,17 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public void create(UserAccount item) {
-   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(?,?,?,?,?,?)";
-   	String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(?,?,?)";
-   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
-   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
-   	File file = new File("H:\\DebugInCreate.txt");
-	try {
-		FileWriter writer= new FileWriter(file);
-		writer.write(item.toString()); 
-	    writer.flush();
-	    writer.close();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-    jdbcTemplateObject.update(SQL1,lastID()+1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
-    jdbcTemplateObject.update(SQL2,lastID(),entry.getKey().ordinal()+1,entry.getValue());
+   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
+   	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
+//   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
+
+//   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
+//   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+   	
+    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
+    //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
+
+
     //TODO more questions/answers
    }
    @Override
@@ -69,5 +63,10 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    public int getID(String username){
 	   String SQL = "SELECT USERID FROM USERACCOUNT where username = ?";
 	   return (int) jdbcTemplateObject.queryForObject(SQL,Integer.class,username);
+   }
+   public UserAccount read(Integer id) {
+	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE userid = ?";
+	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{id},new UserAccountMapper());
+   	return user;
    }
 }
