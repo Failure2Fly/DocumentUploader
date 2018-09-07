@@ -9,13 +9,19 @@ public class BusinessAccount {
 	private ServiceLevel servicelevel;
 	private List<UserAccount> userAccounts = new ArrayList<>();
 	private List<String> fileList = new ArrayList<>();
+	private String accountName;
 	private int businessAccountId;
-	
 	public UserAccount getOwner() {
 		return owner;
 	}
 	public void setOwner(UserAccount owner) {
 		this.owner = owner;
+	}
+	public String getAccountName() {
+		return accountName;
+	}
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 	public ServiceLevel getServicelevel() {
 		return servicelevel;
@@ -41,31 +47,37 @@ public class BusinessAccount {
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
 	}
-	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel, List<UserAccount> userAccounts,
-			List<String> fileList) {
+	public BusinessAccount(UserAccount owner,  ServiceLevel servicelevel,
+			List<UserAccount> userAccounts, List<String> fileList,String accountName, int businessAccountId) {
 		super();
 		this.owner = owner;
+		
 		this.servicelevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
+		this.accountName = accountName;
+		this.businessAccountId = businessAccountId;
 	}
 	public BusinessAccount() {
 		super();
 	}
-	@Override
-	public String toString() {
-		return "BusinessAccount [owner=" + owner + ", servicelevel=" + servicelevel + ", userAccounts=" + userAccounts
-				+ ", fileList=" + fileList + ", businessAccountId=" + businessAccountId + "]";
-	}
-	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel, List<UserAccount> userAccounts,
-			List<String> fileList, int businessAccountId) {
+	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel,
+			List<UserAccount> userAccounts, List<String> fileList, String accountName) {
 		super();
 		this.owner = owner;
+		
 		this.servicelevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
-		this.businessAccountId = businessAccountId;
+		this.accountName = accountName;
 	}
+	@Override
+	public String toString() {
+		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + servicelevel
+				+ ", userAccounts=" + userAccounts + ", fileList=" + fileList + ", businessAccountId="
+				+ businessAccountId + "]";
+	}
+	
 	
 
 }

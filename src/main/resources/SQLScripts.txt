@@ -9,7 +9,8 @@ CREATE TABLE UserAccount(
     PRIMARY KEY(UserID),
     UNIQUE(Username)
 );
-
+INSERT INTO UserAccount
+VALUES(1000000,'fakeUser','FakeName','AnotherFake','SuperFake','ImFake@gmail.com');
 
 DROP TABLE SecurityQuestion CASCADE CONSTRAINTS;
 CREATE TABLE SecurityQuestion(
@@ -46,10 +47,12 @@ CREATE TABLE BusinessAccount(
   BusinessAccountID int,
   UserAccountOwnerID int,
   ServiceLevel int,
+  AccountName VARCHAR(255),
   PRIMARY KEY(BusinessAccountID),
   CONSTRAINT FK_ownerId FOREIGN KEY (UserAccountOwnerID)
   REFERENCES UserAccount(UserID)
   );
+
 
 
 

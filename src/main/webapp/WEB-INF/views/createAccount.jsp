@@ -16,28 +16,40 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 
-<title>User Homepage</title>
+<title>DocumentUploader Business Account Creation</title>
 </head>
 
-
 <body>
-<div class="header">
-	<div class="mainHeaderRight"></div>
-		<div class="mainTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div>
-		<div class="mainHeaderRight">
-			<a href="/DocumentUploader/createAccount">
-				<button	class="btn btn-primary" type="submit">Create Account</button>
-			</a>
-		</div>
+	<div class="header"><div class = "registrationTitle"><h1>${sessionScope.user.username} Business Account Creation</h1></div></div>
+	
+
+	<h2>Create Account</h2>
+
+	<div id="register-form" class="registration">
+		<sf:form commandName="businessAccount" method="POST"  action="createAccount">
+			<fieldset >
+					<p>Account name:</p>
+				<sf:input path="accountName" class="inputField" type="text" 
+					name="AccountName" placeholder="Account Name " value="" />
+				<br>
+				<br> <br> <select>
+					<option value="BRONZE">Bronze</option>
+					<option value="SILVER">Silver</option>
+					<option value="GOLD">Gold</option>
+					<option value="UNLIMITED">Unlimited</option>
+					<option value="ENTERPRISE">Enterprise</option>
+				</select> 
+				<br> 
+				
+				
+				<input class="button" id="registerButton" type="submit" value="Create Account">
+
+
+			</fieldset>
+		</sf:form>
 	</div>
 
-
 </body>
-
-
-
-
-
 
 <footer>
 <div class="header">

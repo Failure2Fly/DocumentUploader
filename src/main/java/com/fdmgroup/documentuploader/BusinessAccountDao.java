@@ -1,6 +1,9 @@
 package com.fdmgroup.documentuploader;
 
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -29,12 +32,24 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	public void create(BusinessAccount account) {
 		//UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
 		//List<UserAccount> userAccounts, List<String> fileList
-		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel) VALUES(businessaccount_seq.nextval, ?, ?)";
+		//TODO: write servicelevel
+		File file = new File("H:\\DebugInCreate.txt");
+		try {
+			FileWriter writer = new FileWriter(file);
+			writer.write(account.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		String SQL1="INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(businessaccount_seq.nextval, ?, null, ?)";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 		String ownerUsername =account.getOwner().getUsername();
 	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
-	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);		
-		jdbcTemplateObject.update(SQL1, ownerId,account.getServicelevel());
+	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);	
+	    
+		jdbcTemplateObject.update(SQL1, ownerId, account.getAccountName());
 		
 	}
 
@@ -46,18 +61,18 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 
 	@Override
 	public void update(BusinessAccount account) {
-		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?";
+		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?, accountname=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 		String ownerUsername =account.getOwner().getUsername();
 	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { ownerUsername }, Integer.class);
-		jdbcTemplateObject.update(SQL, ownerId,account.getServicelevel());
+		jdbcTemplateObject.update(SQL, ownerId,account.getServicelevel(),account.getAccountName());
 	}
 	
 
 	public BusinessAccount read(String username) {
 		//TODO : will fail when user has multiple accounts
-		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
+		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { username }, Integer.class);
@@ -69,7 +84,7 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 
 	@Override
 	public BusinessAccount read(Integer id) {
-		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel FROM BUSINESSACCOUNT WHERE businessaccountid=?";
+		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { id }, Integer.class);
