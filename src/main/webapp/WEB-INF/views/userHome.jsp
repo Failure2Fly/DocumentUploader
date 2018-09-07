@@ -34,7 +34,7 @@
 		</div>
 	</div>
 	<div>
-		<p>${sessionScope.accounts}</p>
+		<p>${sessionScope.accountList}</p>
 	</div>
 
 

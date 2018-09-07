@@ -65,7 +65,7 @@ public class DispatchController {
 			try {
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
-				return "userHome";
+				return "login";
 			} catch (Exception e) {
 				File file = new File("H:\\Debug.txt");
 				try {
@@ -106,6 +106,7 @@ public class DispatchController {
 			userAccount = userDao.read(userAccount.getUsername());
 			session.setAttribute("user", userAccount);
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
 			
 			return "userHome";
 		} else {
