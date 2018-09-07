@@ -85,7 +85,7 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	@Override
 	public BusinessAccount read(Integer id) {
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
-		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
+		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE userid=?";
 			    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(
 	    		sqlOwnerId, new Object[] { id }, Integer.class);
 		
