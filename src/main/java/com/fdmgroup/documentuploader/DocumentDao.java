@@ -67,7 +67,7 @@ public class DocumentDao implements DAO<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 			
-			String SQL1="INSERT INTO FILES (fileid,filename,storedfilepath,storedate) VALUES(file_seq.nextval,?,?,SYSDATE)";
+			String SQL1="INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(file_seq.nextval,?,?,SYSDATE)";
 			jdbcTemplateObject.update(SQL1,document.getName(),document.getRepositoryPath().toString());
 			
 		} catch (IOException e) {

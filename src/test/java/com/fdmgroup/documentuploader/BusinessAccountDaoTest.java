@@ -29,14 +29,34 @@ public class BusinessAccountDaoTest {
 		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
 		account = businessDao.read(username);
-		businessDao.delete(account);
-		userDao.delete(user);
+		//businessDao.delete(account);
+		//userDao.delete(user);
 		try{
 
 		}catch(EmptyResultDataAccessException e){
 			
 		}
 		
+	}
+	
+	@Test
+	public void test_businessAccountUpdateMethodWorks_UpdatesReflectedInDatabase(){
+		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+		BusinessAccount business = new BusinessAccount();
+		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
+
+		UserAccount newOwner = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
+		System.out.println(business);
+		business.setOwner(null);
+		businessDao.create(business);
+		//business.getOwner();
+		//business.getServicelevel();
+		System.out.println(business);
+		userAccount.create(newOwner);
+		business.setOwner(newOwner);
+		businessDao.update(business);
+		System.out.println(business);
 	}
 
 }
