@@ -76,7 +76,6 @@ public class DispatchController {
 				    writer.flush();
 				    writer.close();
 				} catch (IOException e2) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				// TODO specify exception
