@@ -82,6 +82,7 @@ public class UserAccountDaoTest {
 		testUser2.setFirstName("Henry");
 		System.out.println(testUser2.getFirstName());
 		userAccount.update(testUser2);
+		userAccount.delete(testUser2);
 	}
 	
 	@Test

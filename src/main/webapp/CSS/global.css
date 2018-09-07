@@ -57,11 +57,20 @@ h1,h2 {
 .nav-right {
 	width: 230px;
 }
-
-.nav-buttons {
+div.mainHeaderLeft {
+	width:25%
+	border-width:0,5px,0,0;
+	border-style: solid;
+}
+div.mainTitle{
+	width:50%;
+	margin:auto;
+}
+div.mainHeaderRight {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
+	width:25%;
 }
 
 /* This is the end of the Navigation Bar*/

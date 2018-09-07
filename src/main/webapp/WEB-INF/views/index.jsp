@@ -18,8 +18,9 @@
 
 <body>
 	<div class="header">
-		<div class="registrationTitle"><h1>Ye Olde Renaissance Document Uploader</h1></div>
-		<div class="nav-buttons">
+	<div class="mainHeaderRight"></div>
+		<div class="mainTitle"><h1>Ye Olde Renaissance Document Uploader</h1></div>
+		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/login">
 				<button class="btn btn-primary" type="submit">Login</button>
 			</a> 
