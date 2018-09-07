@@ -22,28 +22,19 @@ public class DispatchController {
 
 	@RequestMapping(value = "/UserHome/*", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(Model model) {
-
 		return "userHome";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
+		model.addAttribute("listOfQuestion",SecurityQuestion.allQuestions());
 		model.addAttribute(userAccount);
 		return "register";
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {
-		File file = new File("H:\\Debug.txt");
-		try {
-			FileWriter writer= new FileWriter(file);
-			writer.write(userAccount.toString()); 
-		    writer.flush();
-		    writer.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount) {	
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		jdbc.create(userAccount);
@@ -54,8 +45,6 @@ public class DispatchController {
 	public String userLogin(Model model) {
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute(userAccount);
-		
-		
 		return "login";
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -64,8 +53,4 @@ public class DispatchController {
 		UserAccountJdbcTemplate jdbc = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		return "userHome";
 	}
-
-
-	
-
 }

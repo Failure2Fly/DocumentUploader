@@ -15,17 +15,18 @@ public class TestUserAccountDAO {
 	public void testCreateThenReadThenDelete(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
-		//Map<SecurityQuestion,String> QA = new HashMap<>();
-		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
-		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
-		String username = "LukeWeatherstein";
+		Map<SecurityQuestion,String> QA = new HashMap<>();
+		QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
+		QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
+		String username = "FlySwat";
 		
-		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
-		userAccount.delete(expected);
+		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com",QA);
+		UserAccount assertExpected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
+		//userAccount.delete(expected);
 		userAccount.create(expected);
 		UserAccount actual = userAccount.read(username);
 		
-		assertEquals(expected,actual);
+		assertEquals(assertExpected,actual);
 		userAccount.delete(expected);
 	}
 }

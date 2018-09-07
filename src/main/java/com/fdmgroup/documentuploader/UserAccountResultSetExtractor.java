@@ -18,12 +18,12 @@ public class UserAccountResultSetExtractor implements ResultSetExtractor {
 	        user.setUserEmail(rs.getString(3));
 	        user.setFirstName(rs.getString(4));
 	        user.setLastName(rs.getString(5));
-//	        Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
-//	        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6).toUpperCase().replace(" ", "_").replace("?", "")),rs.getString(7));
-//	        while(rs.next()){
-//		        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6).toUpperCase().replace(" ", "_").replace("?", "")),rs.getString(7));
-//	        }
-//	        user.setMapQA(rsQuestionMap);
+	        Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
+	        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6).toUpperCase().replace(" ", "_").replace("?", "")),rs.getString(7));
+	        while(rs.next()){
+		        rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString(6).toUpperCase().replace(" ", "_").replace("?", "")),rs.getString(7));
+	        }
+	        user.setMapQA(rsQuestionMap);
 	        return user;
 	    }
 	    

@@ -41,34 +41,31 @@
 				<br>
 				<sf:input path="password" type="text" class="fas" id="fields"
 					placeholder="Create a password" />
-				<br> <br> <select>
+				<br> <br> <sf:select path="mapQA">
+					<!--<sf:options values="${listOfQuestion}"></sf:options>-->
 					<option value="maiden">What is the maiden name of your
 						mother?</option>
-					<option value="pet">What is the name of your first pet?</option>
+					<option value="pet">What is the name of your first pet?
+					</option>
 					<option value="concert">What was the first concert you
 						attended?</option>
 					<option value="car">What was the make and model of your
 						first car?</option>
-				</select> <br> <input type="text" class="fas" id="fields"
+				</sf:select> <br> <input type="text" class="fas" id="fields"
 					name="securityQuestion" placeholder="Security Answer " value="" />
 				<br> <input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> <br> <input
 					class="button" id="registerButton" type="submit" value="Register">
-
-
 			</fieldset>
 		</sf:form>
 	</div>
-
 </body>
-
 <footer>
 	<div class="row">
 		<div class="col-4 social">
 			<i class="fab fa-facebook-f"></i> <i class="fab fa-twitter"></i> <i
 				class="fab fa-linkedin-in"></i> <i class="fab fa-google-plus-g"></i>
 			<i class="fab fa-youtube"></i>
-
 		</div>
 		<div class="col-8 copyright">
 			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
