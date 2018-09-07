@@ -46,15 +46,17 @@
 					<p>Password:</p> 
 				<sf:input path="password" class="inputField" type="password" 
 					name="Password" placeholder="Create a password" />
-				<c:forEach var="listQA" items="listQA" varStatus="i">
-				<br> <br> <sf:select path="listQA[${i.index}].question">				
-				<sf:options items="${listOfQuestion}"></sf:options>
-				</sf:select> 
+				
+				<br> <br> 
+				<select >				
+				   <c:forEach var="item" items="${listOfQuestion}">
+    				 <option>${item}</option>
+    			   </c:forEach>
+				</select> 
 				<br> 
-				<sf:input path="listQA[${i.index}].question" type="text" 
-					name="Value" placeholder="Security Answer " value="" />
+				<input  type="text" 
+					name="Value" placeholder="Security Answer " />
 				<br> 
-				</c:forEach>
 				<input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> 
 				<br> 

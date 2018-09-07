@@ -1,5 +1,6 @@
 package com.fdmgroup.documentuploader;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserAccount {
@@ -19,7 +20,6 @@ public class UserAccount {
 	}
 	public UserAccount() {
 		super();
-		
 	}
 	public UserAccount(String username, String lastName, String firstName, String password, String userEmail){
 		super();

@@ -38,7 +38,6 @@ public class DispatchController {
 
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount) {
-
 		return "userHome";
 	}
 
@@ -84,6 +83,7 @@ public class DispatchController {
 
 			}
 		} else {
+			session.setAttribute("listOfQuestion",SecurityQuestion.allQuestions());
 			return "register";
 		}
 	}
