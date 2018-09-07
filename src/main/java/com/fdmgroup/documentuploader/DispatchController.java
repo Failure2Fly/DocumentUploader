@@ -2,6 +2,7 @@ package com.fdmgroup.documentuploader;
 
 import java.io.File;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileWriter;
@@ -42,6 +43,11 @@ public class DispatchController {
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount) {
 		return "userHome";
+	}
+	
+	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
+	public String UserAccountDetails(@ModelAttribute UserAccount userAccount) {
+		return "userDetails";
 	}
 
 	@RequestMapping(value = "/serviceLevels")
