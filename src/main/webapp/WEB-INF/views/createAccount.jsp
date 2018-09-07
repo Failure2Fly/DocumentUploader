@@ -20,8 +20,19 @@
 </head>
 
 <body>
-	<div class="header"><div class = "registrationTitle"><h1>${sessionScope.user.username} Business Account Creation</h1></div></div>
-	
+<%-- 	<div class="header"><div class = "registrationTitle"><h1>${sessionScope.user.username} Business Account Creation</h1></div></div> --%>
+	<div class="header">
+	<div class="mainHeaderRight"></div>
+		<div class="mainTitle"><h1>Business Account Creation for ${sessionScope.user.username}</h1></div>
+		<div class="mainHeaderRight">
+			<a href="/DocumentUploader/userHome">
+				<button	class="btn btn-primary" type="submit">Back to Homepage</button>
+			</a>
+			<a href="/DocumentUploader/login">
+				<button	class="btn btn-primary" type="submit">Logout</button>
+			</a>
+		</div>
+	</div>
 
 	<h2>Create Account</h2>
 
