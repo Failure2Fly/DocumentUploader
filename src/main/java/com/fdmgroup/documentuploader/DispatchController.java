@@ -1,6 +1,9 @@
 package com.fdmgroup.documentuploader;
 
 import java.io.File;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -124,20 +127,34 @@ public class DispatchController {
 	public ModelAndView createAccountPost (@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+		
 		UserAccount user= ((UserAccount) session.getAttribute("user"));
 		account.setOwner(user);
+		
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
+		
 		//TODO put in servicelevel data
 		account.setServicelevel(new ServiceLevel());
+		
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
+		
 		dao.create(account);
+		ObjectMapper mapper = new ObjectMapper();
+        try {
+            String json = mapper.writeValueAsString(artist);
+            System.out.println("JSON = " + json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
 		session.setAttribute("accountList", dao.read(user.getUsername()));
+		
 		
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
+	
 
 }

@@ -33,7 +33,7 @@
 			</a>
 		</div>
 	</div>
-	<div>
+	<div class="registration">
 		<p>${sessionScope.accountList}</p>
 	</div>
 
