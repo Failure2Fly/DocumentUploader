@@ -59,14 +59,14 @@ public class BusinessAccountDaoTest {
 		businessDao.update(account);
 		System.out.println("After update: " + account.getAccountName());
 		businessDao.delete(account);
-		userAccount.delete(user);
-		try{
+		System.out.println("account deleted");
+//		userAccount.delete(user);
+//		System.out.println("user deleted");
 
-		}catch(EmptyResultDataAccessException e){
-			
-		}
 	}
 
+	
+	
 }
 
 
