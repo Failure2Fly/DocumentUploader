@@ -4,7 +4,6 @@ package com.fdmgroup.documentuploader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map.Entry;
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,18 +21,22 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    
    @Override
    public void create(UserAccount item) {
-   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(useraccount_seq.nextval,?,?,?,?,?)";
-   	//String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(useraccount_seq.currval,?,?)";
-//   	Entry<SecurityQuestion, String> entry = item.getMapQA().entrySet().iterator().next();
-
-//   	String key = entry.getKey().name().toLowerCase().replace("_", " ")+"?";
-//   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
-   	
-    jdbcTemplateObject.update(SQL1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
-    //jdbcTemplateObject.update(SQL2, entry.getKey().ordinal()+1,entry.getValue());
-
-
-    //TODO more questions/answers
+	   	String SQL1="INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(?,?,?,?,?,?)";
+	   	String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(?,?,?)";
+	   	String key = item.getListQA().get(0).getQuestion().name().toLowerCase().replace("_", " ")+"?";
+	   	key = key.substring(0, 1).toUpperCase() + key.substring(1);
+	   	File file = new File("H:\\DebugInCreate.txt");
+		try {
+			FileWriter writer= new FileWriter(file);
+			writer.write(item.toString()); 
+		    writer.flush();
+		    writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    jdbcTemplateObject.update(SQL1,lastID()+1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
+	    jdbcTemplateObject.update(SQL2,lastID(),item.getListQA().get(0).getQuestion().ordinal()+1,item.getListQA().get(0).getAnswer());
    }
    @Override
    public void delete(UserAccount item) {

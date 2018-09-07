@@ -20,18 +20,17 @@ public class QuestionDao implements DAO<String,Integer> {
 	}
 	@Override
 	public void create(String item) {
+		String SQL = "";
 	}
 
 	@Override
 	public void delete(String item) {
 		String SQL = "SELECT";
-		
 	}
 
 	@Override
 	public void update(String item) {
-		String SQL = "";
-		
+		String SQL = "";	
 	}
 
 	@Override

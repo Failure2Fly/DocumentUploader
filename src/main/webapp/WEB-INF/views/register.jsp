@@ -24,10 +24,9 @@
 	
 
 	<h2>Register</h2>
-
 	<div id="register-form" class="registration">
 		<sf:form commandName="userAccount" method="POST" action="register">
-			<fieldset >
+			<fieldset>
 					<p>First Name:</p>
 				<sf:input path="firstName" class="inputField" type="text" 
 					name="FirstName" placeholder="First name " value="" />
@@ -47,26 +46,19 @@
 					<p>Password:</p> 
 				<sf:input path="password" class="inputField" type="password" 
 					name="Password" placeholder="Create a password" />
-				<br> <br> <select>
-				<option value="pet">What is the name of your first pet?</option>
-					<option value="maiden">What is the maiden name of your
-						mother?</option>
-					<option value="concert">What was the first concert you
-						attended?</option>
-					<option value="car">What was the make and model of your
-						first car?</option>
-					<option value="artist">Who is your favorite actor, musician, or artist?</option>
-				</select> 
+				<c:forEach var="listQA" items="listQA" varStatus="i">
+				<br> <br> <sf:select path="listQA[${i.index}].question">				
+				<sf:options items="${listOfQuestion}"></sf:options>
+				</sf:select> 
 				<br> 
-				<input type="text" 
-					name="securityQuestion" placeholder="Security Answer " value="" />
+				<sf:input path="listQA[${i.index}].question" type="text" 
+					name="Value" placeholder="Security Answer " value="" />
 				<br> 
+				</c:forEach>
 				<input type="checkbox" name="agree" value="agree">
 				I accept <span>UD's terms and conditions</span> 
 				<br> 
 				<input class="button" id="registerButton" type="submit" value="Register">
-
-
 			</fieldset>
 		</sf:form>
 	</div>
@@ -78,7 +70,6 @@
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
 				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
 			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-
 		</div>
 		<div class="col-8 copyright">
 			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>

@@ -27,7 +27,6 @@ public class DispatchController {
 
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {
-
 		return "serviceLevels";
 	}
 
@@ -51,26 +50,23 @@ public class DispatchController {
 				jdbc.create(userAccount);
 				return "login";
 			} catch (Exception e) {
-				File file = new File("H:\\DebugInCreate.txt");
+				File file = new File("H:\\Debug.txt");
 				try {
-					FileWriter writer= new FileWriter(file);
-					writer.write(e.toString()); 
-				      writer.flush();
-				      writer.close();
+					FileWriter writer = new FileWriter(file);
+					writer.write(e.toString());
+					writer.write(userAccount.toString()); 
+				    writer.flush();
+				    writer.close();
 				} catch (IOException e2) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-				
 				// TODO specify exception
 				return "register";
 			}
 		} else {
-
 			return "register";
 		}
-
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -90,5 +86,4 @@ public class DispatchController {
 			return "login";
 		}
 	}
-
 }
