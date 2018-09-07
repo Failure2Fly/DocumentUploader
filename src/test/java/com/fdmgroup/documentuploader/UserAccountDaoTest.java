@@ -90,14 +90,13 @@ public class UserAccountDaoTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "fakeUser";
-		int id = 103;
+		int id = 1000000;
 		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");
-		userAccount.delete(expected);
-		userAccount.create(expected);
+	
 		UserAccount actual = userAccount.read(id);
 		
 		assertEquals(expected,actual);
-		//userAccount.delete(expected);
+		
 	}
 
 
