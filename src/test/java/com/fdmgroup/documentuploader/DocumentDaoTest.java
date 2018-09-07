@@ -46,9 +46,6 @@ public class DocumentDaoTest {
 		
 	}
 	
-	@Test
-	public void test_createDocumentMethod_CreatesDocument_andWritesToDatabase(){
-		
-	}
+
 
 }
