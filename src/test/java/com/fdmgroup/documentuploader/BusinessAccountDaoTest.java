@@ -1,3 +1,4 @@
+
 package com.fdmgroup.documentuploader;
 
 import java.util.ArrayList;
@@ -29,8 +30,8 @@ public class BusinessAccountDaoTest {
 		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
 		account = businessDao.read(username);
-		//businessDao.delete(account);
-		//userDao.delete(user);
+		businessDao.delete(account);
+		userDao.delete(user);
 		try{
 
 		}catch(EmptyResultDataAccessException e){
@@ -43,21 +44,29 @@ public class BusinessAccountDaoTest {
 	public void test_businessAccountUpdateMethodWorks_UpdatesReflectedInDatabase(){
 		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
-		BusinessAccount business = new BusinessAccount();
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
+		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
+		userAccount.create(user);
+		List<UserAccount> users = new ArrayList<>();
+		users.add(user);
+		List<String> files= null;
+		ServiceLevel level = null;
+		String accountName="TestAccount";
+		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
+		businessDao.create(account);
+		System.out.println("Before update: " + account.getAccountName());
+		account.setAccountName("WhooAccount!");
+		businessDao.update(account);
+		System.out.println("After update: " + account.getAccountName());
+		businessDao.delete(account);
+		System.out.println("account deleted");
+//		userAccount.delete(user);
+//		System.out.println("user deleted");
 
-		UserAccount newOwner = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
-		System.out.println(business);
-		business.setOwner(null);
-		businessDao.create(business);
-		//business.getOwner();
-		//business.getServicelevel();
-		System.out.println(business);
-		userAccount.create(newOwner);
-		business.setOwner(newOwner);
-		businessDao.update(business);
-		System.out.println(business);
 	}
 
+	
+	
 }
+
 
