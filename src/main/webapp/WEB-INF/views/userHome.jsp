@@ -22,6 +22,7 @@
 
 <body>
 <h1>THIS IS THE USER HOMEPAGE OF ${userAccount.username}</h1>
+
 </body>
 
 </html>

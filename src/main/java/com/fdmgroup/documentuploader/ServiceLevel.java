@@ -1,6 +1,6 @@
 package com.fdmgroup.documentuploader;
 
-public class ServiceLevel {
+public class ServiceLevel { 
 	
 	private String fileName;
 	private int DocumentUploadCount;
