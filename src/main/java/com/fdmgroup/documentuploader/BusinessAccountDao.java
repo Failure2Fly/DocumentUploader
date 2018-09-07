@@ -30,25 +30,15 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
 		// List<UserAccount> userAccounts, List<String> fileList
 		// TODO: write servicelevel
-		File file = new File("H:\\DebugInCreate.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-			writer.write(account.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
+		
 		String SQL1 = "INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(?, ?, null, ?)";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
-
-		jdbcTemplateObject.update(SQL1, getId(), ownerId, account.getAccountName());
-		int businessId = getId();
-
+		int businessId= getId();
+		jdbcTemplateObject.update(SQL1,businessId , ownerId, account.getAccountName());
+		
 		SQL1 = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
 
@@ -73,11 +63,11 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	}
 
 	public List<BusinessAccount> read(String username) {
-		System.out.println("Username : "+username);
+		
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE useraccountownerid=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 	    Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { username }, Integer.class);
-	    System.out.println("OwnerId : "+ownerId);
+	   
 		List<BusinessAccount> businessAccounts = new ArrayList<>();
 		List<Map<String, Object>> rows = new ArrayList<>();
 		rows = jdbcTemplateObject.queryForList(SQL, ownerId);
@@ -138,7 +128,9 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	public int getId() {
 		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
 		try {
-			return (int) jdbcTemplateObject.queryForObject(SQL, Integer.class);
+			
+			
+			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
 
 		} catch (NullPointerException e) {
 			return 1;

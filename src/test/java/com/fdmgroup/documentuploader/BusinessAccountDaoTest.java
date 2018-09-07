@@ -28,12 +28,16 @@ public class BusinessAccountDaoTest {
 		String accountName="TestAccount";
 		
 		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
+		BusinessAccount account2 = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
+		businessDao.create(account2);
+		
 		List<BusinessAccount>accounts = businessDao.read(username);
 		for(BusinessAccount acc:accounts){
 			account=acc;
+			businessDao.delete(account);
 		}
-		businessDao.delete(account);
+		
 		userDao.delete(user);
 		try{
 
@@ -72,6 +76,7 @@ public class BusinessAccountDaoTest {
 		System.out.println("user deleted");
 
 	}
+	
 
 	
 	
