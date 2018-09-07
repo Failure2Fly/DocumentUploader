@@ -38,19 +38,18 @@ public class DispatchController {
 
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount) {
-
 		return "userHome";
 	}
 
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {
-
 		return "serviceLevels";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
+		model.addAttribute("listOfQuestion",SecurityQuestion.allQuestions());
 		model.addAttribute(userAccount);
 		return "register";
 	}
@@ -68,26 +67,25 @@ public class DispatchController {
 				session.setAttribute("user", userAccount);
 				return "userHome";
 			} catch (Exception e) {
-				File file = new File("H:\\DebugInCreate.txt");
+				File file = new File("H:\\Debug.txt");
 				try {
 					FileWriter writer = new FileWriter(file);
 					writer.write(e.toString());
-					writer.flush();
-					writer.close();
+					writer.write(userAccount.toString()); 
+				    writer.flush();
+				    writer.close();
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
-
 				// TODO specify exception
 				return "register";
 			} finally {
 
 			}
 		} else {
-
+			session.setAttribute("listOfQuestion",SecurityQuestion.allQuestions());
 			return "register";
 		}
-
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
