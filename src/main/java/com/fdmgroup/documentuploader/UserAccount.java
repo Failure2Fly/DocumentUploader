@@ -1,6 +1,7 @@
 package com.fdmgroup.documentuploader;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserAccount {
 	
@@ -9,7 +10,7 @@ public class UserAccount {
 	private String firstName;
 	private String password;
 	private String userEmail;
-//	private Map<SecurityQuestion,String> mapQA;
+	private List<Questions> listQA;
 	
 	public String getUserEmail() {
 		return userEmail;
@@ -19,17 +20,24 @@ public class UserAccount {
 	}
 	public UserAccount() {
 		super();
-		
 	}
-	public UserAccount(String username, String lastName, String firstName, String password, String userEmail
-			) {
+	public UserAccount(String username, String lastName, String firstName, String password, String userEmail){
 		super();
 		this.username = username;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
 		this.userEmail = userEmail;
-		
+		this.listQA = null;
+	}
+	public UserAccount(String username, String lastName, String firstName, String password, String userEmail,  List<Questions> listQA){
+		super();
+		this.username = username;
+		this.lastName = lastName;
+		this.firstName = firstName;
+		this.password = password;
+		this.userEmail = userEmail;
+		this.listQA = listQA;
 	}
 	public String getUsername() {
 		return username;
@@ -56,13 +64,12 @@ public class UserAccount {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
-//	public Map<SecurityQuestion, String> getMapQA() {
-//		return mapQA;
-//	}
-//	public void setMapQA(Map<SecurityQuestion, String> mapQA) {
-//		this.mapQA = mapQA;
-//	}
+	public List<Questions>  getListQA() {
+		return listQA;
+	}
+	public void setListQA(List<Questions> listQA) {
+		this.listQA = listQA;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +77,7 @@ public class UserAccount {
 		result = prime * result + ((userEmail == null) ? 0 : userEmail.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
-//		result = prime * result + ((mapQA == null) ? 0 : mapQA.hashCode());
+		result = prime * result + ((listQA == null) ? 0 : listQA.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -99,11 +106,11 @@ public class UserAccount {
 				return false;
 		} else if (!lastName.equals(other.lastName))
 			return false;
-//		if (mapQA == null) {
-//			if (other.mapQA != null)
-//				return false;
-//		} else if (!mapQA.equals(other.mapQA))
-//			return false;
+		if (listQA == null) {
+			if (other.listQA != null)
+				return false;
+		} else if (!listQA.equals(other.listQA))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -120,11 +127,8 @@ public class UserAccount {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("UserAccount [username=").append(username).append(", password=").append(password)
-				.append(", useremail=").append(userEmail).append(", firstName=").append(firstName)
-				.append(", lastName=").append(lastName).append("]");
+				.append(", emailAddress=").append(userEmail).append(", firstName=").append(firstName)
+				.append(", lastName=").append(lastName).append(listQA).append("]");
 		return builder.toString();
 	}
-
-	
-	
 }
