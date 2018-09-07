@@ -19,7 +19,7 @@ public class DocumentDao implements DAO<Document, String> {
 	   public void setDataSource(DataSource dataSource) {
 	      this.dataSource = dataSource;
 	      this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-	   }
+	   } 
 	
 	@Override
 	public void create(Document document) {
