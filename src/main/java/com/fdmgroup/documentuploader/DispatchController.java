@@ -124,7 +124,8 @@ public class DispatchController {
 	public ModelAndView createAccountPost (@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-		account.setOwner((UserAccount) session.getAttribute("user"));
+		UserAccount user= ((UserAccount) session.getAttribute("user"));
+		account.setOwner(user);
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 		//TODO put in servicelevel data
@@ -133,6 +134,7 @@ public class DispatchController {
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
 		dao.create(account);
+		session.setAttribute("accountList", dao.read(user.getUsername()));
 		
 		return new ModelAndView(new RedirectView("/userHome", true));
 
