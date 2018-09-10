@@ -20,7 +20,7 @@
 </head>
 
 
-<body onload="UserAccount()">
+<body>
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
