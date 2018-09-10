@@ -14,17 +14,17 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
-<link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
+<link rel="stylesheet" href="<c:url value="../CSS/global.css"/>">
 
 <title>Business Account Details</title>
 </head>
-
 
 <body onload="BusinessAccount()">
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
-			<h1>Change your business account details, ${sessionScope.user.username}</h1>
+			<h1>Change your business account details,
+				${sessionScope.user.username}</h1>
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">

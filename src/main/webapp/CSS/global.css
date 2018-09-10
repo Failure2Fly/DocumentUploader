@@ -1,27 +1,29 @@
 /* These are global attributes*/
-
-body, html{
-    margin:0;
-    padding:0;
+body, html {
+	margin: 0;
+	padding: 0;
 }
+
 div.header {
 	width: 100%;
-	background-color: rgb(200,200,220);
-	display:flex;
+	background-color: rgb(200, 200, 220);
+	display: flex;
 	padding-bottom: 5px;
 }
-div.registrationTitle{
-	text-align:center;
-	margin:auto;
+
+div.registrationTitle {
+	text-align: center;
+	margin: auto;
 }
-h1,h2 {
+
+h1, h2 {
 	text-align: center;
 }
+
 * {
 	box-sizing: border-box;
 	margin: 0;
 }
-
 
 .fa-phone {
 	transform: scaleX(-1);
@@ -39,16 +41,14 @@ h1,h2 {
 	border-color: #E8E8E8;
 	margin: 5px;
 	width: 90%;
-	text-align:center;
+	text-align: center;
 }
 
 .btn:hover {
 	background-color: #00aeef;
 }
 
-
 /* This is part of the Navigation Bar*/
-
 .phone {
 	color: #00aeef;
 	padding-bottom: 15px;
@@ -57,86 +57,86 @@ h1,h2 {
 .nav-right {
 	width: 230px;
 }
+
 div.mainHeaderLeft {
-	width:25%
-	border-width:0,5px,0,0;
+	width: 25% border-width:0, 5px, 0, 0;
 	border-style: solid;
 }
-div.mainTitle{
-	width:50%;
-	margin:auto;
+
+div.mainTitle {
+	width: 50%;
+	margin: auto;
 }
+
 div.mainHeaderRight {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
-	width:25%;
+	width: 25%;
 }
 
 /* This is the end of the Navigation Bar*/
 
 /* This is the start of the Form*/
-
 div.registration {
-	margin:auto;
+	margin: auto;
 	text-align: center;
-	background-color: rgb(240,240,255);
+	background-color: rgb(240, 240, 255);
 	max-width: 50%;
 	width: 50%;
 }
+
 div.update {
-	margin:auto;
+	margin: auto;
 	text-align: center;
-	background-color: rgb(240,240,255);
+	background-color: rgb(240, 240, 255);
 	max-width: 50%;
 	width: 50%;
 }
+
 form {
 	border: grey solid 1px;
 	border-radius: 20px;
 	margin-bottom: 100px;
 }
-input.inputField{
-	marign:0px;
-	padding:5px;
+
+input.inputField {
+	marign: 0px;
+	padding: 5px;
 }
-
-
 
 .terms {
 	color: #00aeef !important;
 }
 
-p.accountList{
+p.accountList {
 	visibility: hidden;
 }
-div.accountDiv{
+
+div.accountDiv {
 	background-color: rgb(255, 255, 204);
 }
 
-
-
-
 input[type=checkbox], input[type=radio] {
-    box-sizing: border-box;
-    padding: 0;
-    margin-top: 20px;
-    margin-left: 50px;
+	box-sizing: border-box;
+	padding: 0;
+	margin-top: 20px;
+	margin-left: 50px;
 }
 
+.update span {
+	color: #339900;
+	font-weight: bold;
+}
 /* This is the end of the Form*/
 
 /* This is the Start Login Page*/
-
-
 
 /* This is the End of Login Page */
 
 /* This is the Start of Main Page*/
 
-
 /* This is where the Footer Starts*/
-
 footer {
 	margin-top: 50px;
 	border-top: black solid 1px;
@@ -147,6 +147,7 @@ footer {
 footer a {
 	color: #666666;
 }
+
 .social {
 	padding-top: 20px;
 }
