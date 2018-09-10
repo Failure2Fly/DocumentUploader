@@ -107,9 +107,8 @@ public class BusinessAccountDaoTest {
 		businessDao.delete(account);
 		
 		userAccount.delete(user);
-		
-		
 	}
+
 	
 }
 

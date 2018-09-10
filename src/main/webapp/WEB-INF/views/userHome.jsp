@@ -28,6 +28,9 @@
 			<a href="/DocumentUploader/createAccount">
 				<button	class="btn btn-primary" type="submit">Create Account</button>
 			</a>
+			<a href="/DocumentUploader/userDetails">
+				<button	class="btn btn-primary" type="submit">User Details</button>
+			</a>
 			<a href="/DocumentUploader/login">
 				<button	class="btn btn-primary" type="submit">Logout</button>
 			</a>

@@ -44,6 +44,11 @@ public class DispatchController {
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount) {
 		return "userHome";
 	}
+	
+	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
+	public String UserAccountDetails(@ModelAttribute UserAccount userAccount) {
+		return "userDetails";
+	}
 
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {
