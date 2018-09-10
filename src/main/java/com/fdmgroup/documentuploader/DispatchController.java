@@ -138,7 +138,6 @@ public class DispatchController {
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
-				// TODO specify exception
 				return "register";
 			} finally {
 
@@ -175,7 +174,6 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
@@ -203,6 +201,7 @@ public class DispatchController {
 
 		dao.create(account);
 
+
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
@@ -223,11 +222,9 @@ public class DispatchController {
 			
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 			session.setAttribute("account",businessAccount);
-		
+
 		return "accountDetails";
 
+		
 	}
-	
-	
-
 }

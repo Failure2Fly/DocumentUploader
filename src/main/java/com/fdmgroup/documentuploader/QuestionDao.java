@@ -20,7 +20,7 @@ public class QuestionDao implements DAO<String,Integer> {
 	}
 	@Override
 	public void create(String item) {
-		String SQL = "";
+		String SQL = "INSERT INTO SECURITYQUESTION VALUES (?,?)";
 	}
 
 	@Override
@@ -56,4 +56,5 @@ public class QuestionDao implements DAO<String,Integer> {
 			});
 		return list;
 	}
+	
 }

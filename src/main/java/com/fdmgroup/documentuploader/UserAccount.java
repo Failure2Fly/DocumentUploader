@@ -1,8 +1,5 @@
 package com.fdmgroup.documentuploader;
-
-import java.util.ArrayList;
 import java.util.List;
-
 public class UserAccount {
 	
 	private String username;
