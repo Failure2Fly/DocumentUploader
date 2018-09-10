@@ -50,7 +50,7 @@ public class DispatchController {
 		} catch (NullPointerException e) {
 			return "login";
 		}
-		
+
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -60,13 +60,47 @@ public class DispatchController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-		
+
 		return "userHome";
 	}
 
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
-	public String UserAccountDetails(@ModelAttribute UserAccount userAccount) {
+	public String userAccountDetails(Model model) {
+		UserAccount userAccount = new UserAccount();
+		model.addAttribute("listOfQuestion", SecurityQuestion.allQuestions());
+		model.addAttribute(userAccount);
 		return "userDetails";
+	}
+
+	@RequestMapping(value = "/userDetails", method = RequestMethod.POST)
+	public RedirectView UserAccountDetails(@ModelAttribute UserAccount userAccount, HttpSession session) {
+		File file = new File("H:\\DebugDetails.txt");
+		try {
+			FileWriter writer = new FileWriter(file);
+			writer.write(userAccount.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		context = getContext();
+		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+		UserAccount user = (UserAccount) session.getAttribute("user");
+		if (userAccount.getFirstName().length() > 0) {
+			user.setFirstName(userAccount.getFirstName());
+		}
+		if (userAccount.getLastName().length() > 0) {
+			user.setLastName(userAccount.getLastName());
+		}
+		if (userAccount.getUserEmail().length() > 0) {
+			user.setUserEmail(userAccount.getUserEmail());
+		}
+		if (userAccount.getPassword().length() > 0) {
+			user.setPassword(userAccount.getPassword());
+		}
+		dao.update(user);
+		session.setAttribute("user", user);
+		return new RedirectView("userHome");
 	}
 
 	@RequestMapping(value = "/serviceLevels")
@@ -126,7 +160,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public RedirectView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
+	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		Validator validator = new Validator();
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
@@ -137,9 +171,9 @@ public class DispatchController {
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
 
-			return new RedirectView("userHome");
+			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
-			return new RedirectView("login");
+			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
 
@@ -169,7 +203,6 @@ public class DispatchController {
 		account.setUserAccounts(usersAssociated);
 
 		dao.create(account);
-		
 
 		return new ModelAndView(new RedirectView("/userHome", true));
 
