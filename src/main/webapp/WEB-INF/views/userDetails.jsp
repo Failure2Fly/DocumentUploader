@@ -21,19 +21,22 @@
 
 
 <body onload="UserAccount()">
-<div class="header">
-	<div class="mainHeaderRight"></div>
-		<div class="mainTitle"><h1>Change your details, ${sessionScope.user.username}</h1></div>
+	<div class="header">
+		<div class="mainHeaderRight"></div>
+		<div class="mainTitle">
+			<h1>Change your details, ${sessionScope.user.username}</h1>
+		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
-				<button	class="btn btn-primary" type="submit">Back to Homepage</button>
-			</a>
-			<a href="/DocumentUploader/login">
-				<button	class="btn btn-primary" type="submit">Logout</button>
+				<button class="btn btn-primary" type="submit">Back to
+					Homepage</button>
+			</a> <a href="/DocumentUploader/login">
+				<button class="btn btn-primary" type="submit">Logout</button>
 			</a>
 		</div>
 	</div>
 
+<<<<<<< HEAD
 <footer>
 <div class="header">
 	<div class="row">
@@ -41,12 +44,55 @@
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
 				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
 			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+=======
 
-		</div>
-		<div class="col-8 copyright">
-			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-		</div>
+	<div id="update-form" class="update">
+		<sf:form commandName="userAccount" method="POST" action="userDetails">
+			<legend>Update:</legend>
+			<fieldset>
+				<p>First Name:</p>
+				<sf:input path="firstName" class="inputField" type="text"
+					name="FirstName" placeholder="First name " value="" />
+				<br>
+				<p>Last Name:</p>
+				<sf:input path="lastName" class="inputField" type="text"
+					name="LastName" placeholder="Last name" value="" />
+				<br>
+				<p>Email:</p>
+				<sf:input path="userEmail" class="inputField" type="text"
+					name="Email" placeholder="Email" />
+				<br>
+				<p>Password:</p>
+				<sf:input path="password" class="inputField" type="password"
+					name="Password" placeholder="Create a password" />
+				<br>
+				<br> <input class="button" id="updateButton" type="submit"
+					value="Update">
+			</fieldset>
+		</sf:form>
 	</div>
-	</div>
-</footer>
+
+
+
+
+>>>>>>> f54ba4397cb94d1aacbc0ac87877f1197c0fd1f3
+
+
+	<footer>
+		<div class="header">
+			<div class="row">
+				<div class="col-4 social">
+					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+				</div>
+				<div class="col-8 copyright">
+					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 </html>
