@@ -207,7 +207,7 @@ public class DispatchController {
 	}
 	
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
-	public @ResponseBody String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
+	public String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		File file = new File("H:\\DebugAccountDetails.txt");
 		try {

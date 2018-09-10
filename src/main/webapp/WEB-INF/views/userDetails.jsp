@@ -41,21 +41,21 @@
 		<sf:form commandName="userAccount" method="POST" action="userDetails">
 			<legend>Update:</legend>
 			<fieldset>
-				<p>First Name:</p>
+				<p>Current First Name: <span>${sessionScope.user.firstName}</span></p>
 				<sf:input path="firstName" class="inputField" type="text"
-					name="FirstName" placeholder="First name " value="" />
+					name="FirstName" placeholder="New First name " value="" />
 				<br>
-				<p>Last Name:</p>
+				<p>Current Last Name: <span>${sessionScope.user.lastName}</span></p>
 				<sf:input path="lastName" class="inputField" type="text"
-					name="LastName" placeholder="Last name" value="" />
+					name="LastName" placeholder="New Last name" value="" />
 				<br>
-				<p>Email:</p>
+				<p>Current Email: <span>${sessionScope.user.userEmail}</span></p>
 				<sf:input path="userEmail" class="inputField" type="text"
-					name="Email" placeholder="Email" />
+					name="Email" placeholder="New Email" />
 				<br>
-				<p>Password:</p>
+				<p>Current Password: </p>
 				<sf:input path="password" class="inputField" type="password"
-					name="Password" placeholder="Create a password" />
+					name="Password" placeholder="Create a new password" />
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Update">
