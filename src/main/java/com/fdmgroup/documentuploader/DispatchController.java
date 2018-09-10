@@ -2,6 +2,7 @@ package com.fdmgroup.documentuploader;
 
 import java.io.File;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.FileWriter;
@@ -144,12 +145,12 @@ public class DispatchController {
 		dao.create(account);
 		ObjectMapper mapper = new ObjectMapper();
         try {
-            String json = mapper.writeValueAsString(artist);
-            System.out.println("JSON = " + json);
+            String json = mapper.writeValueAsString(dao.read(user.getUsername()));
+            session.setAttribute("accountList", json);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
-		session.setAttribute("accountList", dao.read(user.getUsername()));
+		
 		
 		
 		return new ModelAndView(new RedirectView("/userHome", true));

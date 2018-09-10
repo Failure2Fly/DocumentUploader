@@ -17,7 +17,7 @@ public class UserAccountDaoTest {
 
 	@Test 
 	public void testReadNonexistentUser(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "ImaginaryUser";
 		
@@ -30,7 +30,7 @@ public class UserAccountDaoTest {
 		
 	@Test
 	public void testCreateThenReadThenDelete(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		//Map<SecurityQuestion,String> QA = new HashMap<>();
 		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
@@ -48,7 +48,7 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_createAUserWritesToDatabase(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "testUser";
 		String firstName = "Test";
@@ -68,7 +68,7 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_updateWorks_andUpdtesInfoInDatabase(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "testUser2";
 		String firstName = "Bob";
@@ -87,7 +87,7 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_readMethodReads_WhenPassedAnInteger(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "fakeUser";
 		int id = 1000000;

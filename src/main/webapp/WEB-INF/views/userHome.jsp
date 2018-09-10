@@ -34,7 +34,11 @@
 		</div>
 	</div>
 	<div class="registration">
-		<p>${sessionScope.accountList}</p>
+		<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+		<ul class="outputList" id="outputList"><li></li></ul>
+		<p id="TestField">testfield</p>
+		<p id="TestField2">testfield2</p>
+		
 	</div>
 
 

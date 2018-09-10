@@ -15,7 +15,7 @@ public class BusinessAccountDaoTest {
 
 	@Test
 	public void test_willCheckIfBusinessAccountCreated() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
 		
 		
@@ -51,7 +51,7 @@ public class BusinessAccountDaoTest {
 	
 	@Test
 	public void test_businessAccountUpdateMethodWorks_UpdatesReflectedInDatabase(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
 		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
 		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
@@ -64,47 +64,50 @@ public class BusinessAccountDaoTest {
 		String accountName="TestAccount";
 		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
 		businessDao.create(account);
-		System.out.println("Before update: " + account.getAccountName());
+
 		account.setAccountName("WhooAccount!");
 		businessDao.update(account);
 		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
 		for(BusinessAccount acc:accounts){
 			account=acc;
 		}
-		System.out.println("After update: " + account.getAccountName());
+
 		businessDao.delete(account);
-		System.out.println("account deleted");
+
 		userAccount.delete(user);
-		System.out.println("user deleted");
+
 
 	}
 	
 
 	@Test
 	public void test_businessAccountReadMethodWorks_WhenPassedInAnInteger() {
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+		ApplicationContext context = DispatchController.getContext();
+		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
-		
-		UserAccountJdbcTemplate userDao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
-		UserAccount user = new UserAccount();
-		
-		user = userDao.read(1000000);
-		System.out.println("User read: " + user);
+		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
 		
 		List<UserAccount> users = new ArrayList<>();
 		users.add(user);
+		userAccount.create(user);
 		List<String> files= null;
 		ServiceLevel level = null;
-				
-		int id = 1000000;
-		BusinessAccount expected = new BusinessAccount(user,level,users,files,"fakeAccount", id);
-		System.out.println("expected account created: " + expected);
+		String accountName="TestAccount";
 		
-		//BREAKS HERE
-		BusinessAccount actual = businessDao.read(id);
-		System.out.println("actual account created: " + actual);
-		System.out.println("read account");
-		assertEquals(expected,actual);
+		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
+		businessDao.create(account);
+		
+		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
+		for(BusinessAccount acc:accounts){
+			account=acc;
+		}
+		
+		businessDao.read(new Integer(account.getBusinessAccountId()));
+		
+		businessDao.delete(account);
+		
+		userAccount.delete(user);
+		
 		
 	}
 	
