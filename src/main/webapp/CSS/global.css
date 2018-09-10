@@ -84,6 +84,13 @@ div.registration {
 	max-width: 50%;
 	width: 50%;
 }
+div.update {
+	margin:auto;
+	text-align: center;
+	background-color: rgb(240,240,255);
+	max-width: 50%;
+	width: 50%;
+}
 form {
 	border: grey solid 1px;
 	border-radius: 20px;
