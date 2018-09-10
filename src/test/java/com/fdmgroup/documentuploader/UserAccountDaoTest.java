@@ -3,8 +3,6 @@ package com.fdmgroup.documentuploader;
 
 import static org.junit.Assert.*;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -14,24 +12,21 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 
 public class UserAccountDaoTest {
-
+	private ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
+	private UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 	@Test 
 	public void testReadNonexistentUser(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "ImaginaryUser";
 		
 	 	UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
 		try{
-		System.out.println("This is the result of a nonexistent read"+dao.read(username));
+		System.out.println("This is the result of a nonexistent read"+userAccount.read(username));
 		}catch(EmptyResultDataAccessException e){
 		}
 	}
 		
 	@Test
 	public void testCreateThenReadThenDelete(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		//Map<SecurityQuestion,String> QA = new HashMap<>();
 		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
 		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
@@ -48,8 +43,6 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_createAUserWritesToDatabase(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "testUser";
 		String firstName = "Test";
 		String lastName = "User";
@@ -68,8 +61,6 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_updateWorks_andUpdtesInfoInDatabase(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "testUser2";
 		String firstName = "Bob";
 		String lastName = "User";
@@ -87,8 +78,6 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_readMethodReads_WhenPassedAnInteger(){
-		ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-		UserAccountJdbcTemplate userAccount = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
 		String username = "fakeUser";
 		int id = 1000000;
 		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");

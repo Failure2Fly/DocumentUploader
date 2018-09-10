@@ -25,7 +25,7 @@
 
 	<h2>Register</h2>
 	<div id="register-form" class="registration">
-		<sf:form commandName="userAccount" method="POST" action="register">
+		<sf:form commandName="userAccount" method="POST" action="register" onsubmit="return RegisterValidate()">
 			<fieldset>
 					<p>First Name:</p>
 				<sf:input path="firstName" class="inputField" type="text" 

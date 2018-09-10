@@ -76,17 +76,6 @@ public class DispatchController {
 				session.setAttribute("user", userAccount);
 				return "login";
 			} catch (Exception e) {
-				File file = new File("H:\\Debug.txt");
-				try {
-					FileWriter writer = new FileWriter(file);
-					writer.write(e.toString());
-					writer.write(userAccount.toString()); 
-				    writer.flush();
-				    writer.close();
-				} catch (IOException e2) {
-					e.printStackTrace();
-				}
-				// TODO specify exception
 				return "register";
 			} finally {
 
@@ -162,17 +151,22 @@ public class DispatchController {
 	}
 	@RequestMapping(value = "/userControlPanel", method = RequestMethod.GET)
 	public String changeUserInfoGet(Model model, HttpSession session) {
-		model.addAttribute("userAccount", session.getAttribute("user"));
+		model.addAttribute("changedUser", new UserAccount());
 		return "userControlPanel";
 
 
 	}
 	@RequestMapping(value = "/userControlPanel", method = RequestMethod.POST)
-	public String changeUserInfoPost(@ModelAttribute UserAccount userAccount,HttpSession session){
+	public String changeUserInfoPost(@ModelAttribute UserAccount changedUser, HttpSession session){
 		context = getContext();
 		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
-		
-		return null;
+		try {
+			return "userHome";
+		} catch (Exception e) {
+			return "userHome";
+		} finally {
+
+		}
 		
 	}
 }

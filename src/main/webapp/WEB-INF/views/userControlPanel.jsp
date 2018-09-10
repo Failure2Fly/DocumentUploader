@@ -28,36 +28,37 @@
 	<div id="register-form" class="registration">
 		<sf:form  commandName="userAccount" method="POST"  action="changeUserInfo">
 			<fieldset>
-					<p id="info" style="display:inline;">First Name: ${userAccount.getFirstName()}</p> 
-				<button style="display:inline-block;" id="registerButton" type="button" onclick="cancelDisplayProperty()">change first name</button>
-				<sf:input path="firstName" class="validate-form" type="text" name="FirstName" placeholder="new First name " value="" />
-				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
+				<p style="display:inline;">First Name: ${userAccount.getFirstName()}</p> 
 				<br>
-					<p id="info" style="display:inline;">Last Name: ${userAccount.getLastName()}</p> 
-				<button style="display:inline-block;" id="registerButton" type="button" onclick="cancelDisplayProperty()">change last name</button>
-				<sf:input path="lastName" class="validate-form" type="text" name="LastName" placeholder="Last name" value="" />
-				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
+				<sf:input path="firstName" type="text" name="FirstName" placeholder="new First name " value="" />
+				<input class="button"  type="submit" value="changed"/>
+				<br><br>
+				<p style="display:inline;">Last Name: ${userAccount.getLastName()}</p> 
 				<br>
-					<p id="info" style="display:inline;">Email: ${userAccount.getUserEmail()}</p> 
-					<button style="display:inline-block;" id="registerButton" type="button" onclick="cancelDisplayProperty()">change email</button>
-				<sf:input path="userEmail" class="validate-form" type="text" name="Email" placeholder="Email" />
-				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
+				<sf:input path="lastName" type="text" name="LastName" placeholder="Last name" value="" />
+				<input class="button" type="submit" value="changed"/>
+				<br><br>
+				<p style="display:inline;">Email: ${usexrAccount.getUserEmail()}</p> 
 				<br>
-					<p id="info" style="display:inline;">Username: ${userAccount.getUsername()}</p> 
-					<button style="display:inline-block;" id="registerButton" type="button"onclick="cancelDisplayProperty()">change username</button>
-				<sf:input path="username" class="validate-form" type="text" name="UserName" placeholder="Create a username" />
-				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
+				<sf:input path="userEmail" type="text" name="Email" placeholder="Email" />
+				<input class="button" type="submit" value="changed"/>
+				<br><br>
+				<p style="display:inline;">Username: ${userAccount.getUsername()}</p> 
 				<br>
-					<p id="info" style="display:inline;">Password: ********</p> 
-					<button style="display:inline-block;" id="registerButton" type="button" onclick="cancelDisplayProperty()">change password</button>
-				<sf:input path="password" class="validate-form" type="password" name="Password" placeholder="Create a password" />
-				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
+				<sf:input path="username" type="text" name="UserName" placeholder="Create a username" />
+				<input class="button" type="submit" value="changed"/>
+				<br><br>
+				<p style="display:inline;">Password: ********</p> 
+				<br>
+				<sf:input path="password" type="password" name="Password" placeholder="Create a password" />
+				<input class="button" type="submit" value="changed"/>
 				<br>
 				<br> 
 				<input class="button" id="registerButton" type="submit" value="Change User Account Information"/>
 			</fieldset>
 		</sf:form>
 	</div>
+<script src="./JS/global.js"></script>
 </body>
 <footer>
 <div class="header">

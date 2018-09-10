@@ -34,11 +34,6 @@
 		</div>
 	</div>
 
-
-
-
-
-
 <footer>
 <div class="header">
 	<div class="row">
