@@ -138,7 +138,6 @@ public class DispatchController {
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
-				// TODO specify exception
 				return "register";
 			} finally {
 
@@ -175,7 +174,6 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
@@ -203,8 +201,22 @@ public class DispatchController {
 
 		dao.create(account);
 
+
 		return new ModelAndView(new RedirectView("/userHome", true));
 
+	}
+	@RequestMapping(value = "/userControlPanel", method = RequestMethod.GET)
+	public String changeUserInfoGet(Model model, HttpSession session) {
+		model.addAttribute("changedUser", new UserAccount());
+		return "userControlPanel";
+
+
+	}
+	@RequestMapping(value = "/userControlPanel", method = RequestMethod.POST)
+	public RedirectView changeUserInfoPost(@ModelAttribute UserAccount changedUser, HttpSession session){
+		context = getContext();
+		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+		return new RedirectView("userhome");
 	}
 	
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
@@ -230,8 +242,6 @@ public class DispatchController {
 		
 		return "accountDetails";
 
+		
 	}
-	
-	
-
 }
