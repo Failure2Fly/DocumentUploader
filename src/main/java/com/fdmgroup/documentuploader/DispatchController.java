@@ -17,8 +17,11 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -74,15 +77,6 @@ public class DispatchController {
 
 	@RequestMapping(value = "/userDetails", method = RequestMethod.POST)
 	public RedirectView UserAccountDetails(@ModelAttribute UserAccount userAccount, HttpSession session) {
-		File file = new File("H:\\DebugDetails.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-			writer.write(userAccount.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		context = getContext();
 		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
 		UserAccount user = (UserAccount) session.getAttribute("user");
@@ -217,8 +211,32 @@ public class DispatchController {
 	public RedirectView changeUserInfoPost(@ModelAttribute UserAccount changedUser, HttpSession session){
 		context = getContext();
 		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
-
 		return new RedirectView("userhome");
+	}
+	
+	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+	public @ResponseBody RedirectView AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
+		BusinessAccountDao dao = new BusinessAccountDao();
+		File file = new File("H:\\DebugAccountDetails.txt");
+		try {
+			FileWriter writer = new FileWriter(file);
+
+			writer.write("Account id:"+accountId);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+			
+		BusinessAccount businessAccount = dao.read(new Integer(Integer.parseInt(accountId)));
+			session.setAttribute("account",businessAccount);
+		
+		
+			
+		
+		
+		return new RedirectView("accountDetails");
+
 		
 	}
 }
