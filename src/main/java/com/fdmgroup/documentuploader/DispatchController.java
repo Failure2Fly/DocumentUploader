@@ -220,8 +220,8 @@ public class DispatchController {
 	}
 	
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
-	public @ResponseBody RedirectView AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
-		BusinessAccountDao dao = new BusinessAccountDao();
+	public @ResponseBody String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
+		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		File file = new File("H:\\DebugAccountDetails.txt");
 		try {
 			FileWriter writer = new FileWriter(file);
@@ -233,14 +233,14 @@ public class DispatchController {
 			e.printStackTrace();
 		}
 			
-		BusinessAccount businessAccount = dao.read(new Integer(Integer.parseInt(accountId)));
+		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 			session.setAttribute("account",businessAccount);
 		
 		
 			
 		
 		
-		return new RedirectView("accountDetails");
+		return "accountDetails";
 
 		
 	}
