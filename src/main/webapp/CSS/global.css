@@ -46,7 +46,9 @@ h1,h2 {
 	background-color: #00aeef;
 }
 
-
+#hidden{
+	diplay:none;
+}
 /* This is part of the Navigation Bar*/
 
 .phone {
@@ -100,9 +102,20 @@ input.inputField{
 	color: #00aeef !important;
 }
 
+<<<<<<< HEAD
 .validate-form{
 	display:none;
 }
+=======
+p.accountList{
+	visibility: hidden;
+}
+div.accountDiv{
+	background-color: rgb(255, 255, 204);
+}
+
+
+>>>>>>> 22ce267db33c7cd3db68beebfaefc5113216647a
 
 
 input[type=checkbox], input[type=radio] {

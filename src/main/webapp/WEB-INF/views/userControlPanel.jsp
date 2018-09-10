@@ -26,32 +26,32 @@
 	<h2>Change User Account Information</h2>
 
 	<div id="register-form" class="registration">
-		<sf:form  commandName="userAccount" method="POST"  action="changeUserInfo">
+		<sf:form  commandName="changedUser" method="POST"  action="userControlPanel">
 			<fieldset>
-				<p style="display:inline;">First Name: ${userAccount.getFirstName()}</p> 
+				<p style="display:inline;">First Name: ${sessionScope.user.firstName}</p>
+				<button id="hidden">Change First Name</button> 
 				<br>
 				<sf:input path="firstName" type="text" name="FirstName" placeholder="new First name " value="" />
-				<input class="button"  type="submit" value="changed"/>
 				<br><br>
-				<p style="display:inline;">Last Name: ${userAccount.getLastName()}</p> 
+				<p style="display:inline;">Last Name: ${sessionScope.user.lastName}</p> 
+				<button id="hidden">Change Last Name</button> 
 				<br>
 				<sf:input path="lastName" type="text" name="LastName" placeholder="Last name" value="" />
-				<input class="button" type="submit" value="changed"/>
 				<br><br>
-				<p style="display:inline;">Email: ${usexrAccount.getUserEmail()}</p> 
+				<p style="display:inline;">Email: ${sessionScope.user.userEmail}</p> 
+				<button id="hidden">Change Email</button> 
 				<br>
 				<sf:input path="userEmail" type="text" name="Email" placeholder="Email" />
-				<input class="button" type="submit" value="changed"/>
 				<br><br>
-				<p style="display:inline;">Username: ${userAccount.getUsername()}</p> 
+				<p style="display:inline;">Username: ${sessionScope.user.username}</p>
+				<button id="hidden">Change Username</button>  
 				<br>
 				<sf:input path="username" type="text" name="UserName" placeholder="Create a username" />
-				<input class="button" type="submit" value="changed"/>
 				<br><br>
-				<p style="display:inline;">Password: ********</p> 
+				<p style="display:inline;">Password: ********</p>
+				<button id="hidden">Change Password</button>  
 				<br>
 				<sf:input path="password" type="password" name="Password" placeholder="Create a password" />
-				<input class="button" type="submit" value="changed"/>
 				<br>
 				<br> 
 				<input class="button" id="registerButton" type="submit" value="Change User Account Information"/>

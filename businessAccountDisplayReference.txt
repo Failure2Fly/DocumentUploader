@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Looping through arrays inside arrays.</p>
+
+<p id="demo"></p>
+
+<script>
+var myObj, i, j, x = "";
+
+myObj = [
+	{"owner": {
+		"username":"FredThomson",
+		"lastName":"Thomson",
+		"firstName":"Fred",
+		"password":"12345678p",
+		"userEmail":"bob@gmail.com",
+		"listQA":null
+		},
+		"servicelevel":null,
+		"userAccounts": [ {
+			"username":null,
+			"lastName":null,
+			"firstName":null,
+			"password":null,
+			"userEmail":null,
+			"listQA":null
+		} ],
+		"fileList":[],
+		"accountName":"Test Account",
+		"businessAccountId":1
+		},
+	{"owner": {
+		"username":"FredThomson",
+		"lastName":"Thomson",
+		"firstName":"Fred",
+		"password":"12345678p",
+		"userEmail":"bob@gmail.com",
+		"listQA":null
+		},
+		"servicelevel":null,
+		"userAccounts": [ {
+		"username":null,
+			"lastName":null,
+			"firstName":null,
+			"password":null,
+			"userEmail":null,
+			"listQA":null
+		} ],
+		"fileList":[],
+		"accountName":"Test Account2",
+		"businessAccountId":2
+	},
+	{"owner": {
+		"username":"FredThomson",
+		"lastName":"Thomson",
+		"firstName":"Fred",
+		"password":"12345678p",
+		"userEmail":"bob@gmail.com",
+		"listQA":null
+		},
+		"servicelevel":null,
+		"userAccounts": [ {
+			"username":null,
+			"lastName":null,
+			"firstName":null,
+			"password":null,
+			"userEmail":null,
+			"listQA":null
+		} ],
+		"fileList":[],
+		"accountName":"Test Account",
+		"businessAccountId":3
+	}
+]
+
+for (i in myObj) {
+	x += "<h3>ID: " + myObj[i].businessAccountId + "</h3>";
+    x += "Account Name: " + myObj[i].accountName + "<br>";
+	x += "Owner: " + myObj[i].owner.firstName + " " + myObj[i].owner.lastName + "<br>";
+	x += "Email: " + myObj[i].owner.userEmail + "<br>";
+	x += "Service Level: " + myObj[i].servicelevel + "<br>";
+	x += "User Accounts: " + "<br>" + "<ul>";
+	for (j in myObj[i].userAccounts) {
+		x += "<li><a href=\"\">Name: " + myObj[i].userAccounts[j].firstName + " " + myObj[i].userAccounts[j].lastName + "</a></li>";
+		x += "<li>Email: " + myObj[i].userAccounts[j].userEmail + "</li>";
+	}
+	x += "</ul>";
+	x += "<br>";
+}
+
+document.getElementById("demo").innerHTML = x;
+</script>
+
+</body>
+</html>
