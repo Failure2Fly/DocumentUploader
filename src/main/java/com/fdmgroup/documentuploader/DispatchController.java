@@ -41,10 +41,29 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
-	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount) {
+	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
+		try {
+			UserAccount user = (UserAccount) session.getAttribute("user");
+			if (user.getUsername().equals("") || user.getUsername() == null) {
+				return "login";
+			}
+		} catch (NullPointerException e) {
+			return "login";
+		}
+		
+		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			UserAccount user = (UserAccount) session.getAttribute("user");
+			String json = mapper.writeValueAsString(businessDao.read(user.getUsername()));
+			session.setAttribute("accountList", json);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		
 		return "userHome";
 	}
-	
+
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
 	public String UserAccountDetails(@ModelAttribute UserAccount userAccount) {
 		return "userDetails";
@@ -58,7 +77,7 @@ public class DispatchController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
-		model.addAttribute("listOfQuestion",SecurityQuestion.allQuestions());
+		model.addAttribute("listOfQuestion", SecurityQuestion.allQuestions());
 		model.addAttribute(userAccount);
 		return "register";
 	}
@@ -80,9 +99,9 @@ public class DispatchController {
 				try {
 					FileWriter writer = new FileWriter(file);
 					writer.write(e.toString());
-					writer.write(userAccount.toString()); 
-				    writer.flush();
-				    writer.close();
+					writer.write(userAccount.toString());
+					writer.flush();
+					writer.close();
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
@@ -92,21 +111,22 @@ public class DispatchController {
 
 			}
 		} else {
-			session.setAttribute("listOfQuestion",SecurityQuestion.allQuestions());
+			session.setAttribute("listOfQuestion", SecurityQuestion.allQuestions());
 			return "register";
 		}
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
-	public String userLogin(Model model) {
+	public String userLogin(Model model, HttpSession session) {
 
 		UserAccount userAccount = new UserAccount();
+		session.setAttribute("user", userAccount);
 		model.addAttribute(userAccount);
 		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
+	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		Validator validator = new Validator();
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
@@ -116,10 +136,10 @@ public class DispatchController {
 			session.setAttribute("user", userAccount);
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
-			
-			return "userHome";
+
+			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
-			return "login";
+			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
 
@@ -129,38 +149,30 @@ public class DispatchController {
 		return "createAccount";
 
 	}
+
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public ModelAndView createAccountPost (@ModelAttribute BusinessAccount account, HttpSession session) {
+	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-		
-		UserAccount user= ((UserAccount) session.getAttribute("user"));
+
+		UserAccount user = ((UserAccount) session.getAttribute("user"));
 		account.setOwner(user);
-		
+
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
-		
-		//TODO put in servicelevel data
+
+		// TODO put in servicelevel data
 		account.setServicelevel(new ServiceLevel());
-		
+
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
-		
+
 		dao.create(account);
-		ObjectMapper mapper = new ObjectMapper();
-        try {
-            String json = mapper.writeValueAsString(dao.read(user.getUsername()));
-            session.setAttribute("accountList", json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
 		
-		
-		
+
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
-	
 
 }
