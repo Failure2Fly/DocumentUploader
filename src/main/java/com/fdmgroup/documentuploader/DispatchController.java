@@ -126,7 +126,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
+	public RedirectView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		Validator validator = new Validator();
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
@@ -137,9 +137,9 @@ public class DispatchController {
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
 
-			return new ModelAndView(new RedirectView("/userHome", true));
+			return new RedirectView("userHome");
 		} else {
-			return new ModelAndView(new RedirectView("/login", true));
+			return new RedirectView("login");
 		}
 	}
 

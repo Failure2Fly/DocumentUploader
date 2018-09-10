@@ -15,12 +15,31 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
+<script>
+function DisplayAccounts() {
 
+	
+	var myObj, i, j, x = "";
+
+	myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+
+	for (i in myObj) {
+		x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].accountName+"\">" + myObj[i].businessAccountId+" "+myObj[i].accountName + "</a></h3>";
+		x += "<br>";
+	}
+
+	document.getElementById("Accounts").innerHTML = x;
+	
+
+
+
+}
+</script>
 <title>User Homepage</title>
 </head>
 
 
-<body onload="UserAccount()">
+<body onload="DisplayAccounts()">
 <div class="header">
 	<div class="mainHeaderRight"></div>
 		<div class="mainTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div>
@@ -37,15 +56,15 @@
 		</div>
 	</div>
 	<div class="registration">
-		<p class="accountList" id="accountList">${sessionScope.accountList}</p>
-		<ul class="outputList" id="outputList"><li></li></ul>
-		<p id="TestField">testfield</p>
-		<p id="TestField2">testfield2</p>
+		
+		
+		<p id="Accounts">AccountsPlaceholder</p>
+
 		
 	</div>
 
-
-	<script src="./JS/UserHome.js"></script>
+<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+	
 </body>
 
 
@@ -68,4 +87,5 @@
 	</div>
 	</div>
 </footer>
+
 </html>

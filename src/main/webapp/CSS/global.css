@@ -100,8 +100,12 @@ input.inputField{
 	color: #00aeef !important;
 }
 
-
-
+p.accountList{
+	visibility: hidden;
+}
+div.accountDiv{
+	background-color: rgb(255, 255, 204);
+}
 
 
 

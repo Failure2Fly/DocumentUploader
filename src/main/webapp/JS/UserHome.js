@@ -1,9 +1,13 @@
 function DisplayAccounts() {
 
 	var x;
-
+	var i;
 	var obj = document.getElementById("accountList");
-	x = obj[0].accountName;
+	for (i=0;i<obj.length;i++){
+		x += obj[i].businessAccountId +" "+ obj[i].accountName + "<br>";
+	}
+	
+	
 	document.getElementById("TestField").innerHTML = x;
 	document.getElementById("TestField2").innerHTML = document
 			.getElementById("accountList");
