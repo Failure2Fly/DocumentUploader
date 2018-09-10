@@ -220,8 +220,8 @@ public class DispatchController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-			
-		BusinessAccount businessAccount = dao.read(new Integer(Integer.parseInt(accountId)));
+		
+		BusinessAccount businessAccount = dao.read(new Integer(Integer.parseInt(accountId))); 
 			session.setAttribute("account",businessAccount);
 		
 		
