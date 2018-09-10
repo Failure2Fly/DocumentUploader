@@ -208,7 +208,7 @@ public class DispatchController {
 	}
 	
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
-	public @ResponseBody RedirectView AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
+	public @ResponseBody String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		File file = new File("H:\\DebugAccountDetails.txt");
 		try {
@@ -228,7 +228,7 @@ public class DispatchController {
 			
 		
 		
-		return new RedirectView("accountDetails");
+		return "accountDetails";
 
 	}
 	
