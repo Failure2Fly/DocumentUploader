@@ -205,19 +205,6 @@ public class DispatchController {
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
-	@RequestMapping(value = "/userControlPanel", method = RequestMethod.GET)
-	public String changeUserInfoGet(Model model, HttpSession session) {
-		model.addAttribute("changedUser", new UserAccount());
-		return "userControlPanel";
-
-
-	}
-	@RequestMapping(value = "/userControlPanel", method = RequestMethod.POST)
-	public RedirectView changeUserInfoPost(@ModelAttribute UserAccount changedUser, HttpSession session){
-		context = getContext();
-		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
-		return new RedirectView("userhome");
-	}
 	
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
 	public @ResponseBody String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
@@ -235,11 +222,7 @@ public class DispatchController {
 			
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 			session.setAttribute("account",businessAccount);
-		
-		
-			
-		
-		
+
 		return "accountDetails";
 
 		
