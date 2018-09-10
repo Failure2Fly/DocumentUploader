@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.sql.DataSource;
 
@@ -123,14 +124,14 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 		try {
 			FileWriter writer = new FileWriter(file);
 
-			writer.write("Account id:"+id.toString());
+			writer.write("Account id:"+id.toString()+"\n SQL "+SQL+"\nIs jdbcTemplate null?"+Objects.isNull(jdbcTemplateObject));
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new BusinessAccountMapper());
+		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id.toString()}, new BusinessAccountMapper());
 
 		return business;
 	}

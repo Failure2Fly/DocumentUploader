@@ -45,7 +45,7 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		try {
 			FileWriter writer = new FileWriter(file);
 
-			writer.append("Ended mapper");
+			writer.append("Ended mapper; business account = "+business);
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
