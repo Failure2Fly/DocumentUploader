@@ -24,7 +24,7 @@ function DisplayAccounts() {
 	myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
 	for (i in myObj) {
-		x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].accountName+"\">" + myObj[i].businessAccountId+" "+myObj[i].accountName + "</a></h3>";
+		x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].businessAccountId+"\">" + myObj[i].businessAccountId+" "+myObj[i].accountName + "</a></h3>";
 		x += "<br>";
 	}
 

@@ -118,6 +118,17 @@ public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> 
 	public BusinessAccount read(Integer id) {
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
 		
+		File file = new File("H:\\DebugBusinessDao.txt");
+		try {
+			FileWriter writer = new FileWriter(file);
+
+			writer.write("Account id:"+id.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id}, new BusinessAccountMapper());
 
 		return business;
