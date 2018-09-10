@@ -20,13 +20,16 @@
 </head>
 
 
-<body>
+<body onload="UserAccount()">
 <div class="header">
 	<div class="mainHeaderRight"></div>
 		<div class="mainTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/createAccount">
 				<button	class="btn btn-primary" type="submit">Create Account</button>
+			</a>
+			<a href="/DocumentUploader/userDetails">
+				<button	class="btn btn-primary" type="submit">User Details</button>
 			</a>
 			<a href="/DocumentUploader/login">
 				<button	class="btn btn-primary" type="submit">Logout</button>
@@ -36,8 +39,12 @@
 			</a>
 		</div>
 	</div>
+	<div class="registration">
+		<p>${sessionScope.accountList}</p>
+	</div>
 
 
+	<script src="./JS/UserHome.js"></script>
 </body>
 
 

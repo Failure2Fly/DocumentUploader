@@ -28,6 +28,4 @@ public class UserAccountResultSetExtractor implements ResultSetExtractor {
 	        user.setListQA(rsQuestionList);
 	        return user;
 	    }
-	    
-	    
 }

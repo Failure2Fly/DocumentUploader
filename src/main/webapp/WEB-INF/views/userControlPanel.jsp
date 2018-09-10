@@ -48,7 +48,7 @@
 				<sf:input path="username" class="validate-form" type="text" name="UserName" placeholder="Create a username" />
 				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
 				<br>
-					<p id="info" style="display:inline;">Password: ${userAccount.getPassword()}</p> 
+					<p id="info" style="display:inline;">Password: ********</p> 
 					<button style="display:inline-block;" id="registerButton" type="button" onclick="cancelDisplayProperty()">change password</button>
 				<sf:input path="password" class="validate-form" type="password" name="Password" placeholder="Create a password" />
 				<input class="button validate-form" id="registrationButton" type="submit" value="changed"/>
