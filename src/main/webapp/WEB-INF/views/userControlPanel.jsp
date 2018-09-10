@@ -29,27 +29,27 @@
 		<sf:form  commandName="changedUser" method="POST"  action="userControlPanel">
 			<fieldset>
 				<p style="display:inline;">First Name: ${sessionScope.user.firstName}</p>
-				<button id="hidden">Change First Name</button> 
+				<button class="hidden" onclick="myfuntion()">Change First Name</button> 
 				<br>
 				<sf:input path="firstName" type="text" name="FirstName" placeholder="new First name " value="" />
 				<br><br>
 				<p style="display:inline;">Last Name: ${sessionScope.user.lastName}</p> 
-				<button id="hidden">Change Last Name</button> 
+				<button class="hidden" onclick="">Change Last Name</button> 
 				<br>
 				<sf:input path="lastName" type="text" name="LastName" placeholder="Last name" value="" />
 				<br><br>
 				<p style="display:inline;">Email: ${sessionScope.user.userEmail}</p> 
-				<button id="hidden">Change Email</button> 
+				<button class="hidden" onclick="">Change Email</button> 
 				<br>
 				<sf:input path="userEmail" type="text" name="Email" placeholder="Email" />
 				<br><br>
 				<p style="display:inline;">Username: ${sessionScope.user.username}</p>
-				<button id="hidden">Change Username</button>  
+				<button class="hidden" onclick="">Change Username</button>  
 				<br>
 				<sf:input path="username" type="text" name="UserName" placeholder="Create a username" />
 				<br><br>
 				<p style="display:inline;">Password: ********</p>
-				<button id="hidden">Change Password</button>  
+				<button class="hidden" onclick="">Change Password</button>  
 				<br>
 				<sf:input path="password" type="password" name="Password" placeholder="Create a password" />
 				<br>

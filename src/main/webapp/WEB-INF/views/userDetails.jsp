@@ -36,15 +36,6 @@
 		</div>
 	</div>
 
-<<<<<<< HEAD
-<footer>
-<div class="header">
-	<div class="row">
-		<div class="col-4 social">
-			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-=======
 
 	<div id="update-form" class="update">
 		<sf:form commandName="userAccount" method="POST" action="userDetails">
@@ -75,7 +66,6 @@
 
 
 
->>>>>>> f54ba4397cb94d1aacbc0ac87877f1197c0fd1f3
 
 
 	<footer>

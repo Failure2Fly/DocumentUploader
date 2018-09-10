@@ -51,7 +51,10 @@ function RegisterValidate() {
 		return true;
 	}
 }
-
+function myfunction(){
+	document.getElementByClassName("hidden")[0].style.display = "block";
+	
+}
 function loginValidate() {
 	var user_name = document.querySelector(".user-name").value;
 	var password = document.querySelector(".password").value;
