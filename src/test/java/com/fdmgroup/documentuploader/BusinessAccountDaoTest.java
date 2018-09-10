@@ -1,18 +1,18 @@
-
-package com.fdmgroup.documentuploader;
-
-import static org.junit.Assert.assertEquals;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.dao.EmptyResultDataAccessException;
-
-public class BusinessAccountDaoTest {
-
+//
+//package com.fdmgroup.documentuploader;
+//
+//import static org.junit.Assert.assertEquals;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import org.junit.Test;
+//import org.springframework.context.ApplicationContext;
+//import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.dao.EmptyResultDataAccessException;
+//
+//public class BusinessAccountDaoTest {
+//
 //	@Test
 //	public void test_willCheckIfBusinessAccountCreated() {
 //		ApplicationContext context = DispatchController.getContext();
@@ -109,21 +109,21 @@ public class BusinessAccountDaoTest {
 //		userAccount.delete(user);
 //	}
 //	
-	@Test
-	public void justHumorMe(){
-		ApplicationContext context = DispatchController.getContext();
-		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
-		System.out.println(businessDao.read(1));
-		System.out.println(businessDao.read(2));
-		System.out.println(businessDao.read(3));
-		System.out.println(businessDao.read(4));
-		System.out.println(businessDao.read(5));
-		System.out.println(businessDao.read(6));
-
-	}
-	
-
-	
-}
-
-
+//	@Test
+//	public void justHumorMe(){
+//		ApplicationContext context = DispatchController.getContext();
+//		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
+//		System.out.println(businessDao.read(1));
+//		System.out.println(businessDao.read(2));
+//		System.out.println(businessDao.read(3));
+//		System.out.println(businessDao.read(4));
+//		System.out.println(businessDao.read(5));
+//		System.out.println(businessDao.read(6));
+//
+//	}
+//	
+//
+//	
+//}
+//
+//
