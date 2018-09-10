@@ -102,6 +102,11 @@ public class DispatchController {
 		session.setAttribute("user", user);
 		return new RedirectView("userHome");
 	}
+	
+	@RequestMapping(value = "/accountDetails")
+	public String BusinessDetails(Model model) {
+		return "accountDetails";
+	}
 
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {

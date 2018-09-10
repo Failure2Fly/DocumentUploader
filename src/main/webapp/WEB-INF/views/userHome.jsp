@@ -30,6 +30,8 @@ function DisplayAccounts() {
 
 	document.getElementById("Accounts").innerHTML = x;
 	
+	/* var text = "My Button"; // JavaScript string
+	button.setText(text); // text is converted to java.lang.String */
 
 
 
