@@ -15,7 +15,6 @@ public class Validator {
 	public boolean validateUserLogin(String username, String password) {
 		context = new ClassPathXmlApplicationContext("context.xml");
 		dao = (UserAccountDao) context.getBean("UserAccountDao");
-
 		try {
 			UserAccount actualUser = dao.read(username);
 			if (actualUser.getPassword().equals(password)) {
@@ -98,7 +97,6 @@ public class Validator {
 		} catch (AddressException e) {
 
 		}
-
 		return isValid;
 	}
 	
