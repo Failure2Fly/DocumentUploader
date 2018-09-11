@@ -1,40 +1,20 @@
-/* These are global attributes*/
-body, html {
-	margin: 0;
-	padding: 0;
-}
-
-div.header {
-	width: 100%;
-	background-color: rgb(200, 200, 220);
-	display: flex;
-	padding-bottom: 5px;
-}
-
-div.registrationTitle {
-	text-align: center;
-	margin: auto;
-}
-
-h1, h2 {
-	text-align: center;
-}
-
 * {
 	box-sizing: border-box;
 	margin: 0;
 }
-
+body{
+	background-color: #ffffff;
+background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
 .fa-phone {
 	transform: scaleX(-1);
 	padding-left: 10px;
 }
-
 .btn {
 	padding: 0.25rem 1.0rem;
 	border-radius: .5rem;
 }
-
 .btn-primary {
 	color: black;
 	background-color: whitesmoke;
@@ -43,110 +23,125 @@ h1, h2 {
 	width: 90%;
 	text-align: center;
 }
-
 .btn:hover {
 	background-color: #00aeef;
 }
-
 .hidden{
-	diplay:none;
+	display:none;
 }
-
 /* This is part of the Navigation Bar*/
 .phone {
 	color: #00aeef;
 	padding-bottom: 15px;
 }
-
 .nav-right {
 	width: 230px;
 }
-
-div.mainHeaderLeft {
-	width: 25% border-width:0, 5px, 0, 0;
+div .mainHeaderLeft {
+	width: 25%;
+	border-width: 0 5px 0px 0px;
 	border-style: solid;
 }
-
-div.mainTitle {
+div .mainTitle {
 	width: 50%;
 	margin: auto;
 }
-
-div.mainHeaderRight {
+div .mainHeaderRight {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
 	width: 25%;
 }
-
 /* This is the end of the Navigation Bar*/
 
 /* This is the start of the Form*/
-div.registration {
-	margin: auto;
-	text-align: center;
-	background-color: rgb(240, 240, 255);
-	max-width: 50%;
-	width: 50%;
+.register-form {
+	max-width: 450px;
+	margin: 100px auto;
 }
-
-div.update {
-	margin: auto;
-	text-align: center;
-	background-color: rgb(240, 240, 255);
-	max-width: 50%;
-	width: 50%;
-}
-
 form {
 	border: grey solid 1px;
 	border-radius: 20px;
 	margin-bottom: 100px;
 }
-
-input.inputField {
-	marign: 0px;
-	padding: 5px;
+.validate-form{
+    display:none;
 }
-
+.mb-2,
+.form-group {
+	margin: 20px;
+}
+.form-group {
+	width: 100%
+}
+.security-question{
+	height: 40px;
+}
+.incorrect{
+	background-color: red;
+    color: white;
+}
+.form-check {
+	margin-left: 20px;
+}
 .terms {
 	color: #00aeef !important;
 }
-
-
-
-.validate-form{
-	display:none;
-}
-
-p.accountList{
-	visibility: hidden;
-}
-p#accountList.accountList {
-	visibility: hidden;
-}
-div.accountDiv {
-	background-color: rgb(255, 255, 204);
-}
-
-input[type=checkbox], input[type=radio] {
-	box-sizing: border-box;
-	padding: 0;
-	margin-top: 20px;
-	margin-left: 50px;
-}
-
-.update span {
-	color: #339900;
-	font-weight: bold;
+.btn-sign-in {
+	float: right;
 }
 /* This is the end of the Form*/
 
+/* This is the start of the Form*/
+/*div .registration {*/
+/*	margin: auto;*/
+/*	text-align: center;*/
+/*	background-color: rgb(240, 240, 255);*/
+/*	max-width: 50%;*/
+/*	width: 50%;*/
+/*}*/
+/*div.update {*/
+/*	margin: auto;*/
+/*	text-align: center;*/
+/*	background-color: rgb(240, 240, 255);*/
+/*	max-width: 50%;*/
+/*	width: 50%;*/
+/*}*/
+/*form {*/
+/*	border: grey solid 1px;*/
+/*	border-radius: 20px;*/
+/*	margin-bottom: 100px;*/
+/*}*/
+/*input .inputField {*/
+/*	margin: 0px;*/
+/*	padding: 5px;*/
+/*}*/
+/*.terms {*/
+/*	color: #00aeef !important;*/
+/*}*/
+
+/*.validate-form{*/
+/*	display:none;*/
+/*}*/
+/*div .accountDiv {*/
+/*	background-color: rgb(255, 255, 204);*/
+/*}*/
+
+/*input[type=checkbox], input[type=radio] {*/
+/*	padding: 0;*/
+/*	margin-top: 20px;*/
+/*	margin-left: 50px;*/
+/*}*/
+/*.update span {*/
+/*	color: #339900;*/
+/*	font-weight: bold;*/
+/*}*/
+
+/* This is the end of the Form*/
 /* This is the Start Login Page*/
-
 /* This is the End of Login Page */
-
 /* This is the Start of Main Page*/
+/* This is the End of Main Page*/
 
 /* This is where the Footer Starts*/
 footer {
@@ -155,25 +150,19 @@ footer {
 	bottom: 0;
 	width: 100%;
 }
-
 footer a {
 	color: #666666;
 }
-
 .social {
 	padding-top: 20px;
 }
-
 .social a {
 	padding: 0px 15px 0px 15px;
 }
-
 .copyright {
 	padding: 15px;
 }
-
 .copyright p {
 	float: right;
 }
-
 /* This is where the Footer Ends*/
