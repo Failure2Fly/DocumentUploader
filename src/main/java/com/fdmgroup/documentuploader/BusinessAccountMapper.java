@@ -29,7 +29,8 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		}
 		
 		BusinessAccount business = new BusinessAccount();
-		ApplicationContext context = DispatchController.getContext();
+		ApplicationContext context =DispatchController.getContext();
+
 		UserAccountDao dao = (UserAccountDao)context.getBean("UserAccountDao");
 				
 		UserAccount owner = dao.read(rs.getInt("useraccountownerid"));
