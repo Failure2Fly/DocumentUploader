@@ -103,7 +103,7 @@ public class DispatchController {
 		isValid = validator.validateUserRegistration(userAccount);
 		if (isValid) {
 			context = getContext();
-			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccounDao");
+			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
 			try {
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
@@ -170,7 +170,12 @@ public class DispatchController {
 		dao.create(account);
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
+<<<<<<< HEAD
 	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET)
+=======
+
+	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+>>>>>>> 9fee9e7ccff18508f2901e231d85fe34fbced02f
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -180,7 +185,12 @@ public class DispatchController {
 		model.addAttribute(document);
 		return "accountDetails";
 	}
+<<<<<<< HEAD
 	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.POST)
+=======
+
+	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
+>>>>>>> 9fee9e7ccff18508f2901e231d85fe34fbced02f
 	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		File directory = new File("H:\\repository\\"+accountId);
