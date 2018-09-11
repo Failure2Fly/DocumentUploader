@@ -10,11 +10,11 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 public class Validator {
 
 	private ApplicationContext context;
-	private UserAccountJdbcTemplate dao;
+	private UserAccountDao dao;
 
 	public boolean validateUserLogin(String username, String password) {
 		context = new ClassPathXmlApplicationContext("context.xml");
-		dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+		dao = (UserAccountDao) context.getBean("UserAccountJdbcTemplate");
 
 		try {
 			UserAccount actualUser = dao.read(username);

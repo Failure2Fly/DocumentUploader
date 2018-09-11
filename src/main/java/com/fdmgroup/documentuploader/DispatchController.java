@@ -76,7 +76,7 @@ public class DispatchController {
 	@RequestMapping(value = "/userDetails", method = RequestMethod.POST)
 	public RedirectView UserAccountDetails(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		context = getContext();
-		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountJdbcTemplate");
 		UserAccount user = (UserAccount) session.getAttribute("user");
 		if (userAccount.getFirstName().length() > 0) {
 			user.setFirstName(userAccount.getFirstName());
@@ -120,7 +120,7 @@ public class DispatchController {
 		isValid = validator.validateUserRegistration(userAccount);
 		if (isValid) {
 			context = getContext();
-			UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountJdbcTemplate");
 			try {
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
@@ -161,7 +161,7 @@ public class DispatchController {
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
 			context = getContext();
-			UserAccountJdbcTemplate userDao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountJdbcTemplate");
 			userAccount = userDao.read(userAccount.getUsername());
 			session.setAttribute("user", userAccount);
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");

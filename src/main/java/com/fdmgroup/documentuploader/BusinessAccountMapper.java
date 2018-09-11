@@ -30,7 +30,7 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		
 		BusinessAccount business = new BusinessAccount();
 		ApplicationContext context =DispatchController.getContext();
-		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate)context.getBean("UserAccountJdbcTemplate");
+		UserAccountDao dao = (UserAccountDao)context.getBean("UserAccountJdbcTemplate");
 				
 		UserAccount owner = dao.read(rs.getInt("useraccountownerid"));
 		business.setOwner(owner);
