@@ -206,8 +206,6 @@ public class DispatchController {
 		session.setAttribute("account", businessAccount);
 		Document document = new Document();
 		model.addAttribute(document);
-		
-
 		return "accountDetails";
 
 	}
@@ -215,7 +213,6 @@ public class DispatchController {
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
 	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
-		
 		File directory = new File("H:\\repository\\"+accountId);
 	    if (! directory.exists()){
 	        directory.mkdir();
@@ -225,8 +222,7 @@ public class DispatchController {
 		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
 		document.setRepositoryPath(Paths.get(repositoryPath));
 		documentDao.create(document);
-		return "accountDetails";
-		
+		return "accountDetails";	
 	}
 	
 	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)

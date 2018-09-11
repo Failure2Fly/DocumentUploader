@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserAccountDao implements DAO<UserAccount,String> {
+public class UserAccountDao implements Dao<UserAccount,String> {
    private DataSource dataSource;
    private JdbcTemplate jdbcTemplateObject;
    

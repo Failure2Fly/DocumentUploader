@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class BusinessAccountDao implements DAOExample<BusinessAccount, Integer> {
+public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;

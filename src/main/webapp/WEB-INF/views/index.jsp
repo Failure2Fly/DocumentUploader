@@ -31,7 +31,7 @@
 	</div>
 	<nav class="navbar navbar-expand-lg">
 		<div class="container logo">
-			<a class="navbar-brand" href="#"><img src="<c:url value=""/>" /></a>
+			<a class="navbar-brand" href="#"><img src="<c:url value="/IMG/logo.png"/>" /></a>
 		</div>
 		<div class="nav-right">
 			<div class="nav phone">

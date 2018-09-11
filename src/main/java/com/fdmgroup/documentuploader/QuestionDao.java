@@ -10,7 +10,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-public class QuestionDao implements DAO<String,Integer> {
+public class QuestionDao implements Dao<String,Integer> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 	
