@@ -281,7 +281,15 @@ public class DispatchController {
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
+		
 		return "accountDetails";
+
+	}
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
+	public String accountDetailsPost(@ModelAttribute BusinessAccount account, HttpSession session) {
+		
+		return "accountDetails";
+
 
 	}
 
