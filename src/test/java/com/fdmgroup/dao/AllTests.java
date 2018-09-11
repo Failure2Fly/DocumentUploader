@@ -8,7 +8,7 @@ import com.fdmgroup.dao.UserAccountDaoTest;
 import com.fdmgroup.logic.ValidatorTest;
 
 @RunWith(Suite.class)
-@SuiteClasses({ BusinessAccountDaoTest.class, DocumentDaoTest.class, com.fdmgroup.documentuploader.UserAccountDaoTest.class, ValidatorTest.class })
+@SuiteClasses({ BusinessAccountDaoTest.class, DocumentDaoTest.class, com.fdmgroup.dao.UserAccountDaoTest.class, ValidatorTest.class })
 public class AllTests {
 
 }

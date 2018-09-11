@@ -1,6 +1,6 @@
 
 
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import static org.junit.Assert.assertEquals;
 
