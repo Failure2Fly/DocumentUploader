@@ -21,7 +21,7 @@ public class UserAccountDaoTest {
 		
 	 	UserAccount expected = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
 		try{
-		System.out.println("This is the result of a nonexistent read"+userAccount.read(username));
+			System.out.println("This is the result of a nonexistent read"+userAccount.read(username));
 		}catch(EmptyResultDataAccessException e){
 		}
 	}
