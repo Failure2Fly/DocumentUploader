@@ -168,6 +168,7 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
+
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
@@ -194,42 +195,75 @@ public class DispatchController {
 
 		dao.create(account);
 
-
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 		session.setAttribute("account", businessAccount);
-		Document document = new Document();
-		model.addAttribute(document);
-		return "accountDetails";
+		File file = new File("");
+		model.addAttribute(file);
+
+		return "accountHome";
 
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
-	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") MultipartFile file) {
+
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
+	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
+			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
-		File directory = new File("H:\\repository\\"+accountId);
-	    if (! directory.exists()){
-	        directory.mkdir();
-	    }
-	    int fileId = documentDao.getId();
-	    File sourcePath = document.getSourcePath().toFile();
-		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
+		File directory = new File("H:\\repository\\" + accountId);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+		int fileId = documentDao.getId();
+		Document document = new Document();
+		document.setName(file.getOriginalFilename());
+		document.setAccountId(Integer.parseInt(accountId));
+		File sourceFile = new File(file.getOriginalFilename());
+		try {
+			file.transferTo(sourceFile);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		document.setSourcePath(Paths.get(sourceFile.toString()));
+
+		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
+		
 		document.setRepositoryPath(Paths.get(repositoryPath));
+		File debugFile = new File("H:\\DebugFileDispatchController.txt");
+		try {
+			FileWriter writer = new FileWriter(debugFile);
+			writer.write("MultipartFile original name : "+file.getOriginalFilename()+"\n MultipartFile content type:"+file.getContentType()+"\n Sourcepath? :"+sourceFile.toString()+"\n Document? :"+document);
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		documentDao.create(document);
+		return "accountHome";
+
+	}
+	
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
+	public String accountDetailsGet(Model model, HttpSession session) {
+		model.addAttribute(new BusinessAccount());
 		return "accountDetails";
 
-		
 	}
-	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)
-	public String AccountHomeGet(Model model,HttpSession session){
-		return null;
-	}
+
 
 }
