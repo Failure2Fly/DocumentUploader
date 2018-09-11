@@ -48,7 +48,6 @@ h1, h2 {
 	background-color: #00aeef;
 }
 
-
 .hidden{
 	diplay:none;
 }
@@ -123,11 +122,12 @@ input.inputField {
 p.accountList{
 	visibility: hidden;
 }
-
+p#accountList.accountList {
+	visibility: hidden;
+}
 div.accountDiv {
 	background-color: rgb(255, 255, 204);
 }
-
 
 input[type=checkbox], input[type=radio] {
 	box-sizing: border-box;

@@ -16,78 +16,79 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <script>
-function DisplayAccounts() {
+	function DisplayAccounts() {
 
-	
-	var myObj, i, j, x = "";
+		var myObj, i, j, x = "";
 
-	myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
-	for (i in myObj) {
-		x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].businessAccountId+"\">" + myObj[i].businessAccountId+" "+myObj[i].accountName + "</a></h3>";
-		x += "<br>";
+		for (i in myObj) {
+			x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].businessAccountId+"\">"
+					+ myObj[i].businessAccountId
+					+ " "
+					+ myObj[i].accountName
+					+ "</a></h3>";
+			x += "<br>";
+		}
+
+		document.getElementById("Accounts").innerHTML = x;
+
+		/* var text = "My Button"; // JavaScript string
+		button.setText(text); // text is converted to java.lang.String */
+
 	}
-
-	document.getElementById("Accounts").innerHTML = x;
-	
-	/* var text = "My Button"; // JavaScript string
-	button.setText(text); // text is converted to java.lang.String */
-
-
-
-}
 </script>
 <title>User Homepage</title>
 </head>
 
 
 <body onload="DisplayAccounts()">
-<div class="header">
-	<div class="mainHeaderRight"></div>
-		<div class="mainTitle"><h1>Welcome to Document Loader, ${sessionScope.user.username}</h1></div>
+	<div class="header">
+		<div class="mainHeaderRight"></div>
+		<div class="mainTitle">
+			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
+		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/createAccount">
-				<button	class="btn btn-primary" type="submit">Create Account</button>
-			</a>
-			<a href="/DocumentUploader/userDetails">
-				<button	class="btn btn-primary" type="submit">User Details</button>
-			</a>
-			<a href="/DocumentUploader/login">
-				<button	class="btn btn-primary" type="submit">Logout</button>
+				<button class="btn btn-primary" type="submit">Create
+					Account</button>
+			</a> <a href="/DocumentUploader/userDetails">
+				<button class="btn btn-primary" type="submit">User Details</button>
+			</a> <a href="/DocumentUploader/login">
+				<button class="btn btn-primary" type="submit">Logout</button>
 			</a>
 		</div>
 	</div>
 	<div class="registration">
-		
-		
+				
 		<p id="Accounts">AccountsPlaceholder</p>
 
-		
+
 	</div>
 
-<p class="accountList" id="accountList">${sessionScope.accountList}</p>
-	
+<!-- 	//TODO change accountList into details to display information of accounts -->
+	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+
+
+
+
+	<footer>
+		<div class="header">
+			<div class="row">
+				<div class="col-4 social">
+					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+				</div>
+				<div class="col-8 copyright">
+					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
 </body>
-
-
-
-
-
-
-<footer>
-<div class="header">
-	<div class="row">
-		<div class="col-4 social">
-			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-
-		</div>
-		<div class="col-8 copyright">
-			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-		</div>
-	</div>
-	</div>
-</footer>
-
 </html>

@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
+public class UserAccountDao implements DAO<UserAccount,String> {
    private DataSource dataSource;
    private JdbcTemplate jdbcTemplateObject;
    
@@ -28,7 +28,6 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
 //		    writer.flush();
 //		    writer.close();
 //		} catch (IOException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 	    jdbcTemplateObject.update(SQL1,lastID()+1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
