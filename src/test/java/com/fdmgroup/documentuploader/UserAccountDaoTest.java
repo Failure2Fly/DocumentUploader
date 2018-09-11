@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package com.fdmgroup.documentuploader;
 //
 //import static org.junit.Assert.*;
@@ -6,13 +7,37 @@
 //import org.junit.Test;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
+=======
+//
+//
+//package com.fdmgroup.documentuploader;
+//
+//import static org.junit.Assert.assertEquals;
+//
+//import org.junit.Before;
+//import org.junit.Test;
+//import org.springframework.context.ApplicationContext;
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3
 //import org.springframework.dao.EmptyResultDataAccessException;
 //
 //
 //
 //public class UserAccountDaoTest {
+<<<<<<< HEAD
 //	private ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
 //	private UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
+=======
+//	private ApplicationContext context;
+//	private UserAccountDao userAccount;
+//	@Before
+//	public void setUp(){
+//		context= DispatchController.getContext();
+//		userAccount = (UserAccountDao)context.getBean("UserAccountDao");
+//	}
+//	
+//	
+//	
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3
 //	@Test 
 //	public void testReadNonexistentUser(){
 //		String username = "ImaginaryUser";
@@ -50,10 +75,14 @@
 //		
 //		UserAccount testUser = new UserAccount(username,lastName,firstName,password,userEmail);
 //		userAccount.create(testUser);
+<<<<<<< HEAD
 //		
 //		testUser.toString();
 //		//JdbcUtils.countRowsInTable(userAccount);
 //		//deleteuser
+=======
+//
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3
 //		userAccount.delete(testUser);
 //	}
 //	
@@ -68,9 +97,15 @@
 //		
 //		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail);
 //		userAccount.create(testUser2);
+<<<<<<< HEAD
 //		System.out.println(testUser2.getFirstName());
 //		testUser2.setFirstName("Henry");
 //		System.out.println(testUser2.getFirstName());
+=======
+//	
+//		testUser2.setFirstName("Henry");
+//
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3
 //		userAccount.update(testUser2);
 //		userAccount.delete(testUser2);
 //	}
@@ -78,10 +113,17 @@
 //	@Test
 //	public void test_readMethodReads_WhenPassedAnInteger(){
 //		String username = "fakeUser";
+<<<<<<< HEAD
 //		int id = 1000000;
 //		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");
 //	
 //		UserAccount actual = userAccount.read(id);
+=======
+//		int expectedId = userAccount.getID(username);
+//		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");
+//		
+//		UserAccount actual = userAccount.read(expectedId);
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3
 //		
 //		assertEquals(expected,actual);
 //		
@@ -89,4 +131,7 @@
 //
 //
 //}
+<<<<<<< HEAD
 
+=======
+>>>>>>> a00c4d6ed248c2336b3b375c4aa4d0eec55c9bd3

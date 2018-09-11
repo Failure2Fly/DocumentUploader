@@ -66,7 +66,7 @@
 
 	</div>
 
-<!-- 	//TODO change accountList into details to display information of accounts -->
+
 	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
 
 

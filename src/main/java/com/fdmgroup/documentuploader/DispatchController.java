@@ -173,10 +173,43 @@ public class DispatchController {
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+		DocumentDao documentDao =  (DocumentDao) context.getBean("DocumentDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 		session.setAttribute("account", businessAccount);
 		File file = new File("");
 		model.addAttribute(file);
+		
+		
+		List<Document> fileList=documentDao.read(Integer.parseInt(accountId));
+		
+		String json = "";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			
+			json = mapper.writeValueAsString(fileList);
+			session.setAttribute("fileList", json);
+			
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			File debugFile = new File("H:\\DebugFileListException.txt");
+			try {
+				FileWriter writer = new FileWriter(debugFile);
+				writer.write(""+e);
+				writer.flush();
+				writer.close();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		}
+		File debugFile = new File("H:\\DebugFileList.txt");
+		try {
+			FileWriter writer = new FileWriter(debugFile);
+			writer.write("List of files for id "+accountId+": "+documentDao.read(Integer.parseInt(accountId)));
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return "accountHome";
 	}
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
@@ -187,7 +220,6 @@ public class DispatchController {
 		if (!directory.exists()) {
 			directory.mkdirs();
 		}
-		int fileId = documentDao.getId();
 		Document document = new Document();
 		document.setName(file.getOriginalFilename());
 		document.setAccountId(Integer.parseInt(accountId));
@@ -202,23 +234,12 @@ public class DispatchController {
 			e.printStackTrace();
 		}
 		
-		
-		
-		
 		document.setSourcePath(Paths.get(sourceFile.toString()));
 		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
-		
 		document.setRepositoryPath(Paths.get(repositoryPath));
-		File debugFile = new File("H:\\DebugFileDispatchController.txt");
-		try {
-			FileWriter writer = new FileWriter(debugFile);
-			writer.write("MultipartFile original name : "+file.getOriginalFilename()+"\n MultipartFile content type:"+file.getContentType()+"\n Sourcepath? :"+sourceFile.toString()+"\n Document? :"+document);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		documentDao.create(document);
+		
 		return "accountHome";
 	}
 	

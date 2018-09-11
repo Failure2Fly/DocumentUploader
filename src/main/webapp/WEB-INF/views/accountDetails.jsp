@@ -31,7 +31,7 @@
 			<a href="/DocumentUploader/userHome">
 				<button class="btn btn-primary" type="submit">Back to User
 					Homepage</button>
-			</a> <a href="/DocumentUploader/accountHome">
+			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId }">
 				<button class="btn btn-primary" type="submit">Account
 					Home</button>
 			</a> <a href="/DocumentUploader/login">
