@@ -24,7 +24,7 @@
 //	public void test_validateUserLogin_returnsTrue_whenGivenAValidUsernameAndPassword() {
 //		// Arrange
 //		context = new ClassPathXmlApplicationContext("context.xml");
-//		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountJdbcTemplate");
+//		UserAccountJdbcTemplate dao = (UserAccountJdbcTemplate) context.getBean("UserAccountDao");
 //		// Map<SecurityQuestion,String> QA = new HashMap<>();
 //		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
 //		// "SheepFace");

@@ -80,7 +80,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			account.setBusinessAccountId(accountId.intValue());
 			
 			ApplicationContext context= DispatchController.getContext(); 
-			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountJdbcTemplate");
+			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountDao");
 			UserAccount owner = userDao.read(ownerId);
 			account.setOwner(owner);
 			
