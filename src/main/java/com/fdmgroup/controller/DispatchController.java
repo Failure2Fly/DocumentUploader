@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.controller;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ApplicationContext;
@@ -24,6 +25,15 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fdmgroup.dao.BusinessAccountDao;
+import com.fdmgroup.dao.DocumentDao;
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.enumeratedtypes.SecurityQuestion;
+import com.fdmgroup.logic.Validator;
+import com.fdmgroup.pojo.BusinessAccount;
+import com.fdmgroup.pojo.Document;
+import com.fdmgroup.pojo.ServiceLevel;
+import com.fdmgroup.pojo.UserAccount;
 
 @Controller
 public class DispatchController {
@@ -286,8 +296,10 @@ public class DispatchController {
 
 	}
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
-	public String accountDetailsPost(@ModelAttribute BusinessAccount account, HttpSession session) {
-		
+	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
+		String addAccount = request.getParameter("add");
+		String remove = request.getParameter("remove");
+		String accoutName = request.getParameter("AccountName");
 		return "accountDetails";
 
 	}

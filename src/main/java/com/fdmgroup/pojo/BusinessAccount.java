@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +78,4 @@ public class BusinessAccount {
 				+ businessAccountId + "]";
 	}
 	
-	
-
 }

@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 import java.util.List;
 public class UserAccount {
 	
