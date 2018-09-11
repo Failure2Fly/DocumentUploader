@@ -208,7 +208,7 @@ public class DispatchController {
 		session.setAttribute("account", businessAccount);
 		Document document = new Document();
 		model.addAttribute(document);
-		return "accountDetails";
+		return "account";
 
 	}
 
@@ -224,7 +224,7 @@ public class DispatchController {
 		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
 		document.setRepositoryPath(Paths.get(repositoryPath));
 		documentDao.create(document);
-		return "accountDetails";
+		return "account";
 
 		
 	}
