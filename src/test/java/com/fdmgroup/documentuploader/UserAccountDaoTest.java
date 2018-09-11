@@ -87,13 +87,21 @@ public class UserAccountDaoTest {
 	
 	@Test
 	public void test_readMethodReads_WhenPassedAnInteger(){
-		String username = "fakeUser";
+		String username = "testUser2";
+		String firstName = "Bob";
+		String lastName = "User";
+		String password = "password";
+		String userEmail = "email@email.com";
+		
+		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail);
+		userAccount.create(testUser2);
 		int expectedId = userAccount.getID(username);
-		UserAccount expected = new UserAccount(username,"FakeName","AnotherFake","SuperFake","ImFake@gmail.com");
+		UserAccount expected = testUser2;
 		
 		UserAccount actual = userAccount.read(expectedId);
 		
 		assertEquals(expected,actual);
+		userAccount.delete(testUser2);
 		
 	}
 
