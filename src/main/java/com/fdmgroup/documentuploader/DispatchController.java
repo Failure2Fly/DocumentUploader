@@ -200,7 +200,7 @@ public class DispatchController {
 
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -208,16 +208,13 @@ public class DispatchController {
 		session.setAttribute("account", businessAccount);
 		Document document = new Document();
 		model.addAttribute(document);
-		
-
 		return "accountDetails";
 
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
+	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.POST)
 	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
-		
 		File directory = new File("H:\\repository\\"+accountId);
 	    if (! directory.exists()){
 	        directory.mkdir();

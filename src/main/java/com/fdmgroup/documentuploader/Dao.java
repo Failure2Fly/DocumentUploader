@@ -2,7 +2,7 @@ package com.fdmgroup.documentuploader;
 
 import javax.sql.DataSource;
 
-public interface DAOExample<T, U> {
+public interface Dao<T, U> {
 
 void setDataSource(DataSource ds);
 	

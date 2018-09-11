@@ -36,7 +36,6 @@
 					placeholder="Enter your password" />
 				<br> 
 				<input class="button" id="loginButton" type="submit" value="Login">
-	
 
 			</fieldset>
 		</sf:form>
