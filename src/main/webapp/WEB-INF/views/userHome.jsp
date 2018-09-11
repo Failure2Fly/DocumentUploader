@@ -58,21 +58,14 @@ function DisplayAccounts() {
 		</div>
 	</div>
 	<div class="registration">
-		
-		
+				
 		<p id="Accounts">AccountsPlaceholder</p>
 
-		
 	</div>
 
 <p class="accountList" id="accountList">${sessionScope.accountList}</p>
 	
 </body>
-
-
-
-
-
 
 <footer>
 <div class="header">
