@@ -25,6 +25,7 @@
 		<div class="mainTitle">
 			<h1>Change your business account details,
 				${sessionScope.user.username}</h1>
+
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
@@ -36,6 +37,27 @@
 		</div>
 	</div>
 
+
+	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+
+
+	<footer>
+		<div class="header">
+			<div class="row">
+				<div class="col-4 social">
+					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+				</div>
+				<div class="col-8 copyright">
+					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 </body>
 </html>
