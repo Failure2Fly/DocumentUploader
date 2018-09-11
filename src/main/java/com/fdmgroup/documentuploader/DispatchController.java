@@ -131,7 +131,6 @@ public class DispatchController {
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
-				// TODO specify exception
 				return "register";
 			} finally {
 
@@ -168,7 +167,6 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
@@ -187,7 +185,6 @@ public class DispatchController {
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 
-		// TODO put in servicelevel data
 		account.setServicelevel(new ServiceLevel());
 
 		List<UserAccount> usersAssociated = new ArrayList<>();
@@ -195,6 +192,7 @@ public class DispatchController {
 		account.setUserAccounts(usersAssociated);
 
 		dao.create(account);
+
 
 		return new ModelAndView(new RedirectView("/userHome", true));
 
@@ -228,7 +226,12 @@ public class DispatchController {
 		document.setRepositoryPath(Paths.get(repositoryPath));
 		documentDao.create(document);
 		return "accountDetails";
-
+		
+	}
+	
+	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)
+	public String AccountHomeGet(Model model,HttpSession session){
+		return null;
 	}
 
 }

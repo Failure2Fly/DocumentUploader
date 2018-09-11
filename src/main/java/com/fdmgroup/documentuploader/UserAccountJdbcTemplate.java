@@ -57,7 +57,11 @@ public class UserAccountJdbcTemplate implements DAO<UserAccount,String> {
    }
    public int lastID(){
 	   String SQL = "SELECT MAX(USERID) FROM USERACCOUNT";
-	   return (int) jdbcTemplateObject.queryForObject(SQL,Integer.class);
+	   try {
+			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
+		} catch (NullPointerException e) {
+			return 1;
+		}
    }
    public int getID(String username){
 	   String SQL = "SELECT USERID FROM USERACCOUNT where username = ?";
