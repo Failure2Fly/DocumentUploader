@@ -117,7 +117,7 @@ function LoginValidate(){
     return false;
   }
   else{
-    false;
+    true;
   }
   
 }

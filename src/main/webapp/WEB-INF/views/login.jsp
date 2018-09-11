@@ -18,7 +18,7 @@
 
 <body>
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+<nav class="navbar fixed-top navbar-expand-lg">
 	  <a class="navbar-brand" href="#">Navbar</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
@@ -51,29 +51,50 @@
 	</nav>
 	
 	
+	<div class="register-form">
+<h3>Login</h3>
+	<sf:form commandName="userAccount" method="POST" action="login">
+	  <div class="form-row">
+		   <div class="input-group mb-2">
+		        <div class="input-group-prepend">
+		          <div class="input-group-text" id="incorrectUsername"><i class="fas fa-user"></i></div>
+		        </div>
+		        <sf:input path="username" type="text" name="UserName" class="form-control username" id="inlineFormInputGroup" placeholder="Username"/>
+		        
+		   </div>
+		   <p class="validate-form" id="missingUsername">Please Enter A Username</p>
+       	   <p class="validate-form" id="nonValidUsername">Please Enter A Valid Username</p>
+		   <div class="input-group mb-2">
+		        <div class="input-group-prepend">
+		          <div class="input-group-text" id="incorrectPassword"><i class="fas fa-lock"></i></div>
+		        </div>
+		        <sf:input path="password" type="password" name="Password" class="form-control password" id="inlineFormInputGroup" placeholder="Password"/>
+		   </div>
+		   <p class="validate-form" id="missingPassword">Please Enter A Password</p>
+           <p class="validate-form" id="nonValidPassword">Please Enter A Valid Password</p>
+		  <div class="form-group-login">
+		    <div class="form-check">
+		      <input class="form-check-input" type="checkbox" id="gridCheck">
+		      <label class="form-check-label" for="gridCheck">
+		        Remember me
+		      </label>
+		      <button type="submit" class="btn btn-primary btn-sign-in" value="Login">Login</button>
+		    </div>
+		  </div>
+		   <div class="form-group-links">
+		  	<div class="login-links">
+		  		<a>Lost your password?</a>
+		  	</div>
+		  	<div class="login-links">
+		  		<a href="/DocumentUploader/register">Register</a>
+		  	</div>
+		  </div>
+	   </div>
+	</sf:form>
+</div>
 	
-<div class="header">	
-		<div class = "registrationTitle">
-		<h1>THIS IS THE LOGIN PAGE</h1>
-		</div>
-	</div>
-	<h2>Login</h2>
-	<div id="login-form" class="registration">
 	
-		<sf:form commandName="userAccount" method="POST" action="login">
-			<fieldset class="login-form">
-				<p>Username:</p>
-				<sf:input path="username" type="text" class="inputField" id="fields"
-					placeholder="Enter your username" />
-				<br>
-				<p>Password:</p>
-				<sf:input path="password" type="password" class="inputField" id="fields"
-					placeholder="Enter your password" />
-				<br> 
-				<input class="button" id="loginButton" type="submit" value="Login">
-			</fieldset>
-		</sf:form>
-	</div>
+
 	<script src="./JS/global.js"></script>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

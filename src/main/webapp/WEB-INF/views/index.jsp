@@ -13,6 +13,7 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
+<link rel="stylesheet" href="<c:url value="./CSS/serviceLevel.css"/>">
 <title>DocumentUploader Home</title>
 </head>
 
@@ -29,24 +30,77 @@
 			</a>
 		</div>
 	</div>
-	<nav class="navbar navbar-expand-lg">
-		<div class="container logo">
-			<a class="navbar-brand" href="#"><img style="width:10%;" src="<c:url value="/IMG/logo.png"/>" /></a>
-		</div>
-		<div class="nav-right">
-			<div class="nav phone">
-				<i class="fas fa-phone"></i>
-				<p>Call DU 800 800 8000</p>
-			</div>
-
-		</div>
-	</nav>
 
 	<div>
 		<h1>This is the home page</h1>
 	</div>
 	<div class="main-img" style="background-image: url(./imgs/main.jpg)">
 	</div>
+	
+	<div class="row row-3">
+
+            
+            <div class="column column-3 column-left">
+                <p class="perks membership perks-top">Bronze</p>
+                <p class="fee membership">Free</p>
+                <p class="perks membership perks-bottom">Forever</p>
+                <p class="perks">Maximum 2 documents at any time</p>
+                <p class="perks">Can upload 2 documents per month</p>
+                <p class="perks">1 user</p>
+                <p class="perks">Adverts</p>
+                <div class="choose">
+                    <button class=button type="button" onclick="alert('Thank You!')">Choose</button>
+                </div>
+            </div>
+            <div class="column column-3 column-center">
+                <p class="perks membership membership-2 perks-top">Silver</p>
+                <p class="fee membership membership-2">$1</p>
+                <p class="perks membership membership-2 perks-bottom">per month</p>
+                <p class="perks">Maximum 5 documents at any time</p>
+                <p class="perks">Can upload 10 documents per month</p>
+                <p class="perks">1 user</p>
+                <p class="perks">Adverts</p>
+                <div class="choose">
+                    <button class="button" type="button" onclick="alert('Thank You!')">Choose</button>
+                </div>
+            </div>
+            <div class="column column-3 column-right">
+                <p class="perks membership membership-3 perks-top">Gold</p>
+                <p class="fee membership membership-3">$2</p>
+                <p class="perks membership membership-3 perks-bottom">per month</p>
+                <p class="perks">Maximum 20 documents at any time</p>
+                <p class="perks">Can upload 50 documents per month</p>
+                <p class="perks">2 user</p>
+                <p class="perks">No Adverts</p>
+                <div class="choose">
+                    <button class=button type="button" onclick="alert('Thank You!')">Choose</button>
+                </div>
+            </div>
+            <div class="column column-3 column-bottom-left">
+                <p class="perks membership membership-4 perks-top">Unlimited</p>
+                <p class="fee membership membership-4">$5</p>
+                <p class="perks membership membership-4 perks-bottom">per month</p>
+                <p class="perks">Unlimited documents at any time</p>
+                <p class="perks">Unlimited document uploads per month</p>
+                <p class="perks">10 user ($1 for each addition 10 Users)</p>
+                <p class="perks">No Adverts</p>
+                <div class="choose">
+                    <button class=button type="button" onclick="alert('Thank You!')">Choose</button>
+                </div>
+            </div>
+            <div class="column column-3 column-bottom-right">
+                <p class="perks membership membership-5 perks-top">Enterprise</p>
+                <p class="fee membership membership-5">$15</p>
+                <p class="perks membership membership-5 perks-bottom">per month</p>
+                <p class="perks">Unlimited documents at any time</p>
+                <p class="perks">Unlimited document uploads per month</p>
+                <p class="perks">200 user ($1 for each addition 20 Users)</p>
+                <p class="perks">No Adverts</p>
+                <div class="choose">
+                    <button class=button type="button" onclick="alert('Thank You!')">Choose</button>
+                </div>
+            </div>
+        </div>
 
 
 

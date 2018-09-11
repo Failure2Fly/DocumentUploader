@@ -3,8 +3,6 @@
 	margin: 0;
 }
 body{
-	background-color: #ffffff;
-background-image: url("https://www.transparenttextures.com/patterns/lined-paper-2.png");
 /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 .fa-phone {
@@ -33,6 +31,12 @@ background-image: url("https://www.transparenttextures.com/patterns/lined-paper-
 .phone {
 	color: #00aeef;
 	padding-bottom: 15px;
+}
+.navbar{
+	background-color: #A82C21;
+}
+.navbar-brand, .nav-link{
+	color: white;
 }
 .nav-right {
 	width: 230px;
@@ -63,6 +67,7 @@ form {
 	border: grey solid 1px;
 	border-radius: 20px;
 	margin-bottom: 100px;
+	background-color: #6FD1E8;
 }
 .validate-form{
     display:none;
@@ -93,49 +98,44 @@ form {
 /* This is the end of the Form*/
 
 /* This is the start of the Form*/
-/*div .registration {*/
-/*	margin: auto;*/
-/*	text-align: center;*/
-/*	background-color: rgb(240, 240, 255);*/
-/*	max-width: 50%;*/
-/*	width: 50%;*/
-/*}*/
-/*div.update {*/
-/*	margin: auto;*/
-/*	text-align: center;*/
-/*	background-color: rgb(240, 240, 255);*/
-/*	max-width: 50%;*/
-/*	width: 50%;*/
-/*}*/
-/*form {*/
-/*	border: grey solid 1px;*/
-/*	border-radius: 20px;*/
-/*	margin-bottom: 100px;*/
-/*}*/
-/*input .inputField {*/
-/*	margin: 0px;*/
-/*	padding: 5px;*/
-/*}*/
-/*.terms {*/
-/*	color: #00aeef !important;*/
-/*}*/
+div .registration {
+	margin: auto;
+	text-align: center;
+	background-color: rgb(240, 240, 255);
+	max-width: 50%;
+	width: 50%;*
+}
+div.update {
+	margin: auto;
+	text-align: center;
+	background-color: rgb(240, 240, 255);
+	max-width: 50%;
+	width: 50%;
+}
+form {
+	border: grey solid 1px;
+	border-radius: 20px;
+	margin-bottom: 100px;
+}
+input .inputField {
+	margin: 0px;
+	padding: 5px;
+}
+.terms {
+	color: #00aeef !important;
+}
 
-/*.validate-form{*/
-/*	display:none;*/
-/*}*/
-/*div .accountDiv {*/
-/*	background-color: rgb(255, 255, 204);*/
-/*}*/
-
-/*input[type=checkbox], input[type=radio] {*/
-/*	padding: 0;*/
-/*	margin-top: 20px;*/
-/*	margin-left: 50px;*/
-/*}*/
-/*.update span {*/
-/*	color: #339900;*/
-/*	font-weight: bold;*/
-/*}*/
+.validate-form{
+	display:none;
+	color: red;
+}
+div .accountDiv {
+	background-color: rgb(255, 255, 204);
+}
+.update span {
+	color: #339900;
+	font-weight: bold;
+}
 
 /* This is the end of the Form*/
 /* This is the Start Login Page*/
