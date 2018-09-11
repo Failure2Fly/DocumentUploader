@@ -16,11 +16,34 @@
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
 
+<script>
+	function DisplayFiles() {
+
+		var myObj, i, j, x = "";
+
+		myObj = JSON.parse(document.getElementById("fileList").innerHTML);
+
+		for (i in myObj) {
+			x += "<h3><p>"
+					+ myObj[i].name
+					+ " "
+					+ myObj[i].date
+					+ "</p></h3>";
+			x += "<br>";
+		}
+
+		document.getElementById("Documents").innerHTML = x;
+
+		/* var text = "My Button"; // JavaScript string
+		button.setText(text); // text is converted to java.lang.String */
+
+	}
+</script>
 
 <title>Business Account Details</title>
 </head>
 
-<body>
+<body onload="DisplayFiles()">
 
 	<div class="header">
 		<div class="mainHeaderRight"></div>
@@ -46,12 +69,21 @@
 			action="${sessionScope.account.businessAccountId }"
 			enctype="multipart/form-data">
 			<p>Choose a file to upload:</p>
-			<input name="file" id="sourcePath" type="file" class="inputField"/>
+			<input name="file" id="sourcePath" type="file" class="inputField" />
 			<input class="button" id="registerButton" type="submit"
 				value="Upload" class="inputField">
 		</sf:form>
 	</div>
 
+	<div class="registration">
+
+		<p id="Documents">DocumentsPlaceholder</p>
+
+
+	</div>
+
+
+	<p id="fileList">${sessionScope.fileList}</p>
 </body>
 <footer>
 	<div class="header">
