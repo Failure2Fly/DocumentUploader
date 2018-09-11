@@ -60,19 +60,14 @@
 		</div>
 	</div>
 	<div class="registration">
-
-
+				
 		<p id="Accounts">AccountsPlaceholder</p>
 
 
 	</div>
 
-	//TODO change accountList into details to display information of accounts
+<!-- 	//TODO change accountList into details to display information of accounts -->
 	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
-
-
-
-
 
 
 

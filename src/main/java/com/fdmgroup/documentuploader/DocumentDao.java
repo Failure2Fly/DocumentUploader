@@ -28,8 +28,8 @@ public class DocumentDao implements DAO<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(file_seq.nextval,?,?,SYSDATE)";
-			jdbcTemplateObject.update(SQL1, document.getName(), document.getRepositoryPath().toString());
+			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(?,?,?,SYSDATE)";
+			jdbcTemplateObject.update(SQL1,getId(), document.getName(), document.getRepositoryPath().toString());
 
 		} catch (IOException x) {
 			System.err.println("Problem creating file - check document paths");
@@ -80,6 +80,19 @@ public class DocumentDao implements DAO<Document, String> {
 				new DocumentMapper());
 
 		return document;
+	}
+	
+	public int getId() {
+		String SQL = "SELECT MAX(fileid) FROM documents";
+		try {
+			
+			
+			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
+
+		} catch (NullPointerException e) {
+			return 1;
+		}
+
 	}
 
 }
