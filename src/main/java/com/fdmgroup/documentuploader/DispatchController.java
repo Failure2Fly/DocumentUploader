@@ -117,7 +117,7 @@ public class DispatchController {
 		isValid = validator.validateUserRegistration(userAccount);
 		if (isValid) {
 			context = getContext();
-			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccounDao");
+			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
 			try {
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
@@ -145,7 +145,6 @@ public class DispatchController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(Model model, HttpSession session) {
-
 		UserAccount userAccount = new UserAccount();
 		session.setAttribute("user", userAccount);
 		model.addAttribute(userAccount);
@@ -200,7 +199,7 @@ public class DispatchController {
 
 	}
 
-	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -209,11 +208,12 @@ public class DispatchController {
 		File file = new File("");
 		model.addAttribute(file);
 
-		return "account";
+		return "accountHome";
 
 	}
 
-	@RequestMapping(value = "/account/{accountId}", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
 	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
@@ -254,13 +254,16 @@ public class DispatchController {
 			e.printStackTrace();
 		}
 		documentDao.create(document);
-		return "account";
+		return "accountHome";
+
+	}
+	
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
+	public String accountDetailsGet(Model model, HttpSession session) {
+		model.addAttribute(new BusinessAccount());
+		return "accountDetails";
 
 	}
 
-	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)
-	public String AccountHomeGet(Model model, HttpSession session) {
-		return null;
-	}
 
 }
