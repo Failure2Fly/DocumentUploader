@@ -1,12 +1,9 @@
 package com.fdmgroup.documentuploader;
 
 import java.io.File;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,10 +17,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class DispatchController {
@@ -95,11 +93,6 @@ public class DispatchController {
 		dao.update(user);
 		session.setAttribute("user", user);
 		return new RedirectView("userHome");
-	}
-	
-	@RequestMapping(value = "/accountDetails")
-	public String BusinessDetails(Model model) {
-		return "accountDetails";
 	}
 
 	@RequestMapping(value = "/serviceLevels")
@@ -206,32 +199,36 @@ public class DispatchController {
 		return new ModelAndView(new RedirectView("/userHome", true));
 
 	}
-	
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
-	public @ResponseBody String AccountDetailsGet(HttpSession session,@PathVariable(value="accountId") String accountId) {
-		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-		File file = new File("H:\\DebugAccountDetails.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
 
-			writer.write("Account id:"+accountId);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-			
+	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+	public String AccountDetailsGet(Model model, HttpSession session,
+			@PathVariable(value = "accountId") String accountId) {
+		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
-			session.setAttribute("account",businessAccount);
+		session.setAttribute("account", businessAccount);
+		Document document = new Document();
+		model.addAttribute(document);
 		
-		
-			
-		
-		
+
 		return "accountDetails";
 
 	}
-	
-	
+
+	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
+	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId) {
+		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
+		
+		File directory = new File("H:\\repository\\"+accountId);
+	    if (! directory.exists()){
+	        directory.mkdir();
+	    }
+	    int fileId = documentDao.getId();
+	    File sourcePath = document.getSourcePath().toFile();
+		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
+		document.setRepositoryPath(Paths.get(repositoryPath));
+		documentDao.create(document);
+		return "accountDetails";
+
+	}
 
 }
