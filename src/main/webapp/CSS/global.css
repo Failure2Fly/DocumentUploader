@@ -2,9 +2,6 @@
 	box-sizing: border-box;
 	margin: 0;
 }
-body{
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
-}
 .fa-phone {
 	transform: scaleX(-1);
 	padding-left: 10px;
@@ -31,6 +28,11 @@ body{
 .phone {
 	color: #00aeef;
 	padding-bottom: 15px;
+}
+.header{
+	display: flex;
+	background-color: #A82C21;
+	color: white;
 }
 .navbar{
 	background-color: #A82C21;

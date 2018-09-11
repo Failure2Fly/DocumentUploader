@@ -31,11 +31,7 @@
 		</div>
 	</div>
 
-	<div>
-		<h1>This is the home page</h1>
-	</div>
-	<div class="main-img" style="background-image: url(./imgs/main.jpg)">
-	</div>
+	<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 	
 	<div class="row row-3">
 

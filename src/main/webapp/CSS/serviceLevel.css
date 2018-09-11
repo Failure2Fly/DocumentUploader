@@ -69,7 +69,6 @@ h2 {
 }
 .column-3 {
    height: fit-content;
-   flex: 3;
 }
 .column-left {
     margin-left: 150px;
@@ -113,7 +112,8 @@ h2 {
     margin-bottom: 15px;
     }
 .membership:first-child {
-    color: white;
+    color: black;
+    font-weight: bold;
 }
 .membership {
     border-style: hidden;
@@ -121,7 +121,7 @@ h2 {
     font-size: 25px;
     text-align: center;
     background-color: #826543;
-    color:lightslategray;
+    color:black;
 }
 .fee {
     /*padding: 0px;*/

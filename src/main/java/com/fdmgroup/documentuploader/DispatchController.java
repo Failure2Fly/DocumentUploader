@@ -1,4 +1,5 @@
 package com.fdmgroup.documentuploader;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -20,9 +21,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 @Controller
 public class DispatchController {
 	private static ApplicationContext context;
+
 	public static ApplicationContext getContext() {
 		if (context != null) {
 			return context;
@@ -31,10 +34,12 @@ public class DispatchController {
 			return context;
 		}
 	}
+
 	@RequestMapping(value = "/")
 	public String landingPage(Model model) {
 		return "index";
 	}
+
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		try {
@@ -56,6 +61,7 @@ public class DispatchController {
 		}
 		return "userHome";
 	}
+
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
 	public String userAccountDetails(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -63,6 +69,7 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "userDetails";
 	}
+
 	@RequestMapping(value = "/userDetails", method = RequestMethod.POST)
 	public RedirectView UserAccountDetails(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		context = getContext();
@@ -84,10 +91,12 @@ public class DispatchController {
 		session.setAttribute("user", user);
 		return new RedirectView("userHome");
 	}
+
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {
 		return "serviceLevels";
 	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -95,6 +104,7 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "register";
 	}
+
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		boolean isValid = true;
@@ -126,6 +136,7 @@ public class DispatchController {
 			return "register";
 		}
 	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(Model model, HttpSession session) {
 		UserAccount userAccount = new UserAccount();
@@ -133,6 +144,7 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "login";
 	}
+
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		Validator validator = new Validator();
@@ -149,11 +161,13 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
+
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		return "createAccount";
 	}
+
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
@@ -169,32 +183,31 @@ public class DispatchController {
 		dao.create(account);
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
+
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-		DocumentDao documentDao =  (DocumentDao) context.getBean("DocumentDao");
+		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 		session.setAttribute("account", businessAccount);
 		File file = new File("");
 		model.addAttribute(file);
+
+		List<Document> fileList = documentDao.read(Integer.parseInt(accountId));
 		
-		
-		List<Document> fileList=documentDao.read(Integer.parseInt(accountId));
-		
-		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			
-			json = mapper.writeValueAsString(fileList);
+
+			String json = mapper.writeValueAsString(fileList);
 			session.setAttribute("fileList", json);
-			
+
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			File debugFile = new File("H:\\DebugFileListException.txt");
 			try {
 				FileWriter writer = new FileWriter(debugFile);
-				writer.write(""+e);
+				writer.write("" + e);
 				writer.flush();
 				writer.close();
 			} catch (IOException e2) {
@@ -204,7 +217,7 @@ public class DispatchController {
 		File debugFile = new File("H:\\DebugFileList.txt");
 		try {
 			FileWriter writer = new FileWriter(debugFile);
-			writer.write("List of files for id "+accountId+": "+documentDao.read(Integer.parseInt(accountId)));
+			writer.write("List of files for id " + accountId + ": " + documentDao.read(Integer.parseInt(accountId)));
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
@@ -212,6 +225,7 @@ public class DispatchController {
 		}
 		return "accountHome";
 	}
+
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
 	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
@@ -233,16 +247,16 @@ public class DispatchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		document.setSourcePath(Paths.get(sourceFile.toString()));
 		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
 		document.setRepositoryPath(Paths.get(repositoryPath));
-		
+
 		documentDao.create(document);
-		
+
 		return "accountHome";
 	}
-	
+
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
