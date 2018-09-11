@@ -15,28 +15,18 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
-<<<<<<< HEAD
-=======
 
->>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 
 <title>Business Account Details</title>
 </head>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 <body>
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
 			<h1>Details for ${sessionScope.user.username}'s account,
 				${sessionScope.account.accountName }</h1>
-<<<<<<< HEAD
-=======
 
->>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
