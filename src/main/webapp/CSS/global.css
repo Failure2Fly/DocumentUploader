@@ -48,12 +48,11 @@ h1, h2 {
 	background-color: #00aeef;
 }
 
-<<<<<<< HEAD
-=======
+
 .hidden{
 	diplay:none;
 }
->>>>>>> 625bb1c6be2981c3619f53f1a10e9800ae00a02d
+
 /* This is part of the Navigation Bar*/
 .phone {
 	color: #00aeef;
@@ -115,16 +114,13 @@ input.inputField {
 	color: #00aeef !important;
 }
 
-<<<<<<< HEAD
-p.accountList {
-=======
-<<<<<<< HEAD
+
+
 .validate-form{
 	display:none;
 }
-=======
+
 p.accountList{
->>>>>>> 625bb1c6be2981c3619f53f1a10e9800ae00a02d
 	visibility: hidden;
 }
 
@@ -132,13 +128,7 @@ div.accountDiv {
 	background-color: rgb(255, 255, 204);
 }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 22ce267db33c7cd3db68beebfaefc5113216647a
-
-
->>>>>>> 625bb1c6be2981c3619f53f1a10e9800ae00a02d
 input[type=checkbox], input[type=radio] {
 	box-sizing: border-box;
 	padding: 0;

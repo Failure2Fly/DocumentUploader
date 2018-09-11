@@ -13,18 +13,12 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-<<<<<<< HEAD
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
-=======
-<%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
-<link rel="stylesheet" href="<c:url value="../CSS/global.css"/>">
->>>>>>> 5a6b6be4535d572e44cd70b9d936995ce67e229d
 
 <title>Business Account Details</title>
 </head>
 
-<<<<<<< HEAD
 
 <body>
 	<div class="header">
@@ -32,14 +26,6 @@
 		<div class="mainTitle">
 			<h1>Details for ${sessionScope.user.username}'s account,
 				${sessionScope.account.accountName }</h1>
-=======
-<body onload="BusinessAccount()">
-	<div class="header">
-		<div class="mainHeaderRight"></div>
-		<div class="mainTitle">
-			<h1>Change your business account details,
-				${sessionScope.user.username}</h1>
->>>>>>> 5a6b6be4535d572e44cd70b9d936995ce67e229d
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
@@ -53,7 +39,7 @@
 		</div>
 	</div>
 	<div>
-		<sf:form  method="POST" action="/WEB-INF/views/accountDetails">
+		<sf:form commandName="document" method="POST" action="${sessionScope.account.businessAccountId }" enctype="multipart/form-data">
 			<p>Choose a file to upload:</p>
 			<sf:input path="sourcePath" id="sourcePath" type="file" />
 			<input class="button" id="registerButton" type="submit" value="Upload">

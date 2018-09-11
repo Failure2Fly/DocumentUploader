@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -213,7 +215,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
-	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId) {
+	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		
 		File directory = new File("H:\\repository\\"+accountId);
@@ -226,9 +228,9 @@ public class DispatchController {
 		document.setRepositoryPath(Paths.get(repositoryPath));
 		documentDao.create(document);
 		return "accountDetails";
+
 		
 	}
-	
 	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)
 	public String AccountHomeGet(Model model,HttpSession session){
 		return null;
