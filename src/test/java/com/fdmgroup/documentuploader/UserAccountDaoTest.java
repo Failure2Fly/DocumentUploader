@@ -14,7 +14,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 
 public class UserAccountDaoTest {
 	private ApplicationContext context = new ClassPathXmlApplicationContext("context.xml");
-	private UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountJdbcTemplate");
+	private UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
 	@Test 
 	public void testReadNonexistentUser(){
 		String username = "ImaginaryUser";
