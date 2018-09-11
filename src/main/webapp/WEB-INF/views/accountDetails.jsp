@@ -13,33 +13,30 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-<<<<<<< HEAD
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
+<<<<<<< HEAD
 =======
-<%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
-<link rel="stylesheet" href="<c:url value="../CSS/global.css"/>">
->>>>>>> 5a6b6be4535d572e44cd70b9d936995ce67e229d
+
+>>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 
 <title>Business Account Details</title>
 </head>
 
 <<<<<<< HEAD
 
+=======
+>>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 <body>
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
 			<h1>Details for ${sessionScope.user.username}'s account,
 				${sessionScope.account.accountName }</h1>
+<<<<<<< HEAD
 =======
-<body onload="BusinessAccount()">
-	<div class="header">
-		<div class="mainHeaderRight"></div>
-		<div class="mainTitle">
-			<h1>Change your business account details,
-				${sessionScope.user.username}</h1>
->>>>>>> 5a6b6be4535d572e44cd70b9d936995ce67e229d
+
+>>>>>>> e6f2e1c85a13aafaa1957ef7da16d6d1d1cc2c92
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
@@ -53,13 +50,34 @@
 		</div>
 	</div>
 	<div>
-		<sf:form  method="POST" action="/WEB-INF/views/accountDetails">
+		<sf:form commandName="document" method="POST" action="${sessionScope.account.businessAccountId }" enctype="multipart/form-data">
 			<p>Choose a file to upload:</p>
 			<sf:input path="sourcePath" id="sourcePath" type="file" />
 			<input class="button" id="registerButton" type="submit" value="Upload">
 		</sf:form>
 	</div>
 
+
+	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+
+
+	<footer>
+		<div class="header">
+			<div class="row">
+				<div class="col-4 social">
+					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+				</div>
+				<div class="col-8 copyright">
+					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+				</div>
+			</div>
+		</div>
+	</footer>
 
 </body>
 <footer>

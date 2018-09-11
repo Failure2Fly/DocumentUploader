@@ -51,6 +51,7 @@ h1, h2 {
 .hidden{
 	diplay:none;
 }
+
 /* This is part of the Navigation Bar*/
 .phone {
 	color: #00aeef;
@@ -112,15 +113,21 @@ input.inputField {
 	color: #00aeef !important;
 }
 
+
+
+.validate-form{
+	display:none;
+}
+
 p.accountList{
 	visibility: hidden;
 }
-
+p#accountList.accountList {
+	visibility: hidden;
+}
 div.accountDiv {
 	background-color: rgb(255, 255, 204);
 }
-
-
 
 input[type=checkbox], input[type=radio] {
 	box-sizing: border-box;
