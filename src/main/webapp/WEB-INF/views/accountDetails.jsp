@@ -6,7 +6,6 @@
 <html>
 
 <head>
-
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -16,16 +15,14 @@
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
 
-
 <title>Business Account Details</title>
 </head>
-
 <body>
 
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
-			<h1>${sessionScope.user.username } Accounts details</h1>
+			<h1>${sessionScope.user.username }'s Accounts details</h1>
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
@@ -44,17 +41,16 @@
 		<sf:form commandName="account" method="POST" action="accountDetails">
 			<legend>Update:</legend>
 			<fieldset>
-				<p>Current Account Name: <span></span></p>
-				<sf:select path="accountName" name="AccountName">
-					<c:forEach var="item" items="${AccountList}">
-    				 <option>${item}</option>
-    			   </c:forEach>
-				</sf:select>
-				<br>
-				<p>Current Service Level: <span>${sessionScope.account.ServiceLevel}</span></p>
+				<p>Current Service Level: <span>${sessionScope.account.servicelevel}</span></p>
 				<select></select>
+				<p>Choose Account: <span></span></p>
+				<select name="AccountName" >
+					<c:forEach var="item" items="${AccountList}">
+    				 <option>${item.getAccountName()}</option>
+    			   </c:forEach>
+				</select>
 				<p>Remove Account: </p>
-				<input type="checkbox" name="remove">
+				<input style="marigin-top:0px;"type="checkbox" name="remove">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Update">
