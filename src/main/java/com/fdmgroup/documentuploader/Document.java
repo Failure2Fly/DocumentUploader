@@ -8,7 +8,15 @@ public class Document {
 	Path sourcePath;
 	Path repositoryPath;
 	Date date;
+	int accountId;
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Document [name=" + name + ", sourcePath=" + sourcePath + ", repositoryPath=" + repositoryPath
+				+ ", date=" + date + "]";
+	}
 	public Document(String name, Path sourcePath, Path repositoryPath, Date date) {
 		super();
 		this.name = name;
@@ -18,6 +26,13 @@ public class Document {
 	}
 	public Document() {
 		super();
+	}
+	
+	protected int getAccountId() {
+		return accountId;
+	}
+	protected void setAccountId(int accountId) {
+		this.accountId = accountId;
 	}
 	public String getName() {
 		return name;

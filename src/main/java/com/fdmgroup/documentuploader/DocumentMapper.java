@@ -13,6 +13,7 @@ public class DocumentMapper implements RowMapper {
 		//TODO comeback after sql database coded
 		document.setName(rs.getString("filename"));
 		document.setDate(rs.getDate("storedate"));
+		document.setAccountId(rs.getInt("associatedaccountid"));
 		document.setSourcePath(null);
 //		Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
 //	    rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));

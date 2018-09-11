@@ -21,53 +21,44 @@
 
 
 <body>
+
+
+
+
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
 			<h1>Details for ${sessionScope.user.username}'s account,
 				${sessionScope.account.accountName }</h1>
-
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
-				<button class="btn btn-primary" type="submit">Back to
+				<button class="btn btn-primary" type="submit">Back to User
 					Homepage</button>
+			</a> <a href="/DocumentUploader/accountDetails">
+				<button class="btn btn-primary" type="submit">Account
+					Details</button>
 			</a> <a href="/DocumentUploader/login">
 				<button class="btn btn-primary" type="submit">Logout</button>
 			</a>
-
-
 		</div>
 	</div>
-	<div>
-		<sf:form commandName="document" method="POST" action="${sessionScope.account.businessAccountId }" enctype="multipart/form-data">
+
+	<div id="register-form" class="registration">
+		<sf:form commandName="file" method="POST"
+			action="${sessionScope.account.businessAccountId }"
+			enctype="multipart/form-data">
 			<p>Choose a file to upload:</p>
-			<sf:input path="sourcePath" id="sourcePath" type="file" />
-			<input class="button" id="registerButton" type="submit" value="Upload">
+			<input name="file" id="sourcePath" type="file" class="inputField"/>
+			<input class="button" id="registerButton" type="submit"
+				value="Upload" class="inputField">
 		</sf:form>
 	</div>
 
 
-	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
 
 
-	<footer>
-		<div class="header">
-			<div class="row">
-				<div class="col-4 social">
-					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
-						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
-						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
 
-				</div>
-				<div class="col-8 copyright">
-					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-				</div>
-			</div>
-		</div>
-	</footer>
 
 </body>
 <footer>

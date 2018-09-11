@@ -28,8 +28,8 @@ public class DocumentDao implements Dao<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(?,?,?,SYSDATE)";
-			jdbcTemplateObject.update(SQL1,getId(), document.getName(), document.getRepositoryPath().toString());
+			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
+			jdbcTemplateObject.update(SQL1,getId(), document.getName(), document.getRepositoryPath().toString(),document.accountId);
 
 		} catch (IOException x) {
 			System.err.println("Problem creating file - check document paths");
@@ -63,8 +63,8 @@ public class DocumentDao implements Dao<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(file_seq.nextval,?,?,SYSDATE)";
-			jdbcTemplateObject.update(SQL1, document.getName(), document.getRepositoryPath().toString());
+			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
+			jdbcTemplateObject.update(SQL1,getId(), document.getName(), document.getRepositoryPath().toString(),document.getAccountId());
 
 		} catch (IOException e) {
 			System.err.println("Error with updating a file- check document paths");
