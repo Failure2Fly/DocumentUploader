@@ -7,7 +7,12 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpSession;
+<<<<<<< HEAD
 import org.springframework.context.ApplicationContext;
+=======
+
+import org.springframework.context.ConfigurableApplicationContext;
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,10 +29,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class DispatchController {
-	private static ApplicationContext context;
+	private static ConfigurableApplicationContext context;
 
-	public static ApplicationContext getContext() {
+	public static ConfigurableApplicationContext getContext() {
 		if (context != null) {
+			context.close();
+			context = new ClassPathXmlApplicationContext("context.xml");
 			return context;
 		} else {
 			context = new ClassPathXmlApplicationContext("context.xml");
@@ -195,11 +202,20 @@ public class DispatchController {
 		model.addAttribute(file);
 
 		List<Document> fileList = documentDao.read(Integer.parseInt(accountId));
+<<<<<<< HEAD
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 
 			String json = mapper.writeValueAsString(fileList);
+=======
+
+		String json = "";
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+
+			json = mapper.writeValueAsString(fileList);
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 			session.setAttribute("fileList", json);
 
 		} catch (JsonProcessingException e) {
@@ -253,6 +269,11 @@ public class DispatchController {
 		document.setRepositoryPath(Paths.get(repositoryPath));
 
 		documentDao.create(document);
+<<<<<<< HEAD
+=======
+
+		return "accountHome";
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 
 		return "accountHome";
 	}
@@ -260,6 +281,19 @@ public class DispatchController {
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
+		
 		return "accountDetails";
 	}
+<<<<<<< HEAD
 }
+=======
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
+	public String accountDetailsPost(@ModelAttribute BusinessAccount account, HttpSession session) {
+		
+		return "accountDetails";
+
+
+	}
+
+}
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d

@@ -11,6 +11,7 @@ public class BusinessAccount {
 	private List<String> fileList = new ArrayList<>();
 	private String accountName;
 	private int businessAccountId;
+	
 	public UserAccount getOwner() {
 		return owner;
 	}

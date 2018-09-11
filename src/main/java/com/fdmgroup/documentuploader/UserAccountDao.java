@@ -30,7 +30,7 @@ public class UserAccountDao implements Dao<UserAccount,String> {
 //		} catch (IOException e) {
 //			e.printStackTrace();
 //		}
-	    jdbcTemplateObject.update(SQL1,lastID()+1,item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
+	    jdbcTemplateObject.update(SQL1,lastID(),item.getUsername(),item.getLastName(),item.getFirstName(),item.getPassword(),item.getUserEmail());
 	    //jdbcTemplateObject.update(SQL2,lastID(),item.getListQA().get(0).getQuestion().ordinal()+1,item.getListQA().get(0).getAnswer());
    }
    @Override
@@ -57,7 +57,10 @@ public class UserAccountDao implements Dao<UserAccount,String> {
    public int lastID(){
 	   String SQL = "SELECT MAX(USERID) FROM USERACCOUNT";
 	   try {
+			
+			
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
+
 		} catch (NullPointerException e) {
 			return 1;
 		}
@@ -68,6 +71,7 @@ public class UserAccountDao implements Dao<UserAccount,String> {
    }
    public UserAccount read(Integer id) {
 	  String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE userid = ?";
+	  
 	  UserAccount user = jdbcTemplateObject.queryForObject(SQL,new Object[]{id},new UserAccountMapper());
    	return user;
    }

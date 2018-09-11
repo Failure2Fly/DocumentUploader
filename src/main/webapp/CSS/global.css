@@ -134,6 +134,17 @@ input .inputField {
 div .accountDiv {
 	background-color: rgb(255, 255, 204);
 }
+<<<<<<< HEAD
+=======
+
+input[type=checkbox], input[type=radio] {
+	box-sizing: border-box;
+	padding: 0;
+	margin-top: 0px;
+	margin-left: 50px;
+}
+
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 .update span {
 	color: #339900;
 	font-weight: bold;
