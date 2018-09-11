@@ -31,7 +31,14 @@ public class Validator {
 			return false;
 		}
 	}
-
+	
+	public boolean validatePassword(String password,String confirmPassword){
+		if(password.equals(confirmPassword)){
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean validateUserRegistration(UserAccount userAccount) {
 		boolean usernameValid = false;
 		boolean passwordValid = false;
@@ -94,5 +101,6 @@ public class Validator {
 
 		return isValid;
 	}
+	
 
 }
