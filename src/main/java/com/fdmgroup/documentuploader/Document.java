@@ -1,10 +1,13 @@
 package com.fdmgroup.documentuploader;
 
 import java.nio.file.Path;
-import java.sql.Date;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Document {
 	String name;
+
 	Path sourcePath;
 	Path repositoryPath;
 	Date date;
