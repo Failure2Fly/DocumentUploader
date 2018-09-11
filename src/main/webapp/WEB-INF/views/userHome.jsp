@@ -24,8 +24,8 @@
 
 		for (i in myObj) {
 			x += "<h3><a href=\"/DocumentUploader/accountHome/"+myObj[i].businessAccountId+"\">"
-					+ myObj[i].businessAccountId
-					+ " "
+					+ "Account ID: "+myObj[i].businessAccountId
+					+ "<br> Account Name: "
 					+ myObj[i].accountName
 					+ "</a></h3>";
 			x += "<br>";
