@@ -206,8 +206,8 @@ public class DispatchController {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 		session.setAttribute("account", businessAccount);
-		Document document = new Document();
-		model.addAttribute(document);
+		File file = new File("");
+		model.addAttribute(file);
 		
 
 		return "accountDetails";
@@ -215,7 +215,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
-	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") MultipartFile file) {
+	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,@RequestParam("file") File file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		
 		File directory = new File("H:\\repository\\"+accountId);
@@ -223,8 +223,10 @@ public class DispatchController {
 	        directory.mkdir();
 	    }
 	    int fileId = documentDao.getId();
-	    File sourcePath = document.getSourcePath().toFile();
-		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
+	    Document document = new Document();
+	    document.setSourcePath(Paths.get(file.toString()));
+	   
+		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+file.getName();
 		document.setRepositoryPath(Paths.get(repositoryPath));
 		documentDao.create(document);
 		return "accountDetails";
