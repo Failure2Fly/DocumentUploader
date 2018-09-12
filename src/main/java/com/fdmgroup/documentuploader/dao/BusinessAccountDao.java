@@ -28,12 +28,15 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
-
+	
+	@Override
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
+	
 	@Override
 	public void create(BusinessAccount account) {
-		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
-		// List<UserAccount> userAccounts, List<String> fileList
-		// TODO: write servicelevel
 		
 		String SQL1 = "INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(?, ?, null, ?)";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
@@ -46,6 +49,10 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		SQL1 = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
 
+		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
+		// List<UserAccount> userAccounts, List<String> fileList
+		// TODO: write servicelevel
+		
 	}
 
 	@Override
@@ -156,17 +163,16 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
 		try {
 			
-			
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
 
 		} catch (NullPointerException e) {
 			return 1;
 		}
+   }
+	public void linkUsertoRepository(int userId,int businessId){
+		String SQL = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT VALUES(?,?) ";
+		jdbcTemplateObject.update(SQL,businessId,userId);
 
 	}
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-	}
 }

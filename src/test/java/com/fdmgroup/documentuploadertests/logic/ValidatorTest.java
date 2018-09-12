@@ -1,5 +1,5 @@
 
-package com.fdmgroup.logic;
+package com.fdmgroup.documentuploadertests.logic;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

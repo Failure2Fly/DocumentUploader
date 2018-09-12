@@ -1,3 +1,4 @@
+package com.fdmgroup.documentuploadertests.dao;
 //package com.fdmgroup.dao;
 //
 //import org.junit.runner.RunWith;
