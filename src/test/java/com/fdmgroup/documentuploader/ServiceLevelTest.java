@@ -6,8 +6,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.fdmgroup.pojo.ServiceLevel;
-import com.fdmgroup.pojo.ServiceLevels;
+import com.fdmgroup.documentuploader.pojo.ServiceLevel;
+import com.fdmgroup.documentuploader.enumeratedtypes.ServiceLevels;
 
 public class ServiceLevelTest {
 
@@ -37,7 +37,7 @@ public class ServiceLevelTest {
 		// Arrange
 		
 		// Act
-		SerivceLevel result = new ServiceLevel(ServiceLevels.BRONZE);
+		ServiceLevel result = new ServiceLevel(ServiceLevels.BRONZE);
 	}
 
 }

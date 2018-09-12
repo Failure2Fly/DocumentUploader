@@ -1,4 +1,4 @@
-package com.fdmgroup.logic;
+package com.fdmgroup.documentuploader.logic;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -7,8 +7,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
-import com.fdmgroup.dao.UserAccountDao;
-import com.fdmgroup.pojo.UserAccount;
+import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 public class Validator {
 

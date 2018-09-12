@@ -9,8 +9,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.fdmgroup.dao.UserAccountDao;
-import com.fdmgroup.pojo.UserAccount;
+import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.logic.Validator;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 public class ValidatorTest {
 
