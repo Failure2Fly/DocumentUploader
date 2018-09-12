@@ -82,7 +82,7 @@ public class DocumentDao implements Dao<Document, String> {
 		return document;
 	}
 	
-	public int getId() {
+	private int getId() {
 		String SQL = "SELECT MAX(fileid) FROM documents";
 		try {
 			

@@ -11,6 +11,69 @@ public class BusinessAccount {
 	private List<String> fileList = new ArrayList<>();
 	private String accountName;
 	private int businessAccountId;
+	
+	public BusinessAccount(UserAccount owner,  ServiceLevel servicelevel,
+			List<UserAccount> userAccounts, List<String> fileList,String accountName, int businessAccountId) {
+		super();
+		this.owner = owner;
+		
+		this.servicelevel = servicelevel;
+		this.userAccounts = userAccounts;
+		this.fileList = fileList;
+		this.accountName = accountName;
+		this.businessAccountId = businessAccountId;
+	}
+	
+	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel,
+			List<UserAccount> userAccounts, List<String> fileList, String accountName) {
+		super();
+		this.owner = owner;
+		
+		this.servicelevel = servicelevel;
+		this.userAccounts = userAccounts;
+		this.fileList = fileList;
+		this.accountName = accountName;
+	}
+		
+	public BusinessAccount() {
+		super();
+	}
+	
+	public boolean linkUser(UserAccount userAccount) {
+		
+		// TODO: Requires implementation
+		
+		return false;
+	}
+	
+	public boolean unlinkUser(UserAccount userAccount) {
+		
+		// TODO: Requires implementation
+		
+		return false;
+	}
+	
+	public boolean upgradeServiceLevel(ServiceLevel serviceLevel) {
+		
+		// TODO: Requires implementation
+		
+		return false;
+	}
+	
+	public boolean downgradeServiceLevel(ServiceLevel serviceLevel) {
+		
+		// TODO: Requires implementation
+		
+		return false;
+	}
+	
+	@Override
+	public String toString() {
+		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + servicelevel
+				+ ", userAccounts=" + userAccounts + ", fileList=" + fileList + ", businessAccountId="
+				+ businessAccountId + "]";
+	}
+
 	public UserAccount getOwner() {
 		return owner;
 	}
@@ -47,37 +110,5 @@ public class BusinessAccount {
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
 	}
-	public BusinessAccount(UserAccount owner,  ServiceLevel servicelevel,
-			List<UserAccount> userAccounts, List<String> fileList,String accountName, int businessAccountId) {
-		super();
-		this.owner = owner;
-		
-		this.servicelevel = servicelevel;
-		this.userAccounts = userAccounts;
-		this.fileList = fileList;
-		this.accountName = accountName;
-		this.businessAccountId = businessAccountId;
-	}
-	public BusinessAccount() {
-		super();
-	}
-	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel,
-			List<UserAccount> userAccounts, List<String> fileList, String accountName) {
-		super();
-		this.owner = owner;
-		
-		this.servicelevel = servicelevel;
-		this.userAccounts = userAccounts;
-		this.fileList = fileList;
-		this.accountName = accountName;
-	}
-	@Override
-	public String toString() {
-		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + servicelevel
-				+ ", userAccounts=" + userAccounts + ", fileList=" + fileList + ", businessAccountId="
-				+ businessAccountId + "]";
-	}
 	
-	
-
 }

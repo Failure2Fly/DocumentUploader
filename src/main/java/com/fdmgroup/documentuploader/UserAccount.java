@@ -1,33 +1,33 @@
 package com.fdmgroup.documentuploader;
+
 import java.util.List;
+
 public class UserAccount {
-	
+
 	private String username;
 	private String lastName;
 	private String firstName;
 	private String password;
 	private String userEmail;
 	private List<Questions> listQA;
-	
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
+
 	public UserAccount() {
 		super();
 	}
-	public UserAccount(String username, String lastName, String firstName, String password, String userEmail){
+
+	public UserAccount(String username, String lastName, String firstName, String password, String userEmail) {
 		super();
 		this.username = username;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.password = password;
 		this.userEmail = userEmail;
+
 		this.listQA = null;
 	}
-	public UserAccount(String username, String lastName, String firstName, String password, String userEmail,  List<Questions> listQA){
+
+	public UserAccount(String username, String lastName, String firstName, String password, String userEmail,
+			List<Questions> listQA) {
 		super();
 		this.username = username;
 		this.lastName = lastName;
@@ -36,37 +36,55 @@ public class UserAccount {
 		this.userEmail = userEmail;
 		this.listQA = listQA;
 	}
+
 	public String getUsername() {
 		return username;
 	}
+
 	public void setUsername(String username) {
 		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
 	}
 	
 	public String getFirstName() {
 		return firstName;
 	}
+	
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+	
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	public List<Questions>  getListQA() {
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	
+	public List<Questions> getListQA() {
 		return listQA;
 	}
+
 	public void setListQA(List<Questions> listQA) {
 		this.listQA = listQA;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -79,6 +97,7 @@ public class UserAccount {
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -120,6 +139,7 @@ public class UserAccount {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
