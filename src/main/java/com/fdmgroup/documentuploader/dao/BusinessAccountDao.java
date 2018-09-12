@@ -115,13 +115,9 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			innerRows=jdbcTemplateObject.queryForList(SQL, accountId);
 			for(Map<String, Object> innerMap:innerRows){
 				UserAccount userAccount = new UserAccount();
-				userAccount.setFirstName((String)innerMap.get("firstname"));
-				userAccount.setLastName((String)innerMap.get("lastname"));
-				userAccount.setUsername((String)innerMap.get("username"));
-				userAccount.setPassword((String)innerMap.get("password"));
-				userAccount.setUserEmail((String)innerMap.get("useremail"));
-				List<Questions> listQA = null;
-				userAccount.setListQA(listQA);
+				
+				BigDecimal userId= (BigDecimal) innerMap.get("useraccountbusinessjoinid");
+				userAccount = userDao.read(userId.intValue());
 				associatedUsers.add(userAccount);
 			}
 			account.setUserAccounts(associatedUsers);
@@ -146,6 +142,19 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
 		
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id.toString()}, new BusinessAccountMapper());
+		
+		List<UserAccount> associatedUsers = new ArrayList<>();
+		List<Map<String,Object>> innerRows = new ArrayList<>();
+		SQL="SELECT useraccountbusinessjoinid FROM BUSINESSACCOUNTTOUSERACCOUNT WHERE businessaccountuserjoinid = ?";
+		innerRows=jdbcTemplateObject.queryForList(SQL, business.getBusinessAccountId());
+		for(Map<String, Object> innerMap:innerRows){
+			UserAccount userAccount = new UserAccount();
+			UserAccountDao userDao= (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
+			BigDecimal userId= (BigDecimal) innerMap.get("useraccountbusinessjoinid");
+			userAccount = userDao.read(userId.intValue());
+			associatedUsers.add(userAccount);
+		}
+		business.setUserAccounts(associatedUsers);
 
 		return business;
 	}

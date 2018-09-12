@@ -52,7 +52,7 @@
 	        <a href="/DocumentUploader/createAccount"><button class="btn btn-primary" type="submit">CreateAccount</button></a>
 	      </li>
 	      <li class="nav-item">
-	        <a href="/DocumentUploader/userDetails"><button class="btn btn-primary" type="submit">User Details</button></a>
+	        <a href="/DocumentUploader/accountDetails"><button class="btn btn-primary" type="submit">Account Details</button></a>
 	      </li>
 	      <li class="nav-item">
 			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>

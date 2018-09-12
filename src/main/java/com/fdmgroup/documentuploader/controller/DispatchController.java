@@ -342,7 +342,15 @@ public class DispatchController {
 	}
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(HttpSession session) {
-			
+		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+			String json = mapper.writeValueAsString(dao.read(account.getBusinessAccountId()));
+			session.setAttribute("accountDetailJson", json);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
 		return "accountDetails";
 	}
 
@@ -363,6 +371,18 @@ public class DispatchController {
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
 		UserAccount addedUser =userDao.read(addUser);
 		account.getUserAccounts().add(addedUser);
+		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
+		businessDao.update(account);
+		session.setAttribute("account", account);
+		return new RedirectView("/DocumentUploader/accountDetails/");
+
+
+	}
+	@RequestMapping(value = "/accountDetails/changeName", method = RequestMethod.POST)
+	public RedirectView accountChangeName(HttpServletRequest request, HttpSession session) {
+		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		String newName = request.getParameter("accountName");
+		account.setAccountName(newName);
 		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 		businessDao.update(account);
 		session.setAttribute("account", account);
