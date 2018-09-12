@@ -29,11 +29,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
-	}
-
 	@Override
 	public void create(BusinessAccount account) {
 		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
@@ -143,7 +138,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		return business;
 	}
 
-	public int getId() {
+	private int getId() {
 		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
 		try {
 			
@@ -156,4 +151,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	}
 
+	public void setDataSource(DataSource dataSource) {
+		this.dataSource = dataSource;
+		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
+	}
 }

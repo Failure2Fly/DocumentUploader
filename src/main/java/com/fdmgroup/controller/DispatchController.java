@@ -267,7 +267,7 @@ public class DispatchController {
 	}
 	
 	@RequestMapping(value = "/downloadFile/{fileDetails}", method = RequestMethod.GET)
-	public RedirectView downloadFile(Model model, HttpSession session, @PathVariable(value = "accountId") String accountId) {
+	public RedirectView downloadFile(Model model, HttpSession session, @PathVariable(value = "fileDetails") String fileDetails) {
 		
 		
 		

@@ -4,13 +4,15 @@ import com.fdmgroup.enumeratedtypes.SecurityQuestion;
 
 public class Questions {
 
-	SecurityQuestion question;
-	String answer;
-	
-	public Questions(){}
-	public Questions(SecurityQuestion question,String answer){
-		this.question=question;
-		this.answer=answer;
+	private SecurityQuestion question;
+	private String answer;
+
+	public Questions() {
+	}
+
+	public Questions(SecurityQuestion question, String answer) {
+		this.question = question;
+		this.answer = answer;
 	}
 
 	public SecurityQuestion getQuestion() {
@@ -63,6 +65,5 @@ public class Questions {
 		builder.append("Questions [question=").append(question).append(", answer=").append(answer).append("]");
 		return builder.toString();
 	}
-	
-	
+
 }
