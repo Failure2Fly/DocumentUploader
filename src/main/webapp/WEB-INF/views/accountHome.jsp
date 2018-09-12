@@ -25,7 +25,7 @@
 		myObj = JSON.parse(x);
 
 		for (i in myObj) {
-			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].name+";"+myObj[i].date+"\"><h3><p>" + "File name: " + myObj[i].name + " "
+			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "File name: " + myObj[i].name + " "
 					+ "Upload date: " + myObj[i].date + "</p></h3></a>";
 			y += "<br>";
 		}
