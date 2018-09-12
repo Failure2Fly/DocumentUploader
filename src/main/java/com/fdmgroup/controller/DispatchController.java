@@ -1,15 +1,12 @@
 package com.fdmgroup.controller;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -33,11 +30,9 @@ import com.fdmgroup.pojo.BusinessAccount;
 import com.fdmgroup.pojo.Document;
 import com.fdmgroup.pojo.ServiceLevel;
 import com.fdmgroup.pojo.UserAccount;
-
 @Controller
 public class DispatchController {
 	private static ConfigurableApplicationContext context;
-
 	public static ConfigurableApplicationContext getContext() {
 		if (context != null) {
 			context.close();
@@ -48,12 +43,10 @@ public class DispatchController {
 			return context;
 		}
 	}
-
 	@RequestMapping(value = "/")
 	public String landingPage(Model model) {
 		return "index";
 	}
-
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		try {
@@ -75,7 +68,6 @@ public class DispatchController {
 		}
 		return "userHome";
 	}
-
 	@RequestMapping(value = "/userDetails", method = RequestMethod.GET)
 	public String userAccountDetails(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -83,7 +75,6 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "userDetails";
 	}
-
 	@RequestMapping(value = "/userDetails", method = RequestMethod.POST)
 	public RedirectView UserAccountDetails(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		context = getContext();
@@ -105,12 +96,10 @@ public class DispatchController {
 		session.setAttribute("user", user);
 		return new RedirectView("userHome");
 	}
-
 	@RequestMapping(value = "/serviceLevels")
 	public String ServiceLevels(Model model) {
 		return "serviceLevels";
 	}
-
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -118,7 +107,6 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "register";
 	}
-
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		boolean isValid = true;
@@ -150,7 +138,6 @@ public class DispatchController {
 			return "register";
 		}
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(Model model, HttpSession session) {
 		UserAccount userAccount = new UserAccount();
@@ -158,7 +145,6 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "login";
 	}
-
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session) {
 		Validator validator = new Validator();
@@ -175,13 +161,11 @@ public class DispatchController {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		return "createAccount";
 	}
-
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
@@ -197,7 +181,6 @@ public class DispatchController {
 		dao.create(account);
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
-
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
@@ -207,9 +190,7 @@ public class DispatchController {
 		session.setAttribute("account", businessAccount);
 		File file = new File("");
 		model.addAttribute(file);
-
 		List<Document> fileList = documentDao.read(Integer.parseInt(accountId));
-
 		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
 		json=json+"[";
@@ -237,7 +218,6 @@ public class DispatchController {
 		
 		return "accountHome";
 	}
-
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
 	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
@@ -259,23 +239,18 @@ public class DispatchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		document.setSourcePath(Paths.get(sourceFile.toString()));
 		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
 		document.setRepositoryPath(Paths.get(repositoryPath));
-
 		documentDao.create(document);
-
 		return "accountHome";
 	}
-
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		
 		return "accountDetails";
 	}
-
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
 	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
 		String addAccount = request.getParameter("add");
@@ -285,6 +260,4 @@ public class DispatchController {
 	}
 	
 	
-
-
 }
