@@ -19,20 +19,21 @@
 <script>
 	function DisplayFiles() {
 
-		var myObj, i, j, x = "";
-
-		myObj = JSON.parse(document.getElementById("fileList").innerHTML);
+		var myObj, i, x = "",y="";
+		x=document.getElementById("fileList").innerHTML;
+		x=x.replace(/\\/g, "\\\\");
+		myObj =JSON.parse(x);
 
 		for (i in myObj) {
-			x += "<h3><p>"
-					+ myObj[i].name
+			y += "<h3><p>"
+					+ "File name: "+myObj[i].name
 					+ " "
-					+ myObj[i].date
+					+ "Upload date: "+myObj[i].date
 					+ "</p></h3>";
-			x += "<br>";
+			y += "<br>";
 		}
 
-		document.getElementById("Documents").innerHTML = x;
+		document.getElementById("Documents").innerHTML = y;
 
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
