@@ -24,6 +24,8 @@ public class ValidatorTest {
 		validator = new Validator();
 	}
 
+	// ====== Begin validateUserLogin Tests ======
+	
 	@Test
 	public void test_validateUserLogin_returnsTrue_whenGivenAValidUsernameAndPassword() {
 		// Arrange
@@ -50,8 +52,6 @@ public class ValidatorTest {
 
 		dao.delete(userAccount);
 	}
-
-	// ====== Begin validateUserLogin Tests =====
 
 	@Test
 	public void test_validateUserLogin_returnsFalse_whenGivenAnInvalidUsername() {
@@ -162,8 +162,34 @@ public class ValidatorTest {
 		dao.delete(userAccount);
 	}
 	
+	// ====== Begin validatePasswordConfirmation Tests ======
+	
+	@Test
+	public void test_validatePasswordConfirmation_returnsTrue_whenPassedMatchingPasswords() {
+		// Arrange
+		String passwordOne = "password1234!";
+		String passwordTwo = "password1234!";
+		
+		// Act
+		boolean result = validator.validatePasswordConfirmation(passwordOne, passwordTwo);
+		
+		// Assert
+		assertTrue(result);
+	}
+	
+	@Test
+	public void test_validatePasswordConfirmation_returnsFalse_whenPassedMismatchedPasword() {
+		String passwordOne = "password1234!";
+		String passwordTwo = "Passwrod1234!";
+		
+		// Act
+		boolean result = validator.validatePasswordConfirmation(passwordOne, passwordTwo);
+		
+		// Assert
+		assertFalse(result);
+	}
 
-	// ====== Begin validateUserRegistration Tests =====
+	// ====== Begin validateUserRegistration Tests ======
 
 	@Test
 	public void test_validateUserRegistration_returnsTrue_whenGivenAUserAccountWithValidInformation() {
