@@ -1,17 +1,17 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import javax.sql.DataSource;
 
 public interface Dao<T, U> {
 
-void setDataSource(DataSource ds);
+public void setDataSource(DataSource ds);
 	
-void create(T item);
+public void create(T item);
 
-void delete(T item);
+public void delete(T item);
                                                                                                                    
-void update(T item);
+public void update(T item);
                                                                                                                    
-T read(U item);
+public T read(U item);
                                                                                                                    
 }

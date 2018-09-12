@@ -1,5 +1,5 @@
 //
-//package com.fdmgroup.documentuploader;
+//package com.fdmgroup.dao;
 //
 //import java.io.File;
 //import java.io.FileWriter;
@@ -14,6 +14,11 @@
 //import org.junit.Test;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
+//
+//import com.fdmgroup.controller.DispatchController;
+//import com.fdmgroup.pojo.BusinessAccount;
+//import com.fdmgroup.pojo.Document;
+//import com.fdmgroup.pojo.UserAccount;
 //
 //public class DocumentDaoTest {
 //	private ApplicationContext context;
