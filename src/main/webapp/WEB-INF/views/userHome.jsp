@@ -37,20 +37,7 @@
 		button.setText(text); // text is converted to java.lang.String */
 
 	}
-	
-	function getInfo() {
-		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
-	    fetch(sessionScope.accountList)
-	        return response.json();
-		.then(function (data){
-	            results = data;
-	            console.log(searchResults);
-	            results.forEach(result); {
-	                createResultCard(result);
-	            }
-	        });
-	}
-	}
+
 </script>
 <title>User Homepage</title>
 </head>
