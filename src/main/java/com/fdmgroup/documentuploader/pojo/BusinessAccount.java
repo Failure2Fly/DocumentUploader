@@ -82,5 +82,46 @@ public class BusinessAccount {
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((accountName == null) ? 0 : accountName.hashCode());
+		result = prime * result + businessAccountId;
+		result = prime * result + ((fileList == null) ? 0 : fileList.hashCode());
+		result = prime * result + ((owner == null) ? 0 : owner.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BusinessAccount other = (BusinessAccount) obj;
+		if (accountName == null) {
+			if (other.accountName != null)
+				return false;
+		} else if (!accountName.equals(other.accountName))
+			return false;
+		if (businessAccountId != other.businessAccountId)
+			return false;
+		if (fileList == null) {
+			if (other.fileList != null)
+				return false;
+		} else if (!fileList.equals(other.fileList))
+			return false;
+		if (owner == null) {
+			if (other.owner != null)
+				return false;
+		} else if (!owner.equals(other.owner))
+			return false;
+		return true;
+	}
+	
 	
 }
