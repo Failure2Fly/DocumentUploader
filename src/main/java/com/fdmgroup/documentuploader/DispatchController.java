@@ -215,32 +215,31 @@ public class DispatchController {
 
 		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
-		try {
-
-			json = mapper.writeValueAsString(fileList);
-			session.setAttribute("fileList", json);
-
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			File debugFile = new File("H:\\DebugFileListException.txt");
-			try {
-				FileWriter writer = new FileWriter(debugFile);
-				writer.write("" + e);
-				writer.flush();
-				writer.close();
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
+		json=json+"[";
+		if(fileList.size()>0){
+		for(Document document:fileList){
+			json =json+"{\"name\":\""+document.getName()+"\",";
+			json =json+"\"repositoryPath\":\""+document.getRepositoryPath()+"\",";
+			json =json+"\"date\":\""+document.getDate().toString()+"\"},";
 		}
-		File debugFile = new File("H:\\DebugFileList.txt");
+		
+		File debugFile = new File("H:\\DebugJsonFileList.txt");
 		try {
 			FileWriter writer = new FileWriter(debugFile);
-			writer.write("List of files for id " + accountId + ": " + documentDao.read(Integer.parseInt(accountId)));
+			writer.write("Json so far: " + json + " Json length: " +json.length());
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		json=json.substring(0,json.length()-1);
+		}
+		json=json+"]";
+		
+		session.setAttribute("fileList", json);
+		
+		
+		
 
 		return "accountHome";
 
@@ -292,5 +291,8 @@ public class DispatchController {
 
 
 	}
+	
+	
+
 
 }
