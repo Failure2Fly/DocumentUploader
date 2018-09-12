@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 
 public class ServiceLevel { 
 	

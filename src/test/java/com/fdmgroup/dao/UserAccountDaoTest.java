@@ -137,7 +137,7 @@
 
 =======
 
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import static org.junit.Assert.assertEquals;
 
@@ -145,6 +145,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
+
+import com.fdmgroup.controller.DispatchController;
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.pojo.UserAccount;
 
 
 

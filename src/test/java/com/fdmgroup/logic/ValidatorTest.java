@@ -1,5 +1,5 @@
 
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.logic;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -8,6 +8,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.pojo.UserAccount;
 
 public class ValidatorTest {
 

@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import javax.sql.DataSource;
 

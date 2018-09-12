@@ -18,14 +18,14 @@
 		<property name="username" value="trainee1" />
 		<property name="password" value="!QAZSE4" />
 	</bean>
-	<bean id="UserAccountDao" class="com.fdmgroup.documentuploader.UserAccountDao">
+	<bean id="UserAccountDao" class="com.fdmgroup.dao.UserAccountDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<bean id="DocumentDao" class="com.fdmgroup.documentuploader.DocumentDao">
+	<bean id="DocumentDao" class="com.fdmgroup.dao.DocumentDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<bean id="BusinessAccountDao" class="com.fdmgroup.documentuploader.BusinessAccountDao">
+	<bean id="BusinessAccountDao" class="com.fdmgroup.dao.BusinessAccountDao">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
 </beans>

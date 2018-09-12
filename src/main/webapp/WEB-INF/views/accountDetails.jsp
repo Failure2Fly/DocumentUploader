@@ -39,21 +39,39 @@
 
 	<div id="update-form" class="update">
 		<sf:form commandName="account" method="POST" action="accountDetails">
-			<legend>Update:</legend>
+			<legend>Remove Account:</legend>
 			<fieldset>
-				<p>Current Service Level: <span>${sessionScope.account.servicelevel}</span></p>
-				<select></select>
 				<p>Choose Account: <span></span></p>
 				<select name="AccountName" >
 					<c:forEach var="item" items="${AccountList}">
     				 <option>${item.getAccountName()}</option>
     			   </c:forEach>
 				</select>
-				<p>Remove Account: </p>
+				<p>Do you want to remove the account? </p>
 				<input style="marigin-top:0px;"type="checkbox" name="remove">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
-					value="Update">
+					value="Remove">
+		</fieldset>
+		</sf:form>
+		<sf:form commandName="account" method="POST" action="accountDetails">
+				<legend>Add Account:</legend>
+			<fieldset>
+				<input type="text" class="inputField" id="fields"name="add"type="text" 
+				placeholder="Enter the Account Name">
+				<br>
+				<br> <input class="button" id="updateButton" type="submit"
+					value="Add">
+			</fieldset>
+		</sf:form>
+		<sf:form commandName="account" method="POST" action="accountDetails">
+				<legend>Add Account:</legend>
+			<fieldset>
+				<input type="text" class="inputField" id="fields"name="add"type="text" 
+				placeholder="Enter your Account Name">
+				<br>
+				<br> <input class="button" id="updateButton" type="submit"
+					value="Add">
 			</fieldset>
 		</sf:form>
 	</div>

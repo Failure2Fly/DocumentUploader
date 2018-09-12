@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 
 import java.nio.file.Path;
 import java.util.Date;
@@ -11,7 +11,7 @@ public class Document {
 	Path sourcePath;
 	Path repositoryPath;
 	Date date;
-	int accountId;
+	private int accountId;
 	
 	
 	
@@ -31,10 +31,10 @@ public class Document {
 		super();
 	}
 	
-	protected int getAccountId() {
+	public int getAccountId() {
 		return accountId;
 	}
-	protected void setAccountId(int accountId) {
+	public void setAccountId(int accountId) {
 		this.accountId = accountId;
 	}
 	public String getName() {
