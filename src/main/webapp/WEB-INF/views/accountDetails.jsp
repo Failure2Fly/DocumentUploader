@@ -22,7 +22,7 @@
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
-			<h1>${sessionScope.user.username }'s Accounts details</h1>
+			<h1>${sessionScope.account.accountName} Account Details</h1>
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
@@ -38,40 +38,34 @@
 	</div>
 
 	<div id="update-form" class="update">
-		<sf:form commandName="account" method="POST" action="accountDetails">
-			<legend>Remove Account:</legend>
+		<sf:form method="POST" action="/DocumentUploader/accountDetails/delete">
+			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
 			<fieldset>
-				<p>Choose Account: <span></span></p>
-				<select name="AccountName" >
-					<c:forEach var="item" items="${AccountList}">
-    				 <option>${item.getAccountName()}</option>
-    			   </c:forEach>
-				</select>
-				<p>Do you want to remove the account? </p>
+				<p>Do you want to delete the repository? </p>
 				<input style="marigin-top:0px;"type="checkbox" name="remove">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
-					value="Remove">
+					value="Delete">
 		</fieldset>
 		</sf:form>
-		<sf:form commandName="account" method="POST" action="accountDetails">
+		<sf:form method="POST" action="/DocumentUploader/accountDetails/addUser">
 				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="fields"name="add"type="text" 
-				placeholder="Enter the User Email">
+				placeholder="Enter the username of the the user you would like to add">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Add">
 			</fieldset>
 		</sf:form>
-		<sf:form commandName="account" method="POST" action="accountDetails">
+		<sf:form method="POST" action="/DocumentUploader/accountDetails/changeName">
 				<legend>Change Repository Name:</legend>
 			<fieldset>
-				<sf:input path="accountName" type="text" class="inputField" id="fields" name="AccountName" type="text" 
+				<input name="accountName" type="text" class="inputField" id="fields"  type="text" 
 				placeholder="Enter new Account Name"/>
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
-					value="Add">
+					value="Change">
 			</fieldset>
 		</sf:form>
 	</div>

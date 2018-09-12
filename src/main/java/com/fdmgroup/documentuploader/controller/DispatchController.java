@@ -73,7 +73,8 @@ public class DispatchController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			UserAccount user = (UserAccount) session.getAttribute("user");
-			String json = mapper.writeValueAsString(businessDao.read(user.getUsername()));
+			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
+			String json = mapper.writeValueAsString(dao.readAccounts(dao.getThisId(user)));
 			session.setAttribute("accountList", json);
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
@@ -340,19 +341,32 @@ public class DispatchController {
 		
 	}
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
-	public String accountDetailsGet(Model model, HttpSession session) {
-		model.addAttribute(new BusinessAccount());
-		
+	public String accountDetailsGet(HttpSession session) {
+			
 		return "accountDetails";
 	}
 
 	
-	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
-	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
-		String addAccount = request.getParameter("add");
-		String remove = request.getParameter("remove");
-		String accoutName = request.getParameter("AccountName");
-		return "accountDetails";
+	@RequestMapping(value = "/accountDetails/delete", method = RequestMethod.POST)
+	public RedirectView accountDetailsDelete(HttpServletRequest request, HttpSession session) {
+		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
+		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		businessDao.delete(account);
+		return new RedirectView("/DocumentUploader/userHome");
+
+
+	}
+	@RequestMapping(value = "/accountDetails/addUser", method = RequestMethod.POST)
+	public RedirectView accountDetailsAddUser(HttpServletRequest request, HttpSession session) {
+		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		String addUser = request.getParameter("add");
+		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
+		UserAccount addedUser =userDao.read(addUser);
+		account.getUserAccounts().add(addedUser);
+		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
+		businessDao.update(account);
+		session.setAttribute("account", account);
+		return new RedirectView("/DocumentUploader/accountDetails/");
 
 
 	}
