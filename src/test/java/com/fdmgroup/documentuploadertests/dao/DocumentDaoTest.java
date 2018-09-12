@@ -1,6 +1,5 @@
 package com.fdmgroup.documentuploadertests.dao;
-//
-//package com.fdmgroup.dao;
+
 //
 //import java.io.File;
 //import java.io.FileWriter;
