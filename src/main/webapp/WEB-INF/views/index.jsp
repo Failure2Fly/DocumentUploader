@@ -14,7 +14,7 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <link rel="stylesheet" href="<c:url value="./CSS/serviceLevel.css"/>">
-<title>DocumentUploader Home</title>
+<title>Document Uploader</title>
 </head>
 
 <body>
@@ -105,7 +105,7 @@
 </body>
 
 <footer>
-<div class="header">
+	<div class="header">
 	<div class="row">
 		<div class="col-4 social">
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a

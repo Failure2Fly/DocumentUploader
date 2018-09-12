@@ -13,13 +13,13 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
-<title>DocumentUploader Login</title>
+<title>Document Uploader</title>
 </head>
 
-<body>
+<body class="register-login-background">
 
 <nav class="navbar fixed-top navbar-expand-lg">
-	  <a class="navbar-brand" href="#">Navbar</a>
+	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -27,31 +27,21 @@
 	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 	    <ul class="navbar-nav">
 		<li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	        <a class="nav-link" href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Login</button> <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="#">Link</a>
+	        <a class="nav-link" href="/DocumentUploader/register"><button class="btn btn-primary" type="submit">Register</button></a>
 	      </li>
 	      <li>
 	      	<div class="g-signin2" data-onsuccess="onSignIn"></div>
 	      </li>
-	      <li class="nav-item dropdown">
-	        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-	          Dropdown
-	        </a>
-	        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-	          <a class="dropdown-item" href="#">Action</a>
-	          <a class="dropdown-item" href="#">Another action</a>
-	          <div class="dropdown-divider"></div>
-	          <a class="dropdown-item" href="#">Something else here</a>
-	        </div>
-	      </li>
+	      
 	    </ul>
 	  </div>
 	</nav>
 	
 	
-	<div class="register-form">
+	<div class="register-form login-form">
 <h3>Login</h3>
 	<sf:form commandName="userAccount" method="POST" action="login">
 	  <div class="form-row">
@@ -74,19 +64,18 @@
            <p class="validate-form" id="nonValidPassword">Please Enter A Valid Password</p>
 		  <div class="form-group-login">
 		    <div class="form-check">
-		      <input class="form-check-input" type="checkbox" id="gridCheck">
+		      <input class="" type="checkbox" id="gridCheck">
 		      <label class="form-check-label" for="gridCheck">
 		        Remember me
 		      </label>
-		      <button type="submit" class="btn btn-primary btn-sign-in" value="Login">Login</button>
 		    </div>
+		    <button type="submit" class="btn btn-primary btn-sign-in" value="Login">Login</button>
 		  </div>
-		   <div class="form-group-links">
+		 </div>
+		<div class="form-row">
+		  <div class="form-group-links">
 		  	<div class="login-links">
-		  		<a>Lost your password?</a>
-		  	</div>
-		  	<div class="login-links">
-		  		<a href="/DocumentUploader/register">Register</a>
+		  		<a href="#">Lost your password?</a>
 		  	</div>
 		  </div>
 	   </div>

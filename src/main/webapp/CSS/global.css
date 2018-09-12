@@ -2,6 +2,11 @@
 	box-sizing: border-box;
 	margin: 0;
 }
+.register-login-background{
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://images.pexels.com/photos/265047/pexels-photo-265047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
+}
 .fa-phone {
 	transform: scaleX(-1);
 	padding-left: 10px;
@@ -63,7 +68,10 @@ div .mainHeaderRight {
 /* This is the start of the Form*/
 .register-form {
 	max-width: 450px;
-	margin: 100px auto;
+	margin: 150px auto;
+}
+.login-form{
+	margin: 250px auto;
 }
 form {
 	border: grey solid 1px;
@@ -81,6 +89,14 @@ form {
 .form-group {
 	width: 100%
 }
+.form-group-login{
+	padding: 10px;
+	width: 100%
+}
+.form-group-links{
+	padding: 20px;
+	margin-left: 70px;
+}
 .security-question{
 	height: 40px;
 }
@@ -88,8 +104,8 @@ form {
 	background-color: red;
     color: white;
 }
-.form-check {
-	margin-left: 20px;
+.form-check > button{
+ margin-right: 18px;
 }
 .terms {
 	color: #00aeef !important;
@@ -134,8 +150,6 @@ input .inputField {
 div .accountDiv {
 	background-color: rgb(255, 255, 204);
 }
-<<<<<<< HEAD
-=======
 
 input[type=checkbox], input[type=radio] {
 	box-sizing: border-box;
@@ -144,7 +158,6 @@ input[type=checkbox], input[type=radio] {
 	margin-left: 50px;
 }
 
->>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 .update span {
 	color: #339900;
 	font-weight: bold;
@@ -158,6 +171,7 @@ input[type=checkbox], input[type=radio] {
 
 /* This is where the Footer Starts*/
 footer {
+	position: absolute;
 	margin-top: 50px;
 	border-top: black solid 1px;
 	bottom: 0;
