@@ -20,7 +20,7 @@
 	background-color: whitesmoke;
 	border-color: #E8E8E8;
 	margin: 5px;
-	width: 90%;
+	width: 97%;
 	text-align: center;
 }
 .btn:hover {
@@ -42,26 +42,33 @@
 .navbar{
 	background-color: #A82C21;
 }
+.navbar-brand{
+	font-family: 'Abril Fatface', cursive;
+	font-size: 34px;
+}
 .navbar-brand, .nav-link{
 	color: white;
 }
 .nav-right {
 	width: 230px;
 }
-div .mainHeaderLeft {
+.mainHeaderLeft {
 	width: 25%;
 	border-width: 0 5px 0px 0px;
 	border-style: solid;
 }
-div .mainTitle {
-	width: 50%;
+.mainTitle {
 	margin: auto;
+	font-family: 'Abril Fatface', cursive;
 }
-div .mainHeaderRight {
+.mainHeaderRight {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
 	width: 25%;
+}
+.user-hello{
+	margin-top: 75px;
 }
 /* This is the end of the Navigation Bar*/
 
@@ -176,11 +183,14 @@ footer {
 	bottom: 0;
 	width: 100%;
 }
+.footer-row{
+	width: 100%
+}
 footer a {
 	color: #666666;
 }
 .social {
-	padding-top: 20px;
+	padding: 20px;
 }
 .social a {
 	padding: 0px 15px 0px 15px;

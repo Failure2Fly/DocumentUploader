@@ -1,14 +1,11 @@
 
-package com.fdmgroup.dao;
-
-import static org.junit.Assert.assertEquals;
+package com.fdmgroup.documentuploadertests.dao;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import com.fdmgroup.documentuploader.controller.DispatchController;
@@ -92,8 +89,6 @@ public class BusinessAccountDaoTest {
 //
 //
 //	}
-	
-
 //	@Test
 //	public void test_businessAccountReadMethodWorks_WhenPassedInAnInteger() {
 //		ApplicationContext context = DispatchController.getContext();
@@ -122,10 +117,6 @@ public class BusinessAccountDaoTest {
 //		
 //		userAccount.delete(user);
 //	}
-	
-	
-	
-
 	
 }
 

@@ -1,5 +1,5 @@
 
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.documentuploadertests.pojo;
 
 import static org.junit.Assert.*;
 

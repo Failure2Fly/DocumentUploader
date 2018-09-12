@@ -44,20 +44,16 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
 		int businessId= getId();
-		SQL1 = "SELECT servicelevelid FROM servicelevel WHERE servicelevel=?";
-		String formattedServiceLevel = account.getServicelevel().getServiceLevel().name().substring(0,1) + account.getServicelevel().getServiceLevel().name().substring(1).toLowerCase();
 		File file1 = new File("H:\\businessaccountservicelevel.txt");
 		try {
 			FileWriter writer = new FileWriter(file1);
-			writer.write(formattedServiceLevel);
+			writer.write(ownerId.toString());
 			writer.flush();
 			writer.close();
 		} catch (IOException e2) {
 			e2.printStackTrace();
 		}
-		Integer serviceLevelId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { formattedServiceLevel },
-				Integer.class);
-		jdbcTemplateObject.update(SQL1,businessId , ownerId, serviceLevelId, account.getAccountName());
+		jdbcTemplateObject.update(SQL1,businessId , ownerId,account.getServicelevel().getServiceLevel().ordinal()+1, account.getAccountName());
 		
 		SQL1 = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
@@ -71,18 +67,20 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	public void delete(BusinessAccount account) {
 		String SQL = "DELETE FROM BUSINESSACCOUNTTOUSERACCOUNT WHERE businessaccountuserjoinid = ?";
 		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
+		SQL = "DELETE FROM DOCUMENTS WHERE associatedaccountid = ?";
+		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
 		SQL = "DELETE FROM BUSINESSACCOUNT WHERE businessaccountid = ?";
 		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
 	}
 
 	@Override
 	public void update(BusinessAccount account) {
-		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?, accountname=?";
+		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?, accountname=? WHERE businessaccountId=?";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
-		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel(), account.getAccountName());
+		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel(), account.getAccountName(), account.getBusinessAccountId());
 		for(UserAccount secondaryUser:account.getUserAccounts()){
 			System.out.println("This what read username getting:"+read(secondaryUser.getUsername()));
 			System.out.println("Compared to: "+account);
@@ -154,17 +152,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	@Override
 	public BusinessAccount read(Integer id) {
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
-		
-		File file = new File("H:\\DebugBusinessDao.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-
-			writer.write("Account id:"+id.toString()+"\n SQL "+SQL+"\nIs jdbcTemplate null?"+Objects.isNull(jdbcTemplateObject));
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id.toString()}, new BusinessAccountMapper());
 

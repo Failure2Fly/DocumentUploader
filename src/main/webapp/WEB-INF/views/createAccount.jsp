@@ -44,14 +44,14 @@
 					name="AccountName" placeholder="Account Name " value="" />
 				<br>
 				<br> <br> 
-				<sf:select items="${listOfLevels}" path="servicelevel.serviceLevel">
-					
-				</sf:select> 
+				<select name="level">
+					<c:forEach var="item" items="${listOfLevels}">
+    				 <option>${item}</option>
+					</c:forEach>
+				</select> 
 				<br> 
 				
-				
 				<input class="button" id="registerButton" type="submit" value="Create Account">
-
 
 			</fieldset>
 		</sf:form>
