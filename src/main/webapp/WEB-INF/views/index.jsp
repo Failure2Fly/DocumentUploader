@@ -12,6 +12,7 @@
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <link rel="stylesheet" href="<c:url value="./CSS/serviceLevel.css"/>">
 <title>Document Uploader</title>
@@ -19,7 +20,6 @@
 
 <body>
 	<div class="header">
-	<div class="mainHeaderRight"></div>
 		<div class="mainTitle"><h1>Ye Olde Renaissance Document Uploader</h1></div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/login">
@@ -104,22 +104,7 @@
 
 </body>
 
-<footer>
-	<div class="header">
-	<div class="row">
-		<div class="col-4 social">
-			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
-				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
-				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
 
-		</div>
-		<div class="col-8 copyright">
-			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-		</div>
-	</div>
-	</div>
-</footer>
+
 
 </html>

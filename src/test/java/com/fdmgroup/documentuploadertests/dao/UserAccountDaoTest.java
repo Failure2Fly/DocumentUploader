@@ -1,7 +1,6 @@
 package com.fdmgroup.documentuploadertests.dao;
 
-//
-//package com.fdmgroup.dao;
+
 //
 //import static org.junit.Assert.assertEquals;
 //

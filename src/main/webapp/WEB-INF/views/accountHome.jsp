@@ -18,7 +18,7 @@
 
 <script>
 	function DisplayFiles() {
-
+		
 		var myObj, i, x = "", y = "";
 		x = document.getElementById("fileList").innerHTML;
 		x = x.replace(/\\/g, "\\\\");
@@ -30,37 +30,46 @@
 			y += "<a href=\"/DocumentUploader/deleteFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "Delete"+"</p></h3></a>";
 			y += "<br>";
 		}
-
 		document.getElementById("Documents").innerHTML = y;
-
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
-
 	}
 </script>
 
 
-<title>Business Account Details</title>
+<title>Document Uploader</title>
 </head>
 
+    <nav class="navbar fixed-top navbar-expand-lg">
+	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+	    <ul class="navbar-nav">
+		  <li class="nav-item active">
+	        <a href="/DocumentUploader/createAccount"><button class="btn btn-primary" type="submit">CreateAccount</button></a>
+	      </li>
+	      <li class="nav-item">
+	        <a href="/DocumentUploader/userDetails"><button class="btn btn-primary" type="submit">User Details</button></a>
+	      </li>
+	      <li class="nav-item">
+			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>
+	      </li>
+	      <li>
+	      	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	      </li> 
+	    </ul>
+	  </div>
+	</nav>
+	
 <body onload="DisplayFiles()">
 
-	<div class="header">
-		<div class="mainHeaderRight"></div>
+	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Details for ${sessionScope.user.username}'s account,
 				${sessionScope.account.accountName }</h1>
-		</div>
-		<div class="mainHeaderRight">
-			<a href="/DocumentUploader/userHome">
-				<button class="btn btn-primary" type="submit">Back to User
-					Homepage</button>
-			</a> <a href="/DocumentUploader/accountDetails">
-				<button class="btn btn-primary" type="submit">Account
-					Details</button>
-			</a> <a href="/DocumentUploader/login">
-				<button class="btn btn-primary" type="submit">Logout</button>
-			</a>
 		</div>
 	</div>
 

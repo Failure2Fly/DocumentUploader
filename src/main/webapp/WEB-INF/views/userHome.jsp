@@ -37,28 +37,42 @@
 		button.setText(text); // text is converted to java.lang.String */
 
 	}
+
 </script>
-<title>User Homepage</title>
+<title>Document Uploader</title>
 </head>
 
+    <nav class="navbar fixed-top navbar-expand-lg">
+	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+	    <ul class="navbar-nav">
+		  <li class="nav-item active">
+	        <a href="/DocumentUploader/createAccount"><button class="btn btn-primary" type="submit">CreateAccount</button></a>
+	      </li>
+	      <li class="nav-item">
+	        <a href="/DocumentUploader/userDetails"><button class="btn btn-primary" type="submit">User Details</button></a>
+	      </li>
+	      <li class="nav-item">
+			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>
+	      </li>
+	      <li>
+	      	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	      </li> 
+	    </ul>
+	  </div>
+	</nav>
 
 <body onload="DisplayAccounts()">
-	<div class="header">
-		<div class="mainHeaderRight"></div>
+	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>
-		<div class="mainHeaderRight">
-			<a href="/DocumentUploader/createAccount">
-				<button class="btn btn-primary" type="submit">Create
-					Account</button>
-			</a> <a href="/DocumentUploader/userDetails">
-				<button class="btn btn-primary" type="submit">User Details</button>
-			</a> <a href="/DocumentUploader/login">
-				<button class="btn btn-primary" type="submit">Logout</button>
-			</a>
-		</div>
 	</div>
+	
 	<div class="registration">
 				
 		<p id="Accounts">AccountsPlaceholder</p>
@@ -69,7 +83,36 @@
 
 	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
 
-
+	<table class="table">
+	  <thead class="thead-dark">
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">First</th>
+	      <th scope="col">Last</th>
+	      <th scope="col">Handle</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <th scope="row">1</th>
+	      <td>Mark</td>
+	      <td>Otto</td>
+	      <td>@mdo</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">2</th>
+	      <td>Jacob</td>
+	      <td>Thornton</td>
+	      <td>@fat</td>
+	    </tr>
+	    <tr>
+	      <th scope="row">3</th>
+	      <td>Larry</td>
+	      <td>the Bird</td>
+	      <td>@twitter</td>
+	    </tr>
+	  </tbody>
+	</table>
 
 
 	<footer>
