@@ -6,6 +6,10 @@ public class ServiceLevel {
 	private int documentUploadLimit;
 	private boolean hasAdverts;
 
+	public ServiceLevel() {
+		this(ServiceLevels.BRONZE);
+	}
+	
 	public ServiceLevel(ServiceLevels serviceLevel) {
 		super();
 		this.serviceLevel = serviceLevel;
