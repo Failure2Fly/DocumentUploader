@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.enumeratedtypes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,8 @@ WHO_IS_YOUR_FAVORITE_ACTOR_MUSICIAN_OR_ARTIST;
 	public static List<String> allQuestions(){
 		List<String> list = new ArrayList<>();
 		for(SecurityQuestion q: SecurityQuestion.values()){
-			list.add(q.name().toLowerCase().replace("_", " ")+"?");
+			String sub = q.name().substring(0, 1)+ //.toLowerCase()
+			list.add(q.name().substring(0,1).toLowerCase().substring(0, 1).toUpperCase().replace("_", " ")+"?");
 		}
 		return list;
 	}

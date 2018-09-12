@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.controller;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,9 +7,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,16 +22,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fdmgroup.dao.BusinessAccountDao;
+import com.fdmgroup.dao.DocumentDao;
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.enumeratedtypes.SecurityQuestion;
+import com.fdmgroup.logic.Validator;
+import com.fdmgroup.pojo.BusinessAccount;
+import com.fdmgroup.pojo.Document;
+import com.fdmgroup.pojo.ServiceLevel;
+import com.fdmgroup.pojo.UserAccount;
 
 @Controller
 public class DispatchController {
-	private static ApplicationContext context;
+	private static ConfigurableApplicationContext context;
 
-	public static ApplicationContext getContext() {
+	public static ConfigurableApplicationContext getContext() {
 		if (context != null) {
+			context.close();
+			context = new ClassPathXmlApplicationContext("context.xml");
 			return context;
 		} else {
 			context = new ClassPathXmlApplicationContext("context.xml");
@@ -53,7 +64,6 @@ public class DispatchController {
 		} catch (NullPointerException e) {
 			return "login";
 		}
-
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -63,7 +73,6 @@ public class DispatchController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
 		return "userHome";
 	}
 
@@ -135,7 +144,6 @@ public class DispatchController {
 				}
 				return "register";
 			} finally {
-
 			}
 		} else {
 			session.setAttribute("listOfQuestion", SecurityQuestion.allQuestions());
@@ -162,76 +170,121 @@ public class DispatchController {
 			session.setAttribute("user", userAccount);
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
-
 			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}
-	
+
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		return "createAccount";
-
 	}
 
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-
 		UserAccount user = ((UserAccount) session.getAttribute("user"));
 		account.setOwner(user);
-
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
-
 		account.setServicelevel(new ServiceLevel());
-
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
-
 		dao.create(account);
-
-
 		return new ModelAndView(new RedirectView("/userHome", true));
-
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.GET)
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
 		session.setAttribute("account", businessAccount);
-		Document document = new Document();
-		model.addAttribute(document);
-		return "accountDetails";
+		File file = new File("");
+		model.addAttribute(file);
 
+		List<Document> fileList = documentDao.read(Integer.parseInt(accountId));
+
+		String json = "";
+		ObjectMapper mapper = new ObjectMapper();
+		json=json+"[";
+		if(fileList.size()>0){
+		for(Document document:fileList){
+			json =json+"{\"name\":\""+document.getName()+"\",";
+			json =json+"\"repositoryPath\":\""+document.getRepositoryPath()+"\",";
+			json =json+"\"date\":\""+document.getDate().toString()+"\"},";
+		}
+		
+		File debugFile = new File("H:\\DebugJsonFileList.txt");
+		try {
+			FileWriter writer = new FileWriter(debugFile);
+			writer.write("Json so far: " + json + " Json length: " +json.length());
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		json=json.substring(0,json.length()-1);
+		}
+		json=json+"]";
+		
+		session.setAttribute("fileList", json);
+		
+		return "accountHome";
 	}
 
-	@RequestMapping(value = "/accountDetails/{accountId}", method = RequestMethod.POST)
-	public String AccountDetailsPost(@ModelAttribute Document document, HttpSession session, @PathVariable(value = "accountId") String accountId, @RequestParam("file") MultipartFile file) {
+	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
+	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
+			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
-		File directory = new File("H:\\repository\\"+accountId);
-	    if (! directory.exists()){
-	        directory.mkdir();
-	    }
-	    int fileId = documentDao.getId();
-	    File sourcePath = document.getSourcePath().toFile();
-		String repositoryPath = "H:\\repository\\"+accountId+"\\"+fileId+sourcePath.getName();
-		document.setRepositoryPath(Paths.get(repositoryPath));
-		documentDao.create(document);
-		return "accountDetails";
+		File directory = new File("H:\\repository\\" + accountId);
+		if (!directory.exists()) {
+			directory.mkdirs();
+		}
+		Document document = new Document();
+		document.setName(file.getOriginalFilename());
+		document.setAccountId(Integer.parseInt(accountId));
+		File sourceFile = new File(file.getOriginalFilename());
+		try {
+			file.transferTo(sourceFile);
+		} catch (IllegalStateException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+		document.setSourcePath(Paths.get(sourceFile.toString()));
+		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
+		document.setRepositoryPath(Paths.get(repositoryPath));
+
+		documentDao.create(document);
+
+		return "accountHome";
+	}
+
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
+	public String accountDetailsGet(Model model, HttpSession session) {
+		model.addAttribute(new BusinessAccount());
 		
+		return "accountDetails";
+	}
+
+	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
+	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
+		String addAccount = request.getParameter("add");
+		String remove = request.getParameter("remove");
+		String accoutName = request.getParameter("AccountName");
+		return "accountDetails";
 	}
 	
-	@RequestMapping(value = "/accountHome", method = RequestMethod.GET)
-	public String AccountHomeGet(Model model, HttpSession session){
-		return null;
-	}
+	
+
 
 }

@@ -1,4 +1,6 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
+
+import com.fdmgroup.enumeratedtypes.SecurityQuestion;
 
 public class Questions {
 

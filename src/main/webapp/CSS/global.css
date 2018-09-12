@@ -1,40 +1,15 @@
-/* These are global attributes*/
-body, html {
-	margin: 0;
-	padding: 0;
-}
-
-div.header {
-	width: 100%;
-	background-color: rgb(200, 200, 220);
-	display: flex;
-	padding-bottom: 5px;
-}
-
-div.registrationTitle {
-	text-align: center;
-	margin: auto;
-}
-
-h1, h2 {
-	text-align: center;
-}
-
 * {
 	box-sizing: border-box;
 	margin: 0;
 }
-
 .fa-phone {
 	transform: scaleX(-1);
 	padding-left: 10px;
 }
-
 .btn {
 	padding: 0.25rem 1.0rem;
 	border-radius: .5rem;
 }
-
 .btn-primary {
 	color: black;
 	background-color: whitesmoke;
@@ -43,53 +18,95 @@ h1, h2 {
 	width: 90%;
 	text-align: center;
 }
-
 .btn:hover {
 	background-color: #00aeef;
 }
-
 .hidden{
-	diplay:none;
+	display:none;
 }
-
 /* This is part of the Navigation Bar*/
 .phone {
 	color: #00aeef;
 	padding-bottom: 15px;
 }
-
+.header{
+	display: flex;
+	background-color: #A82C21;
+	color: white;
+}
+.navbar{
+	background-color: #A82C21;
+}
+.navbar-brand, .nav-link{
+	color: white;
+}
 .nav-right {
 	width: 230px;
 }
-
-div.mainHeaderLeft {
-	width: 25% border-width:0, 5px, 0, 0;
+div .mainHeaderLeft {
+	width: 25%;
+	border-width: 0 5px 0px 0px;
 	border-style: solid;
 }
-
-div.mainTitle {
+div .mainTitle {
 	width: 50%;
 	margin: auto;
 }
-
-div.mainHeaderRight {
+div .mainHeaderRight {
 	display: flex;
 	flex-direction: column;
 	margin-left: auto;
 	width: 25%;
 }
-
 /* This is the end of the Navigation Bar*/
 
 /* This is the start of the Form*/
-div.registration {
+.register-form {
+	max-width: 450px;
+	margin: 100px auto;
+}
+form {
+	border: grey solid 1px;
+	border-radius: 20px;
+	margin-bottom: 100px;
+	background-color: #6FD1E8;
+}
+.validate-form{
+    display:none;
+}
+.mb-2,
+.form-group {
+	margin: 20px;
+}
+.form-group {
+	width: 100%
+}
+.security-question{
+	height: 40px;
+}
+.incorrect{
+	background-color: red;
+    color: white;
+}
+.form-check {
+	margin-left: 20px;
+}
+.terms {
+	color: #00aeef !important;
+}
+.btn-sign-in {
+	float: right;
+}
+/* This is the end of the Form*/
+
+/* This is the start of the Form*/
+div .registration {
 	margin: auto;
 	text-align: center;
 	background-color: rgb(240, 240, 255);
 	max-width: 50%;
-	width: 50%;
+	width: 50%;*
 }
-
 div.update {
 	margin: auto;
 	text-align: center;
@@ -97,56 +114,47 @@ div.update {
 	max-width: 50%;
 	width: 50%;
 }
-
 form {
 	border: grey solid 1px;
 	border-radius: 20px;
 	margin-bottom: 100px;
 }
-
-input.inputField {
-	marign: 0px;
+input .inputField {
+	margin: 0px;
 	padding: 5px;
 }
-
 .terms {
 	color: #00aeef !important;
 }
 
-
-
 .validate-form{
 	display:none;
+	color: red;
 }
-
-p.accountList{
-	visibility: hidden;
-}
-p#accountList.accountList {
-	visibility: hidden;
-}
-div.accountDiv {
+div .accountDiv {
 	background-color: rgb(255, 255, 204);
 }
+<<<<<<< HEAD
+=======
 
 input[type=checkbox], input[type=radio] {
 	box-sizing: border-box;
 	padding: 0;
-	margin-top: 20px;
+	margin-top: 0px;
 	margin-left: 50px;
 }
 
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 .update span {
 	color: #339900;
 	font-weight: bold;
 }
+
 /* This is the end of the Form*/
-
 /* This is the Start Login Page*/
-
 /* This is the End of Login Page */
-
 /* This is the Start of Main Page*/
+/* This is the End of Main Page*/
 
 /* This is where the Footer Starts*/
 footer {
@@ -155,25 +163,19 @@ footer {
 	bottom: 0;
 	width: 100%;
 }
-
 footer a {
 	color: #666666;
 }
-
 .social {
 	padding-top: 20px;
 }
-
 .social a {
 	padding: 0px 15px 0px 15px;
 }
-
 .copyright {
 	padding: 15px;
 }
-
 .copyright p {
 	float: right;
 }
-
 /* This is where the Footer Ends*/

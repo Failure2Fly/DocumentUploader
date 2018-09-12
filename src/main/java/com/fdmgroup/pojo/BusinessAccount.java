@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,34 +37,6 @@ public class BusinessAccount {
 		
 	public BusinessAccount() {
 		super();
-	}
-	
-	public boolean linkUser(UserAccount userAccount) {
-		
-		// TODO: Requires implementation
-		
-		return false;
-	}
-	
-	public boolean unlinkUser(UserAccount userAccount) {
-		
-		// TODO: Requires implementation
-		
-		return false;
-	}
-	
-	public boolean upgradeServiceLevel(ServiceLevel serviceLevel) {
-		
-		// TODO: Requires implementation
-		
-		return false;
-	}
-	
-	public boolean downgradeServiceLevel(ServiceLevel serviceLevel) {
-		
-		// TODO: Requires implementation
-		
-		return false;
 	}
 	
 	@Override

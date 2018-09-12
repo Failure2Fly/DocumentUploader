@@ -1,5 +1,5 @@
 //
-//package com.fdmgroup.documentuploader;
+//package com.fdmgroup.dao;
 //
 //import static org.junit.Assert.assertEquals;
 //
@@ -10,6 +10,11 @@
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
 //import org.springframework.dao.EmptyResultDataAccessException;
+//
+//import com.fdmgroup.controller.DispatchController;
+//import com.fdmgroup.pojo.BusinessAccount;
+//import com.fdmgroup.pojo.ServiceLevel;
+//import com.fdmgroup.pojo.UserAccount;
 //
 //public class BusinessAccountDaoTest {
 //
@@ -63,12 +68,10 @@
 //		ServiceLevel level = null;
 //		String accountName="TestAccount";
 //		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
-//		int accountId=businessDao.getId();
 //		businessDao.create(account);
 //
 //		account.setAccountName("WhooAccount!");
 //		businessDao.update(account);
-//		account=businessDao.read(accountId);
 //		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
 //		for(BusinessAccount acc:accounts){
 //			account=acc;

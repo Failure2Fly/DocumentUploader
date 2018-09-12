@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.logic;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -6,6 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
+
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.pojo.UserAccount;
 
 public class Validator {
 
@@ -15,7 +18,6 @@ public class Validator {
 	public boolean validateUserLogin(String username, String password) {
 		context = new ClassPathXmlApplicationContext("context.xml");
 		dao = (UserAccountDao) context.getBean("UserAccountDao");
-
 		try {
 			UserAccount actualUser = dao.read(username);
 			if (actualUser.getPassword().equals(password)) {
@@ -31,7 +33,14 @@ public class Validator {
 			return false;
 		}
 	}
-
+	
+	public boolean validatePassword(String password,String confirmPassword){
+		if(password.equals(confirmPassword)){
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean validateUserRegistration(UserAccount userAccount) {
 		boolean usernameValid = false;
 		boolean passwordValid = false;
@@ -91,8 +100,8 @@ public class Validator {
 		} catch (AddressException e) {
 
 		}
-
 		return isValid;
 	}
+	
 
 }

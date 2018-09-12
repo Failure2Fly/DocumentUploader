@@ -23,9 +23,9 @@
 		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
 		for (i in myObj) {
-			x += "<h3><a href=\"/DocumentUploader/accountDetails/"+myObj[i].businessAccountId+"\">"
-					+ myObj[i].businessAccountId
-					+ " "
+			x += "<h3><a href=\"/DocumentUploader/accountHome/"+myObj[i].businessAccountId+"\">"
+					+ "Account ID: "+myObj[i].businessAccountId
+					+ "<br> Account Name: "
 					+ myObj[i].accountName
 					+ "</a></h3>";
 			x += "<br>";
@@ -66,7 +66,7 @@
 
 	</div>
 
-<!-- 	//TODO change accountList into details to display information of accounts -->
+
 	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
 
 

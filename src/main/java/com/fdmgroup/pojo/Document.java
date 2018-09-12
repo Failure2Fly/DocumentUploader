@@ -1,14 +1,23 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.pojo;
 
 import java.nio.file.Path;
-import java.sql.Date;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class Document {
+
 	private String name;
 	private Path sourcePath;
 	private Path repositoryPath;
 	private Date date;
+	private int accountId;
 	
+	@Override
+	public String toString() {
+		return "Document [name=" + name + ", sourcePath=" + sourcePath + ", repositoryPath=" + repositoryPath
+				+ ", date=" + date + "]";
+	}
 	public Document(String name, Path sourcePath, Path repositoryPath, Date date) {
 		super();
 		this.name = name;
@@ -21,6 +30,13 @@ public class Document {
 		super();
 	}
 	
+	public int getAccountId() {
+		return accountId;
+	}
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -53,5 +69,4 @@ public class Document {
 		this.date = date;
 	}
 	
-
 }

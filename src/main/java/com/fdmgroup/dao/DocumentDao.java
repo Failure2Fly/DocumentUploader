@@ -1,14 +1,20 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.fdmgroup.pojo.Document;
+import com.fdmgroup.rowmapper.DocumentMapper;
 
 @Repository
 public class DocumentDao implements Dao<Document, String> {
@@ -28,8 +34,9 @@ public class DocumentDao implements Dao<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(?,?,?,SYSDATE)";
-			jdbcTemplateObject.update(SQL1,getId(), document.getName(), document.getRepositoryPath().toString());
+			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
+			jdbcTemplateObject.update(SQL1, getId(), document.getName(), document.getRepositoryPath().toString(),
+					document.getAccountId());
 
 		} catch (IOException x) {
 			System.err.println("Problem creating file - check document paths");
@@ -63,8 +70,9 @@ public class DocumentDao implements Dao<Document, String> {
 			byte[] data = Files.readAllBytes(document.getSourcePath());
 			Files.write(document.getRepositoryPath(), data);
 
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate) VALUES(file_seq.nextval,?,?,SYSDATE)";
-			jdbcTemplateObject.update(SQL1, document.getName(), document.getRepositoryPath().toString());
+			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
+			jdbcTemplateObject.update(SQL1, getId(), document.getName(), document.getRepositoryPath().toString(),
+					document.getAccountId());
 
 		} catch (IOException e) {
 			System.err.println("Error with updating a file- check document paths");
@@ -75,19 +83,36 @@ public class DocumentDao implements Dao<Document, String> {
 
 	@Override
 	public Document read(String path) {
-		String SQL = "SELECT filename, storedate FROM DOCUMENTS WHERE storedfilepath = ?";
+		String SQL = "SELECT filename, storedfilepath, storedate, associatedaccountid FROM DOCUMENTS WHERE storedfilepath = ?";
 		Document document = (Document) jdbcTemplateObject.queryForObject(SQL, new Object[] { path },
 				new DocumentMapper());
 
 		return document;
 	}
-	
-	private int getId() {
+
+	public List<Document> read(int businessAccountId) {
+		String SQL = "SELECT filename, storedfilepath, storedate, ASSOCIATEDACCOUNTID FROM DOCUMENTS WHERE ASSOCIATEDACCOUNTID = ?";
+		List<Document> documents = new ArrayList<>();
+		List<Map<String, Object>> rows = new ArrayList<>();
+		rows = jdbcTemplateObject.queryForList(SQL, businessAccountId);
+		for (Map<String, Object> map : rows) {
+			Document document = new Document();
+			document.setAccountId(businessAccountId);
+			Date date = ((Date) map.get("storedate"));
+			document.setDate(date);
+			document.setName((String) map.get("filename"));
+			document.setRepositoryPath(Paths.get((String) map.get("storedfilepath")));
+			documents.add(document);
+		}
+
+		return documents;
+	}
+
+	public int getId() {
 		String SQL = "SELECT MAX(fileid) FROM documents";
 		try {
-			
-			
-			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
+
+			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class)) + 1;
 
 		} catch (NullPointerException e) {
 			return 1;

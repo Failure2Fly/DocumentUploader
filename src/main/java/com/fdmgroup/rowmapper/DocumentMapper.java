@@ -1,10 +1,12 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.rowmapper;
 
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import com.fdmgroup.pojo.Document;
 
 public class DocumentMapper implements RowMapper {
 
@@ -13,6 +15,8 @@ public class DocumentMapper implements RowMapper {
 		//TODO comeback after sql database coded
 		document.setName(rs.getString("filename"));
 		document.setDate(rs.getDate("storedate"));
+		document.setAccountId(rs.getInt("associatedaccountid"));
+		document.setRepositoryPath(Paths.get(rs.getString("storedfilepath")));
 		document.setSourcePath(null);
 //		Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
 //	    rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));

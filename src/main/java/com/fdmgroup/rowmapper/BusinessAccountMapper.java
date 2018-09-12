@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.rowmapper;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,6 +11,11 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.fdmgroup.controller.DispatchController;
+import com.fdmgroup.dao.UserAccountDao;
+import com.fdmgroup.pojo.BusinessAccount;
+import com.fdmgroup.pojo.UserAccount;
 
 public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 
@@ -29,8 +34,9 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		}
 		
 		BusinessAccount business = new BusinessAccount();
-		ApplicationContext context =DispatchController.getContext();
-		UserAccountDao dao = (UserAccountDao)context.getBean("UserAccountJdbcTemplate");
+		ApplicationContext context = DispatchController.getContext();
+
+		UserAccountDao dao = (UserAccountDao)context.getBean("UserAccountDao");
 				
 		UserAccount owner = dao.read(rs.getInt("useraccountownerid"));
 		business.setOwner(owner);

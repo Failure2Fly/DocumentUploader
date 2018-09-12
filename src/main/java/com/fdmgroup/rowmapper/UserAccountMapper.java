@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.rowmapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import com.fdmgroup.pojo.UserAccount;
 
 public class UserAccountMapper implements RowMapper<UserAccount> {
 	public UserAccount mapRow(ResultSet rs, int rowNum) throws SQLException {

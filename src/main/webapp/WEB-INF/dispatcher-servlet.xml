@@ -13,7 +13,7 @@
 	<mvc:annotation-driven />
 	
 	<!-- Tell Spring to scan your project for @Controller annotated classes -->
-	<context:component-scan base-package="com.fdmgroup.documentuploader" />
+	<context:component-scan base-package="com.fdmgroup.controller" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -33,13 +33,6 @@
  
     </bean>
      
-    <bean
-        class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-        <property name="exceptionMappings">
-            <props>
-                <prop key="java.lang.Exception">Error</prop>
-            </props>
-        </property>
-    </bean>   
+    
 
 </beans>
