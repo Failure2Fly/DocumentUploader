@@ -6,10 +6,13 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.http.HttpSession;
+<<<<<<< HEAD
+import org.springframework.context.ApplicationContext;
+=======
 
 import org.springframework.context.ConfigurableApplicationContext;
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -55,7 +57,6 @@ public class DispatchController {
 		} catch (NullPointerException e) {
 			return "login";
 		}
-
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -65,7 +66,6 @@ public class DispatchController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
 		return "userHome";
 	}
 
@@ -137,7 +137,6 @@ public class DispatchController {
 				}
 				return "register";
 			} finally {
-
 			}
 		} else {
 			session.setAttribute("listOfQuestion", SecurityQuestion.allQuestions());
@@ -164,7 +163,6 @@ public class DispatchController {
 			session.setAttribute("user", userAccount);
 			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
-
 			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
 			return new ModelAndView(new RedirectView("/login", true));
@@ -175,30 +173,22 @@ public class DispatchController {
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		return "createAccount";
-
 	}
 
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
 	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
-
 		UserAccount user = ((UserAccount) session.getAttribute("user"));
 		account.setOwner(user);
-
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
-
 		account.setServicelevel(new ServiceLevel());
-
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
-
 		dao.create(account);
-
 		return new ModelAndView(new RedirectView("/userHome", true));
-
 	}
 
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
@@ -212,12 +202,20 @@ public class DispatchController {
 		model.addAttribute(file);
 
 		List<Document> fileList = documentDao.read(Integer.parseInt(accountId));
+<<<<<<< HEAD
+		
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+
+			String json = mapper.writeValueAsString(fileList);
+=======
 
 		String json = "";
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 
 			json = mapper.writeValueAsString(fileList);
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 			session.setAttribute("fileList", json);
 
 		} catch (JsonProcessingException e) {
@@ -241,9 +239,7 @@ public class DispatchController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 		return "accountHome";
-
 	}
 
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
@@ -273,9 +269,13 @@ public class DispatchController {
 		document.setRepositoryPath(Paths.get(repositoryPath));
 
 		documentDao.create(document);
+<<<<<<< HEAD
+=======
 
 		return "accountHome";
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
 
+		return "accountHome";
 	}
 
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
@@ -283,8 +283,10 @@ public class DispatchController {
 		model.addAttribute(new BusinessAccount());
 		
 		return "accountDetails";
-
 	}
+<<<<<<< HEAD
+}
+=======
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
 	public String accountDetailsPost(@ModelAttribute BusinessAccount account, HttpSession session) {
 		
@@ -294,3 +296,4 @@ public class DispatchController {
 	}
 
 }
+>>>>>>> 1c72e54f8663ed64a73ca03bd72eeaffd8255d8d
