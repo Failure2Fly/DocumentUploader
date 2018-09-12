@@ -18,26 +18,18 @@
 
 <script>
 	function DisplayFiles() {
-
-		var myObj, i, x = "",y="";
-		x=document.getElementById("fileList").innerHTML;
-		x=x.replace(/\\/g, "\\\\");
-		myObj =JSON.parse(x);
-
+		var myObj, i, x = "", y = "";
+		x = document.getElementById("fileList").innerHTML;
+		x = x.replace(/\\/g, "\\\\");
+		myObj = JSON.parse(x);
 		for (i in myObj) {
-			y += "<h3><p>"
-					+ "File name: "+myObj[i].name
-					+ " "
-					+ "Upload date: "+myObj[i].date
-					+ "</p></h3>";
+			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "File name: " + myObj[i].name + " "
+					+ "Upload date: " + myObj[i].date + "</p></h3></a>";
 			y += "<br>";
 		}
-
 		document.getElementById("Documents").innerHTML = y;
-
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
-
 	}
 </script>
 
