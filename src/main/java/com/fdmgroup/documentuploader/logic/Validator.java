@@ -34,7 +34,7 @@ public class Validator {
 		}
 	}
 	
-	public boolean validatePassword(String password,String confirmPassword){
+	public boolean validatePasswordConfirmation(String password,String confirmPassword){
 		if(password.equals(confirmPassword)){
 			return true;
 		}
