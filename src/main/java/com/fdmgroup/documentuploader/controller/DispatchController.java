@@ -1,9 +1,6 @@
-<<<<<<< HEAD:src/main/java/com/fdmgroup/documentuploader/controller/DispatchController.java
+
 package com.fdmgroup.documentuploader.controller;
 
-=======
-package com.fdmgroup.controller;
->>>>>>> cd52b17393bcb7824fe7c520a6d900117e7fcc7b:src/main/java/com/fdmgroup/controller/DispatchController.java
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -26,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-<<<<<<< HEAD:src/main/java/com/fdmgroup/documentuploader/controller/DispatchController.java
 import com.fdmgroup.documentuploader.dao.BusinessAccountDao;
 import com.fdmgroup.documentuploader.dao.DocumentDao;
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
@@ -37,17 +33,6 @@ import com.fdmgroup.documentuploader.pojo.Document;
 import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
-=======
-import com.fdmgroup.dao.BusinessAccountDao;
-import com.fdmgroup.dao.DocumentDao;
-import com.fdmgroup.dao.UserAccountDao;
-import com.fdmgroup.enumeratedtypes.SecurityQuestion;
-import com.fdmgroup.logic.Validator;
-import com.fdmgroup.pojo.BusinessAccount;
-import com.fdmgroup.pojo.Document;
-import com.fdmgroup.pojo.ServiceLevel;
-import com.fdmgroup.pojo.UserAccount;
->>>>>>> cd52b17393bcb7824fe7c520a6d900117e7fcc7b:src/main/java/com/fdmgroup/controller/DispatchController.java
 @Controller
 public class DispatchController {
 	private static ConfigurableApplicationContext context;
