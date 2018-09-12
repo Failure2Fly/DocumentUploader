@@ -65,7 +65,6 @@ public class DispatchController {
 		} catch (NullPointerException e) {
 			return "login";
 		}
-
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		ObjectMapper mapper = new ObjectMapper();
 		try {
@@ -75,7 +74,6 @@ public class DispatchController {
 		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 		}
-
 		return "userHome";
 	}
 
