@@ -1,10 +1,12 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.rowmapper;
 
 import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+
+import com.fdmgroup.pojo.Document;
 
 public class DocumentMapper implements RowMapper {
 

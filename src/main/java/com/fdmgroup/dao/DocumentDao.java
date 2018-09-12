@@ -1,4 +1,4 @@
-package com.fdmgroup.documentuploader;
+package com.fdmgroup.dao;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,6 +12,9 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import com.fdmgroup.pojo.Document;
+import com.fdmgroup.rowmapper.DocumentMapper;
 
 @Repository
 public class DocumentDao implements Dao<Document, String> {
@@ -33,7 +36,7 @@ public class DocumentDao implements Dao<Document, String> {
 
 			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
 			jdbcTemplateObject.update(SQL1, getId(), document.getName(), document.getRepositoryPath().toString(),
-					document.accountId);
+					document.getAccountId());
 
 		} catch (IOException x) {
 			System.err.println("Problem creating file - check document paths");
