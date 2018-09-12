@@ -56,42 +56,42 @@ public class BusinessAccountDaoTest {
 //		
 //	}
 //	
-	@Test
-	public void test_businessAccountUpdateMethodWorks_UpdatesReflectedInDatabase(){
-		ApplicationContext context = DispatchController.getContext();
-		UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
-		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
-		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
-		UserAccount user2 = new UserAccount("IOwnNow2","You2","IOwn2","youShallNotPass2","userEmail2");
-		List<UserAccount> users = new ArrayList<>();
-		users.add(user);
-		userAccount.create(user);
-		userAccount.create(user2);
-		List<String> files= null;
-		ServiceLevel level = null;
-		String accountName="TestAccount";
-		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
-		
-		businessDao.create(account);
-		List<BusinessAccount> tempAccounts=businessDao.read(user.getUsername());
-		account =tempAccounts.get(0);
-		account.setAccountName("WhooAccount!");
-		users.add(user2);
-		account.setUserAccounts(users);
-		businessDao.update(account);
-		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
-		for(BusinessAccount acc:accounts){
-			account=acc;
-		}
-
-		businessDao.delete(account);
-
-		userAccount.delete(user);
-		userAccount.delete(user2);
-		
-
-
-	}
+//	@Test
+//	public void test_businessAccountUpdateMethodWorks_UpdatesReflectedInDatabase(){
+//		ApplicationContext context = DispatchController.getContext();
+//		UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
+//		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
+//		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
+//		UserAccount user2 = new UserAccount("IOwnNow2","You2","IOwn2","youShallNotPass2","userEmail2");
+//		List<UserAccount> users = new ArrayList<>();
+//		users.add(user);
+//		userAccount.create(user);
+//		userAccount.create(user2);
+//		List<String> files= null;
+//		ServiceLevel level = null;
+//		String accountName="TestAccount";
+//		BusinessAccount account = new BusinessAccount(user,level,users,files,accountName);
+//		
+//		businessDao.create(account);
+//		List<BusinessAccount> tempAccounts=businessDao.read(user.getUsername());
+//		account =tempAccounts.get(0);
+//		account.setAccountName("WhooAccount!");
+//		users.add(user2);
+//		account.setUserAccounts(users);
+//		businessDao.update(account);
+//		List<BusinessAccount> accounts=businessDao.read(user.getUsername());
+//		for(BusinessAccount acc:accounts){
+//			account=acc;
+//		}
+//
+//		businessDao.delete(account);
+//
+//		userAccount.delete(user);
+//		userAccount.delete(user2);
+//		
+//
+//
+//	}
 	
 
 //	@Test

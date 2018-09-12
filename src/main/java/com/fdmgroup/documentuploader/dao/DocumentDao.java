@@ -1,5 +1,7 @@
 package com.fdmgroup.documentuploader.dao;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,12 +14,13 @@ import javax.sql.DataSource;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fdmgroup.documentuploader.pojo.Document;
 import com.fdmgroup.documentuploader.rowmapper.DocumentMapper;
 
 @Repository
-public class DocumentDao implements Dao<Document, String> {
+public class DocumentDao {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
@@ -27,30 +30,54 @@ public class DocumentDao implements Dao<Document, String> {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
-	@Override
-	public void create(Document document) {
+	
+	public void create(Document document, MultipartFile file) {
 
 		try {
-			byte[] data = Files.readAllBytes(document.getSourcePath());
-			Files.write(document.getRepositoryPath(), data);
-
+			File destination = document.getRepositoryPath().toFile(); 
+			
+			String repositoryPath = document.getRepositoryPath().toString();
+			File debugFile = new File("H:\\DebugCreate.txt");
+			try {
+				FileWriter writer = new FileWriter(debugFile);
+				writer.write("Path: "+repositoryPath);
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			repositoryPath=repositoryPath.replaceAll("\\\\", "/");
+			file.transferTo(destination);
 			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
-			jdbcTemplateObject.update(SQL1, getId(), document.getName(), document.getRepositoryPath().toString(),
+			jdbcTemplateObject.update(SQL1, getId(), document.getName(), repositoryPath,
 					document.getAccountId());
 
 		} catch (IOException x) {
+			
 			System.err.println("Problem creating file - check document paths");
 			System.err.println(x);
 		}
 
 	}
 
-	@Override
+
 	public void delete(Document document) {
 		try {
 			Files.delete(document.getRepositoryPath());
+			String repositoryPath = document.getRepositoryPath().toString();
+			repositoryPath=repositoryPath.replaceAll("\\\\", "/");
+			File debugFile = new File("H:\\DebugDeleteDao.txt");
+			try {
+				FileWriter writer = new FileWriter(debugFile);
+				writer.write("Path: "+repositoryPath);
+				writer.flush();
+				writer.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			String SQL = "DELETE FROM DOCUMENTS WHERE storedfilepath = ?";
-			jdbcTemplateObject.update(SQL, document.getRepositoryPath().toString());
+			jdbcTemplateObject.update(SQL, repositoryPath);
+
 
 		} catch (IOException e) {
 			System.err
@@ -60,31 +87,17 @@ public class DocumentDao implements Dao<Document, String> {
 
 	}
 
-	@Override
-	public void update(Document document) {
-		try {
-			Files.delete(document.getRepositoryPath());
-			String SQL = "DELETE FROM DOCUMENTS WHERE storedfilepath = ?";
-			jdbcTemplateObject.update(SQL, document.getRepositoryPath().toString());
 
-			byte[] data = Files.readAllBytes(document.getSourcePath());
-			Files.write(document.getRepositoryPath(), data);
-
-			String SQL1 = "INSERT INTO DOCUMENTS (fileid,filename,storedfilepath,storedate,associatedaccountid) VALUES(?,?,?,SYSDATE,?)";
-			jdbcTemplateObject.update(SQL1, getId(), document.getName(), document.getRepositoryPath().toString(),
-					document.getAccountId());
-
-		} catch (IOException e) {
-			System.err.println("Error with updating a file- check document paths");
-			e.printStackTrace();
-		}
+	public void update(Document document, MultipartFile file) {
+			delete(document);
+			create(document, file);
 
 	}
 
-	@Override
+
 	public Document read(String path) {
 		String SQL = "SELECT filename, storedfilepath, storedate, associatedaccountid FROM DOCUMENTS WHERE storedfilepath = ?";
-		Document document = (Document) jdbcTemplateObject.queryForObject(SQL, new Object[] { path },
+		Document document = jdbcTemplateObject.queryForObject(SQL, new Object[] { path },
 				new DocumentMapper());
 
 		return document;

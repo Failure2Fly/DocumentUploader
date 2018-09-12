@@ -257,12 +257,22 @@ public class DispatchController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 		document.setSourcePath(Paths.get(sourceFile.toString()));
-		String repositoryPath = "H:\\repository\\" +fileId+ accountId + "\\" + file.getOriginalFilename();
+		String repositoryPath = "H:\\repository\\" + accountId + "\\" +fileId+ file.getOriginalFilename();
 		document.setRepositoryPath(Paths.get(repositoryPath));
-
-		documentDao.create(document);
+		
+		File debugFile = new File("H:\\DebugUpload.txt");
+		try {
+			FileWriter writer = new FileWriter(debugFile);
+			writer.write("Document to be uploaded: " + document );
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		documentDao.create(document,file);
+		
 
 		return new RedirectView("/DocumentUploader/refreshAccount");
 	}
@@ -302,9 +312,30 @@ public class DispatchController {
 			} catch (IOException e2) {
 				e2.printStackTrace();
 			}
+		}	
+	}
+	
+	@RequestMapping(value = "/deleteFile/**", method = RequestMethod.GET)
+	public RedirectView deleteFile(HttpSession session, HttpServletRequest request) {
+		String path=(String) request.getAttribute(
+		        HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		path = path.substring(12);
+		path = path.replaceAll("%20", " ");
+		
+		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
+		Document document = documentDao.read(path);
+		File file2 = new File("H:\\DebugDelete.txt");
+		try {
+			FileWriter writer = new FileWriter(file2);
+			writer.write("File attempted to delete: "+document);
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
-		
-		
+		documentDao.delete(document);
+		BusinessAccount account =(BusinessAccount) session.getAttribute("account");
+		return new RedirectView("/DocumentUploader/accountHome/"+account.getBusinessAccountId());
 		
 		
 	}

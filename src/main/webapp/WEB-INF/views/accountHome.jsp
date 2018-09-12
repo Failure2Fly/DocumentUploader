@@ -27,6 +27,7 @@
 		for (i in myObj) {
 			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "File name: " + myObj[i].name + " "
 					+ "Upload date: " + myObj[i].date + "</p></h3></a>";
+			y += "<a href=\"/DocumentUploader/deleteFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "Delete"+"</p></h3></a>";
 			y += "<br>";
 		}
 
