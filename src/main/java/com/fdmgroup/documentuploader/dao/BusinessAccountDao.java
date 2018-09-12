@@ -143,17 +143,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	public BusinessAccount read(Integer id) {
 		String SQL = "SELECT businessaccountid, useraccountownerid, servicelevel, accountname FROM BUSINESSACCOUNT WHERE businessaccountid=?";
 		
-		File file = new File("H:\\DebugBusinessDao.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-
-			writer.write("Account id:"+id.toString()+"\n SQL "+SQL+"\nIs jdbcTemplate null?"+Objects.isNull(jdbcTemplateObject));
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[]{id.toString()}, new BusinessAccountMapper());
 
 		return business;

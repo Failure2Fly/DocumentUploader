@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.fdmgroup.documentuploader.pojo.Document;
 
-public class DocumentMapper implements RowMapper {
+public class DocumentMapper implements RowMapper<Document> {
 
 	public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Document document = new Document();
