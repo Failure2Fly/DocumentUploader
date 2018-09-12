@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -38,6 +39,7 @@ import com.fdmgroup.documentuploader.pojo.BusinessAccount;
 import com.fdmgroup.documentuploader.pojo.Document;
 import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
+import com.fdmgroup.documentuploader.enumeratedtypes.ServiceLevels;
 
 @Controller
 public class DispatchController {
@@ -184,11 +186,12 @@ public class DispatchController {
 	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
 	public String createAccountGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
+		model.addAttribute("listOfLevels", ServiceLevels.allServiceLevels());
 		return "createAccount";
 	}
 
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpSession session) {
+	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpRequest request, HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		UserAccount user = ((UserAccount) session.getAttribute("user"));
@@ -200,6 +203,15 @@ public class DispatchController {
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
 		dao.create(account);
+		File file1 = new File("H:\\createAccount.txt");
+		try {
+			FileWriter writer = new FileWriter(file1);
+			writer.write(account.getServicelevel().getServiceLevel().toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
 
@@ -314,7 +326,6 @@ public class DispatchController {
 		
 		return "accountDetails";
 	}
-
 	
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
 	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
@@ -322,7 +333,6 @@ public class DispatchController {
 		String remove = request.getParameter("remove");
 		String accoutName = request.getParameter("AccountName");
 		return "accountDetails";
-
 
 	}
 	

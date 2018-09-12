@@ -22,13 +22,13 @@
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
-			<h1>${sessionScope.user.username }'s Accounts details</h1>
+			<h1>${sessionScope.user.username}'s Accounts details</h1>
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
 				<button class="btn btn-primary" type="submit">Back to User
 					Homepage</button>
-			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId }">
+			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId}">
 				<button class="btn btn-primary" type="submit">Account
 					Home</button>
 			</a> <a href="/DocumentUploader/login">
@@ -57,7 +57,7 @@
 		<sf:form commandName="account" method="POST" action="accountDetails">
 				<legend>Add User to Repository:</legend>
 			<fieldset>
-				<input type="text" class="inputField" id="fields"name="add"type="text" 
+				<input type="text" class="inputField" id="fields" name="add" type="text" 
 				placeholder="Enter the User Email">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
@@ -67,7 +67,7 @@
 		<sf:form commandName="account" method="POST" action="accountDetails">
 				<legend>Change Repository Name:</legend>
 			<fieldset>
-				<sf:input path="accountName" type="text" class="inputField" id="fields" name="AccountName" type="text" 
+				<sf:input path="accountName" type="text" class="inputField" id="fields" name="changeAccountName" type="text" 
 				placeholder="Enter new Account Name"/>
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"

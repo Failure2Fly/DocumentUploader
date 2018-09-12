@@ -171,7 +171,6 @@ input[type=checkbox], input[type=radio] {
 
 /* This is where the Footer Starts*/
 footer {
-	position: absolute;
 	margin-top: 50px;
 	border-top: black solid 1px;
 	bottom: 0;

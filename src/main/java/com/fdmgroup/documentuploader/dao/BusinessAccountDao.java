@@ -38,19 +38,31 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	@Override
 	public void create(BusinessAccount account) {
 		
-		String SQL1 = "INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(?, ?, null, ?)";
+		String SQL1 = "INSERT INTO BUSINESSACCOUNT(businessaccountid, useraccountownerid, servicelevel, accountname) VALUES(?, ?, ?, ?)";
 		String sqlOwnerId = "SELECT UserID FROM useraccount WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
 		int businessId= getId();
-		jdbcTemplateObject.update(SQL1,businessId , ownerId, account.getAccountName());
+		SQL1 = "SELECT servicelevelid FROM servicelevel WHERE servicelevel=?";
+		String formattedServiceLevel = account.getServicelevel().getServiceLevel().name().substring(0,1) + account.getServicelevel().getServiceLevel().name().substring(1).toLowerCase();
+		File file1 = new File("H:\\businessaccountservicelevel.txt");
+		try {
+			FileWriter writer = new FileWriter(file1);
+			writer.write(formattedServiceLevel);
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		Integer serviceLevelId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { formattedServiceLevel },
+				Integer.class);
+		jdbcTemplateObject.update(SQL1,businessId , ownerId, serviceLevelId, account.getAccountName());
 		
 		SQL1 = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
 
 		// UserAccount admin, int businessAccountId, ServiceLevel servicelevel,
-		// List<UserAccount> userAccounts, List<String> fileList
 		// TODO: write servicelevel
 		
 	}

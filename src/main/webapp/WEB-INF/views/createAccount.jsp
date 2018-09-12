@@ -43,13 +43,10 @@
 				<sf:input path="accountName" class="inputField" type="text" 
 					name="AccountName" placeholder="Account Name " value="" />
 				<br>
-				<br> <br> <select>
-					<option value="BRONZE">Bronze</option>
-					<option value="SILVER">Silver</option>
-					<option value="GOLD">Gold</option>
-					<option value="UNLIMITED">Unlimited</option>
-					<option value="ENTERPRISE">Enterprise</option>
-				</select> 
+				<br> <br> 
+				<sf:select items="${listOfLevels}" path="servicelevel.serviceLevel">
+					
+				</sf:select> 
 				<br> 
 				
 				
