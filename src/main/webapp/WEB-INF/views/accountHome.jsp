@@ -36,7 +36,7 @@
 </script>
 
 
-<title>Business Account Details</title>
+<title>Document Uploader</title>
 </head>
 
 <body onload="DisplayFiles()">

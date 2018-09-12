@@ -113,7 +113,7 @@
 		        I accept <a class="terms">TP's terms and conditions</a>
 		      </label>
 		    </div>
-		    <button type="submit" class="btn btn-primary btn-sign-in" value="Register">Register</button>
+		    <button type="submit" onclick="RegisterValidate()" class="btn btn-primary btn-sign-in" value="Register">Register</button>
 		  </div>
 	   </div>
 	</sf:form>
