@@ -19,17 +19,14 @@
 <script>
 	function DisplayFiles() {
 
-		var myObj, i, x = "",y="";
-		x=document.getElementById("fileList").innerHTML;
-		x=x.replace(/\\/g, "\\\\");
-		myObj =JSON.parse(x);
+		var myObj, i, x = "", y = "";
+		x = document.getElementById("fileList").innerHTML;
+		x = x.replace(/\\/g, "\\\\");
+		myObj = JSON.parse(x);
 
 		for (i in myObj) {
-			y += "<h3><p>"
-					+ "File name: "+myObj[i].name
-					+ " "
-					+ "Upload date: "+myObj[i].date
-					+ "</p></h3>";
+			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].name+";"+myObj[i].date+"\"><h3><p>" + "File name: " + myObj[i].name + " "
+					+ "Upload date: " + myObj[i].date + "</p></h3></a>";
 			y += "<br>";
 		}
 
@@ -40,6 +37,7 @@
 
 	}
 </script>
+
 
 <title>Business Account Details</title>
 </head>
@@ -71,8 +69,8 @@
 			enctype="multipart/form-data">
 			<p>Choose a file to upload:</p>
 			<input name="file" id="sourcePath" type="file" class="inputField" />
-			<input class="button" id="registerButton" type="submit"
-				value="Upload" class="inputField">
+			<input onclick="refreshPage()" class="button" id="registerButton"
+				type="submit" value="Upload" class="inputField">
 		</sf:form>
 	</div>
 

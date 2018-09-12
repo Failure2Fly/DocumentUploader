@@ -201,6 +201,7 @@ public class DispatchController {
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
 	public String AccountDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
+		
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		BusinessAccount businessAccount = businessDao.read(new Integer(Integer.parseInt(accountId)));
@@ -220,15 +221,6 @@ public class DispatchController {
 			json =json+"\"date\":\""+document.getDate().toString()+"\"},";
 		}
 		
-		File debugFile = new File("H:\\DebugJsonFileList.txt");
-		try {
-			FileWriter writer = new FileWriter(debugFile);
-			writer.write("Json so far: " + json + " Json length: " +json.length());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		json=json.substring(0,json.length()-1);
 		}
 		json=json+"]";
@@ -239,7 +231,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
-	public String AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
+	public RedirectView AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		File directory = new File("H:\\repository\\" + accountId);
@@ -266,15 +258,30 @@ public class DispatchController {
 
 		documentDao.create(document);
 
-		return "accountHome";
+		return new RedirectView("/DocumentUploader/refreshAccount");
 	}
-
+	@RequestMapping(value = "/refreshAccount", method = RequestMethod.GET)
+	public RedirectView refreshAccount(Model model, HttpSession session) {
+		BusinessAccount account =(BusinessAccount) session.getAttribute("account");
+		return new RedirectView("/DocumentUploader/accountHome/"+account.getBusinessAccountId());
+	}
+	
+	@RequestMapping(value = "/downloadFile/{fileDetails}", method = RequestMethod.GET)
+	public RedirectView downloadFile(Model model, HttpSession session, @PathVariable(value = "accountId") String accountId) {
+		
+		
+		
+		BusinessAccount account =(BusinessAccount) session.getAttribute("account");
+		return new RedirectView("/DocumentUploader/accountHome/"+account.getBusinessAccountId());
+	}
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		
 		return "accountDetails";
 	}
+
+	
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.POST)
 	public String accountDetailsPost(HttpServletRequest request, HttpSession session) {
 		String addAccount = request.getParameter("add");
