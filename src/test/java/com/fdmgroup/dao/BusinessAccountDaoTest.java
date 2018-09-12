@@ -84,9 +84,11 @@ public class BusinessAccountDaoTest {
 			account=acc;
 		}
 
-//		businessDao.delete(account);
+		businessDao.delete(account);
 
-//		userAccount.delete(user);
+		userAccount.delete(user);
+		userAccount.delete(user2);
+		
 
 
 	}
