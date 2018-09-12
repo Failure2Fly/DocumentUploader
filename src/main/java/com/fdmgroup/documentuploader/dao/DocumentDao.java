@@ -121,10 +121,10 @@ public class DocumentDao {
 		return documents;
 	}
 
+	
 	public int getId() {
 		String SQL = "SELECT MAX(fileid) FROM documents";
 		try {
-
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class)) + 1;
 
 		} catch (NullPointerException e) {
@@ -132,5 +132,5 @@ public class DocumentDao {
 		}
 
 	}
-
+	
 }
