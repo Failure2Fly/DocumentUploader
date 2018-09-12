@@ -1,4 +1,4 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.documentuploader.dao;
 
 
 import java.io.File;
@@ -17,11 +17,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fdmgroup.controller.DispatchController;
-import com.fdmgroup.pojo.BusinessAccount;
-import com.fdmgroup.pojo.Questions;
-import com.fdmgroup.pojo.UserAccount;
-import com.fdmgroup.rowmapper.BusinessAccountMapper;
+import com.fdmgroup.documentuploader.controller.DispatchController;
+import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+import com.fdmgroup.documentuploader.pojo.Questions;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
+import com.fdmgroup.documentuploader.rowmapper.BusinessAccountMapper;
 
 @Repository
 public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {

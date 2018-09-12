@@ -1,4 +1,4 @@
-package com.fdmgroup.pojo;
+package com.fdmgroup.documentuploader.pojo;
 
 import java.util.ArrayList;
 import java.util.List;

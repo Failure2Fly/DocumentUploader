@@ -1,4 +1,4 @@
-package com.fdmgroup.pojo;
+package com.fdmgroup.documentuploader.pojo;
 
 import java.nio.file.Path;
 import java.util.Date;

@@ -1,4 +1,4 @@
-package com.fdmgroup.pojo;
+package com.fdmgroup.documentuploader.enumeratedtypes;
 
 public enum ServiceLevels {
 

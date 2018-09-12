@@ -1,4 +1,4 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.documentuploader.dao;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,8 +13,8 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fdmgroup.pojo.Document;
-import com.fdmgroup.rowmapper.DocumentMapper;
+import com.fdmgroup.documentuploader.pojo.Document;
+import com.fdmgroup.documentuploader.rowmapper.DocumentMapper;
 
 @Repository
 public class DocumentDao implements Dao<Document, String> {
