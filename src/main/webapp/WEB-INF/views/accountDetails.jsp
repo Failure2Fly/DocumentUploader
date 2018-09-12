@@ -63,7 +63,7 @@
 			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
 			<fieldset>
 				<p>Do you want to delete the repository? </p>
-				<input style="marigin-top:0px;"type="checkbox" name="remove">
+			<!--<input style="margin-top: 0px;"type="checkbox" name="remove"> -->
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Delete">
