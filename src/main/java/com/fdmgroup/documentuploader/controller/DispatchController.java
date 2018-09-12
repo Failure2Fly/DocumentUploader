@@ -1,4 +1,4 @@
-package com.fdmgroup.controller;
+package com.fdmgroup.documentuploader.controller;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -24,15 +24,15 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fdmgroup.dao.BusinessAccountDao;
-import com.fdmgroup.dao.DocumentDao;
-import com.fdmgroup.dao.UserAccountDao;
-import com.fdmgroup.enumeratedtypes.SecurityQuestion;
-import com.fdmgroup.logic.Validator;
-import com.fdmgroup.pojo.BusinessAccount;
-import com.fdmgroup.pojo.Document;
-import com.fdmgroup.pojo.ServiceLevel;
-import com.fdmgroup.pojo.UserAccount;
+import com.fdmgroup.documentuploader.dao.BusinessAccountDao;
+import com.fdmgroup.documentuploader.dao.DocumentDao;
+import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
+import com.fdmgroup.documentuploader.logic.Validator;
+import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+import com.fdmgroup.documentuploader.pojo.Document;
+import com.fdmgroup.documentuploader.pojo.ServiceLevel;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 @Controller
 public class DispatchController {

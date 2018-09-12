@@ -1,4 +1,6 @@
-package com.fdmgroup.pojo;
+package com.fdmgroup.documentuploader.pojo;
+
+import com.fdmgroup.documentuploader.enumeratedtypes.ServiceLevels;
 
 public class ServiceLevel {
 

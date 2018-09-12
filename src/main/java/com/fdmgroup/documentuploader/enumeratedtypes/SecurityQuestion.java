@@ -1,4 +1,4 @@
-package com.fdmgroup.enumeratedtypes;
+package com.fdmgroup.documentuploader.enumeratedtypes;
 
 import java.util.ArrayList;
 import java.util.List;

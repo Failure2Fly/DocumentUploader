@@ -9,9 +9,9 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 
-import com.fdmgroup.controller.DispatchController;
-import com.fdmgroup.dao.UserAccountDao;
-import com.fdmgroup.pojo.UserAccount;
+import com.fdmgroup.documentuploader.controller.DispatchController;
+import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 
 
