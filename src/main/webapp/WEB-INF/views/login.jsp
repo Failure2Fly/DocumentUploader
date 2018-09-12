@@ -11,7 +11,7 @@
 <%-- integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> --%>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
-<%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
+<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <title>Document Uploader</title>
 </head>
@@ -93,16 +93,19 @@
 
 <footer>
 	<div class="header">
-		<div class="row">
-			<div class="col-4 social">
-				<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-					class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-				<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-			</div>
-			<div class="col-8 copyright">
-				<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-			</div>
+	<div class="row footer-row">
+		<div class="col-6 social">
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
 		</div>
+		<div class="col-6 copyright">
+			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+		</div>
+	</div>
 	</div>
 </footer>
 </html>

@@ -13,6 +13,7 @@
 	<link rel="stylesheet"
 		href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 	<%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
+	<link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 	<link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <title>Document Uploader</title>
 </head>
@@ -107,12 +108,12 @@
           <p class="validate-form" id="missingSecurityQuestion">Please Answer Security Question</p>
 		  <div class="form-group">
 		    <div class="form-check">
-		      <input class="form-check-input" type="checkbox" id="gridCheck">
+		      <input class="" type="checkbox" id="gridCheck">
 		      <label class="form-check-label" for="gridCheck">
 		        I accept <a class="terms">TP's terms and conditions</a>
 		      </label>
 		    </div>
-		    <button type="submit" class="btn btn-primary btn-sign-in" value="Register">Register</button>
+		    <button type="submit" onclick="RegisterValidate()" class="btn btn-primary btn-sign-in" value="Register">Register</button>
 		  </div>
 	   </div>
 	</sf:form>
@@ -123,18 +124,21 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
-	<footer>
-    	<div class="header">
-    		<div class="row">
-    			<div class="col-4 social">
-    				<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-    					class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-    				<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-    			</div>
-    			<div class="col-8 copyright">
-    				<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-    			</div>
-    		</div>
-    	</div>
-    </footer>
+<footer>
+	<div class="header">
+	<div class="row footer-row">
+		<div class="col-6 social">
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+		</div>
+		<div class="col-6 copyright">
+			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+		</div>
+	</div>
+	</div>
+</footer>
 </html>
