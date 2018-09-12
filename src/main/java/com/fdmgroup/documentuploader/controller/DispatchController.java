@@ -2,13 +2,16 @@
 package com.fdmgroup.documentuploader.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ConfigurableApplicationContext;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -235,6 +239,7 @@ public class DispatchController {
 	public RedirectView AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
+		int fileId =documentDao.getId();
 		File directory = new File("H:\\repository\\" + accountId);
 		if (!directory.exists()) {
 			directory.mkdirs();
@@ -254,7 +259,7 @@ public class DispatchController {
 		}
 
 		document.setSourcePath(Paths.get(sourceFile.toString()));
-		String repositoryPath = "H:\\repository\\" + accountId + "\\" + file.getOriginalFilename();
+		String repositoryPath = "H:\\repository\\" +fileId+ accountId + "\\" + file.getOriginalFilename();
 		document.setRepositoryPath(Paths.get(repositoryPath));
 
 		documentDao.create(document);
@@ -267,13 +272,41 @@ public class DispatchController {
 		return new RedirectView("/DocumentUploader/accountHome/"+account.getBusinessAccountId());
 	}
 	
-	@RequestMapping(value = "/downloadFile/{fileDetails}", method = RequestMethod.GET)
-	public RedirectView downloadFile(Model model, HttpSession session, @PathVariable(value = "fileDetails") String fileDetails) {
+	
+	@RequestMapping(value = "/downloadFile/**", method = RequestMethod.GET)
+	public void downloadFile(HttpServletResponse response, HttpServletRequest request) {
+		String path=(String) request.getAttribute(
+		        HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
+		path = path.substring(14);
+		path = path.replaceAll("%20", " ");
+		File file1 = new File("H:\\DebugDownload1.txt");
+		try {
+			FileWriter writer = new FileWriter(file1);
+			writer.write("File attempted to download: "+path);
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		try{
+		InputStream input = new FileInputStream(path);
+		org.apache.commons.io.IOUtils.copy(input,response.getOutputStream());
+		response.flushBuffer();
+		}catch(IOException e){
+			File file2 = new File("H:\\DebugDownload2.txt");
+			try {
+				FileWriter writer = new FileWriter(file2);
+				writer.write("File attempted to download: "+path+" with error "+e);
+				writer.flush();
+				writer.close();
+			} catch (IOException e2) {
+				e2.printStackTrace();
+			}
+		}
 		
 		
 		
-		BusinessAccount account =(BusinessAccount) session.getAttribute("account");
-		return new RedirectView("/DocumentUploader/accountHome/"+account.getBusinessAccountId());
+		
 	}
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(Model model, HttpSession session) {
