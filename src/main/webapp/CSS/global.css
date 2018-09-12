@@ -45,6 +45,11 @@
 .navbar-brand{
 	font-family: 'Abril Fatface', cursive;
 	font-size: 34px;
+	transition-property: font-size;
+	transition-timing-function: ease-in;
+}
+.navbar-brand:hover{
+	font-size: 38px;
 }
 .navbar-brand, .nav-link{
 	color: white;
@@ -123,14 +128,14 @@ form {
 /* This is the end of the Form*/
 
 /* This is the start of the Form*/
-div .registration {
+.registration {
 	margin: auto;
 	text-align: center;
 	background-color: rgb(240, 240, 255);
 	max-width: 50%;
 	width: 50%;*
 }
-div.update {
+.update {
 	margin: auto;
 	text-align: center;
 	background-color: rgb(240, 240, 255);
@@ -142,7 +147,7 @@ form {
 	border-radius: 20px;
 	margin-bottom: 100px;
 }
-input .inputField {
+.inputField {
 	margin: 0px;
 	padding: 5px;
 }
@@ -187,7 +192,10 @@ footer {
 	width: 100%
 }
 footer a {
-	color: #666666;
+	color: white;
+}
+footer a:hover {
+	color: #428bca;
 }
 .social {
 	padding: 20px;

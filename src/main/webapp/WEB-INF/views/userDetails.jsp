@@ -47,7 +47,6 @@
 		</div>
 	</div>
 
-
 	<div id="update-form" class="update">
 		<sf:form commandName="userAccount" method="POST" action="userDetails">
 			<legend>Update:</legend>

@@ -87,29 +87,41 @@
 	  <thead class="thead-dark">
 	    <tr>
 	      <th scope="col">#</th>
-	      <th scope="col">First</th>
-	      <th scope="col">Last</th>
-	      <th scope="col">Handle</th>
+	      <th scope="col">Account</th>
+	      <th scope="col">Service Level</th>
+	      <th scope="col"># of Users</th>
+	      <th scope="col">User Limit</th>
+	      <th scope="col"># of Documents</th>
+	      <th scope="col">Document limit</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr>
 	      <th scope="row">1</th>
-	      <td>Mark</td>
-	      <td>Otto</td>
-	      <td>@mdo</td>
+	      <td>Don'tTouchDonny</td>
+	      <td>Unlimited</td>
+	      <td>4</td>
+	      <td>10</td>
+	      <td>30</td>
+	      <td>unlimited</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">2</th>
-	      <td>Jacob</td>
-	      <td>Thornton</td>
-	      <td>@fat</td>
+	      <td>Mine</td>
+	      <td>Silver</td>
+	      <td>1</td>
+	      <td>1</td>
+	      <td>4</td>
+	      <td>10 documents</td>
 	    </tr>
 	    <tr>
 	      <th scope="row">3</th>
-	      <td>Larry</td>
-	      <td>the Bird</td>
-	      <td>@twitter</td>
+	      <td>The Entourage</td>
+	      <td>Unlimited</td>
+	      <td>8</td>
+	      <td>10</td>
+	      <td>124</td>
+	      <td>Unlimited</td>
 	    </tr>
 	  </tbody>
 	</table>
