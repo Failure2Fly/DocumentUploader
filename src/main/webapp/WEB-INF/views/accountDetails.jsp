@@ -49,7 +49,7 @@
 			<a href="/DocumentUploader/userHome">
 				<button class="btn btn-primary" type="submit">Back to User
 					Homepage</button>
-			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId }">
+			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId}">
 				<button class="btn btn-primary" type="submit">Account
 					Home</button>
 			</a> <a href="/DocumentUploader/login">
@@ -70,24 +70,34 @@
 		</fieldset>
 		</sf:form>
 		<p >Users currently attached to this account:</p>
-		<p id="userList"></p>
+		<p id="userList">Placeholder User</p>
 		<sf:form method="POST" action="/DocumentUploader/accountDetails/addUser">
 				<legend>Add User to Repository:</legend>
 			<fieldset>
-				<input type="text" class="inputField" id="fields"name="add"type="text" 
-				placeholder="Enter the username of the the user you would like to add">
+				<input type="text" class="inputField" id="addInput"name="add"type="text" 
+				placeholder="Enter username">
 				<br>
-				<br> <input class="button" id="updateButton" type="submit"
+				<br> <input class="button" id="addButton" type="submit"
 					value="Add">
+			</fieldset>
+		</sf:form>
+		<sf:form method="POST" action="/DocumentUploader/accountDetails/removeUser">
+				<legend>Remove User from Repository:</legend>
+			<fieldset>
+				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
+				placeholder="Enter username">
+				<br>
+				<br> <input class="button" id="removeButton" type="submit"
+					value="Remove">
 			</fieldset>
 		</sf:form>
 		<sf:form method="POST" action="/DocumentUploader/accountDetails/changeName">
 				<legend>Change Repository Name:</legend>
 			<fieldset>
-				<input name="accountName" type="text" class="inputField" id="fields"  type="text" 
+				<input name="accountName" type="text" class="inputField" id="changeName"  type="text" 
 				placeholder="Enter new Account Name"/>
 				<br>
-				<br> <input class="button" id="updateButton" type="submit"
+				<br> <input class="button" id="changeName" type="submit"
 					value="Change">
 			</fieldset>
 		</sf:form>

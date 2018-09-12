@@ -28,7 +28,6 @@ public class BusinessAccount {
 			List<UserAccount> userAccounts, List<String> fileList, String accountName) {
 		super();
 		this.owner = owner;
-		
 		this.servicelevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;

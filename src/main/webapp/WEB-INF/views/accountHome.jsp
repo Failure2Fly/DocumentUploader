@@ -49,7 +49,7 @@
 	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 	    <ul class="navbar-nav">
 		  <li class="nav-item active">
-	        <a href="/DocumentUploader/createAccount"><button class="btn btn-primary" type="submit">CreateAccount</button></a>
+	        <a href="/DocumentUploader/userHome"><button class="btn btn-primary" type="submit">User Homepage</button></a>
 	      </li>
 	      <li class="nav-item">
 	        <a href="/DocumentUploader/accountDetails"><button class="btn btn-primary" type="submit">Account Details</button></a>
