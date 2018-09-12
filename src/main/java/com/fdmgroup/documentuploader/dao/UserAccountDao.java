@@ -1,12 +1,12 @@
-package com.fdmgroup.dao;
+package com.fdmgroup.documentuploader.dao;
 
 
 import javax.sql.DataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.fdmgroup.pojo.UserAccount;
-import com.fdmgroup.rowmapper.UserAccountMapper;
+import com.fdmgroup.documentuploader.pojo.UserAccount;
+import com.fdmgroup.documentuploader.rowmapper.UserAccountMapper;
 
 @Repository
 public class UserAccountDao implements Dao<UserAccount,String> {
