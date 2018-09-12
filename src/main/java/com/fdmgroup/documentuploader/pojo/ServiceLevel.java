@@ -59,4 +59,6 @@ public class ServiceLevel {
 		return hasAdverts;
 	}
 
+	
+	
 }

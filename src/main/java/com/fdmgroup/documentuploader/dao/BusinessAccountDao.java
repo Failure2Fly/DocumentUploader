@@ -64,6 +64,20 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
 		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel(), account.getAccountName());
+		for(UserAccount secondaryUser:account.getUserAccounts()){
+			System.out.println("This what read username getting:"+read(secondaryUser.getUsername()));
+			System.out.println("Compared to: "+account);
+			if(!read(secondaryUser.getUsername()).contains(account)){
+				System.out.println("Trying to add "+secondaryUser);
+				SQL = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT (businessaccountuserjoinid,useraccountbusinessjoinid) VALUES(?,?)";
+				UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
+				int secondaryUserId = userDao.getID(secondaryUser.getUsername());
+				System.out.println("using number: "+account.getBusinessAccountId()+" "+secondaryUserId);
+				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(),secondaryUserId );
+				
+			}
+		}
+		
 	}
 
 	public List<BusinessAccount> read(String username) {
@@ -138,7 +152,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		return business;
 	}
 
-	private int getId() {
+	public int getId() {
 		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
 		try {
 			
