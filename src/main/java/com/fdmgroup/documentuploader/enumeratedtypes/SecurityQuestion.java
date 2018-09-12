@@ -13,7 +13,6 @@ WHO_IS_YOUR_FAVORITE_ACTOR_MUSICIAN_OR_ARTIST;
 	public static List<String> allQuestions(){
 		List<String> list = new ArrayList<>();
 		for(SecurityQuestion q: SecurityQuestion.values()){
-			String sub = q.name().substring(0, 1)+ //.toLowerCase()
 			list.add(q.name().substring(0,1).toUpperCase()+q.name().toLowerCase().substring(1).replace("_", " ")+"?");
 		}
 		return list;
