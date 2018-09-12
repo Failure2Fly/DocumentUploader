@@ -28,7 +28,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
-
+	
+	@Override
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
@@ -148,12 +149,15 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		String SQL = "SELECT MAX(BUSINESSACCOUNTID) FROM BUSINESSACCOUNT ";
 		try {
 			
-			
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class))+1;
 
 		} catch (NullPointerException e) {
 			return 1;
 		}
+   }
+	public void linkUsertoRepository(int userId,int businessId){
+		String SQL = "INSERT INTO BUSINESSACCOUNTTOUSERACCOUNT VALUES(?,?) ";
+		jdbcTemplateObject.update(SQL,businessId,userId);
 
 	}
 

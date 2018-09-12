@@ -55,20 +55,20 @@
 		</fieldset>
 		</sf:form>
 		<sf:form commandName="account" method="POST" action="accountDetails">
-				<legend>Add Account:</legend>
+				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="fields"name="add"type="text" 
-				placeholder="Enter the Account Name">
+				placeholder="Enter the User Email">
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Add">
 			</fieldset>
 		</sf:form>
 		<sf:form commandName="account" method="POST" action="accountDetails">
-				<legend>Add Account:</legend>
+				<legend>Change Repository Name:</legend>
 			<fieldset>
-				<input type="text" class="inputField" id="fields"name="add"type="text" 
-				placeholder="Enter your Account Name">
+				<sf:input path="accountName" type="text" class="inputField" id="fields" name="AccountName" type="text" 
+				placeholder="Enter new Account Name"/>
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Add">
