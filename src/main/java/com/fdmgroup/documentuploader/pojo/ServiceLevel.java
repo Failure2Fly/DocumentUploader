@@ -5,7 +5,11 @@ import com.fdmgroup.documentuploader.enumeratedtypes.ServiceLevels;
 public class ServiceLevel {
 
 	private ServiceLevels serviceLevel;
-	private int documentUploadLimit;
+	private int monthlyCost;
+	private int documentLimit;
+	private int monthlyDocumentUploadLimit;
+	private int userLimit;
+	private int additionalUserCost;
 	private boolean hasAdverts;
 
 	public ServiceLevel() {
@@ -27,20 +31,43 @@ public class ServiceLevel {
 		switch (serviceLevel) {
 		default:
 		case BRONZE:
-			documentUploadLimit = 2;
+			monthlyCost = 0;
+			documentLimit = 2;
+			monthlyDocumentUploadLimit = 2;
+			userLimit = 1;
+			additionalUserCost = 0;
 			hasAdverts = true;
 			break;
 		case SILVER:
-			documentUploadLimit = 5;
+			monthlyCost = 1;
+			documentLimit = 5;
+			monthlyDocumentUploadLimit = 10;
+			userLimit = 1;
+			additionalUserCost = 0;
 			hasAdverts = true;
 			break;
 		case GOLD:
-			documentUploadLimit = 20;
+			monthlyCost = 2;
+			documentLimit = 20;
+			monthlyDocumentUploadLimit = 50;
+			userLimit = 2;
+			additionalUserCost = 0;
 			hasAdverts = false;
 			break;
 		case UNLIMITED:
+			monthlyCost = 5;
+			documentLimit = -1;
+			monthlyDocumentUploadLimit = -1;
+			userLimit = 10;
+			additionalUserCost = 1;
+			hasAdverts = false;
+			break;
 		case ENTERPRISE:
-			documentUploadLimit = -1;
+			monthlyCost = 15;
+			documentLimit = -1;
+			monthlyDocumentUploadLimit = -1;
+			userLimit = 200;
+			additionalUserCost = 1;
 			hasAdverts = false;
 			break;
 		// If limit < 0, no documentUploadLimit
@@ -51,8 +78,24 @@ public class ServiceLevel {
 		return serviceLevel;
 	}
 
-	public int getDocumentUploadLimit() {
-		return documentUploadLimit;
+	public int getMonthlyCost() {
+		return monthlyCost;
+	}
+
+	public int getDocumentLimit() {
+		return documentLimit;
+	}
+
+	public int getMonthlyDocumentUploadLimit() {
+		return monthlyDocumentUploadLimit;
+	}
+
+	public int getUserLimit() {
+		return userLimit;
+	}
+
+	public int getAdditionalUserCost() {
+		return additionalUserCost;
 	}
 
 	public boolean getHasAdverts() {
