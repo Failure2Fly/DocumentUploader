@@ -192,14 +192,15 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpServletRequest request, HttpSession session) {
+	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpServletRequest request,
+			HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
 		UserAccount user = ((UserAccount) session.getAttribute("user"));
 		account.setOwner(user);
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
-		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase()); 
+		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
 		account.setServicelevel(new ServiceLevel(level));
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
@@ -352,7 +353,12 @@ public class DispatchController {
 
 	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
 	public String accountDetailsGet(HttpSession session) {
+		UserAccount user = (UserAccount) session.getAttribute("user");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
+		if(userDao.getThisId(account.getOwner())!=userDao.getThisId(user)){
+			return "accountHome";
+		}else{
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -362,6 +368,7 @@ public class DispatchController {
 			e.printStackTrace();
 		}
 		return "accountDetails";
+		}
 	}
 
 	@RequestMapping(value = "/accountDetails/delete", method = RequestMethod.POST)
@@ -379,10 +386,12 @@ public class DispatchController {
 		String addUser = request.getParameter("add");
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
 		UserAccount addedUser = userDao.read(addUser);
-		account.getUserAccounts().add(addedUser);
-		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
-		businessDao.update(account);
-		session.setAttribute("account", account);
+		if (!account.getUserAccounts().contains(addedUser)) {
+			account.getUserAccounts().add(addedUser);
+			BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
+			businessDao.update(account);
+			session.setAttribute("account", account);
+		}
 		return new RedirectView("/DocumentUploader/accountDetails/");
 
 	}
@@ -408,7 +417,7 @@ public class DispatchController {
 		File file = new File("H:\\DebugRemoveUser.txt");
 		try {
 			FileWriter writer = new FileWriter(file);
-			writer.write("Account before removal: " + account +" of user "+removedUser);
+			writer.write("Account before removal: " + account + " of user " + removedUser);
 			writer.flush();
 			writer.close();
 		} catch (IOException e) {
