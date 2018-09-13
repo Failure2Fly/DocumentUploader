@@ -35,12 +35,13 @@
 
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
-
+		
 	}
 	function displayAdverts(){
-		var img = document.getElemtentById("hasAdverts")
+		var serviceLevel = JSON.parse(document.getElementById("accountList").innerHTML);
+		var img = documnent.getElementById("hasAdverts");
 		
-		if(serviceLevel == 1 || 2){
+		if(serviceLevel.serviceLevel.hasAdverts == false){
 			img.classList.remove("validate-form");
 			return false;
 		}
@@ -62,7 +63,7 @@
 	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 	    <ul class="navbar-nav">
 		  <li class="nav-item active">
-	        <a href="/DocumentUploader/createAccount"><button class="btn btn-primary" type="submit">CreateAccount</button></a>
+	        <a href="/DocumentUploader/createRepository"><button class="btn btn-primary" type="submit">Create Repository</button></a>
 	      </li>
 	      <li class="nav-item">
 	        <a href="/DocumentUploader/userDetails"><button class="btn btn-primary" type="submit">User Details</button></a>
@@ -77,7 +78,7 @@
 	  </div>
 	</nav>
 
-<body onload="DisplayAccounts()">
+<body onload="DisplayAccounts(); displayAdverts();">
 	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>

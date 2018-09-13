@@ -1,3 +1,10 @@
+DROP TABLE BUSINESSACCOUNT CASCADE CONSTRAINTS;
+DROP TABLE BUSINESSACCOUNTTOUSERACCOUNT CASCADE CONSTRAINTS;
+DROP TABLE DOCUMENTS CASCADE CONSTRAINTS;
+DROP TABLE SECURITYQUESTION CASCADE CONSTRAINTS;
+DROP TABLE SERVICELEVELS CASCADE CONSTRAINTS;
+DROP TABLE USERACCOUNT CASCADE CONSTRAINTS;
+DROP TABLE USERACCOUNTTOSECURITYQUESTION CASCADE CONSTRAINTS;
 DROP TABLE User_Account CASCADE CONSTRAINTS;
 CREATE TABLE User_Account(
     User_ID int,
@@ -27,15 +34,15 @@ INSERT INTO Security_Question VALUES(3, 'What was the first concert you went att
 INSERT INTO Security_Question VALUES(4, 'What was the make and model of your first car?');
 INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor, musician, or artist?');
   
-DROP TABLE User_Account_To_Security_Question CASCADE CONSTRAINTS;
-CREATE TABLE User_Account_To_Security_Question(
-  User_Account_Security_Join_ID int,
+DROP TABLE User_To_Security_Question CASCADE CONSTRAINTS;
+CREATE TABLE User_To_Security_Question(
+  User_Security_Join_ID int,
   Security_Question_Join_ID int,
   Question_Answer VARCHAR(255),
   
-  CONSTRAINT FK_User_Id FOREIGN KEY (UserAccountSecurityJoinID)
-  REFERENCES User_Account(UserID),
-  CONSTRAINT FK_Question_Id FOREIGN KEY (SecurityQuestionJoinID)
+  CONSTRAINT FK_User_Id FOREIGN KEY (User_Security_Join_ID)
+  REFERENCES User_Account(User_ID),
+  CONSTRAINT FK_Question_Id FOREIGN KEY (Security_Question_Join_ID)
   REFERENCES Security_Question(Question_ID)
   
   );
@@ -58,14 +65,14 @@ CREATE TABLE Business_Account(
 
 
 
-DROP TABLE Business_Account_To_User_Account CASCADE CONSTRAINTS;
-CREATE TABLE Business_Account_To_User_Account(
-  Business_Account_User_Join_ID int,
-  User_Account_Business_Join_ID int,
-  CONSTRAINT FK_Business_Account_Join_Id FOREIGN KEY (Business_Account_User_Join_ID)
+DROP TABLE Business_To_User CASCADE CONSTRAINTS;
+CREATE TABLE Business_To_User(
+  Business_User_Join_ID int,
+  User_Business_Join_ID int,
+  CONSTRAINT FK_Business_Account_Join_Id FOREIGN KEY (Business_User_Join_ID)
   REFERENCES Business_Account(Business_Account_ID),
-   CONSTRAINT FK_User_Account_Join_Id FOREIGN KEY (User_Account_Business_Join_ID)
-  REFERENCES Use_rAccount(User_ID)
+   CONSTRAINT FK_User_Account_Join_Id FOREIGN KEY (User_Business_Join_ID)
+  REFERENCES User_Account(User_ID)
   );
   
   
@@ -91,9 +98,6 @@ CREATE TABLE Documents(
   Store_Date DATE,
   Associated_Account_Id int,
   PRIMARY KEY(File_Id),
-  CONSTRAINT FK_Business_Account_Document_Id FOREIGN KEY (Associated_Account_Id)
+  CONSTRAINT FK_Business_Document_Id FOREIGN KEY (Associated_Account_Id)
   REFERENCES Business_Account(Business_Account_ID)
   );
-  
-
-  

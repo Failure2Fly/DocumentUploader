@@ -155,11 +155,7 @@ form {
 	color: #00aeef !important;
 }
 
-.validate-form{
-	display:none;
-	color: red;
-}
-div .accountDiv {
+.accountDiv {
 	background-color: rgb(255, 255, 204);
 }
 
