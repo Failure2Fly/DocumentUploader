@@ -91,11 +91,11 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		return user;
 	}
 
-	public List<BusinessAccount> readAccounts(Integer id) {
+	public List<BusinessAccount> readAccounts(Integer userId) {
 		String SQL = "SELECT BUSINESSACCOUNTUSERJOINID FROM BUSINESSACCOUNTTOUSERACCOUNT WHERE USERACCOUNTBUSINESSJOINID = ?";
 		List<BusinessAccount> businessAccounts = new ArrayList<>();
 		List<Map<String, Object>> rows = new ArrayList<>();
-		rows = jdbcTemplateObject.queryForList(SQL, id);
+		rows = jdbcTemplateObject.queryForList(SQL, userId);
 		for (Map<String, Object> map : rows) {
 			BusinessAccount account = new BusinessAccount();
 			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");

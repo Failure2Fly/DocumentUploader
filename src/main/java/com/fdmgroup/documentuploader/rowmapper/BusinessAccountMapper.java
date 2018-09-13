@@ -15,23 +15,13 @@ import org.springframework.jdbc.core.RowMapper;
 import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 
 	@Override
 	public BusinessAccount mapRow(ResultSet rs, int rowNum) throws SQLException {
-		
-		File file = new File("H:\\DebugBusinessMapper.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-
-			writer.write("Got in the mapper");
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		BusinessAccount business = new BusinessAccount();
 		ApplicationContext context = DispatchController.getContext();
@@ -45,18 +35,8 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		
 		business.setAccountName(rs.getString("accountname"));
 		
-		//TODO: ServiceLevel DAO
-		business.setServicelevel(null);
-		
-		try {
-			FileWriter writer = new FileWriter(file);
 
-			writer.append("Ended mapper; business account = "+business);
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		business.setServicelevel(new ServiceLevel(rs.getInt("servicelevel")));
 		
 		return business;
 	}
