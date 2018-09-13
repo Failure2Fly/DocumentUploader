@@ -75,7 +75,7 @@
 
 	<div class="header user-hello">
 		<div class="mainTitle">
-			<h1>${sessionScope.user.username}'s Repository,
+			<h1>${sessionScope.account.owner.username}'s Repository,
 				${sessionScope.account.accountName }</h1>
 		</div>
 	</div>
