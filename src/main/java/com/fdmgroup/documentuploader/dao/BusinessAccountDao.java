@@ -20,6 +20,7 @@ import org.springframework.stereotype.Repository;
 import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
 import com.fdmgroup.documentuploader.pojo.Questions;
+import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 import com.fdmgroup.documentuploader.rowmapper.BusinessAccountMapper;
 
@@ -78,7 +79,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		String SQL = "UPDATE BUSINESSACCOUNT SET useraccountownerid=?, servicelevel=?, accountname=? WHERE businessaccountId=?";
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		Integer ownerId = userDao.getThisId(account.getOwner());
-		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel(), account.getAccountName(), account.getBusinessAccountId());
+		jdbcTemplateObject.update(SQL, ownerId, account.getServicelevel().getServiceLevel().ordinal()+1, account.getAccountName(), account.getBusinessAccountId());
 		for(UserAccount secondaryUser:account.getUserAccounts()){
 			
 			if(!secondaryUser.getUsername().equals(account.getOwner().getUsername())){
@@ -114,7 +115,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			BigDecimal accountId =(BigDecimal) map.get("businessaccountid");
 			account.setAccountName((String)map.get("accountname"));
 			account.setBusinessAccountId(accountId.intValue());
-			
+			BigDecimal serviceLevel =(BigDecimal) map.get("servicelevel");
+			account.setServicelevel(new ServiceLevel(serviceLevel.intValue()));
 			ApplicationContext context= DispatchController.getContext(); 
 			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountDao");
 			UserAccount owner = userDao.read(ownerId);

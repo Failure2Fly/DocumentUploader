@@ -11,7 +11,22 @@ public class ServiceLevel {
 	private int userLimit;
 	private int additionalUserCost;
 	private boolean hasAdverts;
-
+	
+	public ServiceLevel(int level){
+		if(level==1){
+			this.serviceLevel=ServiceLevels.BRONZE;
+		}else if(level==2){
+			this.serviceLevel=ServiceLevels.SILVER;
+		}else if(level==3){
+			this.serviceLevel=ServiceLevels.GOLD;
+		}else if(level==4){
+			this.serviceLevel=ServiceLevels.UNLIMITED;
+		}else if(level==5){
+			this.serviceLevel=ServiceLevels.ENTERPRISE;
+		}
+		assembleServiceLevel(serviceLevel);
+		
+	}
 	public ServiceLevel() {
 		this(ServiceLevels.BRONZE);
 	}
