@@ -9,8 +9,6 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -27,19 +25,6 @@ import com.fdmgroup.documentuploader.pojo.UserAccount;
 @Controller
 public class RegistrationController {
 
-	private static ConfigurableApplicationContext context;
-
-	public static ConfigurableApplicationContext getContext() {
-		if (context != null) {
-			context.close();
-			context = new ClassPathXmlApplicationContext("context.xml");
-			return context;
-		} else {
-			context = new ClassPathXmlApplicationContext("context.xml");
-			return context;
-		}
-	}
-	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String userRegistration(Model model) {
 		UserAccount userAccount = new UserAccount();
@@ -54,8 +39,8 @@ public class RegistrationController {
 		Validator validator = new Validator();
 		isValid = validator.validateUserRegistration(userAccount);
 		if (isValid) {
-			context = getContext();
-			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
+			
+			UserAccountDao dao = (UserAccountDao) DispatchController.getContext().getBean("UserAcDispatchController.getContext().");
 			try {
 				List<Questions> list = new ArrayList<>();
 				Questions question = new Questions(SecurityQuestion

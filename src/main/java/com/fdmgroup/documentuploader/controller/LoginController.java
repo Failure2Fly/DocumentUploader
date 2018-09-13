@@ -2,8 +2,6 @@ package com.fdmgroup.documentuploader.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,18 +19,6 @@ import com.fdmgroup.documentuploader.pojo.UserAccount;
 @Controller
 public class LoginController {
 
-	private static ConfigurableApplicationContext context;
-
-	public static ConfigurableApplicationContext getContext() {
-		if (context != null) {
-			context.close();
-			context = new ClassPathXmlApplicationContext("context.xml");
-			return context;
-		} else {
-			context = new ClassPathXmlApplicationContext("context.xml");
-			return context;
-		}
-	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String userLogin(Model model, HttpSession session) {
 		UserAccount userAccount = new UserAccount();
@@ -46,11 +32,10 @@ public class LoginController {
 		Validator validator = new Validator();
 		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
 		if (isValid) {
-			context = getContext();
-			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountDao");
+			UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 			userAccount = userDao.read(userAccount.getUsername());
 			session.setAttribute("user", userAccount);
-			BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
+			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
 			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
