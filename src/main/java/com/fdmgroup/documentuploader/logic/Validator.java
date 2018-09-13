@@ -7,6 +7,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 
+import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
@@ -15,22 +16,20 @@ public class Validator {
 	private ApplicationContext context;
 	private UserAccountDao dao;
 
-	public boolean validateUserLogin(String username, String password) {
+	public String validateUserLogin(String username, String password) {
 		context = new ClassPathXmlApplicationContext("context.xml");
 		dao = (UserAccountDao) context.getBean("UserAccountDao");
 		try {
 			UserAccount actualUser = dao.read(username);
 			if (actualUser.getPassword().equals(password)) {
-				return true;
+				return "";
 			} else {
-				return false;
+				return "Password does not match our records!";
 			}
-		} catch (EmptyResultDataAccessException e) {
-			return false;
-		} catch (IncorrectResultSizeDataAccessException e) {
-			return false;
+		}  catch (IncorrectResultSizeDataAccessException e) {
+			return "Multiple user with that username exist??";
 		} catch (NullPointerException e) {
-			return false;
+			return "Username does not exist!";
 		}
 	}
 	
@@ -41,52 +40,74 @@ public class Validator {
 		return false;
 	}
 	
-	public boolean validateUserRegistration(UserAccount userAccount) {
-		boolean usernameValid = false;
-		boolean passwordValid = false;
-		boolean firstNameValid = false;
-		boolean lastNameValid = false;
-		boolean emailValid = false;
+	public String[] validateUserRegistration(UserAccount userAccount) {
+		boolean isValid = true;
+		String usernameValid = "";
+		String passwordValid = "";
+		String firstNameValid = "";
+		String lastNameValid = "";
+		String emailValid = "";
 
 		try {
 			if (userAccount != null) {
 				if (userAccount.getUsername() != null) {
-					if (!userAccount.getUsername().isEmpty() && userAccount.getUsername().length() <= 20) {
-						usernameValid = true;
+					UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
+					
+					if(userDao.getThisId(userAccount)!=0){
+						usernameValid = "Username is already taken!";
+						isValid=false;
+					}else if (!userAccount.getUsername().isEmpty() && userAccount.getUsername().length() <= 20) {
+						usernameValid = "";
+					}else{
+						usernameValid = "Username too long!";
+						isValid=false;
 					}
 				}
 				if (userAccount.getPassword() != null) {
 					if (!userAccount.getPassword().isEmpty() && userAccount.getPassword().length() >= 8) {
-						passwordValid = true;
+						passwordValid = "";
+					}else{
+						passwordValid = "Password must be at least 8 characters.";
+						isValid=false;
 					}
 				}
 				if (userAccount.getFirstName() != null) {
 					if (!userAccount.getFirstName().isEmpty() && userAccount.getFirstName().length() <= 20) {
-						firstNameValid = true;
+						firstNameValid = "";
+					}else{
+						firstNameValid = "First name too long!";
+						isValid=false;
 					}
 				}
 				if (userAccount.getLastName() != null) {
 					if (!userAccount.getLastName().isEmpty() && userAccount.getLastName().length() <= 20) {
-						lastNameValid = true;
+						lastNameValid = "";
+					}else{
+						lastNameValid = "Last name too long!";
+						isValid=false;
 					}
 				}
 				if (userAccount.getUserEmail() != null) {
 					if (!userAccount.getUserEmail().isEmpty() && emailValidator(userAccount.getUserEmail())) {
-						emailValid = true;
+						emailValid = "";
+					}else{
+						emailValid = "Email invalid.";
+						isValid=false;
 					}
 				}
 
-				if (usernameValid && passwordValid && firstNameValid && lastNameValid && emailValid) {
-					return true;
+				if (isValid) {
+					return null;
 				} else {
-					return false;
+					String[] errors = { usernameValid, passwordValid , firstNameValid , lastNameValid , emailValid};
+					return errors;
 				}
 			} else {
-				return false;
+				return null;
 			}
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		}
 	}
 

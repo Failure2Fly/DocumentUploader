@@ -21,7 +21,14 @@ public class DispatchController {
 		}
 	}
 	@RequestMapping(value = "/")
-	public String landingPage(Model model) {
+	public String landingPage(HttpSession session) {
+		session.setAttribute("registrationError", "");
+		session.setAttribute("usernameError","");
+		session.setAttribute("passwordError", "");
+		session.setAttribute("firstNameError", "");
+		session.setAttribute("lastNameError", "");
+		session.setAttribute("emailError", "");
+		session.setAttribute("loginError", "");
 		return "index";
 	}
 }

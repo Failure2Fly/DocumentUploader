@@ -22,22 +22,21 @@
 		myObj = JSON.parse(document.getElementById("accountJson").innerHTML);
 
 		for (i in myObj.userAccounts) {
-			x += "<h3>"
-					+ "Username: "+myObj.userAccounts[i].username
+			x += "<h3>" + "Username: " + myObj.userAccounts[i].username
 					+ "</h3>";
 			x += "<br>";
 		}
-		if(document.getElementById("errorText").innerHTML==""){
-			removeError.style.visibility='hidden';
-			addError.style.visibility='hidden';
-		}else if(document.getElementById("errorText").innerHTML=="That user is the owner and cannot be removed!"){
-			removeError.style.visibility='visible';
-			addError.style.visibility='hidden';
-		}else if(document.getElementById("errorText").innerHTML=="Your repository cannot support more users at your service level!" || document.getElementById("errorText").innerHTML=="This user has already been added!"){
-			addError.style.visibility='visible';
-			removeError.style.visibility='hidden';
+		if (document.getElementById("errorText").innerHTML == "") {
+			removeError.style.visibility = 'hidden';
+			addError.style.visibility = 'hidden';
+		} else if (document.getElementById("errorText").innerHTML == "That user is the owner and cannot be removed!") {
+			removeError.style.visibility = 'visible';
+			addError.style.visibility = 'hidden';
+		} else if (document.getElementById("errorText").innerHTML == "Your repository cannot support more users at your service level!"
+				|| document.getElementById("errorText").innerHTML == "This user has already been added!") {
+			addError.style.visibility = 'visible';
+			removeError.style.visibility = 'hidden';
 		}
-
 
 		document.getElementById("userList").innerHTML = x;
 		/* var text = "My Button"; // JavaScript string
@@ -75,13 +74,15 @@
 
 	<div class="header user-hello">
 		<div class="mainTitle">
-			<h1>${sessionScope.account.accountName} Repository Details</h1>
+			<h1>${sessionScope.account.accountName}Repository Details</h1>
 		</div>
 	</div>
 
 	<div id="update-form" class="update">
-		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/delete">
-			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
+		<sf:form method="POST"
+			action="/DocumentUploader/repositoryDetails/delete">
+			<legend>Delete Repository:
+				${sessionScope.account.accountName}</legend>
 			<fieldset>
 				<p>Do you want to delete the repository? </p>
 			<!--<input style="margin-top: 0px;"type="checkbox" name="remove"> -->
@@ -89,46 +90,61 @@
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Delete">
 		</fieldset>
+
 		</sf:form>
-		<p >Users currently attached to this repository:</p>
+		<p>Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
-		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/addUser">
-		<p class="errorText" id="addError">${sessionScope.repositoryDetailsError}</p>
+		<sf:form method="POST"
+			action="/DocumentUploader/repositoryDetails/addUser">
+			<p class="incorrect" id="addError">${sessionScope.repositoryDetailsError}</p>
 
-				<legend>Add User to Repository:</legend>
+			<legend>Add User to Repository:</legend>
 			<fieldset>
-				<input type="text" class="inputField" id="addInput"name="add"type="text" 
-				placeholder="Enter username">
-				<br>
-				<br> <input class="button" id="addButton" type="submit"
-					value="Add">
+				<input type="text" class="inputField" id="addInput" name="add"
+					type="text" placeholder="Enter username"> <br> <br>
+				<input class="button" id="addButton" type="submit" value="Add">
 			</fieldset>
 		</sf:form>
 
-		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/removeUser">
-		<p class="errorText" id="removeError">${sessionScope.repositoryDetailsError}</p>
-				<legend>Remove User from Repository:</legend>
+		<sf:form method="POST"
+			action="/DocumentUploader/repositoryDetails/removeUser">
+			<p class="incorrect" id="removeError">${sessionScope.repositoryDetailsError}</p>
+			<legend>Remove User from Repository:</legend>
 			<fieldset>
-				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
-				placeholder="Enter username">
-				<br>
-				<br> <input class="button" id="removeButton" type="submit"
-					value="Remove">
+				<input type="text" class="inputField" id="removeInput" name="remove"
+					type="text" placeholder="Enter username"> <br> <br>
+				<input class="button" id="removeButton" type="submit" value="Remove">
 			</fieldset>
 		</sf:form>
-		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/changeName">
-				<legend>Change Repository Name:</legend>
+		<sf:form method="POST"
+			action="/DocumentUploader/repositoryDetails/changeName">
+			<legend>Change Repository Name:</legend>
 			<fieldset>
-				<input name="accountName" type="text" class="inputField" id="changeName"  type="text" 
-				placeholder="Enter new Account Name"/>
-				<br>
-				<br> <input class="button" id="changeName" type="submit"
-					value="Change">
+				<input name="accountName" type="text" class="inputField"
+					id="changeName" type="text" placeholder="Enter new Account Name" />
+				<br> <br> <input class="button" id="changeName"
+					type="submit" value="Change">
 			</fieldset>
 		</sf:form>
+		<div id="register-form" class="registration">
+
+			<sf:form method="POST"
+				action="/DocumentUploader/repositoryDetails/changeLevel">
+				<legend>Change account service level:</legend>
+				<fieldset>
+					<select name="level">
+						<c:forEach var="item" items="${sessionScope.listOfLevels}">
+							<option>${item}</option>
+						</c:forEach>
+					</select> <br> <input class="button" id="changeLevel" type="submit"
+						value="Change Level">
+
+				</fieldset>
+			</sf:form>
+		</div>
 	</div>
-<p class="hiddenText" id="accountJson">${sessionScope.accountDetailJson}</p>
-<p  id="errorText">${sessionScope.repositoryDetailsError}</p>
+	<p class="hiddenText" id="accountJson">${sessionScope.accountDetailJson}</p>
+	<p id="errorText">${sessionScope.repositoryDetailsError}</p>
 </body>
 <footer>
 	<div class="header">
