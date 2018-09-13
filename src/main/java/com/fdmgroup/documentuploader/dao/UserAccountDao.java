@@ -1,13 +1,14 @@
 package com.fdmgroup.documentuploader.dao;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
-
-import org.springframework.context.ApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -30,24 +31,19 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 	@Override
 	public void create(UserAccount item) {
 		String SQL1 = "INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(?,?,?,?,?,?)";
-		// String SQL2="INSERT INTO USERACCOUNTTOSECURITYQUESTION
-		// VALUES(?,?,?)";
-		// String key =
-		// item.getListQA().get(0).getQuestion().name().toLowerCase().replace("_",
-		// " ")+"?";
-		// key = key.substring(0, 1).toUpperCase() + key.substring(1);
-		// File file = new File("H:\\DebugInCreate.txt");
-		// try {
-		// FileWriter writer= new FileWriter(file);
-		// writer.write(item.toString());
-		// writer.flush();
-		// writer.close();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
+		String SQL2 = "INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(?,?,?)";
+		File file = new File("H:\\DebugInUserCreate.txt");
+		try {
+		FileWriter writer= new FileWriter(file);
+			writer.write(item.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		jdbcTemplateObject.update(SQL1, lastID(), item.getUsername(), item.getLastName(), item.getFirstName(),
 				item.getPassword(), item.getUserEmail());
-		// jdbcTemplateObject.update(SQL2,lastID(),item.getListQA().get(0).getQuestion().ordinal()+1,item.getListQA().get(0).getAnswer());
+		jdbcTemplateObject.update(SQL2,getThisId(item),item.getListQA().get(0).getQuestion().ordinal()+1,item.getListQA().get(0).getAnswer());
 	}
 
 	@Override
@@ -55,8 +51,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		// TODO sql query deletion all useraccount's stuff
 		String SQL1 = "DELETE FROM USERACCOUNTTOSECURITYQUESTION WHERE USERACCOUNTSECURITYJOINID = ?";
 		String SQL2 = "DELETE FROM USERACCOUNT WHERE username = ?";
-		// String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID =
-		// ?";
+		// String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";
 		jdbcTemplateObject.update(SQL1, getID(item.getUsername()));
 		jdbcTemplateObject.update(SQL2, item.getUsername());
 	}
@@ -79,9 +74,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 	public int lastID() {
 		String SQL = "SELECT MAX(USERID) FROM USERACCOUNT";
 		try {
-
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class)) + 1;
-
 		} catch (NullPointerException e) {
 			return 1;
 		}
@@ -94,7 +87,6 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 
 	public UserAccount read(Integer id) {
 		String SQL = "SELECT username, userpassword, useremail, firstname, lastname FROM USERACCOUNT WHERE userid = ?";
-
 		UserAccount user = jdbcTemplateObject.queryForObject(SQL, new Object[] { id }, new UserAccountMapper());
 		return user;
 	}

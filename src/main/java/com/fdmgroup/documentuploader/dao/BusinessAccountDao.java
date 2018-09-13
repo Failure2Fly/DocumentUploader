@@ -143,7 +143,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 				fileList.add(file);
 			}
 			account.setFileList(fileList);
-			
 			businessAccounts.add(account);
 		}
 		return businessAccounts;

@@ -38,29 +38,27 @@
 			removeError.style.visibility='hidden';
 		}
 
+
 		document.getElementById("userList").innerHTML = x;
-
 		/* var text = "My Button"; // JavaScript string
-		button.setText(text); // text is converted to java.lang.String */
-
+		button.setText(text); text is converted to java.lang.String */
 	}
-
 </script>
-<title>Business Account Details</title>
+<title>Repository Details</title>
 </head>
 <body onload="displayUsers()">
 
 	<div class="header">
 		<div class="mainHeaderRight"></div>
 		<div class="mainTitle">
-			<h1>${sessionScope.account.accountName} Account Details</h1>
+			<h1>${sessionScope.account.accountName} Repository Details</h1>
 		</div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/userHome">
 				<button class="btn btn-primary" type="submit">Back to User
 					Homepage</button>
-			</a> <a href="/DocumentUploader/accountHome/${sessionScope.account.businessAccountId}">
-				<button class="btn btn-primary" type="submit">Account
+			</a> <a href="/DocumentUploader/repositoryHome/${sessionScope.account.businessAccountId}">
+				<button class="btn btn-primary" type="submit">Repository
 					Home</button>
 			</a> <a href="/DocumentUploader/login">
 				<button class="btn btn-primary" type="submit">Logout</button>
@@ -69,8 +67,7 @@
 	</div>
 
 	<div id="update-form" class="update">
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/delete">
-			
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/delete">
 			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
 			<fieldset>
 				<p>Do you want to delete the repository? </p>
@@ -80,10 +77,11 @@
 					value="Delete">
 		</fieldset>
 		</sf:form>
-		<p >Users currently attached to this account:</p>
+		<p >Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/addUser">
-			<p class="errorText" id="addError">${sessionScope.accountDetailsError}</p>
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/addUser">
+		<p class="errorText" id="addError">${sessionScope.accountDetailsError}</p>
+
 				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="addInput"name="add"type="text" 
@@ -93,8 +91,9 @@
 					value="Add">
 			</fieldset>
 		</sf:form>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/removeUser">
-			<p class="errorText" id="removeError">${sessionScope.accountDetailsError}</p>
+
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/removeUser">
+		<p class="errorText" id="removeError">${sessionScope.accountDetailsError}</p>
 				<legend>Remove User from Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
@@ -104,7 +103,7 @@
 					value="Remove">
 			</fieldset>
 		</sf:form>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/changeName">
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/changeName">
 				<legend>Change Repository Name:</legend>
 			<fieldset>
 				<input name="accountName" type="text" class="inputField" id="changeName"  type="text" 

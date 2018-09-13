@@ -93,7 +93,7 @@
 		   <p class="validate-form" id="missingConfirmPassword">Please Enter Confirm Password</p>
        <p class="validate-form" id="nonValidConfirmPassword">Passwords Do Not Match</p>
 		     <div class="input-group mb-2">
-            <select class="form-group security-question">				
+            <select class="form-group security-question" name="question">				
 				   <c:forEach var="item" items="${listOfQuestion}">
     				 <option>${item}</option>
     			   </c:forEach>
