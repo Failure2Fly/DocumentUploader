@@ -1,9 +1,7 @@
 package com.fdmgroup.documentuploader.dao;
 
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.DataSource;
@@ -22,7 +20,7 @@ public class QuestionDao implements Dao<String, Integer> {
 
 	@Override
 	public void create(String item) {
-		String SQL = "INSERT INTO SECURITYQUESTION VALUES (?,?)";
+		String SQL = "INSERT INTO SECURITY_QUESTION VALUES (?,?)";
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class QuestionDao implements Dao<String, Integer> {
 	@Override
 	public String read(Integer item) {
 		int intItem = (int) item;
-		String SQL = "SELECT QUESTION FROM SECURITYQUESTION WHERE questionid=?";
+		String SQL = "SELECT QUESTION FROM SECURITY_QUESTION WHERE question_id = ?";
 		String question = jdbcTemplateObject.queryForObject(SQL, new RowMapper<String>() {
 			@Override
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -49,7 +47,7 @@ public class QuestionDao implements Dao<String, Integer> {
 	}
 
 	public List<String> readAll() {
-		String SQL = "SELECT QUESTION FROM SECURITYQUESTION";
+		String SQL = "SELECT QUESTION FROM SECURITY_QUESTION";
 		List<String> list = jdbcTemplateObject.query(SQL, new RowMapper<String>() {
 
 			@Override

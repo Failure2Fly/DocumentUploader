@@ -7,6 +7,7 @@ public class BusinessAccount {
 
 	private UserAccount owner;
 	private ServiceLevel servicelevel;
+	private int userLimit;
 	private List<UserAccount> userAccounts = new ArrayList<>();
 	private List<String> fileList = new ArrayList<>();
 	private String accountName;
@@ -38,6 +39,14 @@ public class BusinessAccount {
 		super();
 	}
 	
+	public void increaseUserLimit(int num){
+		userLimit += num;
+	}
+	
+	public void reduceUserLimit(int num) {
+		userLimit -= num;
+	}
+	
 	@Override
 	public String toString() {
 		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + servicelevel
@@ -57,12 +66,20 @@ public class BusinessAccount {
 	public void setAccountName(String accountName) {
 		this.accountName = accountName;
 	}
-	public ServiceLevel getServicelevel() {
+	public ServiceLevel getServiceLevel() {
 		return servicelevel;
 	}
-	public void setServicelevel(ServiceLevel servicelevel) {
+	public void setServiceLevel(ServiceLevel servicelevel) {
 		this.servicelevel = servicelevel;
 	}
+	public int getUserLimit() {
+		return userLimit;
+	}
+
+	public void setUserLimit(int userLimit) {
+		this.userLimit = userLimit;
+	}
+
 	public List<UserAccount> getUserAccounts() {
 		return userAccounts;
 	}

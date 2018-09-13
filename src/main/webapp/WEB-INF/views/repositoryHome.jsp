@@ -54,7 +54,7 @@
 	        <a href="/DocumentUploader/userHome"><button class="btn btn-primary" type="submit">User Homepage</button></a>
 	      </li>
 	      <li class="nav-item">
-	        <a href="/DocumentUploader/accountDetails"><button class="btn btn-primary" type="submit">Account Details</button></a>
+	        <a href="/DocumentUploader/repositoryDetails"><button class="btn btn-primary" type="submit">Repository Details</button></a>
 	      </li>
 	      <li class="nav-item">
 			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>
@@ -70,7 +70,7 @@
 
 	<div class="header user-hello">
 		<div class="mainTitle">
-			<h1>Details for ${sessionScope.user.username}'s account,
+			<h1>${sessionScope.user.username}'s Repository,
 				${sessionScope.account.accountName }</h1>
 		</div>
 	</div>

@@ -37,6 +37,17 @@
 		button.setText(text); // text is converted to java.lang.String */
 
 	}
+	function displayAdverts(){
+		var img = document.getElemtentById("hasAdverts")
+		
+		if(serviceLevel == 1 || 2){
+			img.classList.remove("validate-form");
+			return false;
+		}
+		else{
+			return true;
+		}
+	}
 
 </script>
 <title>Document Uploader</title>
@@ -72,6 +83,8 @@
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>
 	</div>
+	
+	<img id="hasAdverts" class="validate-form" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 	
 	<div class="registration">
 				

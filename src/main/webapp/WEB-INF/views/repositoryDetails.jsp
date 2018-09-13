@@ -27,16 +27,12 @@
 					+ "</h3>";
 			x += "<br>";
 		}
-
 		document.getElementById("userList").innerHTML = x;
-
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
-
 	}
-
 </script>
-<title>Business Account Details</title>
+<title>Repository Details</title>
 </head>
 
 
@@ -67,12 +63,12 @@
 
 	<div class="header user-hello">
 		<div class="mainTitle">
-			<h1>${sessionScope.account.accountName } Account Details</h1>
+			<h1>${sessionScope.account.accountName} Repository Details</h1>
 		</div>
 	</div>
 
 	<div id="update-form" class="update">
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/delete">
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/delete">
 			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
 			<fieldset>
 				<p>Do you want to delete the repository? </p>
@@ -82,9 +78,9 @@
 					value="Delete">
 		</fieldset>
 		</sf:form>
-		<p >Users currently attached to this account:</p>
+		<p >Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/addUser">
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/addUser">
 				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="addInput"name="add"type="text" 
@@ -94,7 +90,7 @@
 					value="Add">
 			</fieldset>
 		</sf:form>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/removeUser">
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/removeUser">
 				<legend>Remove User from Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
@@ -104,7 +100,7 @@
 					value="Remove">
 			</fieldset>
 		</sf:form>
-		<sf:form method="POST" action="/DocumentUploader/accountDetails/changeName">
+		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/changeName">
 				<legend>Change Repository Name:</legend>
 			<fieldset>
 				<input name="accountName" type="text" class="inputField" id="changeName"  type="text" 

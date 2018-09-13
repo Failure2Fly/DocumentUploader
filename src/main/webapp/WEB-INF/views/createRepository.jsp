@@ -16,10 +16,11 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 
-<title>DocumentUploader Business Account Creation</title>
+<title>DocumentUploader Repository Creation</title>
 </head>
 
 <body>
+
 
 <nav class="navbar fixed-top navbar-expand-lg">
 	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
@@ -48,12 +49,12 @@
 		</div>
 	</div>
 
-	<h2>Create Account</h2>
+	<h2>Create Repository</h2>
 
 	<div id="register-form" class="registration">
-		<sf:form commandName="businessAccount" method="POST"  action="createAccount">
+		<sf:form commandName="businessAccount" method="POST"  action="createRepository">
 			<fieldset >
-					<p>Account name:</p>
+					<p>Repository name:</p>
 				<sf:input path="accountName" class="inputField" type="text" 
 					name="AccountName" placeholder="Account Name " value="" />
 				<br>
@@ -65,7 +66,7 @@
 				</select> 
 				<br> 
 				
-				<input class="button" id="registerButton" type="submit" value="Create Account">
+				<input class="button" id="registerButton" type="submit" value="Create Repository">
 
 			</fieldset>
 		</sf:form>
