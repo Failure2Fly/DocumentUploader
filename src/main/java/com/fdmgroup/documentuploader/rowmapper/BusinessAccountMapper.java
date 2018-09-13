@@ -22,13 +22,13 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
 
-		UserAccount owner = dao.read(rs.getInt("useraccountownerid"));
+		UserAccount owner = dao.read(rs.getInt("user_account_owner_id"));
 		
 		business.setOwner(owner);
-		business.setBusinessAccountId(rs.getInt("businessaccountid"));
-		business.setAccountName(rs.getString("accountname"));
-		business.setServiceLevel(new ServiceLevel(rs.getInt("servicelevel")));
-		business.setUserLimit(rs.getInt("userlimit"));
+		business.setBusinessAccountId(rs.getInt("business_account_id"));
+		business.setAccountName(rs.getString("account_name"));
+		business.setServiceLevel(new ServiceLevel(rs.getInt("service_level")));
+		business.setUserLimit(rs.getInt("user_limit"));
 
 		return business;
 	}

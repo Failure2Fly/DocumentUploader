@@ -27,9 +27,21 @@
 					+ "</h3>";
 			x += "<br>";
 		}
+		if(document.getElementById("errorText").innerHTML==""){
+			removeError.style.visibility='hidden';
+			addError.style.visibility='hidden';
+		}else if(document.getElementById("errorText").innerHTML=="That user is the owner and cannot be removed!"){
+			removeError.style.visibility='visible';
+			addError.style.visibility='hidden';
+		}else if(document.getElementById("errorText").innerHTML=="Your repository cannot support more users at your service level!" || document.getElementById("errorText").innerHTML=="This user has already been added!"){
+			addError.style.visibility='visible';
+			removeError.style.visibility='hidden';
+		}
+
+
 		document.getElementById("userList").innerHTML = x;
 		/* var text = "My Button"; // JavaScript string
-		button.setText(text); // text is converted to java.lang.String */
+		button.setText(text); text is converted to java.lang.String */
 	}
 </script>
 <title>Repository Details</title>
@@ -68,6 +80,8 @@
 		<p >Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
 		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/addUser">
+		<p class="errorText" id="addError">${sessionScope.accountDetailsError}</p>
+
 				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="addInput"name="add"type="text" 
@@ -77,7 +91,9 @@
 					value="Add">
 			</fieldset>
 		</sf:form>
+
 		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/removeUser">
+		<p class="errorText" id="removeError">${sessionScope.accountDetailsError}</p>
 				<legend>Remove User from Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
@@ -98,7 +114,8 @@
 			</fieldset>
 		</sf:form>
 	</div>
-<p id="accountJson">${sessionScope.accountDetailJson}</p>
+<p class="hiddenText" id="accountJson">${sessionScope.accountDetailJson}</p>
+<p class="hiddenText" id="errorText">${sessionScope.accountDetailsError}</p>
 </body>
 <footer>
 	<div class="header">

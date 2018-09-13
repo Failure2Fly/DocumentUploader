@@ -24,7 +24,7 @@
 
 		for (i in myObj) {
 			x += "<h3><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"
-					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].servicelevel.serviceLevel
+					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].serviceLevel.serviceLevel
 					+ "<br> Repository Name: "
 					+ myObj[i].accountName
 					+ "</a></h3>";
@@ -81,7 +81,7 @@
 	</div>
 
 
-	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 
 	<table class="table">
 	  <thead class="thead-dark">

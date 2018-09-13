@@ -30,6 +30,11 @@
 			y += "<a href=\"/DocumentUploader/deleteFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "Delete"+"</p></h3></a>";
 			y += "<br>";
 		}
+		if(document.getElementById("uploadErrorText").innerHTML!=""){
+			uploadErrorText.style.visibility='visible';
+		}else{
+			uploadErrorText.style.visibility='hidden';
+		}
 		document.getElementById("Documents").innerHTML = y;
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
@@ -77,6 +82,7 @@
 		<sf:form commandName="file" method="POST"
 			action="${sessionScope.account.businessAccountId }"
 			enctype="multipart/form-data">
+			<p id="uploadErrorText">${sessionScope.accountHomeError}</p>
 			<p>Choose a file to upload:</p>
 			<input name="file" id="sourcePath" type="file" class="inputField" />
 			<input onclick="refreshPage()" class="button" id="registerButton"
@@ -92,7 +98,8 @@
 	</div>
 
 
-	<p id="fileList">${sessionScope.fileList}</p>
+	<p class="hiddenText" id="fileList">${sessionScope.fileList}</p>
+	<p class="hiddenText" id="accountHomeErrorText">${sessionScope.accountHomeError}</p>
 </body>
 <footer>
 	<div class="header">
