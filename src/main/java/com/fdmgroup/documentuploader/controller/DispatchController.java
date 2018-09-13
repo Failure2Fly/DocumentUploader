@@ -187,15 +187,15 @@ public class DispatchController {
 		}
 	}
 
-	@RequestMapping(value = "/createAccount", method = RequestMethod.GET)
-	public String createAccountGet(Model model, HttpSession session) {
+	@RequestMapping(value = "/createRepository", method = RequestMethod.GET)
+	public String createRepositoryGet(Model model, HttpSession session) {
 		model.addAttribute(new BusinessAccount());
 		model.addAttribute("listOfLevels", ServiceLevels.allServiceLevels());
-		return "createAccount";
+		return "createRepository";
 	}
 
-	@RequestMapping(value = "/createAccount", method = RequestMethod.POST)
-	public ModelAndView createAccountPost(@ModelAttribute BusinessAccount account, HttpServletRequest request,
+	@RequestMapping(value = "/createRepository", method = RequestMethod.POST)
+	public ModelAndView createRepositoryPost(@ModelAttribute BusinessAccount account, HttpServletRequest request,
 			HttpSession session) {
 		context = getContext();
 		BusinessAccountDao dao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -221,8 +221,8 @@ public class DispatchController {
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
 
-	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.GET)
-	public String AccountDetailsGet(Model model, HttpSession session,
+	@RequestMapping(value = "/repositoryHome/{accountId}", method = RequestMethod.GET)
+	public String RepositoryDetailsGet(Model model, HttpSession session,
 			@PathVariable(value = "accountId") String accountId) {
 
 		BusinessAccountDao businessDao = (BusinessAccountDao) context.getBean("BusinessAccountDao");
@@ -249,11 +249,11 @@ public class DispatchController {
 
 		session.setAttribute("fileList", json);
 
-		return "accountHome";
+		return "repositoryHome";
 	}
 
-	@RequestMapping(value = "/accountHome/{accountId}", method = RequestMethod.POST)
-	public RedirectView AccountDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
+	@RequestMapping(value = "/repositoryHome/{accountId}", method = RequestMethod.POST)
+	public RedirectView RepositoryDetailsPost(HttpSession session, @PathVariable(value = "accountId") String accountId,
 			@RequestParam MultipartFile file) {
 		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
 		int fileId = documentDao.getId();
@@ -296,7 +296,7 @@ public class DispatchController {
 	@RequestMapping(value = "/refreshAccount", method = RequestMethod.GET)
 	public RedirectView refreshAccount(Model model, HttpSession session) {
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
-		return new RedirectView("/DocumentUploader/accountHome/" + account.getBusinessAccountId());
+		return new RedirectView("/DocumentUploader/repositoryHome/" + account.getBusinessAccountId());
 	}
 
 	@RequestMapping(value = "/downloadFile/**", method = RequestMethod.GET)
@@ -349,18 +349,18 @@ public class DispatchController {
 		}
 		documentDao.delete(document);
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
-		return new RedirectView("/DocumentUploader/accountHome/" + account.getBusinessAccountId());
+		return new RedirectView("/DocumentUploader/repositoryHome/" + account.getBusinessAccountId());
 
 	}
 
-	@RequestMapping(value = "/accountDetails", method = RequestMethod.GET)
-	public String accountDetailsGet(HttpSession session) {
-		session.setAttribute("accountDetailsError", "");
+	@RequestMapping(value = "/repositoryDetails", method = RequestMethod.GET)
+	public String repositoryDetailsGet(HttpSession session) {
+		session.setAttribute("repositoryDetailsError", "");
 		UserAccount user = (UserAccount) session.getAttribute("user");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
 		if (userDao.getThisId(account.getOwner()) != userDao.getThisId(user)) {
-			return "accountHome";
+			return "repositoryHome";
 		} else {
 			ObjectMapper mapper = new ObjectMapper();
 			try {
@@ -370,12 +370,12 @@ public class DispatchController {
 			} catch (JsonProcessingException e) {
 				e.printStackTrace();
 			}
-			return "accountDetails";
+			return "repositoryDetails";
 		}
 	}
 
-	@RequestMapping(value = "/accountDetails/delete", method = RequestMethod.POST)
-	public RedirectView accountDetailsDelete(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/repositoryDetails/delete", method = RequestMethod.POST)
+	public RedirectView repositoryDetailsDelete(HttpServletRequest request, HttpSession session) {
 		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		businessDao.delete(account);
@@ -383,42 +383,42 @@ public class DispatchController {
 
 	}
 
-	@RequestMapping(value = "/accountDetails/addUser", method = RequestMethod.POST)
-	public RedirectView accountDetailsAddUser(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/repositoryDetails/addUser", method = RequestMethod.POST)
+	public RedirectView repositoryDetailsAddUser(HttpServletRequest request, HttpSession session) {
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		String addUser = request.getParameter("add");
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
 		UserAccount addedUser = userDao.read(addUser);
 		if (account.getUserAccounts().contains(addedUser)) {
-			session.setAttribute("accountDetailsError", "This user has already been added!");
-			return new RedirectView("/DocumentUploader/accountDetails");
+			session.setAttribute("repositoryDetailsError", "This user has already been added!");
+			return new RedirectView("/DocumentUploader/repositoryDetails");
 		} else if(account.getUserAccounts().size()>=account.getServicelevel().getUserLimit()) {
-			session.setAttribute("accountDetailsError", "Your repository cannot support more users at your service level!");
-			return new RedirectView("/DocumentUploader/accountDetails");
+			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
+			return new RedirectView("/DocumentUploader/repositoryDetails");
 		}else{
 			account.getUserAccounts().add(addedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 			businessDao.update(account);
 			session.setAttribute("account", account);
 		}
-		return new RedirectView("/DocumentUploader/accountDetails");
+		return new RedirectView("/DocumentUploader/repositoryDetails");
 
 	}
 
-	@RequestMapping(value = "/accountDetails/changeName", method = RequestMethod.POST)
-	public RedirectView accountChangeName(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/repositoryDetails/changeName", method = RequestMethod.POST)
+	public RedirectView repositoryChangeName(HttpServletRequest request, HttpSession session) {
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		String newName = request.getParameter("accountName");
 		account.setAccountName(newName);
 		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 		businessDao.update(account);
 		session.setAttribute("account", account);
-		return new RedirectView("/DocumentUploader/accountDetails");
+		return new RedirectView("/DocumentUploader/repositoryDetails");
 
 	}
 
-	@RequestMapping(value = "/accountDetails/removeUser", method = RequestMethod.POST)
-	public RedirectView accountremoveUser(HttpServletRequest request, HttpSession session) {
+	@RequestMapping(value = "/repositoryDetails/removeUser", method = RequestMethod.POST)
+	public RedirectView repositoryRemoveUser(HttpServletRequest request, HttpSession session) {
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		String removeUser = request.getParameter("remove");
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
@@ -430,9 +430,9 @@ public class DispatchController {
 			businessDao.update(account);
 			session.setAttribute("account", account);
 		}else{
-			session.setAttribute("accountDetailsError", "That user is the owner and cannot be removed!");
+			session.setAttribute("repositoryDetailsError", "That user is the owner and cannot be removed!");
 		}
-		return new RedirectView("/DocumentUploader/accountDetails/");
+		return new RedirectView("/DocumentUploader/repositoryDetails/");
 
 	}
 
