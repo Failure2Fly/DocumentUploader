@@ -16,39 +16,67 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <script>
-	function DisplayAccounts() {
 
+	
+	function table(){
 		var myObj, i, j, x = "";
 
 		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
 		for (i in myObj) {
-			x += "<h3><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"
-					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].serviceLevel.serviceLevel
-					+ "<br> Repository Name: "
-					+ myObj[i].accountName
-					+ "</a></h3>";
-			x += "<br>";
+			
+			j = myObj[i].serviceLevel.documentLimit
+			   
+		    if (myObj[i].serviceLevel.documentLimit < 0){
+		    	
+		    	j = "unlimited";
+	  
+		    }
+		    
+			x += "<tr>"
+			   + "<th>"+myObj[i].businessAccountId
+			   + "</th>"
+		       + "<td><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"+myObj[i].accountName
+		       + "</td>"
+		       + "<td>"+myObj[i].serviceLevel.serviceLevel
+		       + "</td>"
+		       + "<td>"+myObj[i].userAccounts.length
+		       + "</td>"
+		       + "<td>"+myObj[i].serviceLevel.userLimit
+		       + "</td>"
+		       + "<td>"+myObj[i].fileList.length
+		       + "</td>"
+		       + "<td>"+j
+		       + "</td>"
+		    x += "</tr>";
+		 
 		}
 
-		document.getElementById("Accounts").innerHTML = x;
-
-		/* var text = "My Button"; // JavaScript string
-		button.setText(text); // text is converted to java.lang.String */
+		document.getElementById("table-row").innerHTML = x;
 		
 	}
+	
 	function displayAdverts(){
-		var serviceLevel = JSON.parse(document.getElementById("accountList").innerHTML);
-		var img = documnent.getElementById("hasAdverts");
 		
-		if(serviceLevel.serviceLevel.hasAdverts == false){
-			img.classList.remove("validate-form");
-			return false;
-		}
-		else{
-			return true;
+		var myObj, i, j, x = "";
+
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+
+		for (i in myObj){
+			
+			var adverts = myObj[i].serviceLevel.hasAdverts
+			var img = document.getElementById("hasAdverts");
+			
+			if( adverts === false ){
+				img.classList.add("validate-form");
+			}
+
 		}
 	}
+		
+
+	
+
 
 </script>
 <title>Document Uploader</title>
@@ -78,21 +106,14 @@
 	  </div>
 	</nav>
 
-<body onload="DisplayAccounts(); displayAdverts();">
+<body onload="table(); displayAdverts();">
 	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>
 	</div>
 	
-	<img id="hasAdverts" class="validate-form" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
-	
-	<div class="registration">
-				
-		<p id="Accounts">AccountsPlaceholder</p>
-
-
-	</div>
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 
 
 	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
@@ -109,34 +130,8 @@
 	      <th scope="col">Document limit</th>
 	    </tr>
 	  </thead>
-	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Don'tTouchDonny</td>
-	      <td>Unlimited</td>
-	      <td>4</td>
-	      <td>10</td>
-	      <td>30</td>
-	      <td>unlimited</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Mine</td>
-	      <td>Silver</td>
-	      <td>1</td>
-	      <td>1</td>
-	      <td>4</td>
-	      <td>10 documents</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>The Entourage</td>
-	      <td>Unlimited</td>
-	      <td>8</td>
-	      <td>10</td>
-	      <td>124</td>
-	      <td>Unlimited</td>
-	    </tr>
+	  <tbody  id="table-row">
+
 	  </tbody>
 	</table>
 

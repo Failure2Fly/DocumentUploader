@@ -29,6 +29,9 @@
 .hidden{
 	display:none;
 }
+#hasAdverts{
+	width: 100%;
+}
 /* This is part of the Navigation Bar*/
 .phone {
 	color: #00aeef;
