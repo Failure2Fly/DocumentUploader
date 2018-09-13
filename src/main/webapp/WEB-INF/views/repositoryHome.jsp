@@ -82,7 +82,7 @@
 		<sf:form commandName="file" method="POST"
 			action="${sessionScope.account.businessAccountId }"
 			enctype="multipart/form-data">
-			<p id="uploadErrorText">${sessionScope.accountHomeError}</p>
+			<p class="incorrect" id="uploadErrorText">${sessionScope.accountHomeError}</p>
 			<p>Choose a file to upload:</p>
 			<input name="file" id="sourcePath" type="file" class="inputField" />
 			<input onclick="refreshPage()" class="button" id="registerButton"

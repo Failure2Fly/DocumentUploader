@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.sql.DataSource;
+
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -108,11 +110,15 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		return businessAccounts;
 	}
 	public int getThisId(UserAccount user){
-		
+		try{
 			String SQL = "SELECT user_id FROM USER_ACCOUNT WHERE username = ?";
 
 			Integer userId = jdbcTemplateObject.queryForObject(SQL, new Object[] { user.getUsername() }, Integer.class);
 			return userId;
+		}catch(EmptyResultDataAccessException e){
+			return 0;
+		}
+			
 		
 	}
 }

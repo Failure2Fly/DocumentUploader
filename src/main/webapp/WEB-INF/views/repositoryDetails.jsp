@@ -80,7 +80,7 @@
 		<p >Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
 		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/addUser">
-		<p class="errorText" id="addError">${sessionScope.repositoryDetailsError}</p>
+		<p class="incorrect" id="addError">${sessionScope.repositoryDetailsError}</p>
 
 				<legend>Add User to Repository:</legend>
 			<fieldset>
@@ -93,7 +93,7 @@
 		</sf:form>
 
 		<sf:form method="POST" action="/DocumentUploader/repositoryDetails/removeUser">
-		<p class="errorText" id="removeError">${sessionScope.repositoryDetailsError}</p>
+		<p class="incorrect" id="removeError">${sessionScope.repositoryDetailsError}</p>
 				<legend>Remove User from Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
