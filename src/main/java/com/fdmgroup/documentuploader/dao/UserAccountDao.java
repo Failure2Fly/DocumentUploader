@@ -36,7 +36,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		String SQL2 = "INSERT INTO USER_TO_SECURITY_QUESTION VALUES(?,?,?)";
 		File file = new File("H:\\DebugInUserCreate.txt");
 		try {
-		FileWriter writer= new FileWriter(file);
+			FileWriter writer = new FileWriter(file);
 			writer.write(user.toString());
 			writer.flush();
 			writer.close();
@@ -45,8 +45,8 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		}
 		jdbcTemplateObject.update(SQL1, lastID(), user.getUsername(), user.getLastName(), user.getFirstName(),
 				user.getPassword(), user.getUserEmail());
-		jdbcTemplateObject.update(SQL2,getThisId(user),null,null);
-//		jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
+		jdbcTemplateObject.update(SQL2, getThisId(user), null, null);
+		// jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
 	}
 
 	@Override
@@ -54,7 +54,8 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		// TODO sql query deletion all useraccount's stuff
 		String SQL1 = "DELETE FROM USER_TO_SECURITY_QUESTION WHERE USER_SECURITY_JOIN_ID = ?";
 		String SQL2 = "DELETE FROM USER_ACCOUNT WHERE username = ?";
-		// String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID = ?";
+		// String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID =
+		// ?";
 		jdbcTemplateObject.update(SQL1, getID(item.getUsername()));
 		jdbcTemplateObject.update(SQL2, item.getUsername());
 	}
@@ -69,9 +70,15 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 
 	@Override
 	public UserAccount read(String username) {
-		String SQL = "SELECT username, user_password, user_email, first_name, last_name FROM USER_ACCOUNT WHERE username = ?";
-		UserAccount user = jdbcTemplateObject.queryForObject(SQL, new Object[] { username }, new UserAccountMapper());
-		return user;
+		try {
+			String SQL = "SELECT username, user_password, user_email, first_name, last_name FROM USER_ACCOUNT WHERE username = ?";
+			UserAccount user = jdbcTemplateObject.queryForObject(SQL, new Object[] { username },
+					new UserAccountMapper());
+			return user;
+		} catch (EmptyResultDataAccessException e) {
+			return null;
+		}
+
 	}
 
 	public int lastID() {
@@ -101,24 +108,25 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		rows = jdbcTemplateObject.queryForList(SQL, userId);
 		for (Map<String, Object> map : rows) {
 			BusinessAccount account = new BusinessAccount();
-			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
-			BigDecimal temp =(BigDecimal) map.get("BUSINESS_USER_JOIN_ID");
-			
+			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext()
+					.getBean("BusinessAccountDao");
+			BigDecimal temp = (BigDecimal) map.get("BUSINESS_USER_JOIN_ID");
+
 			account = businessDao.read(temp.intValue());
 			businessAccounts.add(account);
 		}
 		return businessAccounts;
 	}
-	public int getThisId(UserAccount user){
-		try{
+
+	public int getThisId(UserAccount user) {
+		try {
 			String SQL = "SELECT user_id FROM USER_ACCOUNT WHERE username = ?";
 
 			Integer userId = jdbcTemplateObject.queryForObject(SQL, new Object[] { user.getUsername() }, Integer.class);
 			return userId;
-		}catch(EmptyResultDataAccessException e){
+		} catch (EmptyResultDataAccessException e) {
 			return 0;
 		}
-			
-		
+
 	}
 }

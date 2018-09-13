@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -185,7 +186,10 @@ public class BusinessAccountController {
 		String addUser = request.getParameter("add");
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		UserAccount addedUser = userDao.read(addUser);
-		if (account.getUserAccounts().contains(addedUser)) {
+		if (Objects.isNull(addedUser)){
+			session.setAttribute("repositoryDetailsError", "This user does not exist!");
+			return new RedirectView("/DocumentUploader/repositoryDetails");
+		}else if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
