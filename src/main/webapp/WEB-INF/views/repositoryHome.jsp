@@ -18,22 +18,27 @@
 
 <script>
 	function DisplayFiles() {
-		
+
 		var myObj, i, x = "", y = "";
 		x = document.getElementById("fileList").innerHTML;
 		x = x.replace(/\\/g, "\\\\");
 		myObj = JSON.parse(x);
 
 		for (i in myObj) {
-			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "File name: " + myObj[i].name + " "
-					+ "Upload date: " + myObj[i].date + "</p></h3></a>";
-			y += "<a href=\"/DocumentUploader/deleteFile/"+myObj[i].repositoryPath+"\"><h3><p>" + "Delete"+"</p></h3></a>";
+			y += "<a href=\"/DocumentUploader/downloadFile/"+myObj[i].repositoryPath+"\"><h3><p>"
+					+ "File name: "
+					+ myObj[i].name
+					+ " "
+					+ "Upload date: "
+					+ myObj[i].date + "</p></h3></a>";
+			y += "<a href=\"/DocumentUploader/deleteFile/"+myObj[i].repositoryPath+"\"><h3><p>"
+					+ "Delete" + "</p></h3></a>";
 			y += "<br>";
 		}
-		if(document.getElementById("uploadErrorText").innerHTML!=""){
-			uploadErrorText.style.visibility='visible';
-		}else{
-			uploadErrorText.style.visibility='hidden';
+		if (document.getElementById("uploadErrorText").innerHTML != "") {
+			uploadErrorText.style.visibility = 'visible';
+		} else {
+			uploadErrorText.style.visibility = 'hidden';
 		}
 		document.getElementById("Documents").innerHTML = y;
 		/* var text = "My Button"; // JavaScript string
@@ -45,37 +50,42 @@
 <title>Document Uploader</title>
 </head>
 
-    <nav class="navbar fixed-top navbar-expand-lg">
-	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	
-	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-	    <ul class="navbar-nav">
-		  <li class="nav-item active">
-	        <a href="/DocumentUploader/userHome"><button class="btn btn-primary" type="submit">User Homepage</button></a>
-	      </li>
-	      <li class="nav-item">
-	        <a href="/DocumentUploader/repositoryDetails"><button class="btn btn-primary" type="submit">Repository Details</button></a>
-	      </li>
-	      <li class="nav-item">
-			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>
-	      </li>
-	      <li>
-	      	<div class="g-signin2" data-onsuccess="onSignIn"></div>
-	      </li> 
-	    </ul>
-	  </div>
-	</nav>
-	
+<nav class="navbar fixed-top navbar-expand-lg">
+	<a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse"
+		data-target="#navbarSupportedContent"
+		aria-controls="navbarSupportedContent" aria-expanded="false"
+		aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse justify-content-end"
+		id="navbarSupportedContent">
+		<ul class="navbar-nav">
+			<li class="nav-item active"><a href="/DocumentUploader/userHome"><button
+						class="btn btn-primary" type="submit">User Homepage</button></a></li>
+			<li class="nav-item"><a
+				href="/DocumentUploader/repositoryDetails"><button
+						class="btn btn-primary" type="submit">Repository Details</button></a>
+			</li>
+			<li class="nav-item"><a href="/DocumentUploader/login"><button
+						class="btn btn-primary" type="submit">Logout</button></a></li>
+			<li>
+				<div class="g-signin2" data-onsuccess="onSignIn"></div>
+			</li>
+		</ul>
+	</div>
+</nav>
+
 <body onload="DisplayFiles()">
 
 	<div class="header user-hello">
 		<div class="mainTitle">
-			<h1>${sessionScope.account.owner.username}'s Repository,
+			<h1>${sessionScope.account.owner.username}'s
+				${sessionScope.account.serviceLevel.serviceLevel} Repository,
 				${sessionScope.account.accountName }</h1>
 		</div>
+		sessionScope.account.serviceLevel.serviceLevel
 	</div>
 
 	<div id="register-form" class="registration">

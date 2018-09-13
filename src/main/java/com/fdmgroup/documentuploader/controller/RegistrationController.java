@@ -27,7 +27,8 @@ import com.fdmgroup.documentuploader.pojo.UserAccount;
 public class RegistrationController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String userRegistration(Model model) {
+	public String userRegistration(Model model, HttpSession session) {
+		session.setAttribute("loginError", "");
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute("listOfQuestion", SecurityQuestion.allQuestions());
 		model.addAttribute(userAccount);

@@ -30,8 +30,8 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public ModelAndView userLoginSuccess(@ModelAttribute UserAccount userAccount, HttpSession session,RedirectAttributes ra) {
 		Validator validator = new Validator();
-		boolean isValid = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
-		if (isValid) {
+		String validationError = validator.validateUserLogin(userAccount.getUsername(), userAccount.getPassword());
+		if (validationError.equals("")||validationError.equals(null)) {
 			UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 			userAccount = userDao.read(userAccount.getUsername());
 			session.setAttribute("user", userAccount);
@@ -39,6 +39,7 @@ public class LoginController {
 			session.setAttribute("AccountList", businessDao.read(userAccount.getUsername()));
 			return new ModelAndView(new RedirectView("/userHome", true));
 		} else {
+			session.setAttribute("loginError", validationError);
 			return new ModelAndView(new RedirectView("/login", true));
 		}
 	}

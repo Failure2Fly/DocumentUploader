@@ -16,22 +16,20 @@ public class Validator {
 	private ApplicationContext context;
 	private UserAccountDao dao;
 
-	public boolean validateUserLogin(String username, String password) {
+	public String validateUserLogin(String username, String password) {
 		context = new ClassPathXmlApplicationContext("context.xml");
 		dao = (UserAccountDao) context.getBean("UserAccountDao");
 		try {
 			UserAccount actualUser = dao.read(username);
 			if (actualUser.getPassword().equals(password)) {
-				return true;
+				return "";
 			} else {
-				return false;
+				return "Password does not match our records!";
 			}
-		} catch (EmptyResultDataAccessException e) {
-			return false;
-		} catch (IncorrectResultSizeDataAccessException e) {
-			return false;
+		}  catch (IncorrectResultSizeDataAccessException e) {
+			return "Multiple user with that username exist??";
 		} catch (NullPointerException e) {
-			return false;
+			return "Username does not exist!";
 		}
 	}
 	

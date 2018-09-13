@@ -65,6 +65,7 @@ public class DispatchController {
 		session.setAttribute("firstNameError", "");
 		session.setAttribute("lastNameError", "");
 		session.setAttribute("emailError", "");
+		session.setAttribute("loginError", "");
 		return "index";
 	}
 
