@@ -44,7 +44,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		jdbcTemplateObject.update(SQL1, lastID(), user.getUsername(), user.getLastName(), user.getFirstName(),
 				user.getPassword(), user.getUserEmail());
 		jdbcTemplateObject.update(SQL2,getThisId(user),null,null);
-//		jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
+		jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
 	}
 
 	@Override

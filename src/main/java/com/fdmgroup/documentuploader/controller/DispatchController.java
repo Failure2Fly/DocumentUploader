@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,7 +73,28 @@ public class DispatchController {
 		model.addAttribute(userAccount);
 		return "register";
 	}
-
+	
+	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
+	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
+		try {
+			UserAccount user = (UserAccount) session.getAttribute("user");
+			if (user.getUsername().equals("") || user.getUsername() == null) {
+				return "login";
+			}
+		} catch (NullPointerException e) {
+			return "login";
+		}
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			UserAccount user = (UserAccount) session.getAttribute("user");
+			UserAccountDao dao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
+			String json = mapper.writeValueAsString(dao.readAccounts(dao.getThisId(user)));
+			session.setAttribute("accountList", json);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		}
+		return "userHome";
+	}
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public RedirectView userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpServletRequest request ,HttpSession session) {
 		boolean isValid = true;
