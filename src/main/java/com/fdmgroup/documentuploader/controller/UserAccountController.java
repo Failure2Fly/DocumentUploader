@@ -39,6 +39,7 @@ public class UserAccountController {
 
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
+		context = getContext();
 		try {
 			UserAccount user = (UserAccount) session.getAttribute("user");
 			if (user.getUsername().equals("") || user.getUsername() == null) {
@@ -50,15 +51,6 @@ public class UserAccountController {
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			UserAccount user = (UserAccount) session.getAttribute("user");
-			File file1 = new File("H:\\useraccountcontroller.txt");
-			try {
-				FileWriter writer = new FileWriter(file1);
-				writer.write(user.toString());
-				writer.flush();
-				writer.close();
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
 			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
 			String json = mapper.writeValueAsString(dao.readAccounts(dao.getThisId(user)));
 			session.setAttribute("accountList", json);

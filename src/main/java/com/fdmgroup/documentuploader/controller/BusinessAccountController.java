@@ -35,7 +35,7 @@ import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 @Controller
-public class RepositoryController {
+public class BusinessAccountController {
 
 	private static ConfigurableApplicationContext context;
 
@@ -67,7 +67,7 @@ public class RepositoryController {
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
-		account.setServicelevel(new ServiceLevel(level));
+		account.setServiceLevel(new ServiceLevel(level));
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
@@ -75,7 +75,7 @@ public class RepositoryController {
 		File file1 = new File("H:\\createAccount.txt");
 		try {
 			FileWriter writer = new FileWriter(file1);
-			writer.write(account.getServicelevel().getServiceLevel().toString());
+			writer.write(account.getServiceLevel().getServiceLevel().toString());
 			writer.flush();
 			writer.close();
 		} catch (IOException e2) {
@@ -201,7 +201,7 @@ public class RepositoryController {
 		if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
-		} else if(account.getUserAccounts().size()>=account.getServicelevel().getUserLimit()) {
+		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
 			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		}else{
@@ -243,5 +243,8 @@ public class RepositoryController {
 		}
 		return new RedirectView("/DocumentUploader/repositoryDetails/");
 	}
-
+	@RequestMapping(value = "/serviceLevels")
+	public String ServiceLevels(Model model) {
+		return "serviceLevels";
+	}
 }
