@@ -182,7 +182,7 @@ public class DispatchController {
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
-		account.setServicelevel(new ServiceLevel(level));
+		account.setServiceLevel(new ServiceLevel(level));
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
@@ -190,7 +190,7 @@ public class DispatchController {
 		File file1 = new File("H:\\createAccount.txt");
 		try {
 			FileWriter writer = new FileWriter(file1);
-			writer.write(account.getServicelevel().getServiceLevel().toString());
+			writer.write(account.getServiceLevel().getServiceLevel().toString());
 			writer.flush();
 			writer.close();
 		} catch (IOException e2) {
@@ -368,11 +368,19 @@ public class DispatchController {
 		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
 		UserAccount addedUser = userDao.read(addUser);
 		if (account.getUserAccounts().contains(addedUser)) {
+<<<<<<< HEAD
+			session.setAttribute("accountDetailsError", "This user has already been added!");
+			return new RedirectView("/DocumentUploader/accountDetails");
+		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
+			session.setAttribute("accountDetailsError", "Your repository cannot support more users at your service level!");
+			return new RedirectView("/DocumentUploader/accountDetails");
+=======
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		} else if(account.getUserAccounts().size()>=account.getServicelevel().getUserLimit()) {
 			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
+>>>>>>> 302cb663ecce4ad3947539603838ca5c28853050
 		}else{
 			account.getUserAccounts().add(addedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
