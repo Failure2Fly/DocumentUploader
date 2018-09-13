@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,7 +27,8 @@ import com.fdmgroup.documentuploader.pojo.UserAccount;
 public class RegistrationController {
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
-	public String userRegistration(Model model) {
+	public String userRegistration(Model model, HttpSession session) {
+		session.setAttribute("loginError", "");
 		UserAccount userAccount = new UserAccount();
 		model.addAttribute("listOfQuestion", SecurityQuestion.allQuestions());
 		model.addAttribute(userAccount);
@@ -37,10 +39,11 @@ public class RegistrationController {
 	public RedirectView userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpServletRequest request ,HttpSession session) {
 		boolean isValid = true;
 		Validator validator = new Validator();
-		isValid = validator.validateUserRegistration(userAccount);
-		if (isValid) {
+		
+		String[] errorString = validator.validateUserRegistration(userAccount);
+		if (Objects.isNull(errorString)||errorString.length<0) {
 			
-			UserAccountDao dao = (UserAccountDao) DispatchController.getContext().getBean("UserAcDispatchController.getContext().");
+			UserAccountDao dao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 			try {
 				List<Questions> list = new ArrayList<>();
 				Questions question = new Questions(SecurityQuestion
@@ -65,7 +68,16 @@ public class RegistrationController {
 			} finally {
 			}
 		} else {
+			session.setAttribute("registrationError", "This is the error string:"+errorString);
+			session.setAttribute("usernameError", errorString[0]);
+			session.setAttribute("passwordError", errorString[1]);
+			session.setAttribute("firstNameError", errorString[2]);
+			session.setAttribute("lastNameError", errorString[3]);
+			session.setAttribute("emailError", errorString[4]);
+			
 			return new RedirectView("register");
 		}
 	}
+	
+	
 }

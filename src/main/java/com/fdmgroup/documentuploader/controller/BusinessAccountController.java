@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -112,7 +113,7 @@ public class BusinessAccountController {
 		
 		if(file.isEmpty()){
 			session.setAttribute("accountHomeError", "You forgot to include a file to upload!");
-		}else if(documentDao.read(account.getBusinessAccountId()).size() < account.getServiceLevel().getDocumentLimit()) {
+		}else if(account.getServiceLevel().getDocumentLimit()==-1||documentDao.read(account.getBusinessAccountId()).size() < account.getServiceLevel().getDocumentLimit()) {
 			
 			int fileId = documentDao.getId();
 			File directory = new File("H:\\repository\\" + accountId);
@@ -151,6 +152,7 @@ public class BusinessAccountController {
 
 	@RequestMapping(value = "/repositoryDetails", method = RequestMethod.GET)
 	public String repositoryDetailsGet(HttpSession session) {
+		session.setAttribute("listOfLevels", ServiceLevels.allServiceLevels());
 		UserAccount user = (UserAccount) session.getAttribute("user");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
@@ -185,7 +187,10 @@ public class BusinessAccountController {
 		String addUser = request.getParameter("add");
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		UserAccount addedUser = userDao.read(addUser);
-		if (account.getUserAccounts().contains(addedUser)) {
+		if (Objects.isNull(addedUser)){
+			session.setAttribute("repositoryDetailsError", "This user does not exist!");
+			return new RedirectView("/DocumentUploader/repositoryDetails");
+		}else if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
@@ -221,8 +226,9 @@ public class BusinessAccountController {
 		String removeUser = request.getParameter("remove");
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		UserAccount removedUser = userDao.read(removeUser);
-
-		if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
+		if (Objects.isNull(removedUser)){
+		session.setAttribute("repositoryDetailsError", "That user is not attached to this account!");
+		}else if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
 			session.setAttribute("repositoryDetailsError", "");
 			account.getUserAccounts().remove(removedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
@@ -233,5 +239,18 @@ public class BusinessAccountController {
 			session.setAttribute("repositoryDetailsError", "That user is the owner and cannot be removed!");
 		}
 		return new RedirectView("/DocumentUploader/repositoryDetails/");
+	}
+	@RequestMapping(value = "/repositoryDetails/changeLevel", method = RequestMethod.POST)
+	public RedirectView repositoryDetailsChangeLevel(HttpServletRequest request, HttpSession session) {
+		BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
+		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
+		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
+		account.setServiceLevel(new ServiceLevel(level));
+		account.setUserLimit(account.getServiceLevel().getUserLimit());
+		businessDao.update(account);
+		session.setAttribute("account", account);
+		session.setAttribute("repositoryDetailsError", "");
+		return new RedirectView("/DocumentUploader/repositoryDetails");
+
 	}
 }

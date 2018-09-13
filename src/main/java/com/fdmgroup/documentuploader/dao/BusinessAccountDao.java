@@ -88,7 +88,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		List<UserAccount> userAccounts = readUsers(account.getBusinessAccountId());
 		for (UserAccount secondaryUser : userAccounts) {
 			if (!account.getUserAccounts().contains(secondaryUser)) {
-				SQL = "DELETE FROM business_to_user WHERE business_user_join_id = ? AND useraccountbusinessjoinid = ? ";
+				SQL = "DELETE FROM business_to_user WHERE business_user_join_id = ? AND user_business_join_id = ? ";
 				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(), userDao.getThisId(secondaryUser));
 
 			}
@@ -166,6 +166,15 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			associatedUsers.add(userAccount);
 		}
 		business.setUserAccounts(associatedUsers);
+		List<String> fileList = new ArrayList<>();
+		innerRows = new ArrayList<>();
+		SQL = "SELECT STORED_FILE_PATH FROM documents WHERE associated_account_id = ?";
+		innerRows = jdbcTemplateObject.queryForList(SQL, business.getBusinessAccountId());
+		for (Map<String, Object> innerMap : innerRows) {
+			String file = (String) innerMap.get("STORED_FILE_PATH");
+			fileList.add(file);
+		}
+		business.setFileList(fileList);
 
 		return business;
 	}
