@@ -16,7 +16,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -37,6 +36,7 @@ import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
 import com.fdmgroup.documentuploader.logic.Validator;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
 import com.fdmgroup.documentuploader.pojo.Document;
+import com.fdmgroup.documentuploader.pojo.Questions;
 import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 import com.fdmgroup.documentuploader.enumeratedtypes.ServiceLevels;
@@ -128,7 +128,7 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpSession session) {
+	public RedirectView userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpServletRequest request ,HttpSession session) {
 		boolean isValid = true;
 		Validator validator = new Validator();
 		isValid = validator.validateUserRegistration(userAccount);
@@ -136,9 +136,14 @@ public class DispatchController {
 			context = getContext();
 			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
 			try {
+				List<Questions> list = new ArrayList<>();
+				Questions question = new Questions(SecurityQuestion
+						.valueOf(request.getParameter("question").toUpperCase().replace(" ", "_").replace("?", "")),request.getParameter("securityQuestion"));
+				list.add(question);
+				userAccount.setListQA(list);
 				dao.create(userAccount);
 				session.setAttribute("user", userAccount);
-				return "login";
+				return new RedirectView("login");
 			} catch (Exception e) {
 				File file = new File("H:\\Debug.txt");
 				try {
@@ -150,12 +155,11 @@ public class DispatchController {
 				} catch (IOException e2) {
 					e.printStackTrace();
 				}
-				return "register";
+				return new RedirectView("register");
 			} finally {
 			}
 		} else {
-			session.setAttribute("listOfQuestion", SecurityQuestion.allQuestions());
-			return "register";
+			return new RedirectView("register");
 		}
 	}
 
@@ -398,8 +402,6 @@ public class DispatchController {
 		businessDao.update(account);
 		session.setAttribute("account", account);
 		return new RedirectView("/DocumentUploader/accountDetails/");
-
-
 	}
 	
 	

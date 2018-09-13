@@ -4,13 +4,18 @@ package com.fdmgroup.documentuploadertests.logic;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
 import com.fdmgroup.documentuploader.logic.Validator;
+import com.fdmgroup.documentuploader.pojo.Questions;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
 public class ValidatorTest {
@@ -18,10 +23,21 @@ public class ValidatorTest {
 	Validator validator;
 	ApplicationContext context;
 	UserAccount userAccount;
-
+	Questions question;
+	List<Questions> QA;
+	String username;
+	String password;
 	@Before
 	public void setUp() throws Exception {
 		validator = new Validator();
+		question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		QA = new ArrayList<>();
+		QA.add(question);
+		username = "Luke.Weatherstein";
+		password = "LukeIsDaBomb##!";
+
+		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
+				"lweather2@gmail.com",QA);
 	}
 
 	// ====== Begin validateUserLogin Tests ======
@@ -31,26 +47,17 @@ public class ValidatorTest {
 		// Arrange
 		context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-		// Map<SecurityQuestion,String> QA = new HashMap<>();
-		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
-		// "SheepFace");
-		// QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME,
-		// "Statistics");
-		String username = "Luke.Weatherstein";
-		String password = "LukewarmWeather";
-
-		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
-				"lweather2@gmail.com");
+		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", password,
+				"lweather2@gmail.com",QA);
 
 		dao.create(userAccount);
 
 		// Act
 		boolean result = validator.validateUserLogin(username, password);
-
+		dao.delete(userAccount);
 		// Assert
 		assertTrue(result);
 
-		dao.delete(userAccount);
 	}
 
 	@Test
@@ -58,26 +65,16 @@ public class ValidatorTest {
 		// Arrange
 		context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-		// Map<SecurityQuestion,String> QA = new HashMap<>();
-		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
-		// "SheepFace");
-		// QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME,
-		// "Statistics");
-		String username = "Luke.Cage";
-		String password = "LukewarmWeather";
-
 		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
-				"lweather2@gmail.com");
+				"lweather2@gmail.com",QA);
 
 		dao.create(userAccount);
 
 		// Act
 		boolean result = validator.validateUserLogin(username, password);
-
+		dao.delete(userAccount);
 		// Assert
 		assertFalse(result);
-
-		dao.delete(userAccount);
 	}
 
 	@Test
@@ -85,27 +82,18 @@ public class ValidatorTest {
 		// Arrange
 		context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-		// Map<SecurityQuestion,String> QA = new HashMap<>();
-		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
-		// "SheepFace");
-		// QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME,
-		// "Statistics");
-		String username = "Luke.Weatherstein";
-		String password = "LukeIsDaBomb##!";
 
 		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
-				"lweather2@gmail.com");
+				"lweather2@gmail.com",QA);
 		
 		dao.create(userAccount);
 		
 
 		// Act
 		boolean result = validator.validateUserLogin(username, password);
-		
+		dao.delete(userAccount);
 		// Assert
 		assertFalse(result);
-
-		dao.delete(userAccount);
 	}
 
 	@Test
@@ -113,26 +101,17 @@ public class ValidatorTest {
 		// Arrange
 		context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-		// Map<SecurityQuestion,String> QA = new HashMap<>();
-		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
-		// "SheepFace");
-		// QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME,
-		// "Statistics");
-		String username = "Luke.Cake";
-		String password = "LukeIsDaBomb##!";
 
 		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
-				"lweather2@gmail.com");
+				"lweather2@gmail.com",QA);
 
 		dao.create(userAccount);
 
 		// Act
 		boolean result = validator.validateUserLogin(username, password);
-
+		dao.delete(userAccount);
 		// Assert
 		assertFalse(result);
-
-		dao.delete(userAccount);
 	}
 
 	@Test
@@ -140,26 +119,17 @@ public class ValidatorTest {
 		// Arrange
 		context = new ClassPathXmlApplicationContext("context.xml");
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-		// Map<SecurityQuestion,String> QA = new HashMap<>();
-		// QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,
-		// "SheepFace");
-		// QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME,
-		// "Statistics");
-		String username = null;
-		String password = "LukeIsDaBomb##!";
 
 		userAccount = new UserAccount("Luke.Weatherstein", "Weatherstein", "Luke", "LukewarmWeather",
-				"lweather2@gmail.com");
+				"lweather2@gmail.com",QA);
 
 		dao.create(userAccount);
 
 		// Act
 		boolean result = validator.validateUserLogin(username, password);
-
+		dao.delete(userAccount);
 		// Assert
 		assertFalse(result);
-
-		dao.delete(userAccount);
 	}
 	
 	// ====== Begin validatePasswordConfirmation Tests ======

@@ -27,14 +27,10 @@
 					+ "</h3>";
 			x += "<br>";
 		}
-
 		document.getElementById("userList").innerHTML = x;
-
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
-
 	}
-
 </script>
 <title>Business Account Details</title>
 </head>
