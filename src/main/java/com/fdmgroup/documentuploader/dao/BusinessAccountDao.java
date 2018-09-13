@@ -166,6 +166,15 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			associatedUsers.add(userAccount);
 		}
 		business.setUserAccounts(associatedUsers);
+		List<String> fileList = new ArrayList<>();
+		innerRows = new ArrayList<>();
+		SQL = "SELECT STORED_FILE_PATH FROM documents WHERE associated_account_id = ?";
+		innerRows = jdbcTemplateObject.queryForList(SQL, business.getBusinessAccountId());
+		for (Map<String, Object> innerMap : innerRows) {
+			String file = (String) innerMap.get("STORED_FILE_PATH");
+			fileList.add(file);
+		}
+		business.setFileList(fileList);
 
 		return business;
 	}
