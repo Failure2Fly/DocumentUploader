@@ -225,8 +225,9 @@ public class BusinessAccountController {
 		String removeUser = request.getParameter("remove");
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		UserAccount removedUser = userDao.read(removeUser);
-
-		if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
+		if (Objects.isNull(removedUser)){
+		session.setAttribute("repositoryDetailsError", "That user is not attached to this account!");
+		}else if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
 			session.setAttribute("repositoryDetailsError", "");
 			account.getUserAccounts().remove(removedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
