@@ -24,7 +24,7 @@
 
 		for (i in myObj) {
 			x += "<h3><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"
-					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].servicelevel.serviceLevel
+					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].serviceLevel.serviceLevel
 					+ "<br> Repository Name: "
 					+ myObj[i].accountName
 					+ "</a></h3>";
