@@ -12,18 +12,12 @@ public class DocumentMapper implements RowMapper<Document> {
 
 	public Document mapRow(ResultSet rs, int rowNum) throws SQLException {
 		Document document = new Document();
-		//TODO comeback after sql database coded
-		document.setName(rs.getString("filename"));
-		document.setDate(rs.getDate("storedate"));
-		document.setAccountId(rs.getInt("associatedaccountid"));
-		document.setRepositoryPath(Paths.get(rs.getString("storedfilepath")));
+		document.setName(rs.getString("file_name"));
+		document.setDate(rs.getDate("store_date"));
+		document.setAccountId(rs.getInt("associated_account_id"));
+		document.setRepositoryPath(Paths.get(rs.getString("stored_file_path")));
 		document.setSourcePath(null);
-//		Map<SecurityQuestion,String> rsQuestionMap = new HashMap<>();
-//	    rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));
-//	    while(rs.next()){
-//	    	rsQuestionMap.put(SecurityQuestion.valueOf(rs.getString("question").toUpperCase().replace(" ", "_").replace("?", "")),rs.getString("questionanswer"));
-//	    }
-//		user.setMapQA(rsQuestionMap);
+
 		return document;
 	}
 

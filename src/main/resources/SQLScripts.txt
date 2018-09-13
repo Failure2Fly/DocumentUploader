@@ -1,5 +1,5 @@
 DROP TABLE User_Account CASCADE CONSTRAINTS;
-CREATE TABLE UserAccount(
+CREATE TABLE User_Account(
     User_ID int,
     Username varchar(255),
     Last_Name varchar(255),
@@ -13,7 +13,7 @@ CREATE TABLE UserAccount(
 INSERT INTO User_Account
 VALUES(1000000,'fakeUser','FakeName','AnotherFake','SuperFake','ImFake@gmail.com');
 
-DROP TABLE SecurityQuestion CASCADE CONSTRAINTS;
+DROP TABLE Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE Security_Question(
   Question_ID int,
   Question VARCHAR(255),
@@ -21,11 +21,11 @@ CREATE TABLE Security_Question(
   
   );
   
-INSERT INTO SecurityQuestion VALUES(1, 'What was the name of your first pet?');
-INSERT INTO SecurityQuestion VALUES(2, 'What was your mothers maiden name?');
-INSERT INTO SecurityQuestion VALUES(3, 'What was the first concert you went attended?');
-INSERT INTO SecurityQuestion VALUES(4, 'What was the make and model of your first car?');
-INSERT INTO SecurityQuestion VALUES(5, 'Who is your favorite actor, musician, or artist?');
+INSERT INTO Security_Question VALUES(1, 'What was the name of your first pet?');
+INSERT INTO Security_Question VALUES(2, 'What was your mothers maiden name?');
+INSERT INTO Security_Question VALUES(3, 'What was the first concert you went attended?');
+INSERT INTO Security_Question VALUES(4, 'What was the make and model of your first car?');
+INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor, musician, or artist?');
   
 DROP TABLE User_Account_To_Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE User_Account_To_Security_Question(
@@ -72,7 +72,7 @@ CREATE TABLE Business_Account_To_User_Account(
   
 DROP TABLE Service_Levels CASCADE CONSTRAINTS;
 CREATE TABLE Service_Levels(
-  ServiceLevel_ID int,
+  Service_Level_ID int,
   Service_Level VARCHAR(255),
   PRIMARY KEY(Service_Level_ID)
   );

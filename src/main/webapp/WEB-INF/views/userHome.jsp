@@ -23,9 +23,9 @@
 		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
 		for (i in myObj) {
-			x += "<h3><a href=\"/DocumentUploader/accountHome/"+myObj[i].businessAccountId+"\">"
-					+ "Account ID: "+myObj[i].businessAccountId
-					+ "<br> Account Name: "
+			x += "<h3><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"
+					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].serviceLevel.serviceLevel
+					+ "<br> Repository Name: "
 					+ myObj[i].accountName
 					+ "</a></h3>";
 			x += "<br>";
@@ -94,7 +94,7 @@
 	</div>
 
 
-	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 
 	<table class="table">
 	  <thead class="thead-dark">

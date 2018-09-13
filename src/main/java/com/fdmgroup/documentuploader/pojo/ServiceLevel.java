@@ -116,6 +116,12 @@ public class ServiceLevel {
 	public boolean getHasAdverts() {
 		return hasAdverts;
 	}
+	@Override
+	public String toString() {
+		return "ServiceLevel [serviceLevel=" + serviceLevel + ", monthlyCost=" + monthlyCost + ", documentLimit="
+				+ documentLimit + ", monthlyDocumentUploadLimit=" + monthlyDocumentUploadLimit + ", userLimit="
+				+ userLimit + ", additionalUserCost=" + additionalUserCost + ", hasAdverts=" + hasAdverts + "]";
+	}
 
 	
 	

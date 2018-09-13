@@ -47,7 +47,7 @@ public class DocumentDao {
 			}
 			repositoryPath = repositoryPath.replaceAll("\\\\", "/");
 			file.transferTo(destination);
-			String SQL1 = "INSERT INTO documents (file_ id, file_name, stored_file_path, store_date, associated_account_id) VALUES(?, ?, ?, SYSDATE, ?)";
+			String SQL1 = "INSERT INTO documents (file_id, file_name, stored_file_path, store_date, associated_account_id) VALUES(?, ?, ?, SYSDATE, ?)";
 			jdbcTemplateObject.update(SQL1, getId(), document.getName(), repositoryPath, document.getAccountId());
 
 		} catch (IOException x) {
@@ -94,7 +94,7 @@ public class DocumentDao {
 	}
 
 	public List<Document> read(int businessAccountId) {
-		String SQL = "SELECT file_name, stored_file-path, store_date, associated_account_id FROM documents WHERE associated_account_id = ?";
+		String SQL = "SELECT file_name, stored_file_path, store_date, associated_account_id FROM documents WHERE associated_account_id = ?";
 		List<Document> documents = new ArrayList<>();
 		List<Map<String, Object>> rows = new ArrayList<>();
 		rows = jdbcTemplateObject.queryForList(SQL, businessAccountId);
@@ -104,7 +104,7 @@ public class DocumentDao {
 			Date date = ((Date) map.get("store_date"));
 			document.setDate(date);
 			document.setName((String) map.get("file_name"));
-			document.setRepositoryPath(Paths.get((String) map.get("stored-file_path")));
+			document.setRepositoryPath(Paths.get((String) map.get("stored_file_path")));
 			documents.add(document);
 		}
 
