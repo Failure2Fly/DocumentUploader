@@ -136,10 +136,10 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			
 			List<String> fileList = new ArrayList<>();
 			innerRows = new ArrayList<>();
-			SQL="SELECT filename FROM documents WHERE associatedaccountid = ?";
+			SQL="SELECT STOREDFILEPATH FROM documents WHERE ASSOCIATEDACCOUNTID = ?";
 			innerRows=jdbcTemplateObject.queryForList(SQL, accountId);
 			for(Map<String, Object> innerMap : innerRows){
-				String file =(String)innerMap.get("filename");
+				String file =(String)innerMap.get("STOREDFILEPATH");
 				fileList.add(file);
 			}
 			account.setFileList(fileList);

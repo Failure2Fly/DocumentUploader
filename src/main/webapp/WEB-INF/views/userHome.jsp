@@ -81,7 +81,7 @@
 	</div>
 
 
-	<p class="accountList" id="accountList">${sessionScope.accountList}</p>
+	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 
 	<table class="table">
 	  <thead class="thead-dark">

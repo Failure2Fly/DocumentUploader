@@ -27,6 +27,16 @@
 					+ "</h3>";
 			x += "<br>";
 		}
+		if(document.getElementById("errorText").innerHTML==""){
+			removeError.style.visibility='hidden';
+			addError.style.visibility='hidden';
+		}else if(document.getElementById("errorText").innerHTML=="That user is the owner and cannot be removed!"){
+			removeError.style.visibility='visible';
+			addError.style.visibility='hidden';
+		}else if(document.getElementById("errorText").innerHTML=="Your repository cannot support more users at your service level!" || document.getElementById("errorText").innerHTML=="This user has already been added!"){
+			addError.style.visibility='visible';
+			removeError.style.visibility='hidden';
+		}
 
 		document.getElementById("userList").innerHTML = x;
 
@@ -60,6 +70,7 @@
 
 	<div id="update-form" class="update">
 		<sf:form method="POST" action="/DocumentUploader/accountDetails/delete">
+			
 			<legend>Delete Repository: ${sessionScope.account.accountName}</legend>
 			<fieldset>
 				<p>Do you want to delete the repository? </p>
@@ -72,6 +83,7 @@
 		<p >Users currently attached to this account:</p>
 		<p id="userList">Placeholder User</p>
 		<sf:form method="POST" action="/DocumentUploader/accountDetails/addUser">
+			<p class="errorText" id="addError">${sessionScope.accountDetailsError}</p>
 				<legend>Add User to Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="addInput"name="add"type="text" 
@@ -82,6 +94,7 @@
 			</fieldset>
 		</sf:form>
 		<sf:form method="POST" action="/DocumentUploader/accountDetails/removeUser">
+			<p class="errorText" id="removeError">${sessionScope.accountDetailsError}</p>
 				<legend>Remove User from Repository:</legend>
 			<fieldset>
 				<input type="text" class="inputField" id="removeInput"name="remove"type="text" 
@@ -102,7 +115,8 @@
 			</fieldset>
 		</sf:form>
 	</div>
-<p id="accountJson">${sessionScope.accountDetailJson}</p>
+<p class="hiddenText" id="accountJson">${sessionScope.accountDetailJson}</p>
+<p class="hiddenText" id="errorText">${sessionScope.accountDetailsError}</p>
 </body>
 <footer>
 	<div class="header">
