@@ -206,11 +206,21 @@ public class DispatchController {
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
-		account.setServicelevel(new ServiceLevel(level));
+		account.setServiceLevel(new ServiceLevel(level));
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
 		dao.create(account);
+
+		File file1 = new File("H:\\createAccount.txt");
+		try {
+			FileWriter writer = new FileWriter(file1);
+			writer.write(account.getServiceLevel().getServiceLevel().toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
 
@@ -255,7 +265,7 @@ public class DispatchController {
 		
 		if(file.isEmpty()){
 			session.setAttribute("accountHomeError", "You forgot to include a file to upload!");
-		}else if(documentDao.read(account.getBusinessAccountId()).size() < account.getServicelevel().getDocumentLimit()) {
+		}else if(documentDao.read(account.getBusinessAccountId()).size() < account.getServiceLevel().getDocumentLimit()) {
 			
 			int fileId = documentDao.getId();
 			File directory = new File("H:\\repository\\" + accountId);
@@ -363,7 +373,7 @@ public class DispatchController {
 		if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
-		} else if(account.getUserAccounts().size()>=account.getServicelevel().getUserLimit()) {
+		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
 			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		}else{
