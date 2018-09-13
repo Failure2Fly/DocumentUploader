@@ -254,10 +254,25 @@ public class DispatchController {
 		String path = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
 		path = path.substring(14);
 		path = path.replaceAll("%20", " ");
-		
+		DocumentDao documentDao = (DocumentDao) context.getBean("DocumentDao");
+		Document document = documentDao.read(path);
+		File file1 = new File("H:\\fileDownload.txt");
 		try {
-			InputStream input = new FileInputStream(path);
-			org.apache.commons.io.IOUtils.copy(input, response.getOutputStream());
+			FileWriter writer = new FileWriter(file1);
+			writer.write(document.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e2) {
+			e2.printStackTrace();
+		}
+		try {
+			File file = new File(path);
+			InputStream input = new FileInputStream(file);
+			
+			response.setContentType("application/octet-stream");
+			response.setHeader("Content-Disposition", "attachment; filename=" + document.getName());
+			response.setHeader("Content-Length", String.valueOf(file.length()));
+			org.springframework.util.FileCopyUtils.copy(input, response.getOutputStream());
 			response.flushBuffer();
 		} catch (IOException e) {
 			
@@ -306,7 +321,7 @@ public class DispatchController {
 		BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		businessDao.delete(account);
-		session.setAttribute("accountDetailsError", "");
+		session.setAttribute("repositoryDetailsError", "");
 		return new RedirectView("/DocumentUploader/userHome");
 
 	}
@@ -324,6 +339,7 @@ public class DispatchController {
 			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		}else{
+			session.setAttribute("repositoryDetailsError", "");
 			account.getUserAccounts().add(addedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 			businessDao.update(account);
@@ -336,6 +352,7 @@ public class DispatchController {
 
 	@RequestMapping(value = "/repositoryDetails/changeName", method = RequestMethod.POST)
 	public RedirectView repositoryChangeName(HttpServletRequest request, HttpSession session) {
+		session.setAttribute("repositoryDetailsError", "");
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		String newName = request.getParameter("accountName");
 		account.setAccountName(newName);
@@ -354,7 +371,7 @@ public class DispatchController {
 		UserAccount removedUser = userDao.read(removeUser);
 
 		if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
-			session.setAttribute("accountDetailsError", "");
+			session.setAttribute("repositoryDetailsError", "");
 			account.getUserAccounts().remove(removedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) getContext().getBean("BusinessAccountDao");
 			businessDao.update(account);
