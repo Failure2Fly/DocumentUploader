@@ -36,7 +36,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	public void create(BusinessAccount account) {
 
 		String SQL1 = "INSERT INTO BUSINESS_ACCOUNT(business_account_id, user_account_owner_id, service_level, user_limit, account_name) VALUES(?, ?, ?, ?, ?)";
-		String sqlOwnerId = "SELECT User_ID FROM user_account WHERE username=?";
+		String sqlOwnerId = "SELECT user_id FROM user_account WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
@@ -53,23 +53,23 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		jdbcTemplateObject.update(SQL1, businessId, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
 				account.getUserLimit(), account.getAccountName());
 
-		SQL1 = "INSERT INTO BUSINESS_ACCOUNT_TO_USER_ACCOUNT (BUSINESS_ACCOUNT_user_join_id, user_account_business_join_id) VALUES(?,?)";
+		SQL1 = "INSERT INTO business_account_to_user_account (business_account_user_join_id, user_account_business_join_id) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
 	}
 
 	@Override
 	public void delete(BusinessAccount account) {
-		String SQL = "DELETE FROM BUSINESS_ACCOUNT_TO_USER_ACCOUNT WHERE BUSINESS_ACCOUNT_user_join_id = ?";
+		String SQL = "DELETE FROM business_account_to_user_account WHERE business_account_user_join_id = ?";
 		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
-		SQL = "DELETE FROM DOCUMENTS WHERE associated_account_id = ?";
+		SQL = "DELETE FROM documents WHERE associated_account_id = ?";
 		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
-		SQL = "DELETE FROM BUSINESS_ACCOUNT WHERE business_account_id = ?";
+		SQL = "DELETE FROM business_account WHERE business_account_id = ?";
 		jdbcTemplateObject.update(SQL, account.getBusinessAccountId());
 	}
 
 	@Override
 	public void update(BusinessAccount account) {
-		String SQL = "UPDATE BUSINESS_ACCOUNT SET user_account_owner_id = ?, service_level = ?, user_limit = ?, account_name= ? WHERE business_account_id = ?";
+		String SQL = "UPDATE business_account SET user_account_owner_id = ?, service_level = ?, user_limit = ?, account_name= ? WHERE business_account_id = ?";
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		Integer ownerId = userDao.getThisId(account.getOwner());
 		jdbcTemplateObject.update(SQL, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
@@ -78,7 +78,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 			if (!secondaryUser.getUsername().equals(account.getOwner().getUsername())) {
 
-				SQL = "INSERT INTO BUSINESS_ACCOUNT_TO_USER_ACCOUNT (BUSINESS_ACCOUNT_user_join_id, user_account_business_join_id) VALUES(?,?)";
+				SQL = "INSERT INTO business_account_to_user_account (business_account_user_join_id, user_account_business_join_id) VALUES(?,?)";
 				int secondaryUserId = userDao.getThisId(secondaryUser);
 				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(), secondaryUserId);
 
@@ -87,7 +87,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		List<UserAccount> userAccounts = readUsers(account.getBusinessAccountId());
 		for (UserAccount secondaryUser : userAccounts) {
 			if (!account.getUserAccounts().contains(secondaryUser)) {
-				SQL = "DELETE FROM BUSINESS_ACCOUNT_TO_USER_ACCOUNT WHERE BUSINESS_ACCOUNT_user_join_id = ? AND useraccountbusinessjoinid = ? ";
+				SQL = "DELETE FROM business_account_to_user_account WHERE business_account_user_join_id = ? AND useraccountbusinessjoinid = ? ";
 				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(), userDao.getThisId(secondaryUser));
 
 			}
@@ -97,7 +97,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	public List<BusinessAccount> read(String username) {
 
-		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM BUSINESS_ACCOUNT WHERE user_account_owner_id=?";
+		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM business_account WHERE user_account_owner_id=?";
 		String sqlOwnerId = "SELECT User-ID FROM user_account WHERE username=?";
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { username },
 				Integer.class);
@@ -121,7 +121,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 			List<UserAccount> associatedUsers = new ArrayList<>();
 			List<Map<String, Object>> innerRows = new ArrayList<>();
-			SQL = "SELECT useraccountbusinessjoinid FROM BUSINESS_ACCOUNT_TO_USER_ACCOUNT WHERE BUSINESS_ACCOUNT_user_join_id = ?";
+			SQL = "SELECT useraccountbusinessjoinid FROM business_account_to_user_account WHERE business_account_user_join_id = ?";
 			innerRows = jdbcTemplateObject.queryForList(SQL, accountId);
 			for (Map<String, Object> innerMap : innerRows) {
 				UserAccount userAccount = new UserAccount();
@@ -148,14 +148,14 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	@Override
 	public BusinessAccount read(Integer id) {
-		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM BUSINESS_ACCOUNT WHERE business_account_id = ?";
+		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM business_account WHERE business_account_id = ?";
 
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[] { id.toString() },
 				new BusinessAccountMapper());
 
 		List<UserAccount> associatedUsers = new ArrayList<>();
 		List<Map<String, Object>> innerRows = new ArrayList<>();
-		SQL = "SELECT user_account_business_join_id FROM BUSINESS_ACCOUNT_TO_USER_ACCOUNT WHERE BUSINESS_ACCOUNT_user_join_id = ?";
+		SQL = "SELECT user_account_business_join_id FROM business_account_to_user_account WHERE business_account_user_join_id = ?";
 		innerRows = jdbcTemplateObject.queryForList(SQL, business.getBusinessAccountId());
 		for (Map<String, Object> innerMap : innerRows) {
 			UserAccount userAccount = new UserAccount();
@@ -170,7 +170,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	}
 
 	public int getId() {
-		String SQL = "SELECT MAX(business_account_id) FROM BUSINESS_ACCOUNT ";
+		String SQL = "SELECT MAX(business_account_id) FROM business_account ";
 		try {
 
 			return ((Integer) jdbcTemplateObject.queryForObject(SQL, Integer.class)) + 1;
@@ -181,14 +181,14 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	}
 
 	public List<UserAccount> readUsers(Integer userId) {
-		String SQL = "SELECT USER_ACCOUNT_BUSINESS_JOIN_ID  FROM BUSINESS_ACCOUNT_TO_USER_ACCOUNT WHERE BUSINESS_ACCOUNT_USER_JOIN_ID = ?";
+		String SQL = "SELECT user_account_business_join_id  FROM business_account_to_user_account WHERE business_account_user_join_id = ?";
 		List<UserAccount> userAccounts = new ArrayList<>();
 		List<Map<String, Object>> rows = new ArrayList<>();
 		rows = jdbcTemplateObject.queryForList(SQL, userId);
 		for (Map<String, Object> map : rows) {
 			UserAccount user = new UserAccount();
 			UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
-			BigDecimal temp = (BigDecimal) map.get("USER_ACCOUNT_BUSINESS_JOIN_ID");
+			BigDecimal temp = (BigDecimal) map.get("user_account_business_join_id");
 
 			user = userDao.read(temp.intValue());
 			userAccounts.add(user);
@@ -197,7 +197,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	}
 
 	public void linkUsertoRepository(int userId, int businessId) {
-		String SQL = "INSERT INTO BUSINESS_ACCOUNT_TO_USER_ACCOUNT VALUES(?,?) ";
+		String SQL = "INSERT INTO business_account_to_user_account VALUES(?,?) ";
 		jdbcTemplateObject.update(SQL, businessId, userId);
 
 	}

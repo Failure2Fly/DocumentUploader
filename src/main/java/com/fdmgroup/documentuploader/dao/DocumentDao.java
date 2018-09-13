@@ -30,30 +30,28 @@ public class DocumentDao {
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
 
-	
 	public void create(Document document, MultipartFile file) {
 
 		try {
-			File destination = document.getRepositoryPath().toFile(); 
-			
+			File destination = document.getRepositoryPath().toFile();
+
 			String repositoryPath = document.getRepositoryPath().toString();
 			File debugFile = new File("H:\\DebugCreate.txt");
 			try {
 				FileWriter writer = new FileWriter(debugFile);
-				writer.write("Path: "+repositoryPath);
+				writer.write("Path: " + repositoryPath);
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			repositoryPath=repositoryPath.replaceAll("\\\\", "/");
+			repositoryPath = repositoryPath.replaceAll("\\\\", "/");
 			file.transferTo(destination);
-			String SQL1 = "INSERT INTO DOCUMENTS (file_ id, file_name, stored_file_path, store_date, associated_account_id) VALUES(?, ?, ?, SYSDATE, ?)";
-			jdbcTemplateObject.update(SQL1, getId(), document.getName(), repositoryPath,
-					document.getAccountId());
+			String SQL1 = "INSERT INTO documents (file_ id, file_name, stored_file_path, store_date, associated_account_id) VALUES(?, ?, ?, SYSDATE, ?)";
+			jdbcTemplateObject.update(SQL1, getId(), document.getName(), repositoryPath, document.getAccountId());
 
 		} catch (IOException x) {
-			
+
 			System.err.println("Problem creating file - check document paths");
 			System.err.println(x);
 		}
@@ -63,17 +61,17 @@ public class DocumentDao {
 		try {
 			Files.delete(document.getRepositoryPath());
 			String repositoryPath = document.getRepositoryPath().toString();
-			repositoryPath=repositoryPath.replaceAll("\\\\", "/");
+			repositoryPath = repositoryPath.replaceAll("\\\\", "/");
 			File debugFile = new File("H:\\DebugDeleteDao.txt");
 			try {
 				FileWriter writer = new FileWriter(debugFile);
-				writer.write("Path: "+repositoryPath);
+				writer.write("Path: " + repositoryPath);
 				writer.flush();
 				writer.close();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			String SQL = "DELETE FROM DOCUMENTS WHERE stored_file_path = ?";
+			String SQL = "DELETE FROM documents WHERE stored_file_path = ?";
 			jdbcTemplateObject.update(SQL, repositoryPath);
 		} catch (IOException e) {
 			System.err
@@ -82,24 +80,21 @@ public class DocumentDao {
 		}
 	}
 
-
 	public void update(Document document, MultipartFile file) {
-			delete(document);
-			create(document, file);
+		delete(document);
+		create(document, file);
 
 	}
 
-
 	public Document read(String path) {
-		String SQL = "SELECT file_name, stored_file_path, store_date, associated_account_id FROM DOCUMENTS WHERE stored_file_path = ?";
-		Document document = jdbcTemplateObject.queryForObject(SQL, new Object[] { path },
-				new DocumentMapper());
+		String SQL = "SELECT file_name, stored_file_path, store_date, associated_account_id FROM documents WHERE stored_file_path = ?";
+		Document document = jdbcTemplateObject.queryForObject(SQL, new Object[] { path }, new DocumentMapper());
 
 		return document;
 	}
 
 	public List<Document> read(int businessAccountId) {
-		String SQL = "SELECT file_name, stored_file-path, store_date, associated_account_id FROM DOCUMENTS WHERE associated_account_id = ?";
+		String SQL = "SELECT file_name, stored_file-path, store_date, associated_account_id FROM documents WHERE associated_account_id = ?";
 		List<Document> documents = new ArrayList<>();
 		List<Map<String, Object>> rows = new ArrayList<>();
 		rows = jdbcTemplateObject.queryForList(SQL, businessAccountId);
@@ -116,7 +111,6 @@ public class DocumentDao {
 		return documents;
 	}
 
-	
 	public int getId() {
 		String SQL = "SELECT MAX(file_id) FROM documents";
 		try {
@@ -125,7 +119,6 @@ public class DocumentDao {
 		} catch (NullPointerException e) {
 			return 1;
 		}
-
 	}
-	
+
 }
