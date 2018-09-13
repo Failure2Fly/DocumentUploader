@@ -204,7 +204,7 @@ public class DispatchController {
 		List<String> fileList = new ArrayList<>();
 		account.setFileList(fileList);
 		ServiceLevels level = ServiceLevels.valueOf(request.getParameter("level").toUpperCase());
-		account.setServicelevel(new ServiceLevel(level));
+		account.setServiceLevel(new ServiceLevel(level));
 		List<UserAccount> usersAssociated = new ArrayList<>();
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
@@ -212,7 +212,7 @@ public class DispatchController {
 		File file1 = new File("H:\\createAccount.txt");
 		try {
 			FileWriter writer = new FileWriter(file1);
-			writer.write(account.getServicelevel().getServiceLevel().toString());
+			writer.write(account.getServiceLevel().getServiceLevel().toString());
 			writer.flush();
 			writer.close();
 		} catch (IOException e2) {
@@ -392,7 +392,7 @@ public class DispatchController {
 		if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("accountDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/accountDetails");
-		} else if(account.getUserAccounts().size()>=account.getServicelevel().getUserLimit()) {
+		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
 			session.setAttribute("accountDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/accountDetails");
 		}else{
