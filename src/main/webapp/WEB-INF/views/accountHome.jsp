@@ -13,6 +13,9 @@
 
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+	
+<link href="font/font-fileuploader.css" media="all" rel="stylesheet">
+<link href="jquery.fileuploader.min.css" media="all" rel="stylesheet">
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
 
@@ -35,7 +38,6 @@
 		button.setText(text); // text is converted to java.lang.String */
 	}
 </script>
-
 
 <title>Document Uploader</title>
 </head>
@@ -93,21 +95,24 @@
 
 
 	<p id="fileList">${sessionScope.fileList}</p>
+	<script src="//code.jquery.com/jquery-3.2.1.min.js" type="text/javascript"></script>
+	<script src="jquery.fileuploader.min.js" type="text/javascript"></script>
 </body>
 <footer>
 	<div class="header">
-		<div class="row">
-			<div class="col-4 social">
-				<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
-					class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-					class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
-					class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-				<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-			</div>
-			<div class="col-8 copyright">
-				<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-			</div>
+	<div class="row footer-row">
+		<div class="col-6 social">
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
 		</div>
+		<div class="col-6 copyright">
+			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+		</div>
+	</div>
 	</div>
 </footer>
 </html>

@@ -1,4 +1,4 @@
-function RegisterValidate() {
+var validateRegister = function RegisterValidate() {
 //  var MyJavaClass = Java.type('com.fdmgroup.documentuploader.DispathController.UserRegistrationSubmit');
 //  var Register = MyJavaClass.userRegistrationSubmit;
 	

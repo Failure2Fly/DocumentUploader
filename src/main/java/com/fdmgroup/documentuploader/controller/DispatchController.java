@@ -1,15 +1,25 @@
 
 package com.fdmgroup.documentuploader.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -128,10 +138,39 @@ public class DispatchController {
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
-	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpSession session) {
+	public String userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpSession session) throws ScriptException, IOException, NoSuchMethodException {
 		boolean isValid = true;
 		Validator validator = new Validator();
 		isValid = validator.validateUserRegistration(userAccount);
+		
+		
+
+
+	try {
+        ScriptEngineManager manager = new ScriptEngineManager();
+        ScriptEngine engine = manager.getEngineByName("nashorn");
+        System.out.println("okay1");
+        FileInputStream fileInputStream = new FileInputStream("C:/Users/Devin.Blankenship/JavaEclipseWorkspace/DocumentUploader/src/main/webapp/JS/global.js");
+        System.out.println("okay2");
+        if (fileInputStream != null){
+         BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+         engine.eval(reader);
+         System.out.println("okay3");
+        // Invocable javascriptEngine = null;
+         System.out.println("okay4");
+        Invocable invocableEngine = (Invocable)engine;
+         System.out.println("okay5");
+         System.out.println("invocableEngine is : "+invocableEngine);
+         @SuppressWarnings("unused")
+		Object object = invocableEngine.invokeFunction("validateRegister");
+
+         System.out.println("okay6");
+        }
+        }catch(Exception e) {
+            System.out.println("erroe when calling js function"+ e);
+        }
+		
+		
 		if (isValid) {
 			context = getContext();
 			UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
