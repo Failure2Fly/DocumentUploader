@@ -9,11 +9,13 @@ import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
@@ -95,6 +97,7 @@ public class DispatchController {
 		}
 		return "userHome";
 	}
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public RedirectView userRegistrationSubmit(@ModelAttribute UserAccount userAccount, HttpServletRequest request ,HttpSession session) {
 		boolean isValid = true;
@@ -118,7 +121,6 @@ public class DispatchController {
 					FileWriter writer = new FileWriter(file);
 					writer.write(e.toString());
 					writer.write(userAccount.toString());
-					writer.flush();
 					writer.close();
 				} catch (IOException e2) {
 					e.printStackTrace();
@@ -355,7 +357,7 @@ public class DispatchController {
 		if (account.getUserAccounts().contains(addedUser)) {
 			session.setAttribute("repositoryDetailsError", "This user has already been added!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
-		} else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
+		}else if(account.getUserAccounts().size()>=account.getServiceLevel().getUserLimit()) {
 			session.setAttribute("repositoryDetailsError", "Your repository cannot support more users at your service level!");
 			return new RedirectView("/DocumentUploader/repositoryDetails");
 		}else{
@@ -366,9 +368,7 @@ public class DispatchController {
 			session.setAttribute("account", account);
 		}
 		return new RedirectView("/DocumentUploader/repositoryDetails");
-
 	}
-
 
 	@RequestMapping(value = "/repositoryDetails/changeName", method = RequestMethod.POST)
 	public RedirectView repositoryChangeName(HttpServletRequest request, HttpSession session) {
@@ -401,5 +401,43 @@ public class DispatchController {
 			session.setAttribute("repositoryDetailsError", "That user is the owner and cannot be removed!");
 		}
 		return new RedirectView("/DocumentUploader/repositoryDetails/");
+	}
+	
+	@RequestMapping(value="/recoveryPassword",method = RequestMethod.GET)
+	public String recoveryPasswordPost(Model model, HttpServletRequest request){
+		model.addAttribute(new UserAccount());
+		return "recoveryPassword";
+	}
+
+	@RequestMapping(value="/recoveryPassword",method = RequestMethod.POST)
+	public String recoveryPasswordPost(HttpServletRequest request, HttpSession session){
+		String username = (String) request.getParameter("username");
+		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
+		UserAccount user = userDao.read(username);
+		if(Objects.isNull(user)){
+			request.setAttribute("recoveryError","The username "+ username +" requested was not found in the database");
+			return "recoveryPassword"; 
+		}
+		session.setAttribute("user", user);
+		String question = user.getListQA().get(0).getQuestion().name().replace("_", " ");
+		request.setAttribute("securityQuestion",question.substring(0,1)
+				+question.substring(1).toLowerCase()+"?");
+		return "recoveryPassword";
+	}
+	@RequestMapping(value="/recoveryPassword/question",method = RequestMethod.POST)
+	public RedirectView recoveryPasswordQuestionPost(HttpServletRequest request, HttpSession session){
+		UserAccount user = ((UserAccount) session.getAttribute("user"));
+		String databaseAnswer = user.getListQA().get(0).getAnswer();	
+		if(!databaseAnswer.equals(request.getParameter("answer"))){
+			request.setAttribute("recoveryError","Incorrect Answer "+databaseAnswer);
+			return new RedirectView("/DocumentUploader/recoveryPassword"); 
+		}
+		UserAccountDao userDao = (UserAccountDao) getContext().getBean("UserAccountDao");
+		String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+		String pwd = RandomStringUtils.random( 8, characters );
+		user.setPassword(pwd);
+		userDao.update(user);
+		session.setAttribute("recoveryError","New password is "+pwd);
+		return new RedirectView("/DocumentUploader/recoveryPassword");
 	}
 }

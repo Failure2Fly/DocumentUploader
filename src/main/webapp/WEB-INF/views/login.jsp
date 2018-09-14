@@ -75,7 +75,7 @@
 		<div class="form-row">
 		  <div class="form-group-links">
 		  	<div class="login-links">
-		  		<a href="#">Lost your password?</a>
+		  		<a href="/DocumentUploader/recoveryPassword">Lost your password?</a>
 		  	</div>
 		  </div>
 	   </div>

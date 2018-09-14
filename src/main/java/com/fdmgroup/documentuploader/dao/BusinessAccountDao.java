@@ -52,7 +52,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		}
 		
 		jdbcTemplateObject.update(SQL1, businessId, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
-				account.getUserLimit(), account.getAccountName());
+				account.getServiceLevel().getUserLimit(), account.getAccountName());
 
 		SQL1 = "INSERT INTO business_to_user (business_user_join_id, user_business_join_id) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
@@ -76,13 +76,10 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		jdbcTemplateObject.update(SQL, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
 				account.getUserLimit(), account.getAccountName(), account.getBusinessAccountId());
 		for (UserAccount secondaryUser : account.getUserAccounts()) {
-
 			if (!secondaryUser.getUsername().equals(account.getOwner().getUsername())) {
-
 				SQL = "INSERT INTO business_to_user (business_user_join_id, user_business_join_id) VALUES(?,?)";
 				int secondaryUserId = userDao.getThisId(secondaryUser);
 				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(), secondaryUserId);
-
 			}
 		}
 		List<UserAccount> userAccounts = readUsers(account.getBusinessAccountId());
@@ -90,10 +87,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			if (!account.getUserAccounts().contains(secondaryUser)) {
 				SQL = "DELETE FROM business_to_user WHERE business_user_join_id = ? AND useraccountbusinessjoinid = ? ";
 				jdbcTemplateObject.update(SQL, account.getBusinessAccountId(), userDao.getThisId(secondaryUser));
-
 			}
 		}
-
 	}
 
 	public List<BusinessAccount> read(String username) {
@@ -128,7 +123,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 				UserAccount userAccount = new UserAccount();
 				BigDecimal userId = (BigDecimal) innerMap.get("user_business_join_id");
 				userAccount = userDao.read(userId.intValue());
-				associatedUsers.add(userAccount);
 			}
 			account.setUserAccounts(associatedUsers);
 
@@ -202,5 +196,4 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		jdbcTemplateObject.update(SQL, businessId, userId);
 
 	}
-
 }
