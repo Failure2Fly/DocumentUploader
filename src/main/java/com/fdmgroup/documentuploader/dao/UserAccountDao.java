@@ -52,11 +52,11 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 	}
 
 	@Override
-	public void update(UserAccount item) {
+	public void update(UserAccount user) {
 		// TODO sql query update username
 		String SQL = "UPDATE user_account SET first_name=?,last_name=?,user_password=?,user_email=? WHERE username=?";
-		jdbcTemplateObject.update(SQL, item.getFirstName(), item.getLastName(), item.getPassword(), item.getUserEmail(),
-				item.getUsername());
+		jdbcTemplateObject.update(SQL, user.getFirstName(), user.getLastName(), user.getPassword(), user.getUserEmail(),
+				user.getUsername());
 	}
 
 	@Override

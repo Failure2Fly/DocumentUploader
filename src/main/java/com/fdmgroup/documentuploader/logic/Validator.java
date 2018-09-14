@@ -111,7 +111,7 @@ public class Validator {
 		}
 	}
 
-	private boolean emailValidator(String email) {
+	public boolean emailValidator(String email) {
 		boolean isValid = false;
 
 		try {

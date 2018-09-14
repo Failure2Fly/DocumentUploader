@@ -87,7 +87,6 @@
 				${sessionScope.account.serviceLevel.serviceLevel} Repository,
 				${sessionScope.account.accountName }</h1>
 		</div>
-		sessionScope.account.serviceLevel.serviceLevel
 	</div>
 
 	<div id="register-form" class="registration">
