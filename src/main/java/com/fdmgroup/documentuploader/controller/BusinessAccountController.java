@@ -228,15 +228,17 @@ public class BusinessAccountController {
 		UserAccount removedUser = userDao.read(removeUser);
 		if (Objects.isNull(removedUser)){
 		session.setAttribute("repositoryDetailsError", "That user is not attached to this account!");
-		}else if (!removedUser.getUsername().equals(account.getOwner().getUsername())) {
+		}else if(removedUser.getUsername().equals(account.getOwner().getUsername())){
+			session.setAttribute("repositoryDetailsError", "That user is the owner and cannot be removed!");
+		}else if (!account.getUserAccounts().contains(removedUser)) {
+			session.setAttribute("repositoryDetailsError", "That user is not attached to this account!");
+		}else{
 			session.setAttribute("repositoryDetailsError", "");
 			account.getUserAccounts().remove(removedUser);
 			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext().getBean("BusinessAccountDao");
 			businessDao.update(account);
 			session.setAttribute("account", account);
-
-		}else{
-			session.setAttribute("repositoryDetailsError", "That user is the owner and cannot be removed!");
+			
 		}
 		return new RedirectView("/DocumentUploader/repositoryDetails/");
 	}
