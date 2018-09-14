@@ -20,17 +20,32 @@
 </head>
 
 <body>
-<%-- 	<div class="header"><div class = "registrationTitle"><h1>${sessionScope.user.username} Repository Creation</h1></div></div> --%>
-	<div class="header">
-	<div class="mainHeaderRight"></div>
-		<div class="mainTitle"><h1>Repository Creation for ${sessionScope.user.username}</h1></div>
-		<div class="mainHeaderRight">
-			<a href="/DocumentUploader/userHome">
-				<button	class="btn btn-primary" type="submit">Back to Homepage</button>
-			</a>
-			<a href="/DocumentUploader/login">
-				<button	class="btn btn-primary" type="submit">Logout</button>
-			</a>
+
+
+<nav class="navbar fixed-top navbar-expand-lg">
+	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	
+	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+	    <ul class="navbar-nav">
+		  <li class="nav-item active">
+	        <a href="/DocumentUploader/userHome"><button class="btn btn-primary" type="submit">User Homepage</button></a>
+	      </li>
+	      <li class="nav-item">
+			<a href="/DocumentUploader/login"><button class="btn btn-primary" type="submit">Logout</button></a>
+	      </li>
+	      <li>
+	      	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	      </li> 
+	    </ul>
+	  </div>
+	</nav>
+
+	<div class="header user-hello">
+		<div class="mainTitle">
+			<h1>Business Account Creation for ${sessionScope.user.username}</h1>
 		</div>
 	</div>
 
@@ -61,7 +76,7 @@
 
 <footer>
 <div class="header">
-	<div class="row">
+	<div class="row footer-row">
 		<div class="col-4 social">
 			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a class="fab fa-twitter" href="https://www.twitter.com"></a> <a
 				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>

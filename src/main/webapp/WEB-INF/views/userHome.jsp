@@ -16,27 +16,67 @@
 <%-- integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous"> --%>
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <script>
-	function DisplayAccounts() {
 
+	
+	function table(){
 		var myObj, i, j, x = "";
 
 		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
 		for (i in myObj) {
-			x += "<h3><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"
-					+ "Repository ID: "+myObj[i].businessAccountId+" Service Level: "+myObj[i].serviceLevel.serviceLevel
-					+ "<br> Repository Name: "
-					+ myObj[i].accountName
-					+ "</a></h3>";
-			x += "<br>";
+			
+			j = myObj[i].serviceLevel.documentLimit
+			   
+		    if (myObj[i].serviceLevel.documentLimit < 0){
+		    	
+		    	j = "unlimited";
+	  
+		    }
+		    
+			x += "<tr>"
+			   + "<th>"+myObj[i].businessAccountId
+			   + "</th>"
+		       + "<td><a href=\"/DocumentUploader/repositoryHome/"+myObj[i].businessAccountId+"\">"+myObj[i].accountName
+		       + "</td>"
+		       + "<td>"+myObj[i].serviceLevel.serviceLevel
+		       + "</td>"
+		       + "<td>"+myObj[i].userAccounts.length
+		       + "</td>"
+		       + "<td>"+myObj[i].serviceLevel.userLimit
+		       + "</td>"
+		       + "<td>"+myObj[i].fileList.length
+		       + "</td>"
+		       + "<td>"+j
+		       + "</td>"
+		    x += "</tr>";
+		 
 		}
 
-		document.getElementById("Accounts").innerHTML = x;
-
-		/* var text = "My Button"; // JavaScript string
-		button.setText(text); // text is converted to java.lang.String */
-
+		document.getElementById("table-row").innerHTML = x;
+		
 	}
+	
+	function displayAdverts(){
+		
+		var myObj, i, j, x = "";
+
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+
+		for (i in myObj){
+			
+			var adverts = myObj[i].serviceLevel.hasAdverts
+			var img = document.getElementById("hasAdverts");
+			
+			if( adverts === false ){
+				img.classList.add("validate-form");
+			}
+
+		}
+	}
+		
+
+	
+
 
 </script>
 <title>Document Uploader</title>
@@ -51,7 +91,7 @@
 	  <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
 	    <ul class="navbar-nav">
 		  <li class="nav-item active">
-	        <a href="/DocumentUploader/createRepository"><button class="btn btn-primary" type="submit">CreateRepository</button></a>
+	        <a href="/DocumentUploader/createRepository"><button class="btn btn-primary" type="submit">Create Repository</button></a>
 	      </li>
 	      <li class="nav-item">
 	        <a href="/DocumentUploader/userDetails"><button class="btn btn-primary" type="submit">User Details</button></a>
@@ -66,19 +106,14 @@
 	  </div>
 	</nav>
 
-<body onload="DisplayAccounts()">
+<body onload="table(); displayAdverts();">
 	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>
 	</div>
 	
-	<div class="registration">
-				
-		<p id="Accounts">AccountsPlaceholder</p>
-
-
-	</div>
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 
 
 	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
@@ -87,51 +122,37 @@
 	  <thead class="thead-dark">
 	    <tr>
 	      <th scope="col">#</th>
-	      <th scope="col">First</th>
-	      <th scope="col">Last</th>
-	      <th scope="col">Handle</th>
+	      <th scope="col">Account</th>
+	      <th scope="col">Service Level</th>
+	      <th scope="col"># of Users</th>
+	      <th scope="col">User Limit</th>
+	      <th scope="col"># of Documents</th>
+	      <th scope="col">Document limit</th>
 	    </tr>
 	  </thead>
-	  <tbody>
-	    <tr>
-	      <th scope="row">1</th>
-	      <td>Mark</td>
-	      <td>Otto</td>
-	      <td>@mdo</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">2</th>
-	      <td>Jacob</td>
-	      <td>Thornton</td>
-	      <td>@fat</td>
-	    </tr>
-	    <tr>
-	      <th scope="row">3</th>
-	      <td>Larry</td>
-	      <td>the Bird</td>
-	      <td>@twitter</td>
-	    </tr>
+	  <tbody  id="table-row">
+
 	  </tbody>
 	</table>
 
 
-	<footer>
-		<div class="header">
-			<div class="row">
-				<div class="col-4 social">
-					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
-						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
-						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-
-				</div>
-				<div class="col-8 copyright">
-					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-				</div>
-			</div>
-		</div>
-	</footer>
-
 </body>
+
+<footer>
+	<div class="header">
+	<div class="row footer-row">
+		<div class="col-6 social">
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
+
+		</div>
+		<div class="col-6 copyright">
+			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+		</div>
+	</div>
+	</div>
+</footer>
 </html>
