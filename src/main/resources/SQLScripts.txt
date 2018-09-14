@@ -56,7 +56,7 @@ CREATE TABLE Business_Account(
   User_Account_Owner_ID int,
   Service_Level int,
   User_Limit int,
-  Monthy_File_Count int,
+  Monthly_File_Count int,
   Account_Name VARCHAR(255),
   PRIMARY KEY(Business_Account_ID),
   CONSTRAINT FK_Owner_Id FOREIGN KEY (User_Account_Owner_ID)

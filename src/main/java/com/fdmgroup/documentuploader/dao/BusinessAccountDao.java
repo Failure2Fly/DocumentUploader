@@ -35,7 +35,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	@Override
 	public void create(BusinessAccount account) {
 
-		String SQL1 = "INSERT INTO business_account(business_account_id, user_account_owner_id, service_level, user_limit, monthly_file_count, account_name) VALUES(?, ?, ?, ?, ?)";
+		String SQL1 = "INSERT INTO business_account(business_account_id, user_account_owner_id, service_level, user_limit, monthly_file_count, account_name) VALUES(?, ?, ?, ?, ?, ?)";
 		String sqlOwnerId = "SELECT user_id FROM user_account WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
@@ -52,7 +52,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		}
 		
 		jdbcTemplateObject.update(SQL1, businessId, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
-				account.getUserLimit(), account.getMonthlyFileCount(), account.getAccountName());
+				account.getUserLimit(), 0, account.getAccountName());
 
 		SQL1 = "INSERT INTO business_to_user (business_user_join_id, user_business_join_id) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
