@@ -118,7 +118,8 @@ public class BusinessAccountController {
 		}
 		if (file.isEmpty()) {
 			session.setAttribute("accountHomeError", "You forgot to include a file to upload!");
-		} else if (account.getMonthlyFileCount() >= account.getServiceLevel().getMonthlyDocumentUploadLimit()) {
+		} else if (account.getServiceLevel().getMonthlyDocumentUploadLimit() != -1 && account.getMonthlyFileCount() >= account.getServiceLevel().getMonthlyDocumentUploadLimit()
+				) {
 			session.setAttribute("accountHomeError", "You have reached your monthly file upload limit!");
 		} else if (account.getServiceLevel().getDocumentLimit() == -1 || documentDao
 				.read(account.getBusinessAccountId()).size() < account.getServiceLevel().getDocumentLimit()) {
