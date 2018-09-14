@@ -29,7 +29,7 @@
 			   
 		    if (myObj[i].serviceLevel.documentLimit < 0){
 		    	
-		    	j = "unlimited";
+		    	j = "Unlimited";
 	  
 		    }
 		    
