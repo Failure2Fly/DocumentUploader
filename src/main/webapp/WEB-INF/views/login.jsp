@@ -14,9 +14,18 @@
 <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 <title>Document Uploader</title>
+<script>
+function displayErrors(){
+	if(document.getElementById("loginErrors")==""){
+		document.getElementById("loginErrors").style.visibility='hidden';
+	}else{
+		document.getElementById("loginErrors").style.visibility='visible';
+	}
+}
+</script>
 </head>
 
-<body class="register-login-background">
+<body onload="displayErrors()" class="register-login-background">
 
 <nav class="navbar fixed-top navbar-expand-lg">
 	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
@@ -44,6 +53,7 @@
 	<div class="register-form login-form">
 <h3>Login</h3>
 	<sf:form commandName="userAccount" method="POST" action="login">
+	
 	  <div class="form-row">
 		   <div class="input-group mb-2">
 		        <div class="input-group-prepend">
@@ -72,6 +82,7 @@
 		    <button type="submit" class="btn btn-primary btn-sign-in" value="Login">Login</button>
 		  </div>
 		 </div>
+		 <p id="loginErrors" class="incorrect">${sessionScope.loginError}</p>
 		<div class="form-row">
 		  <div class="form-group-links">
 		  	<div class="login-links">

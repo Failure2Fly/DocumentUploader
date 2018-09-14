@@ -39,18 +39,20 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 				user.getPassword(), user.getUserEmail());
 		jdbcTemplateObject.update(SQL2, getThisId(user), user.getListQA().get(0).getQuestion().ordinal() + 1,
 				user.getListQA().get(0).getAnswer());
+		//jdbcTemplateObject.update(SQL2, getThisId(user), null, null);
+		// jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
 	}
 
 	@Override
 	public void delete(UserAccount user) {
 		// TODO sql query deletion all useraccount's stuff
 		String SQL1 = "DELETE FROM USER_TO_SECURITY_QUESTION WHERE USER_SECURITY_JOIN_ID = ?";
-		jdbcTemplateObject.update(SQL1, getID(user.getUsername()));
+		jdbcTemplateObject.update(SQL1, getThisId(user));
 		SQL1 = "DELETE FROM USER_ACCOUNT WHERE username = ?";
 		//String SQL3 = "DELETE FROM BUSINESSACCOUNT WHERE USERACCOUNTOWNERID =
 		jdbcTemplateObject.update(SQL1, user.getUsername());
 		SQL1 = "DELETE FROM USER_TO_SECURITY_QUESTION WHERE USER_SECURITY_JOIN_ID=?";
-		jdbcTemplateObject.update(SQL1, getID(user.getUsername()));
+		jdbcTemplateObject.update(SQL1, getThisId(user));
 
 	}
 
@@ -91,6 +93,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
+
 	}
 
 	public int lastID() {
@@ -131,9 +134,14 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 	}
 
 	public int getThisId(UserAccount user) {
-		String SQL = "SELECT user_id FROM USER_ACCOUNT WHERE username = ?";
-		Integer userId = jdbcTemplateObject.queryForObject(SQL, new Object[] { user.getUsername() }, Integer.class);
-		return userId;
+		try {
+			String SQL = "SELECT user_id FROM USER_ACCOUNT WHERE username = ?";
+
+			Integer userId = jdbcTemplateObject.queryForObject(SQL, new Object[] { user.getUsername() }, Integer.class);
+			return userId;
+		} catch (EmptyResultDataAccessException e) {
+			return 0;
+		}
 
 	}
 }

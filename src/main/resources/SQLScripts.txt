@@ -10,9 +10,6 @@ CREATE TABLE User_Account(
     UNIQUE(Username)
 );
 
-INSERT INTO User_Account
-VALUES(1000000,'fakeUser','FakeName','AnotherFake','SuperFake','ImFake@gmail.com');
-
 DROP TABLE Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE Security_Question(
   Question_ID int,
@@ -23,9 +20,9 @@ CREATE TABLE Security_Question(
   
 INSERT INTO Security_Question VALUES(1, 'What was the name of your first pet?');
 INSERT INTO Security_Question VALUES(2, 'What was your mothers maiden name?');
-INSERT INTO Security_Question VALUES(3, 'What was the first concert you went attended?');
+INSERT INTO Security_Question VALUES(3, 'What was the first concert you attended?');
 INSERT INTO Security_Question VALUES(4, 'What was the make and model of your first car?');
-INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor, musician, or artist?');
+INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor?');
   
 DROP TABLE User_To_Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE User_To_Security_Question(
@@ -35,7 +32,7 @@ CREATE TABLE User_To_Security_Question(
   
   CONSTRAINT FK_User_Id FOREIGN KEY (User_Security_Join_ID)
   REFERENCES User_Account(User_ID),
-  CONSTRAINT FK_Question_Id FOREIGN KEY (Security_QuestionJoinID)
+  CONSTRAINT FK_Question_Id FOREIGN KEY (Security_Question_Join_ID)
   REFERENCES Security_Question(Question_ID)
   
   );
@@ -49,6 +46,7 @@ CREATE TABLE Business_Account(
   User_Account_Owner_ID int,
   Service_Level int,
   User_Limit int,
+  Monthly_File_Count int,
   Account_Name VARCHAR(255),
   PRIMARY KEY(Business_Account_ID),
   CONSTRAINT FK_Owner_Id FOREIGN KEY (User_Account_Owner_ID)
@@ -65,7 +63,7 @@ CREATE TABLE Business_To_User(
   CONSTRAINT FK_Business_Account_Join_Id FOREIGN KEY (Business_User_Join_ID)
   REFERENCES Business_Account(Business_Account_ID),
    CONSTRAINT FK_User_Account_Join_Id FOREIGN KEY (User_Business_Join_ID)
-  REFERENCES Use_rAccount(User_ID)
+  REFERENCES User_Account(User_ID)
   );
   
   
@@ -94,6 +92,3 @@ CREATE TABLE Documents(
   CONSTRAINT FK_Business_Document_Id FOREIGN KEY (Associated_Account_Id)
   REFERENCES Business_Account(Business_Account_ID)
   );
-  
-
-  

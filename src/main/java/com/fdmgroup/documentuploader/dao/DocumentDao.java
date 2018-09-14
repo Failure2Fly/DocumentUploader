@@ -37,14 +37,6 @@ public class DocumentDao {
 
 			String repositoryPath = document.getRepositoryPath().toString();
 			File debugFile = new File("H:\\DebugCreate.txt");
-			try {
-				FileWriter writer = new FileWriter(debugFile);
-				writer.write("Path: " + repositoryPath);
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			repositoryPath = repositoryPath.replaceAll("\\\\", "/");
 			file.transferTo(destination);
 			String SQL1 = "INSERT INTO documents (file_id, file_name, stored_file_path, store_date, associated_account_id) VALUES(?, ?, ?, SYSDATE, ?)";
@@ -62,15 +54,6 @@ public class DocumentDao {
 			Files.delete(document.getRepositoryPath());
 			String repositoryPath = document.getRepositoryPath().toString();
 			repositoryPath = repositoryPath.replaceAll("\\\\", "/");
-			File debugFile = new File("H:\\DebugDeleteDao.txt");
-			try {
-				FileWriter writer = new FileWriter(debugFile);
-				writer.write("Path: " + repositoryPath);
-				writer.flush();
-				writer.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
 			String SQL = "DELETE FROM documents WHERE stored_file_path = ?";
 			jdbcTemplateObject.update(SQL, repositoryPath);
 		} catch (IOException e) {
@@ -118,6 +101,17 @@ public class DocumentDao {
 
 		} catch (NullPointerException e) {
 			return 1;
+		}
+	}
+
+	public Date getMostRecentDate(Integer accountId) {
+		String SQL = "SELECT MAX(store_date) FROM documents WHERE associated_account_id = ? ";
+		try {
+
+			return ((Date) jdbcTemplateObject.queryForObject(SQL, new Object[] { accountId }, java.util.Date.class));
+
+		} catch (NullPointerException e) {
+			return null;
 		}
 	}
 

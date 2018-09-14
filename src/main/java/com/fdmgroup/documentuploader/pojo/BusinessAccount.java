@@ -7,10 +7,11 @@ import java.util.List;
 public class BusinessAccount {
 
 	private UserAccount owner;
-	private ServiceLevel servicelevel;
+	private ServiceLevel serviceLevel;
 	private int userLimit;
 	private List<UserAccount> userAccounts = new ArrayList<>();
 	private List<String> fileList = new ArrayList<>();
+	private int monthlyFileCount;
 	private String accountName;
 	private int businessAccountId;
 	private BigDecimal totalCostperMonth;
@@ -20,18 +21,18 @@ public class BusinessAccount {
 		super();
 		this.owner = owner;
 		
-		this.servicelevel = servicelevel;
+		this.serviceLevel = servicelevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
 		this.accountName = accountName;
 		this.businessAccountId = businessAccountId;
 	}
 	
-	public BusinessAccount(UserAccount owner, ServiceLevel servicelevel,
+	public BusinessAccount(UserAccount owner, ServiceLevel serviceLevel,
 			List<UserAccount> userAccounts, List<String> fileList, String accountName) {
 		super();
 		this.owner = owner;
-		this.servicelevel = servicelevel;
+		this.serviceLevel = serviceLevel;
 		this.userAccounts = userAccounts;
 		this.fileList = fileList;
 		this.accountName = accountName;
@@ -51,7 +52,7 @@ public class BusinessAccount {
 	
 	@Override
 	public String toString() {
-		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + servicelevel
+		return "BusinessAccount [owner=" + owner + ", accountName=" + accountName + ", servicelevel=" + serviceLevel
 				+ ", userAccounts=" + userAccounts + ", fileList=" + fileList + ", businessAccountId="
 				+ businessAccountId + "]";
 	}
@@ -69,10 +70,10 @@ public class BusinessAccount {
 		this.accountName = accountName;
 	}
 	public ServiceLevel getServiceLevel() {
-		return servicelevel;
+		return serviceLevel;
 	}
-	public void setServiceLevel(ServiceLevel servicelevel) {
-		this.servicelevel = servicelevel;
+	public void setServiceLevel(ServiceLevel serviceLevel) {
+		this.serviceLevel = serviceLevel;
 	}
 	public int getUserLimit() {
 		return userLimit;
@@ -99,6 +100,15 @@ public class BusinessAccount {
 	}
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
+	}
+
+	
+	public int getMonthlyFileCount() {
+		return monthlyFileCount;
+	}
+
+	public void setMonthlyFileCount(int monthlyFileCount) {
+		this.monthlyFileCount = monthlyFileCount;
 	}
 
 	@Override

@@ -47,7 +47,6 @@
 		</div>
 	</div>
 
-
 	<div id="update-form" class="update">
 		<sf:form commandName="userAccount" method="POST" action="userDetails">
 			<legend>Update:</legend>
@@ -56,15 +55,20 @@
 				<sf:input path="firstName" class="inputField" type="text"
 					name="FirstName" placeholder="New First name " value="" />
 				<br>
+				<br>
 				<p>Current Last Name: <span>${sessionScope.user.lastName}</span></p>
 				<sf:input path="lastName" class="inputField" type="text"
 					name="LastName" placeholder="New Last name" value="" />
 				<br>
+				<br>
 				<p>Current Email: <span>${sessionScope.user.userEmail}</span></p>
+				<p class="incorrect">${sessionScope.accountDetailsEmailError }</p>
 				<sf:input path="userEmail" class="inputField" type="text"
 					name="Email" placeholder="New Email" />
 				<br>
-				<p>Current Password: </p>
+				<br>		
+				<p>Current Password: <span>${sessionScope.user.password}</span></p>
+				<p class="incorrect">${sessionScope.accountDetailsPasswordError }</p>
 				<sf:input path="password" class="inputField" type="password"
 					name="Password" placeholder="Create a new password" />
 				<br>
@@ -74,26 +78,22 @@
 		</sf:form>
 	</div>
 
+</body>
+<footer>
+	<div class="header">
+	<div class="row footer-row">
+		<div class="col-6 social">
+			<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
+				class="fab fa-twitter" href="https://www.twitter.com"></a> <a
+				class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
+				class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
+			<a class="fab fa-youtube" href="http://www.youtube.com"></a>
 
-
-
-
-
-	<footer>
-		<div class="header">
-			<div class="row">
-				<div class="col-4 social">
-					<a class="fab fa-facebook-f" href="https://www.facebook.com"></a> <a
-						class="fab fa-twitter" href="https://www.twitter.com"></a> <a
-						class="fab fa-linkedin-in" href="https://www.linkedin.com"></a> <a
-						class="fab fa-google-plus-g" href="http://www.plus.google.com"></a>
-					<a class="fab fa-youtube" href="http://www.youtube.com"></a>
-
-				</div>
-				<div class="col-8 copyright">
-					<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
-				</div>
-			</div>
 		</div>
-	</footer>
+		<div class="col-6 copyright">
+			<p>&copy; 2018 DU documentuploader.com. All right reserved.</p>
+		</div>
+	</div>
+	</div>
+</footer>
 </html>
