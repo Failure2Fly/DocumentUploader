@@ -47,13 +47,32 @@
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); // text is converted to java.lang.String */
 	}
+	
+	function displayAdverts(){
+		
+		var myObj, i, j, x = "";
+	
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+	
+		for (i in myObj){
+			
+			var adverts = myObj[i].serviceLevel.hasAdverts
+			var img = document.getElementById("hasAdverts");
+			
+			if( adverts === false ){
+				img.classList.add("validate-form");
+			}
+	
+		}
+	}
 </script>
 
 <title>Document Uploader</title>
 </head>
 
 <nav class="navbar fixed-top navbar-expand-lg">
-	<a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	<a class="navbar-brand" href="/DocumentUploader">
+		<img src="./IMG/yordu_logo.png"/></a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -79,7 +98,9 @@
 	</div>
 </nav>
 
-<body onload="DisplayFiles()">
+
+<body onload="DisplayFiles(); displayAdverts();">
+
 
 	<div class="header user-hello">
 		<div class="mainTitle">
@@ -88,6 +109,8 @@
 				${sessionScope.account.accountName }</h1>
 		</div>
 	</div>
+	
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 
 	<div id="register-form" class="registration">
 		<sf:form commandName="file" method="POST"
@@ -113,7 +136,7 @@
 
 	<p class="hiddenText" id="fileList">${sessionScope.fileList}</p>
 	<p class="hiddenText" id="accountHomeErrorText">${sessionScope.accountHomeError}</p>
-
+	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 </body>
 <footer>
 	<div class="header">

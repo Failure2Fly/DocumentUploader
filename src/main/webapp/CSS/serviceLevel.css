@@ -16,10 +16,8 @@ body {
     /*margin-bottom: 40px;*/
 }
 .column {
+	box-shadow: 5px 10px lightgrey;
     background: white;
-    border: solid;
-    border-color: lightgray;
-    border-width: 1px;
 }
 /*.column:last-child {
     margin-right: 0px;

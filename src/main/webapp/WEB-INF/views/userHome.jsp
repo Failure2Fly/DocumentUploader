@@ -29,7 +29,7 @@
 			   
 		    if (myObj[i].serviceLevel.documentLimit < 0){
 		    	
-		    	j = "unlimited";
+		    	j = "Unlimited";
 	  
 		    }
 		    
@@ -83,7 +83,8 @@
 </head>
 
     <nav class="navbar fixed-top navbar-expand-lg">
-	  <a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+	  <a class="navbar-brand" href="/DocumentUploader">
+		<img src="./IMG/yordu_logo.png"/></a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
@@ -108,6 +109,7 @@
 
 <body onload="table(); displayAdverts();">
 	<div class="header user-hello">
+	
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>
