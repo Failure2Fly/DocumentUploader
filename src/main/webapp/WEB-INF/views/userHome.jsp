@@ -19,7 +19,7 @@
 
 	
 	function table(){
-		var myObj, i, j, x = "";
+		var myObj, i, j, x, b = "";
 
 		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
 
@@ -32,6 +32,21 @@
 		    	j = "Unlimited";
 	  
 		    }
+			
+		<!--	var buttonUnlimited = "<button onclick='addUsers' id='Unlimited' class='btn btn-primary' type='submit'>Add 10</button>";
+			var buttonEnterprise = "<button onclick='addUsers' id='Enterprise' class='btn btn-primary' type='submit'>Add 20</button";
+			var button = "";
+			
+			b = myObj[i].serviceLevel.serviceLevel
+			if ( b == "UNLIMITED"){
+				
+				button = buttonUnlimited;
+
+			}
+			if ( b == "ENTERPRISE"){
+				
+				button = buttonEnterprise;
+			} -->
 		    
 			x += "<tr>"
 			   + "<th>"+myObj[i].businessAccountId
@@ -42,7 +57,9 @@
 		       + "</td>"
 		       + "<td>"+myObj[i].userAccounts.length
 		       + "</td>"
-		       + "<td>"+myObj[i].serviceLevel.userLimit
+		       + "<td class='userLimit'>"+myObj[i].serviceLevel.userLimit
+		       + "</td>"
+		       + "<td class='userButton'>"+button
 		       + "</td>"
 		       + "<td>"+myObj[i].fileList.length
 		       + "</td>"
@@ -53,6 +70,14 @@
 		}
 
 		document.getElementById("table-row").innerHTML = x;
+		
+	}
+<!--	function addUser(){
+		var userButton = document.getElementById("")
+		
+		if (userButton){
+			
+		} -->
 		
 	}
 	
@@ -107,7 +132,7 @@
 	  </div>
 	</nav>
 
-<body onload="table(); displayAdverts();">
+<body onload="table(); displayAdverts(); addUser();">
 	<div class="header user-hello">
 	
 		<div class="mainTitle">
@@ -128,6 +153,7 @@
 	      <th scope="col">Service Level</th>
 	      <th scope="col"># of Users</th>
 	      <th scope="col">User Limit</th>
+	      <th scope="col"></th>
 	      <th scope="col"># of Documents</th>
 	      <th scope="col">Document limit</th>
 	    </tr>
