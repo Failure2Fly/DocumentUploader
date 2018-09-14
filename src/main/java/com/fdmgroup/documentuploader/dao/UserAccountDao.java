@@ -34,15 +34,6 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 	public void create(UserAccount user) {
 		String SQL1 = "INSERT INTO USER_ACCOUNT (user_id,username,last_name,first_name,user_password,user_email) VALUES(?,?,?,?,?,?)";
 		String SQL2 = "INSERT INTO USER_TO_SECURITY_QUESTION VALUES(?,?,?)";
-		File file = new File("H:\\DebugInUserCreate.txt");
-		try {
-			FileWriter writer = new FileWriter(file);
-			writer.write(user.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		jdbcTemplateObject.update(SQL1, lastID(), user.getUsername(), user.getLastName(), user.getFirstName(),
 				user.getPassword(), user.getUserEmail());
 		jdbcTemplateObject.update(SQL2, getThisId(user), null, null);

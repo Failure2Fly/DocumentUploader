@@ -60,15 +60,6 @@ public class BusinessAccountController {
 		usersAssociated.add(account.getOwner());
 		account.setUserAccounts(usersAssociated);
 		dao.create(account);
-		File file1 = new File("H:\\createAccount.txt");
-		try {
-			FileWriter writer = new FileWriter(file1);
-			writer.write(account.getServiceLevel().getServiceLevel().toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
 		return new ModelAndView(new RedirectView("/userHome", true));
 	}
 

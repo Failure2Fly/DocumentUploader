@@ -54,16 +54,6 @@ public class RegistrationController {
 				session.setAttribute("user", userAccount);
 				return new RedirectView("login");
 			} catch (Exception e) {
-				File file = new File("H:\\Debug.txt");
-				try {
-					FileWriter writer = new FileWriter(file);
-					writer.write(e.toString());
-					writer.write(userAccount.toString());
-					writer.flush();
-					writer.close();
-				} catch (IOException e2) {
-					e.printStackTrace();
-				}
 				return new RedirectView("register");
 			} finally {
 			}

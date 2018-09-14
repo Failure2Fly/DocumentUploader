@@ -41,15 +41,6 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
 				Integer.class);
 		int businessId = getId();
-		File file1 = new File("H:\\businessAccountServiceLevel.txt");
-		try {
-			FileWriter writer = new FileWriter(file1);
-			writer.write(account.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
 		
 		jdbcTemplateObject.update(SQL1, businessId, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
 				account.getUserLimit(), 0, account.getAccountName());
