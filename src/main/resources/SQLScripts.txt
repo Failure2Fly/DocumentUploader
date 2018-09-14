@@ -17,9 +17,6 @@ CREATE TABLE User_Account(
     UNIQUE(Username)
 );
 
-INSERT INTO User_Account
-VALUES(1000000,'fakeUser','FakeName','AnotherFake','SuperFake','ImFake@gmail.com');
-
 DROP TABLE Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE Security_Question(
   Question_ID int,

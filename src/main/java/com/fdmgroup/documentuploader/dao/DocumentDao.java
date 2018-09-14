@@ -121,4 +121,15 @@ public class DocumentDao {
 		}
 	}
 
+	public Date getMostRecentDate(Integer accountId) {
+		String SQL = "SELECT MAX(store_date) FROM documents WHERE associated_account_id = ? ";
+		try {
+
+			return ((Date) jdbcTemplateObject.queryForObject(SQL, new Object[] { accountId }, java.util.Date.class));
+
+		} catch (NullPointerException e) {
+			return null;
+		}
+	}
+
 }

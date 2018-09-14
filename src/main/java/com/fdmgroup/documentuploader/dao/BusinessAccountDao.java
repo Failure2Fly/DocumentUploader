@@ -191,6 +191,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			return 1;
 		}
 	}
+	
 
 	public List<UserAccount> readUsers(Integer userId) {
 		String SQL = "SELECT user_business_join_id  FROM business_to_user WHERE business_user_join_id = ?";

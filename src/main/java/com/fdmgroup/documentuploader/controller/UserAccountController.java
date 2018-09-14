@@ -20,6 +20,7 @@ public class UserAccountController {
 
 	@RequestMapping(value = "/userHome", method = RequestMethod.GET)
 	public String dynamicUserPageLogic(@ModelAttribute UserAccount userAccount, HttpSession session) {
+		session.setAttribute("accountHomeError", "");
 		try {
 			UserAccount user = (UserAccount) session.getAttribute("user");
 			if (user.getUsername().equals("") || user.getUsername() == null) {
