@@ -29,6 +29,7 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 		business.setAccountName(rs.getString("account_name"));
 		business.setServiceLevel(new ServiceLevel(rs.getInt("service_level")));
 		business.setUserLimit(rs.getInt("user_limit"));
+		business.setMonthlyFileCount(rs.getInt("monthly_file_count"));
 
 		return business;
 	}

@@ -35,7 +35,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 	@Override
 	public void create(BusinessAccount account) {
 
-		String SQL1 = "INSERT INTO BUSINESS_ACCOUNT(business_account_id, user_account_owner_id, service_level, user_limit, account_name) VALUES(?, ?, ?, ?, ?)";
+		String SQL1 = "INSERT INTO business_account(business_account_id, user_account_owner_id, service_level, user_limit, monthly_file_count, account_name) VALUES(?, ?, ?, ?, ?)";
 		String sqlOwnerId = "SELECT user_id FROM user_account WHERE username=?";
 		String ownerUsername = account.getOwner().getUsername();
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { ownerUsername },
@@ -52,7 +52,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 		}
 		
 		jdbcTemplateObject.update(SQL1, businessId, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
-				account.getUserLimit(), account.getAccountName());
+				account.getUserLimit(), account.getMonthlyFileCount(), account.getAccountName());
 
 		SQL1 = "INSERT INTO business_to_user (business_user_join_id, user_business_join_id) VALUES(?,?)";
 		jdbcTemplateObject.update(SQL1, businessId, ownerId);
@@ -70,11 +70,11 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	@Override
 	public void update(BusinessAccount account) {
-		String SQL = "UPDATE business_account SET user_account_owner_id = ?, service_level = ?, user_limit = ?, account_name= ? WHERE business_account_id = ?";
+		String SQL = "UPDATE business_account SET user_account_owner_id = ?, service_level = ?, user_limit = ?, monthly_file_count = ?, account_name= ? WHERE business_account_id = ?";
 		UserAccountDao userDao = (UserAccountDao) DispatchController.getContext().getBean("UserAccountDao");
 		Integer ownerId = userDao.getThisId(account.getOwner());
 		jdbcTemplateObject.update(SQL, ownerId, account.getServiceLevel().getServiceLevel().ordinal() + 1,
-				account.getUserLimit(), account.getAccountName(), account.getBusinessAccountId());
+				account.getUserLimit(), account.getMonthlyFileCount(), account.getAccountName(), account.getBusinessAccountId());
 		for (UserAccount secondaryUser : account.getUserAccounts()) {
 
 			if (!secondaryUser.getUsername().equals(account.getOwner().getUsername())) {
@@ -98,8 +98,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	public List<BusinessAccount> read(String username) {
 
-		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM business_account WHERE user_account_owner_id=?";
-		String sqlOwnerId = "SELECT User_ID FROM user_account WHERE username=?";
+		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, monthly_file_count, account_name FROM business_account WHERE user_account_owner_id=?";
+		String sqlOwnerId = "SELECT user_id FROM user_account WHERE username=?";
 		Integer ownerId = (Integer) jdbcTemplateObject.queryForObject(sqlOwnerId, new Object[] { username },
 				Integer.class);
 
@@ -115,6 +115,8 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 			account.setServiceLevel(new ServiceLevel(serviceLevel.intValue()));
 			BigDecimal userLimit = (BigDecimal) map.get("user_limit");
 			account.setUserLimit(userLimit.intValue());
+			BigDecimal monthlyFileCount = (BigDecimal) map.get("monthly_file_count");
+			account.setMonthlyFileCount(monthlyFileCount.intValue());
 			ApplicationContext context = DispatchController.getContext();
 			UserAccountDao userDao = (UserAccountDao) context.getBean("UserAccountDao");
 			UserAccount owner = userDao.read(ownerId);
@@ -149,7 +151,7 @@ public class BusinessAccountDao implements Dao<BusinessAccount, Integer> {
 
 	@Override
 	public BusinessAccount read(Integer id) {
-		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, account_name FROM business_account WHERE business_account_id = ?";
+		String SQL = "SELECT business_account_id, user_account_owner_id, service_level, user_limit, monthly_file_count, account_name FROM business_account WHERE business_account_id = ?";
 
 		BusinessAccount business = jdbcTemplateObject.queryForObject(SQL, new Object[] { id.toString() },
 				new BusinessAccountMapper());

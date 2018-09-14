@@ -10,6 +10,7 @@ public class BusinessAccount {
 	private int userLimit;
 	private List<UserAccount> userAccounts = new ArrayList<>();
 	private List<String> fileList = new ArrayList<>();
+	private int monthlyFileCount;
 	private String accountName;
 	private int businessAccountId;
 	
@@ -97,6 +98,22 @@ public class BusinessAccount {
 	}
 	public void setBusinessAccountId(int businessAccountId) {
 		this.businessAccountId = businessAccountId;
+	}
+
+	public ServiceLevel getServicelevel() {
+		return servicelevel;
+	}
+
+	public void setServicelevel(ServiceLevel servicelevel) {
+		this.servicelevel = servicelevel;
+	}
+
+	public int getMonthlyFileCount() {
+		return monthlyFileCount;
+	}
+
+	public void setMonthlyFileCount(int monthlyFileCount) {
+		this.monthlyFileCount = monthlyFileCount;
 	}
 
 	@Override
