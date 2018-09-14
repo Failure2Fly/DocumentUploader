@@ -120,7 +120,15 @@ form {
 .security-question{
 	height: 40px;
 }
+input:invalid{
+	background-color: pink;
+    color: white;
+}
+input:valid{
+	
+}
 .incorrect{
+	margin: 0 auto;
 	background-color: red;
     color: white;
 }

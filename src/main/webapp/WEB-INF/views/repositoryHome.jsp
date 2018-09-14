@@ -97,7 +97,9 @@
 	</div>
 </nav>
 
+
 <body onload="DisplayFiles(); displayAdverts();">
+
 
 	<div class="header user-hello">
 		<div class="mainTitle">

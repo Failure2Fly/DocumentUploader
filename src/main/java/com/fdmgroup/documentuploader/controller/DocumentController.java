@@ -30,15 +30,6 @@ public class DocumentController {
 		path = path.replaceAll("%20", " ");
 		DocumentDao documentDao = (DocumentDao) DispatchController.getContext().getBean("DocumentDao");
 		Document document = documentDao.read(path);
-		File file1 = new File("H:\\fileDownload.txt");
-		try {
-			FileWriter writer = new FileWriter(file1);
-			writer.write(document.toString());
-			writer.flush();
-			writer.close();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
 		try {
 			File file = new File(path);
 			InputStream input = new FileInputStream(file);
@@ -61,15 +52,6 @@ public class DocumentController {
 
 		DocumentDao documentDao = (DocumentDao) DispatchController.getContext().getBean("DocumentDao");
 		Document document = documentDao.read(path);
-		File file2 = new File("H:\\DebugDelete.txt");
-		try {
-			FileWriter writer = new FileWriter(file2);
-			writer.write("File attempted to delete: " + document);
-			writer.flush();
-			writer.close();
-		} catch (IOException e2) {
-			e2.printStackTrace();
-		}
 		documentDao.delete(document);
 		BusinessAccount account = (BusinessAccount) session.getAttribute("account");
 		return new RedirectView("/DocumentUploader/repositoryHome/" + account.getBusinessAccountId());

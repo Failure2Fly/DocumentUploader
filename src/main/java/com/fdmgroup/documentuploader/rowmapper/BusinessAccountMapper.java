@@ -16,19 +16,18 @@ public class BusinessAccountMapper implements RowMapper<BusinessAccount> {
 
 	@Override
 	public BusinessAccount mapRow(ResultSet rs, int rowNum) throws SQLException {
-
 		BusinessAccount business = new BusinessAccount();
 		ApplicationContext context = DispatchController.getContext();
 
 		UserAccountDao dao = (UserAccountDao) context.getBean("UserAccountDao");
-
 		UserAccount owner = dao.read(rs.getInt("user_account_owner_id"));
-		
 		business.setOwner(owner);
+		
 		business.setBusinessAccountId(rs.getInt("business_account_id"));
 		business.setAccountName(rs.getString("account_name"));
 		business.setServiceLevel(new ServiceLevel(rs.getInt("service_level")));
 		business.setUserLimit(rs.getInt("user_limit"));
+		business.setMonthlyFileCount(rs.getInt("monthly_file_count"));
 
 		return business;
 	}

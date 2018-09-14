@@ -30,11 +30,13 @@
 		if (document.getElementById("errorText").innerHTML == "") {
 			removeError.style.visibility = 'hidden';
 			addError.style.visibility = 'hidden';
-		} else if (document.getElementById("errorText").innerHTML == "That user is the owner and cannot be removed!") {
+		} else if (document.getElementById("errorText").innerHTML == "That user is the owner and cannot be removed!"
+				|| document.getElementById("errorText").innerHTML == "That user is not attached to this account!") {
 			removeError.style.visibility = 'visible';
 			addError.style.visibility = 'hidden';
 		} else if (document.getElementById("errorText").innerHTML == "Your repository cannot support more users at your service level!"
-				|| document.getElementById("errorText").innerHTML == "This user has already been added!") {
+				|| document.getElementById("errorText").innerHTML == "This user has already been added!"
+				|| document.getElementById("errorText").innerHTML == "This user does not exist!") {
 			addError.style.visibility = 'visible';
 			removeError.style.visibility = 'hidden';
 		}
@@ -93,7 +95,9 @@
 
 	<div class="header user-hello">
 		<div class="mainTitle">
+
 			<h1>${sessionScope.account.accountName}Repository Details</h1>
+
 		</div>
 	</div>
 	

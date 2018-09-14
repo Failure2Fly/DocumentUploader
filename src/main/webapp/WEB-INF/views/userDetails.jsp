@@ -76,15 +76,20 @@
 				<sf:input path="firstName" class="inputField" type="text"
 					name="FirstName" placeholder="New First name " value="" />
 				<br>
+				<br>
 				<p>Current Last Name: <span>${sessionScope.user.lastName}</span></p>
 				<sf:input path="lastName" class="inputField" type="text"
 					name="LastName" placeholder="New Last name" value="" />
 				<br>
+				<br>
 				<p>Current Email: <span>${sessionScope.user.userEmail}</span></p>
+				<p class="incorrect">${sessionScope.accountDetailsEmailError }</p>
 				<sf:input path="userEmail" class="inputField" type="text"
 					name="Email" placeholder="New Email" />
 				<br>
-				<p>Current Password: </p>
+				<br>		
+				<p>Current Password: <span>${sessionScope.user.password}</span></p>
+				<p class="incorrect">${sessionScope.accountDetailsPasswordError }</p>
 				<sf:input path="password" class="inputField" type="password"
 					name="Password" placeholder="Create a new password" />
 				<br>
