@@ -1,9 +1,10 @@
-package com.fdmgroup.documentuploadertests.dao;
-
+//package com.fdmgroup.documentuploadertests.dao;
+//
 //
 //import java.io.File;
 //import java.io.FileWriter;
 //import java.io.IOException;
+//import java.nio.file.Files;
 //import java.nio.file.Path;
 //import java.nio.file.Paths;
 //import java.util.ArrayList;
@@ -14,11 +15,15 @@ package com.fdmgroup.documentuploadertests.dao;
 //import org.junit.Test;
 //import org.springframework.context.ApplicationContext;
 //import org.springframework.context.support.ClassPathXmlApplicationContext;
+//import org.springframework.web.multipart.MultipartFile;
 //
-//import com.fdmgroup.controller.DispatchController;
-//import com.fdmgroup.pojo.BusinessAccount;
-//import com.fdmgroup.pojo.Document;
-//import com.fdmgroup.pojo.UserAccount;
+//import com.fdmgroup.documentuploader.controller.DispatchController;
+//import com.fdmgroup.documentuploader.dao.BusinessAccountDao;
+//import com.fdmgroup.documentuploader.dao.DocumentDao;
+//import com.fdmgroup.documentuploader.dao.UserAccountDao;
+//import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+//import com.fdmgroup.documentuploader.pojo.Document;
+//import com.fdmgroup.documentuploader.pojo.UserAccount;
 //
 //public class DocumentDaoTest {
 //	private ApplicationContext context;
@@ -72,10 +77,11 @@ package com.fdmgroup.documentuploadertests.dao;
 //	
 //		Path sourcePath = Paths.get(file.toString());
 //		Path repositoryPath = Paths.get("H:\\RepositoryText.txt");
+//		byte[] bytes = Files.readAllBytes(sourcePath);
 //	
 //		Document document = new Document("TestText", sourcePath,repositoryPath, null);
 //		document.setAccountId(testAccount.getBusinessAccountId());
-//		dao.create(document);
+//		dao.create(document, new MockMultipartFile(sourcePath.getFileName(),bytes));
 //		Document documentRead = dao.read(repositoryPath.toString());
 //		dao.delete(documentRead);
 //		

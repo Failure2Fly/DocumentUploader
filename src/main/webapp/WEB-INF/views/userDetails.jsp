@@ -63,7 +63,7 @@
 				<sf:input path="userEmail" class="inputField" type="text"
 					name="Email" placeholder="New Email" />
 				<br>
-				<p>Current Password: </p>
+				<p>Current Password: <span>${sessionScope.user.password}</span></p>
 				<sf:input path="password" class="inputField" type="password"
 					name="Password" placeholder="Create a new password" />
 				<br>
