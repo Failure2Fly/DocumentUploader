@@ -1,0 +1,47 @@
+CREATE OR REPLACE PROCEDURE register_account 
+  (p_username IN VARCHAR2,  -- can use datatype from table
+   p_lastname IN VARCHAR2,
+   p_firstname IN VARCHAR2,
+   p_userpassword in VARCHAR2,
+   p_useremail in VARCHAR2,
+   p_secquestion in VARCHAR2,
+   p_answer in VARCHAR2,
+   p_length in NUMBER
+   )                -- can use datatype without size
+IS
+d_secid NUMBER(38);
+userid_currval NUMBER(38);
+BEGIN
+SELECT QUESTIONID INTO d_secid FROM SECURITYQUESTION WHERE QUESTION=p_secquestion;
+userid_currval := useraccount_seq.NEXTVAL;
+INSERT INTO USERACCOUNT (userid,username,lastname,firstname,userpassword,useremail) VALUES(userid_currval,p_username,p_lastname,p_firstname,p_userpassword,p_useremail);
+
+INSERT INTO USERACCOUNTTOSECURITYQUESTION VALUES(userid_currval,
+d_secid,
+p_answer);
+  COMMIT;
+END;
+/
+show errors PROCEDURE register_account;   
+
+DROP SEQUENCE useraccount_seq;
+CREATE SEQUENCE useraccount_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+ 
+ 
+DROP SEQUENCE businessaccount_seq;
+CREATE SEQUENCE businessaccount_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;
+ 
+DROP SEQUENCE file_seq;
+CREATE SEQUENCE file_seq
+ START WITH     1
+ INCREMENT BY   1
+ NOCACHE
+ NOCYCLE;

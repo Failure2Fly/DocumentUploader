@@ -1,0 +1,94 @@
+DROP TABLE User_Account CASCADE CONSTRAINTS;
+CREATE TABLE User_Account(
+    User_ID int,
+    Username varchar(255),
+    Last_Name varchar(255),
+    First_Name varchar(255),
+    User_Password varchar(255),
+    User_Email varchar(255),
+    PRIMARY KEY(User_ID),
+    UNIQUE(Username)
+);
+
+DROP TABLE Security_Question CASCADE CONSTRAINTS;
+CREATE TABLE Security_Question(
+  Question_ID int,
+  Question VARCHAR(255),
+    PRIMARY KEY(Question_ID)
+  
+  );
+  
+INSERT INTO Security_Question VALUES(1, 'What was the name of your first pet?');
+INSERT INTO Security_Question VALUES(2, 'What was your mothers maiden name?');
+INSERT INTO Security_Question VALUES(3, 'What was the first concert you attended?');
+INSERT INTO Security_Question VALUES(4, 'What was the make and model of your first car?');
+INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor?');
+  
+DROP TABLE User_To_Security_Question CASCADE CONSTRAINTS;
+CREATE TABLE User_To_Security_Question(
+  User_Security_Join_ID int,
+  Security_Question_Join_ID int,
+  Question_Answer VARCHAR(255),
+  
+  CONSTRAINT FK_User_Id FOREIGN KEY (User_Security_Join_ID)
+  REFERENCES User_Account(User_ID),
+  CONSTRAINT FK_Question_Id FOREIGN KEY (Security_Question_Join_ID)
+  REFERENCES Security_Question(Question_ID)
+  
+  );
+
+
+
+
+DROP TABLE Business_Account CASCADE CONSTRAINTS;
+CREATE TABLE Business_Account(
+  Business_Account_ID int,
+  User_Account_Owner_ID int,
+  Service_Level int,
+  User_Limit int,
+  Monthly_File_Count int,
+  Account_Name VARCHAR(255),
+  PRIMARY KEY(Business_Account_ID),
+  CONSTRAINT FK_Owner_Id FOREIGN KEY (User_Account_Owner_ID)
+  REFERENCES User_Account(User_ID)
+  );
+
+
+
+
+DROP TABLE Business_To_User CASCADE CONSTRAINTS;
+CREATE TABLE Business_To_User(
+  Business_User_Join_ID int,
+  User_Business_Join_ID int,
+  CONSTRAINT FK_Business_Account_Join_Id FOREIGN KEY (Business_User_Join_ID)
+  REFERENCES Business_Account(Business_Account_ID),
+   CONSTRAINT FK_User_Account_Join_Id FOREIGN KEY (User_Business_Join_ID)
+  REFERENCES User_Account(User_ID)
+  );
+  
+  
+  
+DROP TABLE Service_Levels CASCADE CONSTRAINTS;
+CREATE TABLE Service_Levels(
+  Service_Level_ID int,
+  Service_Level VARCHAR(255),
+  PRIMARY KEY(Service_Level_ID)
+  );
+  
+INSERT INTO Service_Levels VALUES(1, 'Bronze'); 
+INSERT INTO Service_Levels VALUES(2, 'Silver'); 
+INSERT INTO Service_Levels VALUES(3, 'Gold'); 
+INSERT INTO Service_Levels VALUES(4, 'Unlimited'); 
+INSERT INTO Service_Levels VALUES(5, 'Enterprise'); 
+  
+DROP TABLE Documents CASCADE CONSTRAINTS;
+CREATE TABLE Documents(
+  File_Id int,
+  File_Name VARCHAR(255),
+  Stored_File_Path VARCHAR(255),
+  Store_Date DATE,
+  Associated_Account_Id int,
+  PRIMARY KEY(File_Id),
+  CONSTRAINT FK_Business_Document_Id FOREIGN KEY (Associated_Account_Id)
+  REFERENCES Business_Account(Business_Account_ID)
+  );
