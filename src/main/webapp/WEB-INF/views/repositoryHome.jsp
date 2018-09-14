@@ -117,6 +117,7 @@
 			action="${sessionScope.account.businessAccountId }"
 			enctype="multipart/form-data">
 			<p class="incorrect" id="uploadErrorText">${sessionScope.accountHomeError}</p>
+			<p>${sessionScope.account.monthlyFileCount} documents uploaded this month.</p>
 			<p>Choose a file to upload:</p>
 			<input name="file" id="sourcePath" type="file" class="inputField" />
 			<input onclick="refreshPage()" class="button" id="registerButton"
