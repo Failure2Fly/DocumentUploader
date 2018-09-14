@@ -1,5 +1,4 @@
 package com.fdmgroup.documentuploader.dao;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,30 +6,24 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import javax.sql.DataSource;
-
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
 import com.fdmgroup.documentuploader.pojo.Questions;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 import com.fdmgroup.documentuploader.rowmapper.UserAccountMapper;
-
 @Repository
 public class UserAccountDao implements Dao<UserAccount, String> {
 	private DataSource dataSource;
 	private JdbcTemplate jdbcTemplateObject;
-
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = dataSource;
 		this.jdbcTemplateObject = new JdbcTemplate(dataSource);
 	}
-
 	@Override
 	public void create(UserAccount user) {
 		String SQL1 = "INSERT INTO USER_ACCOUNT (user_id,username,last_name,first_name,user_password,user_email) VALUES(?,?,?,?,?,?)";
@@ -42,7 +35,6 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		//jdbcTemplateObject.update(SQL2, getThisId(user), null, null);
 		// jdbcTemplateObject.update(SQL2,getThisId(user),user.getListQA().get(0).getQuestion().ordinal()+1,user.getListQA().get(0).getAnswer());
 	}
-
 	@Override
 	public void delete(UserAccount user) {
 		// TODO sql query deletion all useraccount's stuff
@@ -55,7 +47,6 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		jdbcTemplateObject.update(SQL1, getThisId(user));
 
 	}
-
 	@Override
 	public void update(UserAccount user) {
 		// TODO sql query update username
@@ -67,7 +58,6 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 			jdbcTemplateObject.update(SQL, user.getListQA().get(0).getAnswer(),user.getListQA().get(0).getQuestion().ordinal()+1,getID(user.getUsername()));
 		}
 	}
-
 	@Override
 	public UserAccount read(String username) {
 		try {
@@ -93,9 +83,7 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 		} catch (EmptyResultDataAccessException e) {
 			return null;
 		}
-
 	}
-
 	public int lastID() {
 		String SQL = "SELECT MAX(USER_ID) FROM USER_ACCOUNT";
 		try {
@@ -104,18 +92,15 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 			return 1;
 		}
 	}
-
 	public int getID(String username) {
 		String SQL = "SELECT USER_ID FROM USER_ACCOUNT where username = ?";
 		return (int) jdbcTemplateObject.queryForObject(SQL, Integer.class, username);
 	}
-
 	public UserAccount read(Integer id) {
 		String SQL = "SELECT username, user_password, user_email, first_name, last_name FROM USER_ACCOUNT WHERE user_id = ?";
 		UserAccount user = jdbcTemplateObject.queryForObject(SQL, new Object[] { id }, new UserAccountMapper());
 		return user;
 	}
-
 	public List<BusinessAccount> readAccounts(Integer userId) {
 		String SQL = "SELECT BUSINESS_USER_JOIN_ID FROM BUSINESS_TO_USER WHERE USER_BUSINESS_JOIN_ID = ?";
 		List<BusinessAccount> businessAccounts = new ArrayList<>();
@@ -126,22 +111,18 @@ public class UserAccountDao implements Dao<UserAccount, String> {
 			BusinessAccountDao businessDao = (BusinessAccountDao) DispatchController.getContext()
 					.getBean("BusinessAccountDao");
 			BigDecimal temp = (BigDecimal) map.get("BUSINESS_USER_JOIN_ID");
-
 			account = businessDao.read(temp.intValue());
 			businessAccounts.add(account);
 		}
 		return businessAccounts;
 	}
-
 	public int getThisId(UserAccount user) {
 		try {
 			String SQL = "SELECT user_id FROM USER_ACCOUNT WHERE username = ?";
-
 			Integer userId = jdbcTemplateObject.queryForObject(SQL, new Object[] { user.getUsername() }, Integer.class);
 			return userId;
 		} catch (EmptyResultDataAccessException e) {
 			return 0;
 		}
-
 	}
 }

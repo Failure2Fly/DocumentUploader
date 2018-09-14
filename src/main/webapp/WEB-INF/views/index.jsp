@@ -18,8 +18,11 @@
 <title>Document Uploader</title>
 </head>
 
-<body>
+<body class="index-background">
 	<div class="header">
+	<div class="mainHeaderLeft">
+		<img src="./IMG/yordu_logo.png"/>
+	</div>
 		<div class="mainTitle"><h1>Ye Olde Renaissance Document Uploader</h1></div>
 		<div class="mainHeaderRight">
 			<a href="/DocumentUploader/login">

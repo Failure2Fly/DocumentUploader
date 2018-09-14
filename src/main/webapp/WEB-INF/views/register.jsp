@@ -53,7 +53,8 @@ function displayError(){
 <body onload="displayError" class="register-login-background">
 
 	<nav class="navbar fixed-top navbar-expand-lg">
-		<a class="navbar-brand" href="/DocumentUploader">YORDU</a>
+		<a class="navbar-brand" href="/DocumentUploader">
+		<img src="./IMG/yordu_logo.png"/></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -177,7 +178,7 @@ function displayError(){
 					<div class="form-check">
 						<input class="" type="checkbox" id="gridCheck" required> <label
 							class="form-check-label" for="gridCheck"> I accept <a
-							class="terms">TP's terms and conditions</a>
+							class="terms" href="/DocumentUploader/termsOfUse">TP's terms and conditions</a>
 						</label>
 					</div>
 					<button type="submit" onclick="RegisterValidate();displayError()"
