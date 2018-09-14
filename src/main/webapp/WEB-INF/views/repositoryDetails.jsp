@@ -14,6 +14,7 @@
 	href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
 <link rel="stylesheet" href="<c:url value="/CSS/global.css"/>">
+
 <script>
 	function displayUsers() {
 
@@ -42,6 +43,24 @@
 		/* var text = "My Button"; // JavaScript string
 		button.setText(text); text is converted to java.lang.String */
 	}
+	
+	function displayAdverts(){
+			
+			var myObj, i, j, x = "";
+		
+			myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+		
+			for (i in myObj){
+				
+				var adverts = myObj[i].serviceLevel.hasAdverts
+				var img = document.getElementById("hasAdverts");
+				
+				if( adverts === false ){
+					img.classList.add("validate-form");
+				}
+		
+			}
+		}
 </script>
 <title>Repository Details</title>
 </head>
@@ -70,28 +89,15 @@
 	    </ul>
 	  </div>
 	</nav>
-<body onload="displayUsers()">
+<body onload="displayUsers(); displayAdverts;">
 
 	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>${sessionScope.account.accountName}Repository Details</h1>
 		</div>
-<<<<<<< HEAD
-=======
-		<div class="mainHeaderRight">
-			<a href="/DocumentUploader/userHome">
-				<button class="btn btn-primary" type="submit">Back to User
-					Homepage</button>
-			</a> <a
-				href="/DocumentUploader/repositoryHome/${sessionScope.account.businessAccountId}">
-				<button class="btn btn-primary" type="submit">Repository
-					Home</button>
-			</a> <a href="/DocumentUploader/login">
-				<button class="btn btn-primary" type="submit">Logout</button>
-			</a>
-		</div>
->>>>>>> dfb09030d439cac7b0aac4db120aaafcc1e6d696
 	</div>
+	
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 
 	<div id="update-form" class="update">
 		<sf:form method="POST"
@@ -99,20 +105,13 @@
 			<legend>Delete Repository:
 				${sessionScope.account.accountName}</legend>
 			<fieldset>
-<<<<<<< HEAD
 				<p>Do you want to delete the repository? </p>
 			<!--<input style="margin-top: 0px;"type="checkbox" name="remove"> -->
 				<br>
 				<br> <input class="button" id="updateButton" type="submit"
 					value="Delete">
 		</fieldset>
-=======
-				<p>Do you want to delete the repository?</p>
-				<input style="marigin-top: 0px;" type="checkbox" name="remove">
-				<br> <br> <input class="button" id="updateButton"
-					type="submit" value="Delete">
-			</fieldset>
->>>>>>> dfb09030d439cac7b0aac4db120aaafcc1e6d696
+
 		</sf:form>
 		<p>Users currently attached to this repository:</p>
 		<p id="userList">Placeholder User</p>
@@ -167,6 +166,7 @@
 	</div>
 	<p class="hiddenText" id="accountJson">${sessionScope.accountDetailJson}</p>
 	<p id="errorText">${sessionScope.repositoryDetailsError}</p>
+	<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 </body>
 <footer>
 	<div class="header">

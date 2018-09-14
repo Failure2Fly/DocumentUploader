@@ -7,6 +7,11 @@
     background-size: cover;
     background-image: url(https://images.pexels.com/photos/265047/pexels-photo-265047.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260);
 }
+.index-background{
+	background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(https://images.pexels.com/photos/82256/pexels-photo-82256.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260);
+}
 .fa-phone {
 	transform: scaleX(-1);
 	padding-left: 10px;
@@ -176,15 +181,23 @@ input[type=checkbox], input[type=radio] {
 .hiddenText {
 	display:none;
 }
+
 .errorText{
 	color=red;
 }
 
 /* This is the end of the Form*/
-/* This is the Start Login Page*/
-/* This is the End of Login Page */
-/* This is the Start of Main Page*/
-/* This is the End of Main Page*/
+
+/* This is the Start UserHome*/
+.table{
+	width: 80%;
+	margin: 100px auto;
+}
+#table-row{
+	background-color: lightyellow;
+}
+/* This is the End of UserHome */
+
 
 /* This is where the Footer Starts*/
 footer {

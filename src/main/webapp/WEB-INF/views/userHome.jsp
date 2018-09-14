@@ -108,6 +108,7 @@
 
 <body onload="table(); displayAdverts();">
 	<div class="header user-hello">
+	
 		<div class="mainTitle">
 			<h1>Welcome to Document Loader, ${sessionScope.user.username}</h1>
 		</div>

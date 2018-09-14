@@ -17,6 +17,25 @@
 <link rel="stylesheet" href="<c:url value="./CSS/global.css"/>">
 
 <title>User Details</title>
+<script>
+	function displayAdverts(){
+		
+		var myObj, i, j, x = "";
+	
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+	
+		for (i in myObj){
+			
+			var adverts = myObj[i].serviceLevel.hasAdverts
+			var img = document.getElementById("hasAdverts");
+			
+			if( adverts === false ){
+				img.classList.add("validate-form");
+			}
+	
+		}
+	}
+</script>
 </head>
 
     <nav class="navbar fixed-top navbar-expand-lg">
@@ -40,13 +59,15 @@
 	  </div>
 	</nav>
 
-<body onload="UserAccount()">
+<body onload="displayAdverts()">
 	<div class="header user-hello">
 		<div class="mainTitle">
 			<h1>Change your details, ${sessionScope.user.username}</h1>
 		</div>
 	</div>
-
+	
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
+	
 	<div id="update-form" class="update">
 		<sf:form commandName="userAccount" method="POST" action="userDetails">
 			<legend>Update:</legend>
@@ -72,7 +93,7 @@
 			</fieldset>
 		</sf:form>
 	</div>
-
+<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 </body>
 <footer>
 	<div class="header">

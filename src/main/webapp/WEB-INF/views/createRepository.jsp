@@ -18,8 +18,27 @@
 
 <title>DocumentUploader Repository Creation</title>
 </head>
+<script>
+	function displayAdverts(){
+		
+		var myObj, i, j, x = "";
+	
+		myObj = JSON.parse(document.getElementById("accountList").innerHTML);
+	
+		for (i in myObj){
+			
+			var adverts = myObj[i].serviceLevel.hasAdverts
+			var img = document.getElementById("hasAdverts");
+			
+			if( adverts === false ){
+				img.classList.add("validate-form");
+			}
+	
+		}
+	}
+</script>
 
-<body>
+<body onload="displayAdverst()">
 
 
 <nav class="navbar fixed-top navbar-expand-lg">
@@ -48,6 +67,8 @@
 			<h1>Business Account Creation for ${sessionScope.user.username}</h1>
 		</div>
 	</div>
+	
+	<img id="hasAdverts" class="" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMhn1E6Nca2jgQ0EMfcmV0hp_SS_pO9t0yOdEzHmbAq1CinOr-"/>
 
 	<h2>Create Repository</h2>
 
@@ -71,7 +92,7 @@
 			</fieldset>
 		</sf:form>
 	</div>
-
+<p class="hiddenText" id="accountList">${sessionScope.accountList}</p>
 </body>
 
 <footer>

@@ -18,7 +18,7 @@
 <title>Document Uploader</title>
 </head>
 
-<body>
+<body class="index-background">
 	<div class="header">
 		<div class="mainTitle"><h1>Ye Olde Renaissance Document Uploader</h1></div>
 		<div class="mainHeaderRight">
