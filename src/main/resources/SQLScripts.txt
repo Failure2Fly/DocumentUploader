@@ -20,9 +20,9 @@ CREATE TABLE Security_Question(
   
 INSERT INTO Security_Question VALUES(1, 'What was the name of your first pet?');
 INSERT INTO Security_Question VALUES(2, 'What was your mothers maiden name?');
-INSERT INTO Security_Question VALUES(3, 'What was the first concert you went attended?');
+INSERT INTO Security_Question VALUES(3, 'What was the first concert you attended?');
 INSERT INTO Security_Question VALUES(4, 'What was the make and model of your first car?');
-INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor, musician, or artist?');
+INSERT INTO Security_Question VALUES(5, 'Who is your favorite actor?');
   
 DROP TABLE User_To_Security_Question CASCADE CONSTRAINTS;
 CREATE TABLE User_To_Security_Question(

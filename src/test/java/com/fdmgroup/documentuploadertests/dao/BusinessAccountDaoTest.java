@@ -11,7 +11,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.dao.BusinessAccountDao;
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+import com.fdmgroup.documentuploader.pojo.Questions;
 import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
@@ -22,10 +24,12 @@ public class BusinessAccountDaoTest {
 		ApplicationContext context = DispatchController.getContext();
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
 		
-		
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
 		UserAccountDao userDao = (UserAccountDao)context.getBean("UserAccountDao");
 		String username ="ImaginaryUser";
-		UserAccount user = new UserAccount(username,"Imaginary","User","password","fake@gmail.com");
+		UserAccount user = new UserAccount(username,"Imaginary","User","password","fake@gmail.com",QA);
 		
 		userDao.create(user);
 		List<UserAccount> users = new ArrayList<>();
@@ -62,8 +66,11 @@ public class BusinessAccountDaoTest {
 		ApplicationContext context = DispatchController.getContext();
 		UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
-		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
-		UserAccount user2 = new UserAccount("IOwnNow2","You2","IOwn2","youShallNotPass2","userEmail2");
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail",QA);
+		UserAccount user2 = new UserAccount("IOwnNow2","You2","IOwn2","youShallNotPass2","userEmail2",QA);
 		List<UserAccount> users = new ArrayList<>();
 		users.add(user);
 		userAccount.create(user);
@@ -98,7 +105,10 @@ public class BusinessAccountDaoTest {
 		ApplicationContext context = DispatchController.getContext();
 		UserAccountDao userAccount = (UserAccountDao)context.getBean("UserAccountDao");
 		BusinessAccountDao businessDao = (BusinessAccountDao)context.getBean("BusinessAccountDao");
-		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail");
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount user = new UserAccount("IOwnNow","You","IOwn","youShallNotPass","userEmail",QA);
 		
 		List<UserAccount> users = new ArrayList<>();
 		users.add(user);

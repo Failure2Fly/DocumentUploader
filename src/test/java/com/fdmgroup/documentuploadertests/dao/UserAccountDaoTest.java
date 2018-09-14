@@ -15,7 +15,9 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import com.fdmgroup.documentuploader.controller.DispatchController;
 import com.fdmgroup.documentuploader.dao.BusinessAccountDao;
 import com.fdmgroup.documentuploader.dao.UserAccountDao;
+import com.fdmgroup.documentuploader.enumeratedtypes.SecurityQuestion;
 import com.fdmgroup.documentuploader.pojo.BusinessAccount;
+import com.fdmgroup.documentuploader.pojo.Questions;
 import com.fdmgroup.documentuploader.pojo.ServiceLevel;
 import com.fdmgroup.documentuploader.pojo.UserAccount;
 
@@ -45,12 +47,12 @@ public class UserAccountDaoTest {
 		
 	@Test
 	public void testCreateThenReadThenDelete(){
-		//Map<SecurityQuestion,String> QA = new HashMap<>();
-		//QA.put(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET, "SheepFace");
-		//QA.put(SecurityQuestion.WHAT_WAS_YOUR_MOTHERS_MAIDEN_NAME, "Statistics");
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
 		String username = "LukeWeatherstein";
 		
-		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com");
+		UserAccount expected = new UserAccount(username,"Luke","Weatherstein","LukewarmWeather","lweather2@gmail.com",QA);
 		
 		userAccount.create(expected);
 		UserAccount actual = userAccount.read(username);
@@ -66,8 +68,10 @@ public class UserAccountDaoTest {
 		String lastName = "User";
 		String password = "password";
 		String userEmail = "email@email.com";
-		
-		UserAccount testUser = new UserAccount(username,lastName,firstName,password,userEmail);
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount testUser = new UserAccount(username,lastName,firstName,password,userEmail,QA);
 		userAccount.create(testUser);
 
 		userAccount.delete(testUser);
@@ -81,8 +85,10 @@ public class UserAccountDaoTest {
 		String lastName = "User";
 		String password = "password";
 		String userEmail = "email@email.com";
-		
-		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail);
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail,QA);
 		userAccount.create(testUser2);
 	
 		testUser2.setFirstName("Henry");
@@ -99,7 +105,10 @@ public class UserAccountDaoTest {
 		String password = "password";
 		String userEmail = "email@email.com";
 		
-		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail);
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail,QA);
 		userAccount.create(testUser2);
 		int expectedId = userAccount.getID(username);
 		UserAccount expected = testUser2;
@@ -117,7 +126,10 @@ public class UserAccountDaoTest {
 		String lastName = "User";
 		String password = "password";
 		String userEmail = "email@email.com";
-		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail);
+		Questions question = new Questions(SecurityQuestion.WHAT_WAS_THE_NAME_OF_YOUR_FIRST_PET,"SheepFace");
+		List<Questions> QA = new ArrayList<>();
+		QA.add(question);
+		UserAccount testUser2 = new UserAccount(username,lastName,firstName,password,userEmail,QA);
 		userAccount.create(testUser2);
 		
 		
