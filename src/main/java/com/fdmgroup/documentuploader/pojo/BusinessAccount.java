@@ -1,5 +1,6 @@
 package com.fdmgroup.documentuploader.pojo;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class BusinessAccount {
 	private int monthlyFileCount;
 	private String accountName;
 	private int businessAccountId;
+	private BigDecimal totalCostperMonth;
 	
 	public BusinessAccount(UserAccount owner,  ServiceLevel servicelevel,
 			List<UserAccount> userAccounts, List<String> fileList,String accountName, int businessAccountId) {
